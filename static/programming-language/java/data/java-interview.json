@@ -1,0 +1,103 @@
+{
+  "beginner": [
+    {
+      "question": "What is the difference between JDK, JRE, and JVM?",
+      "category": "Java Fundamentals",
+      "difficulty": "Beginner",
+      "answer": "JDK (Java Development Kit) is a software development environment used to develop Java applications. It includes JRE, compilers, and tools. JRE (Java Runtime Environment) provides libraries and JVM to run Java applications. JVM (Java Virtual Machine) executes Java bytecode and provides a runtime environment.",
+      "explanation": "JDK is for development, JRE is for running applications, and JVM is the execution engine. JVM is part of JRE, and JRE is part of JDK.",
+      "tips": [
+        "Remember: JDK = Development, JRE = Runtime, JVM = Virtual Machine",
+        "JVM is platform-dependent, Java is platform-independent",
+        "JVM performs Just-In-Time (JIT) compilation"
+      ],
+      "code": "// JDK includes development tools like javac, java, jar\n// JRE includes JVM and core libraries\n// JVM interprets bytecode and manages memory"
+    },
+    {
+      "question": "What are the main principles of OOP?",
+      "category": "Object-Oriented Programming",
+      "difficulty": "Beginner",
+      "answer": "The four main principles of OOP are: 1. Encapsulation - bundling data and methods together, 2. Inheritance - creating new classes from existing ones, 3. Polymorphism - same interface, different implementation, 4. Abstraction - hiding implementation details.",
+      "explanation": "These principles help in creating modular, reusable, and maintainable code. Encapsulation protects data, inheritance promotes code reuse, polymorphism enables flexibility, and abstraction simplifies complexity.",
+      "tips": [
+        "Remember the acronym: A PIE (Abstraction, Polymorphism, Inheritance, Encapsulation)",
+        "Java uses 'extends' for inheritance and 'implements' for interfaces",
+        "Abstraction can be achieved using abstract classes and interfaces"
+      ],
+      "code": "// Encapsulation example\nclass BankAccount {\n    private double balance; // data hiding\n    \n    public double getBalance() { // controlled access\n        return balance;\n    }\n}\n\n// Inheritance example\nclass Animal {}\nclass Dog extends Animal {} // Dog inherits from Animal\n\n// Polymorphism example\ninterface Shape {\n    void draw(); // same interface\n}\nclass Circle implements Shape {\n    public void draw() { System.out.println(\"Drawing circle\"); }\n}\nclass Square implements Shape {\n    public void draw() { System.out.println(\"Drawing square\"); }\n}"
+    }
+  ],
+  "intermediate": [
+    {
+      "question": "What is the difference between ArrayList and LinkedList?",
+      "category": "Collections Framework",
+      "difficulty": "Intermediate",
+      "answer": "ArrayList uses a dynamic array internally while LinkedList uses a doubly linked list. ArrayList provides faster random access (O(1)), while LinkedList provides faster insertion/deletion at ends (O(1)). ArrayList is better for search operations, LinkedList is better for frequent insertions/deletions.",
+      "explanation": "ArrayList resizes itself when needed, which can be expensive. LinkedList doesn't need resizing but uses more memory per element. For random access, ArrayList is better; for queue operations, LinkedList is better.",
+      "tips": [
+        "Use ArrayList when you need frequent access by index",
+        "Use LinkedList when you need frequent add/remove operations",
+        "Both implement List interface but have different performance characteristics"
+      ],
+      "code": "import java.util.ArrayList;\nimport java.util.LinkedList;\nimport java.util.List;\n\npublic class ListComparison {\n    public static void main(String[] args) {\n        // ArrayList - faster random access\n        List<String> arrayList = new ArrayList<>();\n        arrayList.add(\"A\");\n        arrayList.add(\"B\");\n        System.out.println(arrayList.get(1)); // O(1)\n        \n        // LinkedList - faster insertion at ends\n        List<String> linkedList = new LinkedList<>();\n        linkedList.add(\"X\");\n        linkedList.add(\"Y\");\n        ((LinkedList<String>) linkedList).addFirst(\"Z\"); // O(1)\n    }\n}"
+    },
+    {
+      "question": "Explain the Spring Framework architecture.",
+      "category": "Spring Framework",
+      "difficulty": "Intermediate",
+      "answer": "Spring Framework is built on several modules: 1. Core Container (Bean Factory, Application Context), 2. Data Access/Integration (JDBC, ORM, Transactions), 3. Web (MVC, WebSocket), 4. AOP (Aspect-Oriented Programming), 5. Instrumentation, 6. Test. It follows Inversion of Control (IoC) and Dependency Injection (DI) patterns.",
+      "explanation": "The Core Container is the foundation, managing beans and their dependencies. Spring MVC handles web applications. Spring AOP enables cross-cutting concerns. The framework promotes loose coupling through DI.",
+      "tips": [
+        "Understand the role of ApplicationContext",
+        "Know how Dependency Injection works",
+        "Be familiar with Spring Boot auto-configuration",
+        "Understand Spring MVC request flow"
+      ],
+      "code": "// Simple Spring Boot application\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n\n// Service with Dependency Injection\n@Service\npublic class UserService {\n    private final UserRepository userRepository;\n    \n    @Autowired\n    public UserService(UserRepository userRepository) {\n        this.userRepository = userRepository; // DI\n    }\n}\n\n// REST Controller\n@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n    @GetMapping\n    public List<User> getUsers() {\n        return userService.getAllUsers();\n    }\n}"
+    }
+  ],
+  "advanced": [
+    {
+      "question": "Explain Java Memory Model and garbage collection.",
+      "category": "JVM Internals",
+      "difficulty": "Advanced",
+      "answer": "Java Memory Model divides memory into: 1. Heap (objects, instance variables), 2. Stack (method calls, local variables), 3. Method Area (class metadata), 4. PC Registers, 5. Native Method Stack. Garbage Collection automatically reclaims memory from unused objects using algorithms like Mark-Sweep, Copying, Generational GC.",
+      "explanation": "Heap is divided into Young Generation (Eden, S0, S1) and Old Generation. Minor GC cleans Young Generation, Major GC cleans Old Generation. G1GC is the default since Java 9, providing predictable pause times.",
+      "tips": [
+        "Understand different GC algorithms and when to use them",
+        "Know how to tune JVM memory parameters",
+        "Understand memory leaks in Java",
+        "Be familiar with tools like jvisualvm, jconsole"
+      ],
+      "code": "// Memory analysis example\npublic class MemoryExample {\n    public static void main(String[] args) {\n        Runtime runtime = Runtime.getRuntime();\n        \n        System.out.println(\"Total Memory: \" + runtime.totalMemory());\n        System.out.println(\"Free Memory: \" + runtime.freeMemory());\n        System.out.println(\"Used Memory: \" + \n            (runtime.totalMemory() - runtime.freeMemory()));\n        \n        // Force garbage collection (not guaranteed)\n        System.gc();\n    }\n}\n\n// Common JVM arguments\n// -Xmx512m - maximum heap size\n// -Xms256m - initial heap size\n// -XX:+UseG1GC - use G1 garbage collector\n// -XX:MaxGCPauseMillis=200 - target max GC pause"
+    }
+  ],
+  "coding": [
+    {
+      "question": "Implement a thread-safe singleton pattern in Java.",
+      "category": "Design Patterns",
+      "difficulty": "Medium",
+      "answer": "Use double-checked locking with volatile keyword or Bill Pugh Singleton Implementation using static inner class.",
+      "explanation": "Double-checked locking ensures thread safety while minimizing synchronization overhead. The volatile keyword prevents instruction reordering. Bill Pugh implementation is lazy-loaded and thread-safe without synchronization.",
+      "tips": [
+        "Prefer Bill Pugh implementation for simplicity",
+        "Understand why double-checked locking needs volatile",
+        "Consider using enum for singleton in Java"
+      ],
+      "code": "// Method 1: Double-checked locking\nclass Singleton {\n    private static volatile Singleton instance;\n    \n    private Singleton() {}\n    \n    public static Singleton getInstance() {\n        if (instance == null) { // First check (no locking)\n            synchronized (Singleton.class) {\n                if (instance == null) { // Second check (with locking)\n                    instance = new Singleton();\n                }\n            }\n        }\n        return instance;\n    }\n}\n\n// Method 2: Bill Pugh Singleton (Recommended)\nclass SingletonBillPugh {\n    private SingletonBillPugh() {}\n    \n    private static class SingletonHelper {\n        private static final SingletonBillPugh INSTANCE = new SingletonBillPugh();\n    }\n    \n    public static SingletonBillPugh getInstance() {\n        return SingletonHelper.INSTANCE;\n    }\n}\n\n// Method 3: Enum Singleton (Java 5+)\nenum SingletonEnum {\n    INSTANCE;\n    \n    public void doSomething() {\n        System.out.println(\"Singleton using enum\");\n    }\n}"
+    },
+    {
+      "question": "Find the longest palindrome substring in a string.",
+      "category": "Algorithms",
+      "difficulty": "Medium",
+      "answer": "Use dynamic programming or expand around center approach. Expand around center has O(n²) time complexity and O(1) space.",
+      "explanation": "For each character (and between characters), expand outwards to find the longest palindrome. Keep track of the longest palindrome found.",
+      "tips": [
+        "Handle even and odd length palindromes separately",
+        "Optimize by skipping unnecessary expansions",
+        "Consider Manacher's algorithm for O(n) solution"
+      ],
+      "code": "public class LongestPalindrome {\n    public String longestPalindrome(String s) {\n        if (s == null || s.length() < 1) return \"\";\n        \n        int start = 0, end = 0;\n        \n        for (int i = 0; i < s.length(); i++) {\n            // Check for odd length palindrome\n            int len1 = expandAroundCenter(s, i, i);\n            // Check for even length palindrome\n            int len2 = expandAroundCenter(s, i, i + 1);\n            \n            int len = Math.max(len1, len2);\n            \n            if (len > end - start) {\n                start = i - (len - 1) / 2;\n                end = i + len / 2;\n            }\n        }\n        \n        return s.substring(start, end + 1);\n    }\n    \n    private int expandAroundCenter(String s, int left, int right) {\n        while (left >= 0 && right < s.length() && \n               s.charAt(left) == s.charAt(right)) {\n            left--;\n            right++;\n        }\n        return right - left - 1;\n    }\n    \n    public static void main(String[] args) {\n        LongestPalindrome solution = new LongestPalindrome();\n        System.out.println(solution.longestPalindrome(\"babad\")); // \"bab\" or \"aba\"\n        System.out.println(solution.longestPalindrome(\"cbbd\")); // \"bb\"\n    }\n}"
+    }
+  ]
+}

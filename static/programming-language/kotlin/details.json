@@ -1,0 +1,532 @@
+{
+  "interview_index": [
+    { "key": "kotlin_intro", "title": "Kotlin Overview" },
+    { "key": "kotlin_syntax", "title": "Syntax & Types" },
+    { "key": "kotlin_nullsafety", "title": "Null Safety & Optionals" },
+    { "key": "kotlin_coroutines", "title": "Coroutines & Concurrency" },
+    { "key": "kotlin_collections", "title": "Collections & Sequences" },
+    { "key": "kotlin_oop_functional", "title": "OOP & Functional Patterns" },
+    { "key": "kotlin_generics", "title": "Generics & Variance" },
+    { "key": "kotlin_tooling", "title": "Tooling: Gradle, KSP & Scripting" },
+    { "key": "kotlin_multiplatform", "title": "Multiplatform & Targets" },
+    { "key": "kotlin_jvm_interop", "title": "JVM Interop & Java" },
+    { "key": "kotlin_platform_native", "title": "Kotlin/Native & JVM/JS Differences" },
+    { "key": "kotlin_testing", "title": "Testing & Mocks" },
+    { "key": "kotlin_performance", "title": "Performance & Profiling" },
+    { "key": "kotlin_deployment", "title": "Build & Deployment" },
+    { "key": "kotlin_security", "title": "Secure Coding" },
+    { "key": "kotlin_best_practices", "title": "Best Practices & Patterns" }
+  ],
+
+  "kotlin_intro": {
+    "title": "Kotlin Overview",
+    "summary": "Modern, pragmatic language for JVM, Android, JS and native with strong safety and concise syntax.",
+    "details": "Kotlin is a statically-typed language designed for pragmatic, expressive code. It runs on JVM, compiles to JS and native binaries. Key advantages: null-safety, concise syntax, coroutines for async programming, strong interop with Java, modern standard library with functional helpers, and Kotlin Multiplatform for sharing logic. For teams: adopt a consistent style (ktlint), use Gradle Kotlin DSL, enforce static checks and run migration incrementally for large Java codebases.",
+    "cheat": "// Quick commands\nktlint --version\n./gradlew build\n./gradlew test\nkotlinc -script myscript.kts\n// Android: use Android Studio + Kotlin plugin",
+    "examples": [
+      { "code": "fun greet(name: String) = \"Hello, $name\"\nprintln(greet(\"Kotlin\"))" }
+    ],
+    "interview": [
+      { "q": "What is Kotlin?", "a": "A modern JVM-first language by JetBrains with first-class null safety and concise syntax." },
+      { "q": "Why choose Kotlin for Android?", "a": "Improved safety, brevity, coroutines support and official Google support." },
+      { "q": "What platforms can Kotlin target?", "a": "JVM, Android, JavaScript, native (via Kotlin/Native) and Multiplatform projects." },
+      { "q": "How interoperable is Kotlin with Java?", "a": "Highly interoperable; Kotlin can call Java and vice versa with minimal glue." },
+      { "q": "What are coroutines?", "a": "Lightweight cooperative concurrency primitives for non-blocking async code." },
+      { "q": "What is Kotlin Multiplatform?", "a": "A way to share common code across JVM, JS and native targets." },
+      { "q": "What is the standard build tool for Kotlin?", "a": "Gradle (Kotlin DSL commonly used) and tooling integrates with Maven." },
+      { "q": "What is Ktor?", "a": "Kotlin's asynchronous web framework for building servers and clients." },
+      { "q": "What linters/formatters are common?", "a": "ktlint for formatting and detekt for static analysis." },
+      { "q": "What is the Kotlin standard library strength?", "a": "Rich collection utilities, sequences, extension functions and functional helpers." },
+      { "q": "How to run a Kotlin script?", "a": "Use kotlinc -script script.kts or use Kotlin scripting APIs." },
+      { "q": "How to start a new multiplatform project?", "a": "Use Gradle with Kotlin Multiplatform plugin and configure targets." },
+      { "q": "What is data class used for?", "a": "Boilerplate reduction for classes holding state with equals/hashCode/toString/copy." },
+      { "q": "How to handle nulls in Kotlin?", "a": "Use nullable types T? and safe operators like ?. and ?:." },
+      { "q": "What is inline class (value class)?", "a": "A wrapper type that can be inlined by the compiler to avoid allocations." },
+      { "q": "What is delegation in Kotlin?", "a": "Use 'by' to delegate implementation to a helper instance (class or property delegation)." },
+      { "q": "What are extension functions?", "a": "Functions that add behavior to existing types without inheritance." },
+      { "q": "What is sealed class?", "a": "A restricted hierarchy for representing closed sets of types, useful for ADTs." },
+      { "q": "How does Kotlin handle exceptions?", "a": "Like Java — unchecked exceptions; no checked exceptions in language." },
+      { "q": "What are common migration tips from Java?", "a": "Migrate incrementally, keep interop boundaries clean and use data classes and higher-order functions incrementally." }
+    ]
+  },
+
+  "kotlin_syntax": {
+    "title": "Syntax & Types",
+    "summary": "Concise syntax: val/var, functions, lambdas, data classes, sealed classes, smart casts.",
+    "details": "Kotlin syntax combines familiar C-family constructs with expressive features: 'val' for immutable bindings, 'var' for mutable; top-level functions; extension functions; lambdas with concise syntax; named and default parameters; destructuring declarations; data classes for value types; sealed classes for closed hierarchies; smart casts that avoid explicit casting when safe. Prefer explicit visibility modifiers for library code. Use Kotlin's type inference but annotate public APIs. Keep functions single-responsibility and prefer expression style (return expressions directly).",
+    "cheat": "// Basics\nval x: Int = 42\nvar y = 10\nfun sum(a: Int, b: Int) = a + b\n// Lambda\nval doubled = list.map { it * 2 }\n// Data class\ndata class User(val id: Int, val name: String)\n// Sealed + when\nsealed class Result { data class Ok(val v: Int): Result(); data class Err(val e: String): Result() }\nwhen (r) { is Result.Ok -> r.v; is Result.Err -> r.e }\n",
+    "examples": [
+      { "code": "data class Point(val x: Int, val y: Int)\nfun translate(p: Point, dx: Int, dy: Int) = Point(p.x + dx, p.y + dy)" }
+    ],
+    "interview": [
+      { "q": "What is val vs var?", "a": "val declares read-only (immutable) variable; var declares mutable." },
+      { "q": "How do you define a lambda?", "a": "Using curly braces, e.g., { x -> x*2 } or use 'it' for single param." },
+      { "q": "What is a data class?", "a": "A class that automatically provides equals, hashCode, toString and copy." },
+      { "q": "When to use sealed classes?", "a": "To model closed hierarchies and exhaustiveness in when expressions." },
+      { "q": "What is an extension function?", "a": "A function that adds behavior to a type without modifying its source." },
+      { "q": "How to declare default parameters?", "a": "fun f(a: Int = 0, b: String = \"\") { }" },
+      { "q": "What is destructuring?", "a": "Extract multiple values from an object, e.g., val (a,b) = pair." },
+      { "q": "What are named arguments?", "a": "Call functions using parameter names, improving readability and ordering." },
+      { "q": "How does smart cast work?", "a": "Compiler auto-casts after null checks or type checks in local scope." },
+      { "q": "What is inline function?", "a": "Compiler can inline body at call site, often used to reduce lambda allocations." },
+      { "q": "How to define top-level functions?", "a": "Place functions outside classes in a Kotlin file; they compile to static methods." },
+      { "q": "What is companion object?", "a": "Holds static-like members tied to class; can implement interfaces." },
+      { "q": "What is the 'when' expression?", "a": "A powerful switch alternative supporting ranges and type checks." },
+      { "q": "What is tailrec?", "a": "Modifier to enable tail-call optimization for recursive functions." },
+      { "q": "How to interoperate property vs method naming with Java?", "a": "Kotlin properties compile to getters/setters; annotate with @JvmName if needed." },
+      { "q": "What is member reference syntax?", "a": "::foo to reference functions or constructors as values." },
+      { "q": "When to use object declarations?", "a": "For singletons and stateless utility holders." },
+      { "q": "How to create a range?", "a": "1..10 creates an IntRange; use step() and downTo() for variation." },
+      { "q": "What is the scope function 'apply' used for?", "a": "Configure an object and return it; useful for builders." },
+      { "q": "What are inline classes/value classes?", "a": "Lightweight wrappers that can be inlined to avoid allocations (value classes in newer Kotlin)." }
+    ]
+  },
+
+  "kotlin_nullsafety": {
+    "title": "Null Safety & Optionals",
+    "summary": "Nullable types, safe-call (?.), Elvis (?:), not-null assertions, and handling NPEs safely.",
+    "details": "Kotlin's type system distinguishes nullable T? and non-null T. Use safe-call ?. to call methods/properties on nullable values, Elvis operator ?: for fallback defaults, and let scoping '?.let { }' for executing blocks when not null. Avoid using !! (not-null assertion) except when you are certain. For Java interop use @Nullable/@NotNull annotations and platform types; treat platform types carefully. Use annotation processing or contracts to document nullability at boundaries. For collections, prefer filterNotNull / mapNotNull when transforming.",
+    "cheat": "// Nullable examples\nval s: String? = null\nval len = s?.length ?: 0\ns?.let { println(it) }\n// Unsafe\nval mustNotNull: String = s!!  // throws NPE if s is null\n",
+    "examples": [
+      { "code": "fun displayName(user: User?) {\n  val name = user?.name ?: \"guest\"\n  println(name)\n}" }
+    ],
+    "interview": [
+      { "q": "How does Kotlin avoid NullPointerException?", "a": "By distinguishing nullable types (T?) and providing safe operators like ?. and ?:." },
+      { "q": "What does the Elvis operator do?", "a": "Returns left-hand value if not null, otherwise right-hand default (a ?: b)." },
+      { "q": "When to use ?.let {}?", "a": "Execute a block only when the receiver is non-null with scoped 'it' value." },
+      { "q": "What is the danger of !!?", "a": "It forces a non-null assertion and throws NPE if the value is null; use sparingly." },
+      { "q": "How to filter nulls from a list?", "a": "Use list.filterNotNull() or list.mapNotNull { ... }." },
+      { "q": "What are platform types?", "a": "Types from Java with unknown nullability; the compiler treats them flexibly but you must be careful." },
+      { "q": "How to annotate nullability for Java interop?", "a": "Use @Nullable and @NotNull in Java code to improve Kotlin interop." },
+      { "q": "How does smart cast interact with null checks?", "a": "After a null-check, the compiler smart-casts the variable to non-null type in that scope." },
+      { "q": "What is a contract in Kotlin for nulls?", "a": "Experimental feature to express conditions that help compiler smart-casting across calls." },
+      { "q": "How to provide default values for nullable params?", "a": "Use default argument like param: String? = null and handle inside function." },
+      { "q": "How to convert a platform type to non-null safely?", "a": "Validate and use requireNotNull or ?.let for safe conversion." },
+      { "q": "What is requireNotNull?", "a": "Throws IllegalArgumentException if value is null and returns non-null type." },
+      { "q": "How to design APIs to minimize nulls?", "a": "Use non-nullable types where possible and Optional-like wrappers or sealed types for missing values." },
+      { "q": "Why avoid pervasive null checks?", "a": "They clutter code; prefer design that communicates absence explicitly." },
+      { "q": "How to handle JSON fields that may be absent?", "a": "Map them to nullable properties and provide sensible defaults." },
+      { "q": "What is the difference between ?: and ?: throw?", "a": "?: returns default; ?: throw throws an exception if left is null." },
+      { "q": "When to model absence with sealed types instead of null?", "a": "When absence is meaningful and needs explicit handling, use sealed classes like Result or Option." },
+      { "q": "How to avoid nulls in collections of primitives?", "a": "Prefer primitive arrays or non-nullable lists where possible." },
+      { "q": "How to check multiple nullable values succinctly?", "a": "Use if (a != null && b != null) { ... } or combine with let: a?.let { aa -> b?.let { bb -> ... } }." },
+      { "q": "How to log null issues for debugging?", "a": "Add context and avoid leaking sensitive data, use early validation checks." }
+    ]
+  },
+
+  "kotlin_coroutines": {
+    "title": "Coroutines & Concurrency",
+    "summary": "Structured concurrency, suspending functions, Dispatchers, Job, Deferred and Flow.",
+    "details": "Kotlin coroutines provide structured concurrency with lightweight tasks. Use suspend functions to define asynchronous work. Key primitives: CoroutineScope to manage lifecycle, Dispatchers (Main, IO, Default) for context, Job for task handles, Deferred for async results, and Flow for reactive streams. Use coroutine builders: launch (fire-and-forget) and async (returns Deferred). Use structured concurrency (parent-child) to propagate cancellation. For flows use operators map, filter, flatMapConcat, buffer and conflate. Avoid blocking calls inside coroutines; if necessary wrap blocking calls in withContext(Dispatchers.IO).",
+    "cheat": "// Basic coroutine\nimport kotlinx.coroutines.*\nGlobalScope.launch { val data = async { fetch() }.await(); println(data) }\n\n// Scoped\nrunBlocking { launch(Dispatchers.IO) { /* IO work */ } }\n\n// Flow\nflowOf(1,2,3).map { it * 2 }.collect { println(it) }\n",
+    "examples": [
+      { "code": "suspend fun fetch(): String { delay(100); return \"ok\" }\nrunBlocking { val r = async { fetch() }; println(r.await()) }" }
+    ],
+    "interview": [
+      { "q": "What is a suspend function?", "a": "A function that can suspend execution without blocking a thread and resume later." },
+      { "q": "Difference between launch and async?", "a": "launch returns Job (no result), async returns Deferred (has result via await)." },
+      { "q": "What are Dispatchers?", "a": "Coroutine contexts controlling on which thread pool coroutines run (Main, IO, Default)." },
+      { "q": "What is structured concurrency?", "a": "Parent scopes manage child coroutines; cancelling parent cancels children." },
+      { "q": "How to handle cancellation?", "a": "Check isActive or use cooperative cancellation—suspend points are cancellable." },
+      { "q": "What is Flow?", "a": "A cold asynchronous stream type for multiple values with backpressure support." },
+      { "q": "How to convert callback APIs to suspend?", "a": "Use suspendCancellableCoroutine or wrap listeners with continuations." },
+      { "q": "When to use withContext?", "a": "To switch coroutine context for blocking or CPU-bound work." },
+      { "q": "What is coroutineScope vs supervisorScope?", "a": "supervisorScope isolates failures of children so others continue." },
+      { "q": "How to buffer Flow emissions?", "a": "Use buffer() to decouple producers and consumers and handle backpressure." },
+      { "q": "What is backpressure in Flow?", "a": "Mechanism to handle producer faster than consumer; flows are cold and can use buffering operators." },
+      { "q": "How to catch exceptions in coroutines?", "a": "Use try/catch in coroutine or CoroutineExceptionHandler for uncaught exceptions on certain builders." },
+      { "q": "Why avoid GlobalScope in apps?", "a": "It creates coroutines not tied to lifecycle and can leak work." },
+      { "q": "How to test suspend functions?", "a": "Use runBlockingTest or TestCoroutineDispatcher from kotlinx-coroutines-test." },
+      { "q": "What is Job.join()?", "a": "Awaits completion of a Job without returning a result." },
+      { "q": "How to handle concurrency with shared mutable state?", "a": "Use synchronized constructs, Mutex, actors or confine state to a single context." },
+      { "q": "What is an actor in coroutines?", "a": "An isolated primitive to serialize access to state via message processing." },
+      { "q": "How to control coroutine parallelism?", "a": "Use Dispatchers.Default or custom CoroutineDispatcher with limited thread pool." },
+      { "q": "When to use flowOn?", "a": "To change the upstream context where flow emissions are produced." },
+      { "q": "How to combine multiple Flows?", "a": "Use operators like combine, zip, merge depending on semantics." }
+    ]
+  },
+
+  "kotlin_collections": {
+    "title": "Collections & Sequences",
+    "summary": "Lists, Sets, Maps, sequences, and collection transformations with lazy evaluation.",
+    "details": "Kotlin collections are divided into read-only and mutable interfaces. Use immutable APIs where possible. Key operations: map, filter, flatMap, groupBy, partition, associate, fold/reduce. Sequences provide lazy evaluation (similar to Java streams) and are useful for chained operations on large datasets. Use primitive arrays (IntArray) for performance-sensitive numeric work. Use linked/array lists appropriately; prefer HashMap/LinkedHashMap when order matters. For concurrent access consider thread-safe structures or external synchronization. For big data pipelines use chunked, windowed processing and avoid creating many intermediate collections—use sequence or flow.",
+    "cheat": "// Common ops\nval nums = listOf(1,2,3)\nval doubled = nums.map { it * 2 }\nval grouped = nums.groupBy { it % 2 }\n// Sequence\nval seq = nums.asSequence().map { heavy(it) }.filter { it > 10 }.toList()\n",
+    "examples": [
+      { "code": "val names = listOf(\"Alice\",\"Bob\",\"Carol\")\nval byLen = names.groupBy { it.length }\nprintln(byLen)" }
+    ],
+    "interview": [
+      { "q": "What is difference between List and MutableList?", "a": "List is read-only view; MutableList allows mutation." },
+      { "q": "When to use Sequence instead of List?", "a": "When chaining many transforms on large collections to avoid intermediate allocations." },
+      { "q": "What does associate do?", "a": "Transforms a collection into a Map keyed by a selector." },
+      { "q": "How to partition a collection?", "a": "Use partition(predicate) to split into Pair(trueList,falseList)." },
+      { "q": "What is mapNotNull?", "a": "Map and drop null results in a single pass." },
+      { "q": "How to get top N elements efficiently?", "a": "Use partial sorting or heap for large datasets rather than sorting fully." },
+      { "q": "Why use primitive arrays like IntArray?", "a": "Reduce boxing overhead and improve performance for numeric data." },
+      { "q": "How to flatten nested lists?", "a": "Use flatMap to map and flatten in one pass." },
+      { "q": "What is fold vs reduce?", "a": "fold has an initial accumulator; reduce uses first element as initial and fails on empty." },
+      { "q": "How to create an immutable map quickly?", "a": "Use mapOf(key to value, ...)." },
+      { "q": "How to build maps from sequences?", "a": "Use associateBy or associate to convert to Map." },
+      { "q": "When to use groupBy?", "a": "To cluster elements by a key; watch memory when groups are many." },
+      { "q": "What is windowed?", "a": "Creates sliding windows of elements for running calculations." },
+      { "q": "How to combine two lists element-wise?", "a": "Use zip(listA, listB) to pair elements." },
+      { "q": "How to remove duplicates preserving order?", "a": "Use distinct() or use LinkedHashSet to maintain insertion order." },
+      { "q": "How to iterate with index?", "a": "Use forEachIndexed { index, value -> ... } or enumerated-like with withIndex()." },
+      { "q": "How to create a mutable copy of a list?", "a": "Use toMutableList() or ArrayList(original)." },
+      { "q": "How to shuffle a list?", "a": "Use shuffled() (returns new) or shuffle() for in-place mutation." },
+      { "q": "What is chunked useful for?", "a": "Process data in fixed-size batches to limit memory usage." },
+      { "q": "How to stream large files with sequences?", "a": "Use sequence and yield per line or chunk to avoid loading entire file into memory." }
+    ]
+  },
+
+  "kotlin_oop_functional": {
+    "title": "OOP & Functional Patterns",
+    "summary": "Combining object-oriented and functional styles: immutability, extension functions, higher-order functions.",
+    "details": "Kotlin encourages blending OOP with functional techniques: prefer immutable data classes, use copy() to create modified copies, use extension methods to add domain behavior, and pass behavior via higher-order functions. Sealed classes and when expressions model algebraic data types. Use single-responsibility classes, constructor injection, and prefer interfaces for boundaries. Functional patterns: pure functions, composition, small helpers, and avoiding side-effects in core logic. Use tail-recursive functions (tailrec) when recursion is needed and the compiler can optimize.",
+    "cheat": "// Immutability\ndata class User(val id: Int, val name: String)\nval updated = user.copy(name = \"New\")\n// Extension\nfun String.isEmail() = this.contains(\"@\")\n// Higher-order\nfun operate(a: Int, b: Int, op: (Int, Int) -> Int) = op(a,b)\n",
+    "examples": [
+      { "code": "interface Repo<T> { fun get(id: Int): T? }\nclass InMemoryRepo<T>: Repo<T> { private val store = mutableMapOf<Int,T>(); override fun get(id:Int)=store[id] }" }
+    ],
+    "interview": [
+      { "q": "How to model immutable entities?", "a": "Use data classes and copy() for modifications to preserve immutability." },
+      { "q": "What are extension functions used for?", "a": "Add utility behavior to existing types without inheritance." },
+      { "q": "When to use higher-order functions?", "a": "When passing behavior (callbacks, transformers) to reusable utilities." },
+      { "q": "What are sealed classes good for?", "a": "Modeling fixed hierarchies and safe when-exhaustiveness." },
+      { "q": "Why prefer small pure functions?", "a": "They are easier to test, reason and compose." },
+      { "q": "How to implement repository pattern in Kotlin?", "a": "Define interface Repo and provide concrete implementations for data sources." },
+      { "q": "When to use object singletons?", "a": "For stateless utilities or application-wide singletons." },
+      { "q": "What is delegation 'by' used for?", "a": "Delegate implementation of an interface to another object." },
+      { "q": "How to combine OOP and FP?", "a": "Keep state in immutable models, use functions to transform state and classes for orchestration." },
+      { "q": "What is function composition pattern?", "a": "Combine small functions into larger behavior using compose/andThen semantics." },
+      { "q": "How to handle side effects in functional-style code?", "a": "Isolate I/O to boundary layers and keep core logic pure." },
+      { "q": "What is currying in Kotlin context?", "a": "Partially applying arguments via lambdas; Kotlin doesn't have native currying but supports it via higher-order functions." },
+      { "q": "How to reactively process streams?", "a": "Use Flow for reactive pipelines and operators for composition." },
+      { "q": "How to mock functional dependencies in tests?", "a": "Pass lambdas or interfaces and replace with test doubles." },
+      { "q": "What is the advantage of expression-bodied functions?", "a": "Concise code and easier to read for simple transforms." },
+      { "q": "How to model domain errors as types?", "a": "Use sealed classes or Result-like types to represent success/failure." },
+      { "q": "Why avoid global mutable state?", "a": "It impedes testability, reasoning and concurrency safety." },
+      { "q": "How to design command-query separation?", "a": "Split methods that mutate state (commands) from those returning info (queries)." },
+      { "q": "When to use inline functions for lambdas?", "a": "To avoid lambda allocation overhead for small function wrappers." },
+      { "q": "How to use resource management in functional code?", "a": "Use use() for AutoCloseable or structured patterns to release resources." }
+    ]
+  },
+
+  "kotlin_generics": {
+    "title": "Generics & Variance",
+    "summary": "Generic types, type projections, in/out variance and star-projections.",
+    "details": "Kotlin generics are powerful: declare generic types with <T>, constrain with where clauses, and use variance annotations 'in' (contravariant) and 'out' (covariant) to declare producer/consumer relationships. Use type projections (List<out T>) to accept subtypes safely and star-projections (*) for unknown type parameters. For Java interop annotate use-site variance where necessary. Prefer reified type parameters in inline functions when runtime type information is needed (e.g., for reflection or serialization).",
+    "cheat": "// Generic example\nclass Box<T>(val value: T)\nfun <T> listOfOne(item: T) = listOf(item)\n// Reified\ninline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, T::class.java)\n",
+    "examples": [
+      { "code": "fun <T: Comparable<T>> max(a: T, b: T) = if (a > b) a else b\nval b = Box(42)" }
+    ],
+    "interview": [
+      { "q": "What is variance in Kotlin?", "a": "'out' marks a type as covariant (producer), 'in' marks contravariant (consumer)." },
+      { "q": "When to use star-projection (*)?", "a": "When the type parameter is unknown and you only need safe read-only access." },
+      { "q": "What is reified type parameter?", "a": "In inline functions, reified keeps type info at runtime for reflection usage." },
+      { "q": "How to constrain multiple type parameters?", "a": "Use where clause: fun <T, R> f() where T: Number, R: Comparable<R> { }" },
+      { "q": "Why use 'in' for consumers?", "a": "It allows accepting supertypes when the generic is used only for input." },
+      { "q": "How does Kotlin interop with Java generics?", "a": "Platform types and JVM erasure influence runtime; sometimes use @JvmWildcard or use-site variance." },
+      { "q": "What is use-site variance?", "a": "Declare variance at the call site, e.g., fun f(list: List<out Number>)" },
+      { "q": "How to create a generic singleton?", "a": "Use object for singletons but generics and object don't mix; use classes with companion factories." },
+      { "q": "What is type erasure impact?", "a": "Generic type information is erased at runtime on JVM; use reified or explicit Class parameters when needed." },
+      { "q": "When to prefer generic functions over generic classes?", "a": "When type parameter is local to operation rather than type state." },
+      { "q": "How to model producer-consumer safely?", "a": "Use 'out' for producers, 'in' for consumers according to PECS (Producer Extends Consumer Super)." },
+      { "q": "How to implement a covariant container?", "a": "Use 'interface Source<out T> { fun next(): T }' to allow subtype substitution." },
+      { "q": "How to accept mixed generic types in functions?", "a": "Use star-projections or upper bounds to relax constraints." },
+      { "q": "What is reified vs non-reified usage for serialization?", "a": "Reified inline functions can pass T::class.java; non-reified require Class<T> param." },
+      { "q": "How to express variance for mutable types?", "a": "Mutable types generally cannot be covariant; choose in/out carefully or use interfaces." },
+      { "q": "What are inline classes' interplay with generics?", "a": "Value classes can be used in generics but boxing may occur under certain conditions." },
+      { "q": "How to debug complex generic type issues?", "a": "Simplify with typealiases and incremental constraints; inspect compiled signatures." },
+      { "q": "When to use annotation @JvmSuppressWildcards?", "a": "Control wildcard generation for Java callers when exposing Kotlin generics." },
+      { "q": "How to model heterogeneous collections with generics?", "a": "Use Any or sealed hierarchies rather than raw generics for typesafety." },
+      { "q": "What is the cost of generics at runtime?", "a": "Mainly none on JVM due to erasure, but boxing/unboxing and reflection can add costs." }
+    ]
+  },
+
+  "kotlin_tooling": {
+    "title": "Tooling: Gradle, KSP & Scripting",
+    "summary": "Gradle Kotlin DSL, Kotlin Symbol Processing (KSP), kapt, ktlint and detekt.",
+    "details": "Tooling essentials: Gradle with Kotlin DSL is the standard build approach—use plugins block and typed configurations. For annotation processing prefer KSP for faster incremental builds; kapt remains for Java annotation processors. Use ktlint and detekt for style and static analysis. For code generation, use KSP or KotlinPoet. Use Kotlin scripting for build-time tasks and .kts scripts for quick automation. For multiplatform builds configure targets and sourceSets in Gradle. Cache and parallelize Gradle tasks in CI to reduce build times.",
+    "cheat": "// Gradle usage\n./gradlew build\n// KSP\nplugins { id(\"com.google.devtools.ksp\") version \"x.y.z\" }\n// Lint\n./gradlew ktlintFormat detekt\n",
+    "examples": [
+      { "code": "plugins { kotlin(\"jvm\") version \"1.8.0\" }\nrepositories { mavenCentral() }\ndependencies { implementation(kotlin(\"stdlib\")) }" }
+    ],
+    "interview": [
+      { "q": "What is KSP?", "a": "Kotlin Symbol Processing — lightweight API for annotation processing and code generation." },
+      { "q": "How is KSP different from kapt?", "a": "KSP is Kotlin-native and faster; kapt runs Java annotation processors via bytecode generation." },
+      { "q": "Why use Gradle Kotlin DSL?", "a": "Type-safe build scripts and better IDE support vs Groovy DSL." },
+      { "q": "What is kotlinpoet used for?", "a": "A Kotlin API for generating .kt source files programmatically." },
+      { "q": "How to enforce formatting automatically?", "a": "Use ktlint with pre-commit hooks or Gradle tasks for formatting." },
+      { "q": "What is detekt?", "a": "Static analysis tool for Kotlin to detect code smells and complexity." },
+      { "q": "How to speed up Gradle builds in CI?", "a": "Use Gradle build cache, parallel execution and persistent workers." },
+      { "q": "What are composite builds?", "a": "Allow developing multiple Gradle projects together without publishing artifacts." },
+      { "q": "How to publish Kotlin libraries?", "a": "Configure publications in Gradle and publish to Maven Central or private registries." },
+      { "q": "How to debug build failures?", "a": "Run with --stacktrace --info --scan and inspect tasks' inputs/outputs." },
+      { "q": "What is the role of toolchains for Kotlin/Native?", "a": "Provide platform-specific compilers and linkers for native binaries." },
+      { "q": "How to run Kotlin scripts?", "a": "Use kotlinc -script or kotlin script.kts to execute scripts." },
+      { "q": "Why avoid kapt when possible?", "a": "It is slower and less idiomatic for Kotlin than KSP." },
+      { "q": "How to manage plugin versions?", "a": "Use Gradle version catalog or pluginManagement block to centralize versions." },
+      { "q": "What is a Gradle task configuration avoidance?", "a": "Use lazy configuration APIs (register) to speed up configuration phase." },
+      { "q": "How to add generated sources to IDE?", "a": "Configure sourceSets to include generated sources and mark them as generated." },
+      { "q": "How to run tests with coverage?", "a": "Use JaCoCo or other coverage tools integrated with Gradle test tasks." },
+      { "q": "What is Gradle’s build cache?", "a": "A mechanism to reuse outputs from previous builds to avoid re-execution." },
+      { "q": "How to implement multi-module projects?", "a": "Define subprojects in settings.gradle.kts and share configuration via convention plugins." },
+      { "q": "How to manage secrets in CI for publishing?", "a": "Use CI secure variables and avoid hardcoding credentials in Gradle files." }
+    ]
+  },
+
+  "kotlin_multiplatform": {
+    "title": "Multiplatform & Targets",
+    "summary": "Share Kotlin code across JVM, Android, JS and native (iOS) with common modules and platform-specific implementions.",
+    "details": "Kotlin Multiplatform lets you write common business logic once and target JVM, Android, JS and native (iOS, macOS, Linux). Structure projects with commonMain/commonTest and platform-specific source sets. Use expect/actual modifiers for platform-specific APIs. Share models, use ktor for multiplatform HTTP clients, and kotlinx.serialization for cross-platform serialization. Keep UI and platform-specific concerns outside common code. Use Gradle setup with multiplatform plugin and configure frameworks for iOS (XCFramework) when needed.",
+    "cheat": "// basic multiplatform snippet\nkotlin { jvm(); js(); ios(); sourceSets { val commonMain by getting { dependencies { implementation(\"org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0\") } } } }\n",
+    "examples": [
+      { "code": "expect fun getPlatformName(): String\n// actual implementations per target provide platform name" }
+    ],
+    "interview": [
+      { "q": "What is expect/actual?", "a": "Mechanism to declare expected APIs in common code and provide actual implementations per platform." },
+      { "q": "How to share code across Android and iOS?", "a": "Put shared logic in commonMain and expose as frameworks for iOS." },
+      { "q": "What libraries are multiplatform-ready?", "a": "kotlinx.coroutines, kotlinx.serialization, ktor and SQLDelight have multiplatform support." },
+      { "q": "How to serialize shared models?", "a": "Use kotlinx.serialization for platform-agnostic JSON and binary formats." },
+      { "q": "What is the role of sourceSets?", "a": "Organize shared and platform-specific code via commonMain, jvmMain, iosMain, etc." },
+      { "q": "How to handle platform-specific dependencies?", "a": "Declare them in the corresponding sourceSet in Gradle config." },
+      { "q": "How to publish multiplatform libraries?", "a": "Publish platform artifacts (jars, JS modules, XCFrameworks) via Gradle publications." },
+      { "q": "How to test common code?", "a": "Use commonTest and run tests per target in CI to validate behavior." },
+      { "q": "What is code sharing strategy for UI?", "a": "Share logic, not UI; use native UIs or multiplatform UI frameworks where applicable." },
+      { "q": "How to manage native toolchains for iOS?", "a": "Install required Xcode toolchain and configure Kotlin/Native in Gradle." },
+      { "q": "What is SQLDelight role in multiplatform?", "a": "Cross-platform database layer generating types for Kotlin across targets." },
+      { "q": "How to debug multiplatform code on native targets?", "a": "Use platform-specific debuggers (Xcode, browser devtools, JVM debugger) for the platform part." },
+      { "q": "How to interop with Swift/ObjC on iOS?", "a": "Expose Kotlin code as frameworks and call from Swift via generated headers." },
+      { "q": "How to manage build times for multiplatform?", "a": "Use Gradle configuration avoidance and cache generated artifacts to speed builds." },
+      { "q": "How to handle platform testing matrix in CI?", "a": "Run jobs per target platform and use emulators/simulators for native targets." },
+      { "q": "What is the common pitfall with expect/actual?", "a": "Overusing platform specifics in common code leads to brittle design." },
+      { "q": "How to manage dependency versions across targets?", "a": "Use Gradle version catalog or central dependency management to avoid mismatches." },
+      { "q": "What packaging formats are used for JS target?", "a": "NPM packages or UMD/CommonJS bundles depending on configuration." },
+      { "q": "When not to use multiplatform?", "a": "When platform APIs are dominant in business logic or when team lacks experience with native tooling." },
+      { "q": "How to migrate incrementally to multiplatform?", "a": "Start with small modules, share pure logic and increase scope after success." }
+    ]
+  },
+
+  "kotlin_jvm_interop": {
+    "title": "JVM Interop & Java",
+    "summary": "Seamless interop with Java: annotations, nullability, SAM conversions and bytecode considerations.",
+    "details": "Kotlin interoperates tightly with Java: call Java APIs directly, annotate Kotlin with @JvmOverloads, @JvmStatic, @JvmField, @JvmName to control generated bytecode. Understand platform types and nullability when calling Java. Use SAM (single abstract method) conversions to pass lambdas to Java interfaces. For libraries, provide Java-friendly API overloads using @JvmOverloads and keep companion objects accessible via @JvmStatic. Be mindful of default arguments and named params not directly available from Java—provide overloads. Test cross-language boundaries and maintain compatibility in public artifacts.",
+    "cheat": "// Java call example from Kotlin\nval list = ArrayList<String>()\nlist.add(\"a\")\n// Annotation for Java-friendly API\n@JvmOverloads fun greet(name: String = \"world\") { println(name) }\n",
+    "examples": [
+      { "code": "class KotlinUtil { companion object { @JvmStatic fun hello() = println(\"hi\") } }\n// Java can call KotlinUtil.hello()" }
+    ],
+    "interview": [
+      { "q": "How does Kotlin handle Java nullability?", "a": "Java types become platform types in Kotlin with unknown nullability; developer must handle safely." },
+      { "q": "What is @JvmOverloads used for?", "a": "Generate Java overloads for Kotlin functions with default arguments." },
+      { "q": "How to expose Kotlin functions as static to Java?", "a": "Use companion object with @JvmStatic annotation." },
+      { "q": "What is a platform type?", "a": "Type coming from Java with no nullability info, treated flexible by Kotlin compiler." },
+      { "q": "How to call Kotlin from Java with named params?", "a": "Named params are not supported directly; use overloads or builders for Java." },
+      { "q": "What is @file:JvmName?", "a": "Change the generated Java class name for top-level functions in a Kotlin file." },
+      { "q": "How to interop with Java streams?", "a": "Use kotlin sequences or convert Java streams to Kotlin collections as needed." },
+      { "q": "What are SAM conversions?", "a": "Kotlin lambdas can be passed where a Java single-method interface is expected." },
+      { "q": "How to avoid surprises with data class bytecode?", "a": "Understand generated methods and ensure Java visibility expectations align." },
+      { "q": "How to call Java varargs from Kotlin?", "a": "Use spread operator '*' to pass arrays into vararg parameters." },
+      { "q": "How to handle checked exceptions from Java?", "a": "Kotlin treats them as unchecked; use try/catch explicitly." },
+      { "q": "What is @Throws annotation?", "a": "Annotate Kotlin functions to declare checked exceptions for Java callers." },
+      { "q": "How to provide Java-friendly APIs for Kotlin libraries?", "a": "Provide overloads, avoid default-only APIs and annotate for JVM naming." },
+      { "q": "How to debug mixed Kotlin/Java stack traces?", "a": "Use source maps and ensure correct line numbers via proper compilation settings." },
+      { "q": "How does Kotlin compile to JVM bytecode?", "a": "Kotlin compiles to standard JVM bytecode; interoperability is via compiled classes." },
+      { "q": "What is Kotlin's approach to concurrency on JVM?", "a": "Use coroutines that can interop with blocking Java threads via Dispatchers and withContext." },
+      { "q": "How to call Kotlin from Java for top-level functions?", "a": "They are compiled into a class with file name or @file:JvmName-specified name." },
+      { "q": "How to avoid name clashes with Java annotations?", "a": "Use @JvmName to change function names exposed to Java." },
+      { "q": "How to work with Java builders in Kotlin?", "a": "Use apply, with or extension functions to make Java builder usage more idiomatic." },
+      { "q": "When to wrap Java APIs for Kotlin?", "a": "Wrap when Java API is awkward in Kotlin (nullability, verbosity or callback styles)." }
+    ]
+  },
+
+  "kotlin_platform_native": {
+    "title": "Kotlin/Native & JVM/JS Differences",
+    "summary": "Platform differences: memory model, concurrency, available APIs and tooling nuances.",
+    "details": "Kotlin/Native targets produce native binaries with different memory and concurrency models (no shared mutable state across threads historically, evolving to new memory model). Standard library features vary by target: JVM has full JVM ecosystem; JS uses browser/node APIs; Native has POSIX/interop but limited runtime. Serialization, reflection and dynamic classloading differ—minimize dependence on JVM-only features in common code. Build and debug tooling differ: use Xcode for iOS native debugging and Node/browser tools for JS. Watch ABI stability and linking concerns for native targets.",
+    "cheat": "// Target-specific code\nexpect fun platformName(): String\n// Provide actual implementations per target (JVM/JS/Native)",
+    "examples": [
+      { "code": "actual fun platformName(): String = \"JVM\" // in jvmMain\nactual fun platformName(): String = \"iOS\" // in iosMain" }
+    ],
+    "interview": [
+      { "q": "What is the major difference in runtimes?", "a": "JVM uses garbage-collected JVM; Native compiles to machine code with different memory rules; JS runs on JS engine." },
+      { "q": "How to handle reflection differences?", "a": "Avoid heavy reflection in common multiplatform code; use serialization libraries that support targets." },
+      { "q": "Are coroutines supported on Native?", "a": "Yes; but memory/concurrency semantics historically differed—stay updated with new memory model." },
+      { "q": "What tooling for debugging iOS native Kotlin?", "a": "Use Xcode and lldb for Kotlin/Native frameworks." },
+      { "q": "How to interop with C in Kotlin/Native?", "a": "Use cinterop tool and provide .def files for C headers." },
+      { "q": "Can Kotlin/JS use npm packages?", "a": "Yes; configure Gradle JS target to depend on NPM packages." },
+      { "q": "How does exception handling differ on Native?", "a": "Exceptions can cross boundaries but behavior and cost differ—use caution." },
+      { "q": "What about threading on Native?", "a": "Historically confined state; new memory model introduces shared memory with atomics." },
+      { "q": "How to produce XCFramework for iOS?", "a": "Configure Kotlin/Native Gradle plugin to produce frameworks and package as XCFrameworks." },
+      { "q": "What to watch for linking errors on Native?", "a": "Missing C libraries, mismatched toolchains or wrong target triple." },
+      { "q": "How to test JS-targeted code?", "a": "Run node tests or browser-based test runners configured via Gradle." },
+      { "q": "How to manage platform-specific resources?", "a": "Place them in platform sourceSets and load via expect/actual or resource APIs." },
+      { "q": "Can you share UI code across platforms?", "a": "Not generally—share business logic and use platform UI frameworks or multiplatform UI libraries." },
+      { "q": "How to handle file I/O differences?", "a": "Use platform-specific APIs wrapped in expect/actual or use ktor for multiplatform HTTP." },
+      { "q": "What is the impact of ABI changes on Native?", "a": "ABI instability can require recompilation of dependent binaries; track toolchain compatibility." },
+      { "q": "How to profile Native binaries?", "a": "Use platform-specific profilers (Instruments on macOS/iOS) and native tools." },
+      { "q": "How to package JS artifacts?", "a": "Create NPM packages or use webpack bundling depending on distribution needs." },
+      { "q": "What is the role of concurrency primitives across targets?", "a": "Use coroutines for logical concurrency; underlying primitives differ per runtime." },
+      { "q": "How to debug multiplatform Gradle issues?", "a": "Inspect build output, run with --stacktrace, and reproduce platform-specific tasks separately." },
+      { "q": "How to keep common code portable?", "a": "Avoid platform-specific runtime features and depend on multiplatform libraries." }
+    ]
+  },
+
+  "kotlin_testing": {
+    "title": "Testing & Mocks",
+    "summary": "Unit, integration, property-based tests, mocking and coroutine test utilities.",
+    "details": "Testing essentials: use JUnit5 with Kotlin for JVM tests; use kotlinx-coroutines-test for coroutine testing; MockK or Mockito-Kotlin for mocking; use kotest for expressive tests and property-based testing. For multiplatform use commonTest and run platform-specific test tasks. For Android use AndroidX Test, Robolectric for JVM-level Android tests, and Espresso for UI. Use TestCoroutineDispatcher and runBlockingTest to control virtual time. Keep tests fast: isolate unit tests, run integration tests in separate CI stages.",
+    "cheat": "// Basic unit test\nimport kotlin.test.*\nclass MathTest { @Test fun adds() { assertEquals(4, 2+2) } }\n// Coroutines test\nrunBlockingTest { val result = async { suspendFunc() }.await() }\n",
+    "examples": [
+      { "code": "@Test fun testFlow() = runBlockingTest { val items = mutableListOf<Int>(); flowOf(1,2).toList(items); assertEquals(listOf(1,2), items) }" }
+    ],
+    "interview": [
+      { "q": "Which mocking libs are common in Kotlin?", "a": "MockK and Mockito-Kotlin are popular choices; MockK is Kotlin-first." },
+      { "q": "How to test coroutine code?", "a": "Use kotlinx-coroutines-test utilities like TestCoroutineDispatcher and runBlockingTest." },
+      { "q": "What is Kotest?", "a": "A flexible testing framework offering BDD style and property-based testing." },
+      { "q": "How to write multiplatform tests?", "a": "Place tests in commonTest and run them per-target using CI job matrix." },
+      { "q": "What is property-based testing?", "a": "Testing approach generating random inputs to validate invariants." },
+      { "q": "How to mock final classes?", "a": "Use MockK which supports mocking final classes out of the box." },
+      { "q": "How to test Android UI?", "a": "Use Espresso for instrumentation and Robolectric for JVM unit-like tests." },
+      { "q": "How to test Flows?", "a": "Collect them in tests using coroutines-test or Turbine for convenient assertions." },
+      { "q": "How to avoid flaky tests with async work?", "a": "Use virtual time and deterministic schedulers, avoid timing-based assertions." },
+      { "q": "How to assert exceptions?", "a": "Use assertFailsWith or JUnit5 assertThrows to check thrown exceptions." },
+      { "q": "What is test doubles vs mocks?", "a": "Test doubles include fakes/stubs/mocks; mocks assert interactions, fakes simulate behavior." },
+      { "q": "How to integrate tests in CI?", "a": "Run unit tests early; run integration or end-to-end tests in later stages with proper environment setup." },
+      { "q": "How to test native code in Kotlin/Native?", "a": "Use native test runners and simulate platform behavior using test frameworks." },
+      { "q": "How to measure test coverage?", "a": "Use JaCoCo for JVM; for multiplatform coverage is more complex—collect per-target." },
+      { "q": "When to use integration tests?", "a": "When validating interactions across components, external services or DBs." },
+      { "q": "How to mock time in tests?", "a": "Inject clock abstraction or use TestCoroutineDispatcher for coroutine time control." },
+      { "q": "How to test private functions?", "a": "Prefer testing public behavior; if necessary use reflection sparingly." },
+      { "q": "How to keep tests fast?", "a": "Mock external dependencies and isolate unit tests from I/O." },
+      { "q": "How to test serialization?", "a": "Round-trip tests: serialize then deserialize and assert equality." },
+      { "q": "What is contract testing?", "a": "Testing consumer-provider contracts (e.g., Pact) to ensure API compatibility." }
+    ]
+  },
+
+  "kotlin_performance": {
+    "title": "Performance & Profiling",
+    "summary": "Benchmark, profile, avoid allocations, prefer primitives and inline functions where appropriate.",
+    "details": "Performance checklist: profile before optimizing (VisualVM, YourKit for JVM; Instruments for Native). Watch allocations and boxing when using generics with primitives—use primitive arrays (IntArray) and inline classes to avoid allocations. Use inline functions and reified type parameters to reduce reflection usage. For coroutines, avoid heavy per-iteration allocations and tune Dispatchers. In multiplatform, measure per-target since performance characteristics differ across JVM/JS/Native. For Android, watch memory churn and layout performance via Android Profiler. Use benchmarking libs like JMH for JVM microbenchmarks.",
+    "cheat": "// JVM profiling\njava -jar yourkit.jar\n// JMH for benchmarking\n./gradlew jmh\n// Reduce allocations\nuse IntArray for heavy numeric arrays\n",
+    "examples": [
+      { "code": "// Example: prefer primitive arrays\nval arr = IntArray(1000)\nfor (i in arr.indices) arr[i] = i * i" }
+    ],
+    "interview": [
+      { "q": "What profiling tools are used for JVM Kotlin?", "a": "VisualVM, YourKit, async-profiler and JFR (Java Flight Recorder)." },
+      { "q": "How to avoid boxing overhead?", "a": "Use primitive arrays (IntArray) or specialized data structures." },
+      { "q": "When to use inline functions for performance?", "a": "Small higher-order functions to reduce lambda allocation overhead." },
+      { "q": "What is JMH?", "a": "Java Microbenchmark Harness for writing reliable microbenchmarks on the JVM." },
+      { "q": "How to measure coroutine overhead?", "a": "Profile using coroutine-specific tooling and measure dispatch costs and allocations." },
+      { "q": "How does Kotlin/Native performance differ?", "a": "Native has different allocation/GC behavior and linking implications; measure native-specific." },
+      { "q": "Why minimize reflection in hot paths?", "a": "Reflection is costly; prefer compile-time constructs or inline reified alternatives." },
+      { "q": "How to optimize collections operations?", "a": "Use sequences for laziness, avoid unnecessary copying and use specialized algorithms." },
+      { "q": "What is escape analysis impact?", "a": "JVM can avoid allocations when objects don't escape; write code to help escape analysis." },
+      { "q": "How to reduce GC pressure?", "a": "Reduce short-lived allocations, reuse buffers and batch operations." },
+      { "q": "How to benchmark Android UI performance?", "a": "Use Android Profiler and measure frame rates, rendering and memory allocations." },
+      { "q": "How to profile native symbols?", "a": "Use platform profilers (Instruments on iOS/macOS) and symbolicate if needed." },
+      { "q": "What is function inlining trade-off?", "a": "Inlining reduces call overhead but can increase code size; balance accordingly." },
+      { "q": "How to avoid frequent string concatenation overhead?", "a": "Use StringBuilder or templates carefully; avoid in tight loops." },
+      { "q": "How to analyze hotspot allocations?", "a": "Use allocation profiler to find which code produces most allocations." },
+      { "q": "How to optimize serialization costs?", "a": "Use efficient serializers, reuse buffers and avoid reflection-based serialization in hot paths." },
+      { "q": "How to measure end-to-end performance?", "a": "Measure latency, throughput and resource usage under realistic load." },
+      { "q": "When to parallelize tasks?", "a": "When CPU-bound and tasks are independent; avoid oversubscription of cores." },
+      { "q": "How to tune thread pools?", "a": "Match pool sizes to application workload and CPU/memory resources." },
+      { "q": "What is warm-up in benchmarks?", "a": "Initial runs let JVM compile and optimize code; ignore warm-up when reporting results." }
+    ]
+  },
+
+  "kotlin_deployment": {
+    "title": "Build & Deployment",
+    "summary": "Packaging, publishing to Maven/NPM, producing native binaries and app bundles for Android/iOS.",
+    "details": "Deployment notes: publish JVM artifacts to Maven Central or private Maven repos using Gradle publishing. For JS targets publish to NPM. For Native produce XCFrameworks or platform-specific bundles. Use Docker for server-side Kotlin apps, build multi-stage images with minimal runtime. For Android produce signed APK/AABs and use Play Console or Fastlane for automation. Automate builds and tests via CI, include artifact signing and dSYM/stack symbol uploads for crash reporting on native builds. Version artifacts semantically and avoid breaking public APIs without bumping major versions.",
+    "cheat": "// publish with Gradle\n./gradlew publish\n// Android release\n./gradlew assembleRelease\n// Docker\ndocker build -t myapp:latest .\n",
+    "examples": [
+      { "code": "// Simple Gradle publishing snippet\npublishing { publications { maven(MavenPublication) { from components.java } } }" }
+    ],
+    "interview": [
+      { "q": "How to publish Kotlin libraries to Maven Central?", "a": "Configure Gradle publishing with credentials, sign artifacts and upload to Maven Central via OSSRH." },
+      { "q": "How to produce an Android App Bundle?", "a": "./gradlew bundleRelease to create an .aab for Play Store." },
+      { "q": "How to package a Kotlin/Native framework for iOS?", "a": "Use the Kotlin/Native Gradle plugin to produce an XCFramework artifact." },
+      { "q": "How to automate releases?", "a": "Use CI pipelines to build, test, sign and publish artifacts with semantic tags." },
+      { "q": "How to manage credentials for publishing in CI?", "a": "Use secure variables/secrets in CI and avoid committing creds in source." },
+      { "q": "What is multi-stage Docker build benefit?", "a": "Separate build and runtime to reduce final image size and remove build deps." },
+      { "q": "How to upload symbols for crash reporting (iOS)?", "a": "Upload dSYMs to services like Sentry or Crashlytics." },
+      { "q": "How to handle migration steps during deploy?", "a": "Use separate migration jobs and apply backward-compatible changes when possible." },
+      { "q": "What is semantic versioning importance?", "a": "Communicates breaking changes and compatibility to consumers." },
+      { "q": "How to publish JS artifacts from Kotlin/JS?", "a": "Configure npmPublish and Gradle to publish modules to NPM registry." },
+      { "q": "How to roll back a bad release?", "a": "Revert to previous artifact in orchestrator or use immutable infrastructure and switch traffic." },
+      { "q": "How to sign Android apps programmatically?", "a": "Use Gradle signingConfigs with keystore credentials in CI secrets." },
+      { "q": "How to create reproducible builds?", "a": "Pin dependency versions, use lockfiles and keep deterministic build steps." },
+      { "q": "How to deploy server Kotlin apps?", "a": "Run the built JAR in a JVM container or use paket/native binaries with orchestration." },
+      { "q": "How to monitor post-deploy issues?", "a": "Use health checks, logs, APM and alerting to detect regressions quickly." },
+      { "q": "How to handle multi-arch builds?", "a": "Produce target-specific binaries and publish multi-arch Docker manifests." },
+      { "q": "How to manage feature flags for rollout?", "a": "Use a remote flag system to gradually enable features and quickly disable if needed." },
+      { "q": "How to validate artifacts before publish?", "a": "Run smoke tests, integration tests and signature verification in CI." },
+      { "q": "What to include in release notes?", "a": "Breaking changes, migration steps, new features, and known issues." },
+      { "q": "How to maintain backward compatibility in libraries?", "a": "Deprecate APIs, provide migration guides, and adhere to semver." }
+    ]
+  },
+
+  "kotlin_security": {
+    "title": "Secure Coding",
+    "summary": "Input validation, serialization safety, dependency scanning, and secure defaults.",
+    "details": "Security checklist: validate and sanitize all inputs, use parametrized SQL or safe query builders to avoid injection, use TLS for transport, manage secrets via vaults not in repo, and keep dependencies updated and scanned (OWASP dependency-check, Snyk). For serialization use strict schemas and avoid deserializing to polymorphic types unsafely. On Android apply secure storage (EncryptedSharedPreferences, KeyStore) and follow platform guidelines for permissions. For server apps ensure secure headers, rate limiting and authentication best practices.",
+    "cheat": "// Prevent SQL injection\nval user = jdbcTemplate.queryForObject(\"SELECT * FROM users WHERE id = ?\", arrayOf(id), rowMapper)\n// Validate inputs: use constraints and explicit checks\n",
+    "examples": [
+      { "code": "// Example: validate email\nfun isValidEmail(e: String) = EMAIL_REGEX.matches(e)\nif (!isValidEmail(email)) throw IllegalArgumentException(\"invalid\")" }
+    ],
+    "interview": [
+      { "q": "How to prevent SQL injection in Kotlin apps?", "a": "Use parametrized queries or ORM query builders that bind parameters securely." },
+      { "q": "How to store secrets securely?", "a": "Use secret managers or CI vaults; never commit secrets to source control." },
+      { "q": "How to secure Android data at rest?", "a": "Use KeyStore and EncryptedSharedPreferences or encrypted files." },
+      { "q": "What is input validation best practice?", "a": "Whitelist acceptable input, validate length and format and fail early." },
+      { "q": "How to avoid deserialization vulnerabilities?", "a": "Use safe serializers and avoid polymorphic deserialization of untrusted data." },
+      { "q": "How to scan dependencies for vulnerabilities?", "a": "Use tools like Snyk, OWASP Dependency-Check or Gradle plugins." },
+      { "q": "What transport security should be used?", "a": "TLS everywhere with strong ciphers and certificate validation." },
+      { "q": "How to prevent XSS in web Kotlin apps?", "a": "Escape output for HTML contexts and use Content Security Policy." },
+      { "q": "How to mitigate CSRF?", "a": "Use anti-CSRF tokens and same-site cookies." },
+      { "q": "How to enforce least privilege?", "a": "Grant minimal permissions to processes, services and containers." },
+      { "q": "How to manage dependency upgrades?", "a": "Automate updates, run tests and monitor security advisories for transitive deps." },
+      { "q": "When to use encryption vs hashing?", "a": "Use hashing (bcrypt/scrypt/argon2) for passwords, encryption for secrets requiring retrieval." },
+      { "q": "How to log errors securely?", "a": "Sanitize logs to remove secrets and PII, use structured logs with access controls." },
+      { "q": "What is certificate pinning?", "a": "Bind client to a specific server certificate to prevent MITM on mobile apps." },
+      { "q": "How to implement rate limiting?", "a": "Use token buckets or middleware to throttle requests per client." },
+      { "q": "How to validate JWTs safely?", "a": "Verify signature, expiry and expected claims and use well-known keys when available." },
+      { "q": "How to protect API keys in apps?", "a": "Avoid embedding keys in mobile apps; use backend proxies or token exchange." },
+      { "q": "How to perform threat modeling for Kotlin apps?", "a": "Identify assets, trust boundaries and likely threats, then prioritize mitigations." },
+      { "q": "How to manage secrets in Docker images?", "a": "Avoid baking secrets into images; use orchestrator secret stores or runtime injection." },
+      { "q": "What is secure default config?", "a": "Safe-by-default settings like secure cookie flags, minimal permissions and off debug endpoints." }
+    ]
+  },
+
+  "kotlin_best_practices": {
+    "title": "Best Practices & Patterns",
+    "summary": "Idiomatic Kotlin, code style, modularization, testing and maintainability.",
+    "details": "Best practices summary: prefer immutability with val and data classes, keep functions small and focused, use coroutines for async, use sealed classes for ADTs, and rely on standard library utilities instead of reinventing helpers. Enforce style with ktlint and detect smells with detekt. Structure projects in small modules for fast builds and clear boundaries. Use dependency injection (Koin/Hilt/Dagger) for decoupling. Keep public API surfaces stable and document changes. Run static analysis and automate tests in CI. Maintain changelogs and semantic versioning for libraries.",
+    "cheat": "// Enforce formatting\nktlintFormat\n// Static checks\n./gradlew detekt\n// Dependency injection example\nval appModule = module { single { Repository() } }\n",
+    "examples": [
+      { "code": "data class Config(val host: String, val port: Int)\nfun start(cfg: Config) { /* ... */ }" }
+    ],
+    "interview": [
+      { "q": "Why favor small modules in Gradle?", "a": "Faster incremental builds and clearer ownership boundaries." },
+      { "q": "What is the role of ktlint?", "a": "Formatting enforcement to keep consistent code style." },
+      { "q": "How to design for testability?", "a": "Inject dependencies, avoid singletons and side-effect-heavy globals." },
+      { "q": "Why prefer val over var?", "a": "Immutability reduces bugs and clarifies intent." },
+      { "q": "When to use sealed classes vs enums?", "a": "Sealed classes hold data per case and are better for complex ADTs than enums." },
+      { "q": "How to handle breaking API changes?", "a": "Use semantic versioning and deprecation periods with migration guides." },
+      { "q": "How to maintain code readability?", "a": "Use clear names, small functions and document tricky invariants." },
+      { "q": "When to use inline classes?", "a": "Wrap primitives with type-safety while avoiding runtime allocations." },
+      { "q": "How to control public API surface?", "a": "Mark internal types as internal and explicit public APIs with docs." },
+      { "q": "Why run static analysis in CI?", "a": "Catch issues early and maintain code quality across the team." },
+      { "q": "How to organize packages for large codebases?", "a": "Group by feature/domain rather than technical tier only." },
+      { "q": "What is a convention plugin in Gradle?", "a": "Centralizes common build configuration to share across modules." },
+      { "q": "How to document Kotlin libraries?", "a": "Use KDoc and publish generated docs with Dokka." },
+      { "q": "How to handle deprecation?", "a": "Annotate with @Deprecated and provide replacement details and timeline." },
+      { "q": "What is a good PR review focus for Kotlin?", "a": "Design, tests, readability, API compatibility and performance implications." },
+      { "q": "How to track technical debt?", "a": "Maintain a backlog, categorize risk and schedule refactors." },
+      { "q": "How to do gradual migration from Java to Kotlin?", "a": "Migrate modules incrementally and keep interop boundaries small." },
+      { "q": "How to choose libraries?", "a": "Prefer maintained, multiplatform-friendly libraries with active communities." },
+      { "q": "How to practice secure defaults?", "a": "Enable conservative security settings and require explicit opt-in to relax." },
+      { "q": "How to onboard new Kotlin developers?", "a": "Provide style guide, sample modules and clear patterns used by the team." }
+    ]
+  }
+}

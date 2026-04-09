@@ -1,0 +1,320 @@
+{
+  "day1": {
+    "title": "Intro & Setup: Core Fundamentals",
+    "definition": "Setting up the environment (browser console and Node.js), writing the first script, understanding where JavaScript executes.",
+    "details": "We cover how JavaScript is executed in the **Browser** vs. **Node.js**. Learn to use **`console.log()`** for output and comments. Understand the use of the `<script>` tag in HTML and the concept of **Strict Mode** (`'use strict'`). The day concludes with writing and executing a simple 'Hello World' script.",
+    "code": "// index.js\nconsole.log('Hello, JavaScript!');\n\n// Run in Node.js: node index.js",
+    "extra": "Key concepts: Browser vs. Node.js, `console.log()`, Script tag placement, Strict Mode, Semicolons"
+  },
+  "day2": {
+    "title": "Variables & Core Data Types",
+    "definition": "Mastering variable declaration (**`let`, `const`, `var`**) and primary data types: **`string`, `number`, `boolean`, `null`, `undefined`**.",
+    "details": "Focus on the critical difference between **`let`** (mutable, block-scoped) and **`const`** (immutable, block-scoped), and why **`var`** is generally avoided due to its function scope and hoisting issues. Inspect types using the **`typeof`** operator. Explore **Type Coercion** and the difference between loose (`==`) and **strict equality (`===`)**, recommending the latter.",
+    "code": "let count = 42; // Number\nconst userName = 'Ali'; // String\nlet isLogged = true; // Boolean\n\nconsole.log(typeof count, typeof userName);\nconsole.log(5 == '5'); // True (coercion)\nconsole.log(5 === '5'); // False (strict)",
+    "extra": "`let` vs `const` vs `var`, Strict vs. Loose Equality, Type Coercion, Primitive Data Types, `typeof` operator"
+  },
+  "day3": {
+    "title": "Operators & Control Flow: Decisions",
+    "definition": "Using **Arithmetic**, **Comparison**, and **Logical Operators** to form complex expressions, and controlling execution with **`if`/`else`** statements.",
+    "details": "Review all major operators. Learn to chain conditions using **Logical Operators** (`&&`, `||`, `!`). Implement **`if`, `else if`, and `else`** clauses. Explore the concise **Ternary Operator** (`condition ? val1 : val2`) for simple conditional assignments. Introduce the **`switch`** statement for multi-case conditional logic.",
+    "code": "let age = 18;\nlet canVote = (age >= 18) ? 'Yes' : 'No';\n\nif (age > 60 || canVote === 'No') {\n    console.log('Retirement or too young');\n} else {\n    console.log('Working adult or new voter');\n}\n\nconsole.log('Can Vote:', canVote);",
+    "extra": "Logical Operators (`&&`, `||`), Ternary Operator, `switch` statement, operator precedence, Falsy/Truthy values"
+  },
+  "day4": {
+    "title": "Loops & Iteration: Repetition",
+    "definition": "Mastering repetitive code execution using **`for`, `while`, `do...while`** loops and controlling loop flow.",
+    "details": "Use the traditional **`for` loop** for definite iteration and **`while` loop** for indefinite iteration (until a condition is false). Understand the use of **`break`** (exits the loop) and **`continue`** (skips the current iteration). Introduce **`for...of`** (for iterating over iterable values like arrays) and **`for...in`** (for iterating over object properties).",
+    "code": "const items = ['a', 'b', 'c'];\n\nfor (let i = 0; i < items.length; i++) {\n    if (items[i] === 'b') continue;\n    console.log(items[i]);\n}\n\n// Iterating values in an array\nfor (const item of items) {\n    console.log('Item:', item);\n}",
+    "extra": "`for...of` vs `for...in`, `break` and `continue`, loop structure, definite vs indefinite iteration"
+  },
+  "day5": {
+    "title": "Functions: Reusable Code Blocks",
+    "definition": "Defining and using functions (**Declaration, Expression, Arrow**) to create reusable blocks of code and implementing parameters and return values.",
+    "details": "Cover the three main ways to define a function, highlighting **Arrow Functions (ES6+)** as the modern standard. Discuss **Default Parameters** and handling an unknown number of arguments using the **Rest Parameter (`...args`)**. Revisit **Function Scope** and the concept of **Hoisting** for function declarations vs. expressions.",
+    "code": "const greet = (name = 'Guest') => { // Arrow Function with Default Parameter\n    return `Hello, ${name}!`;\n};\n\nfunction sum(...numbers) { // Rest Parameter\n    return numbers.reduce((acc, num) => acc + num, 0);\n}\n\nconsole.log(greet('Kabir'));\nconsole.log(sum(1, 2, 3, 4));",
+    "extra": "Arrow Functions, Default Parameters, Rest Parameter (`...`), Hoisting (Function vs. Variable), `return` keyword"
+  },
+  "day6": {
+    "title": "Arrays: Core Methods & Manipulation",
+    "definition": "Working with ordered lists of data (**Arrays**) and utilizing fundamental array methods for adding, removing, and finding elements.",
+    "details": "Array creation and accessing elements by **index**. Essential methods: **`.push()`** (add to end), **`.pop()`** (remove from end), **`.shift()`** (remove from start), **`.unshift()`** (add to start), and **`.indexOf()`**. Learn non-mutating methods like **`.slice()`** (extracts a portion) versus mutating methods like **`.splice()`** (changes content).",
+    "code": "const fruits = ['apple', 'banana', 'cherry'];\n\nfruits.push('date'); // Mutates: adds to end\nconst first = fruits.shift(); // Mutates: removes first\n\nconst copy = fruits.slice(1, 3); // Non-mutating copy\n\nconsole.log(fruits); // ['banana', 'cherry', 'date']\nconsole.log(copy); // ['cherry', 'date']",
+    "extra": "Mutating vs. Non-mutating methods, Indexing, `.slice()`, `.splice()`, `.includes()`, Array Length"
+  },
+  "day7": {
+    "title": "Higher-Order Array Methods (Map, Filter, Reduce)",
+    "definition": "Harnessing the power of **Higher-Order Functions** to transform and process array data concisely using **`.map()`, `.filter()`, and `.reduce()`**.",
+    "details": "**`.map()`**: Transforms every element in an array and returns a new array of the same length. **`.filter()`**: Returns a new array containing only elements that pass a given test condition. **`.reduce()`**: Applies a function against an accumulator and each element to reduce the array to a single value. These methods are essential for modern, functional-style JavaScript and are generally preferred over traditional `for` loops for data processing.",
+    "code": "const numbers = [1, 2, 3, 4, 5];\n\n// map: returns [2, 4, 6, 8, 10]\nconst doubled = numbers.map(n => n * 2);\n\n// filter: returns [4, 5]\nconst largeNumbers = numbers.filter(n => n > 3);\n\n// reduce: returns 15 (sum of array)\nconst sum = numbers.reduce((acc, n) => acc + n, 0);\n\nconsole.log(doubled, largeNumbers, sum);",
+    "extra": "`.map()`, `.filter()`, `.reduce()`, Immutability, Functional Programming basics, `.forEach()`"
+  },
+  "day8": {
+    "title": "Objects: Key-Value Collections",
+    "definition": "Understanding and manipulating **Objects**, the core data structure for key-value collections in JavaScript (similar to Python's dictionaries).",
+    "details": "Objects store data in **unordered** key-value pairs. Access properties using **dot notation** (`obj.key`) or **bracket notation** (`obj['key']`). Learn methods for listing and iterating over properties: **`Object.keys()`**, **`Object.values()`**, and **`Object.entries()`**. Explore **Object Mutability** and how objects are passed by reference.",
+    "code": "const user = {\n    name: 'Jahid',\n    age: 25,\n    city: 'Chittagong'\n};\n\nconsole.log(user.name); // Dot notation\nconsole.log(user['age']); // Bracket notation\n\n// Loop through keys and values\nfor (const [key, value] of Object.entries(user)) {\n    console.log(`${key}: ${value}`);\n}",
+    "extra": "Dot vs. Bracket Notation, `Object.keys()`, `Object.values()`, Pass by Reference, Mutability of Objects"
+  },
+  "day9": {
+    "title": "ES6+ Features: Destructuring & Spread/Rest",
+    "definition": "Modernize code using ES6 features: **Destructuring** (Array/Object) for extracting data easily, and **Spread/Rest Operators** (`...`) for flexible data manipulation.",
+    "details": "**Object Destructuring** extracts properties into distinct variables. **Array Destructuring** does the same for array elements. The **Spread Operator (`...`)** is used to quickly copy or combine arrays and objects (creating a *shallow copy*). The **Rest Parameter (`...`)** collects multiple function arguments into a single array (already covered, but reviewed in the context of Destructuring).",
+    "code": "const person = { first: 'Rana', last: 'Khan', job: 'Dev' };\n\n// Object Destructuring\nconst { first, job } = person;\nconsole.log(first, job);\n\n// Spread Operator for merging objects\nconst updates = { job: 'Manager', age: 30 };\nconst newPerson = { ...person, ...updates }; // Overwrites 'job'\n\nconsole.log(newPerson);",
+    "extra": "Array and Object Destructuring, Spread Operator (`...`), Rest Parameter (`...`), Shallow Copy"
+  },
+  "day10": {
+    "title": "The 'This' Keyword & Prototypes",
+    "definition": "Deep dive into the **`this`** keyword, which changes context, and the concept of the **Prototype Chain** for inheritance.",
+    "details": "Understand that **`this`** refers to the *execution context*. Its value changes based on *how* a function is called (global, object method, constructor, or explicit binding). Explore the **Prototype Chain**; how objects inherit properties and methods from other objects (`__proto__`). Learn explicit binding using **`.call()`, `.apply()`, and `.bind()`** to manually set the `this` context. Arrow functions have a unique, lexically-scoped `this`.",
+    "code": "const user = { name: 'Priya', greet() { console.log(`Hello, I am ${this.name}`); } };\nconst otherUser = { name: 'Sami' };\n\nuser.greet(); // 'this' is 'user'\n\n// Explicit binding using call\nuser.greet.call(otherUser); // 'this' is 'otherUser'",
+    "extra": "`this` context, Prototype Chain, `call()`, `apply()`, `bind()`, Constructor functions, Lexical `this` in Arrow Functions"
+  },
+  "day11": {
+    "title": "Classes & OOP in JavaScript",
+    "definition": "Implementing **Object-Oriented Programming (OOP)** using **ES6 Classes** for object blueprints and using **Inheritance** to manage code structure.",
+    "details": "Classes in JavaScript are syntactic sugar over the prototype system. Define a **Class** with a **`constructor`** method (for initial state) and instance **Methods**. Implement **Inheritance** using the **`extends`** keyword, and use **`super()`** to call the parent class's constructor and methods. Differentiate between instance properties and static methods/properties.",
+    "code": "class Animal {\n    constructor(name) { this.name = name; }\n    speak() { return 'Animal noise'; }\n}\n\nclass Cat extends Animal {\n    constructor(name, breed) {\n        super(name); // Call parent constructor\n        this.breed = breed;\n    }\n    speak() { return 'Meow!'; }\n}\n\nconst myCat = new Cat('Tigger', 'Shorthair');\nconsole.log(myCat.speak()); // Meow!",
+    "extra": "Class Syntax, Constructor, `extends`, `super()`, Instance vs. Static methods, Encapsulation"
+  },
+  "day12": {
+    "title": "Modules: Import & Export",
+    "definition": "Organizing code into separate files (**Modules**) using the modern **`import` and `export` (ES Modules)** syntax for better reusability and dependency management.",
+    "details": "Understand the need for modules to prevent global scope pollution. Learn to use **Named Exports** (`export const name = ...`) and **Default Exports** (`export default ...`). Discuss the difference in importing them (`import { name } from './file.js'` vs. `import Name from './file.js'`). Briefly touch upon dynamic imports (`import('modulePath')`) for performance optimization.",
+    "code": "// math.js\nexport const PI = 3.14;\nexport function sum(a, b) { return a + b; }\n\n// main.js\nimport { PI, sum } from './math.js';\n\nconsole.log(PI);\nconsole.log(sum(10, 20));",
+    "extra": "Named vs. Default Exports, Module Bundlers (Webpack/Vite concept), Dynamic Imports, Global Scope Prevention"
+  },
+  "day13": {
+    "title": "Error Handling: Try/Catch/Finally",
+    "definition": "Making code robust by implementing **Error Handling** using **`try`, `catch`, `finally`** blocks, and knowing how to **`throw`** custom errors.",
+    "details": "Use the **`try`** block for code that may fail. The **`catch (error)`** block executes if an exception occurs, allowing for graceful recovery. The **`finally`** block executes regardless of whether an error occurred (useful for cleanup). Learn to create and throw custom `Error` objects (`throw new Error('Message')`) for specific application logic failures.",
+    "code": "function divide(a, b) {\n    if (b === 0) {\n        throw new Error('Cannot divide by zero');\n    }\n    return a / b;\n}\n\ntry {\n    console.log(divide(10, 0));\n} catch (error) {\n    console.error('Caught an error:', error.message);\n} finally {\n    console.log('Execution finished.');\n}",
+    "extra": "Specific Error Types (TypeError, ReferenceError), Throwing Errors, Stack Trace, `finally` block"
+  },
+  "day14": {
+    "title": "Asynchronous JS: Callbacks & Timers",
+    "definition": "Introduction to **Asynchronous JavaScript**, focusing on the **Event Loop** model and basic async patterns using **Callbacks** and built-in timer functions.",
+    "details": "Understand that JavaScript is single-threaded, but handles I/O operations non-blockingly using the **Event Loop**. Learn to use **`setTimeout()`** and **`setInterval()`** for delayed or repeated execution. Introduce the **Callback Pattern** (passing a function to be executed later), and the issues it creates (**'Callback Hell'**). This sets the stage for Day 15's solution: Promises.",
+    "code": "console.log('Start');\n\nsetTimeout(() => {\n    console.log('Executed after 1 second'); // Will run last\n}, 1000);\n\nconsole.log('End');",
+    "extra": "Event Loop, Call Stack, Web APIs, Callbacks, `setTimeout`, `setInterval`, Callback Hell"
+  },
+  "day15": {
+    "title": "Asynchronous JS: Promises",
+    "definition": "Solving Callback Hell using **Promises**—objects that represent the eventual completion (or failure) of an asynchronous operation.",
+    "details": "A Promise has three states: **`pending`, `fulfilled` (resolved), and `rejected`**. Use **`.then()`** to handle a successful resolution and **`.catch()`** to handle errors/rejection. Learn **Promise Chaining** (`.then().then()`) for sequence-dependent asynchronous operations. Introduce utility methods like **`Promise.all()`** (wait for all to finish) and **`Promise.race()`** (finish on the first one).",
+    "code": "const fetchData = (success) => new Promise((resolve, reject) => {\n    setTimeout(() => {\n        if (success) {\n            resolve('Data fetched!');\n        } else {\n            reject('Fetch error!');\n        }\n    }, 500);\n});\n\nfetchData(true)\n    .then(data => console.log('Success:', data))\n    .catch(err => console.error('Failure:', err));",
+    "extra": "Promise States, `.then()`, `.catch()`, Promise Chaining, `Promise.all()`, `Promise.race()`"
+  },
+  "day16": {
+    "title": "Asynchronous JS: Async/Await",
+    "definition": "Simplifying Promise handling by using the modern ES2017 syntax: **`async` and `await`**.",
+    "details": "The **`async`** keyword turns a function into one that returns a Promise. The **`await`** keyword pauses the execution of an `async` function until a Promise settles (resolves or rejects), making asynchronous code look and feel synchronous. Learn to wrap `await` calls in **`try/catch`** blocks for error handling, replacing the need for `.catch()`. This is the preferred pattern for modern asynchronous code.",
+    "code": "const fetchData = async () => {\n    try {\n        const result = await new Promise(r => setTimeout(() => r('Async Data'), 1000));\n        console.log('Result:', result);\n    } catch (error) {\n        console.error('Async Error:', error);\n    }\n};\n\nfetchData();",
+    "extra": "`async` function, `await` keyword, Error handling with `try/catch`, Cleaner asynchronous code"
+  },
+  "day17": {
+    "title": "JSON & Fetch API: Networking",
+    "definition": "Understanding the **JSON (JavaScript Object Notation)** data format and using the built-in **`fetch` API** to make HTTP requests (GET, POST) to consume external APIs.",
+    "details": "Learn to convert between JSON strings and JavaScript Objects using **`JSON.stringify()`** and **`JSON.parse()`**. Use the browser's **`fetch()`** API (which returns a Promise) to retrieve data. Understand the process of handling the **Response object**, checking the **HTTP status code**, and calling `response.json()` to parse the response body.",
+    "code": "const userObj = { name: 'Shuvo', id: 201 };\nconst userJson = JSON.stringify(userObj);\n\n// Fetch example\nfetch('https://jsonplaceholder.typicode.com/posts/1')\n    .then(response => response.json()) // Parse JSON body\n    .then(data => console.log('Post Title:', data.title))\n    .catch(error => console.error('Fetch Failed:', error));",
+    "extra": "`JSON.stringify()`, `JSON.parse()`, `fetch` API, HTTP Status Codes, Response object"
+  },
+  "day18": {
+    "title": "Closures & Higher-Order Functions",
+    "definition": "A deep dive into **Closures**: when an inner function remembers and can access variables from its parent scope even after the parent function has finished executing.",
+    "details": "Closures are fundamental to JS's power. Learn how they enable **Data Encapsulation**, **Private Variables**, and **Function Factories** (functions that return other functions). Explore **Higher-Order Functions (HOFs)** which either take a function as an argument (like `.map()`) or return a function (like a Closure factory).",
+    "code": "function createCounter() {\n    let count = 0; // The enclosed variable\n    return function() {\n        count += 1;\n        return count;\n    };\n}\n\nconst counter = createCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2 (count is 'remembered')",
+    "extra": "Data Encapsulation, Private Variables, Function Factories, Currying (a HOF concept)"
+  },
+  "day19": {
+    "title": "Introduction to the DOM (Document Object Model)",
+    "definition": "Understanding the **DOM**—the programming interface for web documents—and learning how to select and inspect HTML elements.",
+    "details": "The DOM represents the HTML structure as a tree of objects. Learn essential selection methods: **`document.getElementById()`**, **`document.querySelector()`**, and **`document.querySelectorAll()`**. Understand the difference between NodeLists and HTMLCollections, and how to access and modify element attributes (like `id` or `class`).",
+    "code": "// Assumes an element with id='header' exists in HTML\nconst header = document.getElementById('header');\nconsole.log(header.tagName); // e.g., 'H1'\n\n// Selects the first element with class='btn'\nconst button = document.querySelector('.btn');\nconsole.log(button.className);",
+    "extra": "DOM Tree structure, `getElementById`, `querySelector`, NodeList, HTMLCollection, Element Attributes"
+  },
+  "day20": {
+    "title": "DOM Manipulation: Content & Styling",
+    "definition": "Dynamically changing the content, structure, and appearance of elements on a webpage using JavaScript.",
+    "details": "Modify element content using **`.innerText`** (text only) and **`.innerHTML`** (HTML content). Change styling directly via the **`.style`** property (`element.style.color = 'red'`) and manage CSS classes using **`.classList`** (`.add()`, `.remove()`, `.toggle()`). Learn to create and insert new elements using **`document.createElement()`** and **`.appendChild()`**.",
+    "code": "const box = document.querySelector('#box');\n\nbox.innerHTML = '<strong>New Content</strong>';\nbox.style.backgroundColor = 'blue';\nbox.classList.add('highlight');\n\nconst newP = document.createElement('p');\nnewP.innerText = 'Added by JS';\nbox.appendChild(newP);",
+    "extra": "`.innerText` vs `.innerHTML`, `.style` property, `.classList` methods, `createElement`, `appendChild`"
+  },
+  "day21": {
+    "title": "DOM Events & Event Listeners",
+    "definition": "Responding to user interactions (like clicks, keypresses, form submissions) by registering **Event Listeners**.",
+    "details": "Understand the **Event Object** (which contains information about the event). Use **`.addEventListener()`** to attach functions to specific events (e.g., `'click'`, `'mouseover'`, `'submit'`). Learn about **Event Propagation** (Capturing and Bubbling) and using **`event.preventDefault()`** to stop default browser actions (e.g., stopping a form from submitting).",
+    "code": "const button = document.querySelector('#submitBtn');\n\nconst handleClick = (event) => {\n    event.preventDefault(); // Stop form submission\n    console.log('Button clicked!');\n    console.log('Target:', event.target);\n};\n\nbutton.addEventListener('click', handleClick);",
+    "extra": "Event Object, `addEventListener()`, Event Bubbling, `preventDefault()`, `target` property"
+  },
+  "day22": {
+    "title": "Local Storage & Session Storage",
+    "definition": "Persisting simple data in the browser using the **Web Storage API** (Local and Session Storage).",
+    "details": "**Local Storage** stores data with no expiration date, surviving browser closure. **Session Storage** clears data when the browser tab is closed. Both store data as **key-value pairs** where values must be **strings**. Use **`localStorage.setItem()`**, **`localStorage.getItem()`**, and remember to use **`JSON.stringify()`/`JSON.parse()`** to store/retrieve complex objects.",
+    "code": "const userData = { user: 'Rahim', theme: 'dark' };\n\n// Store a complex object (must stringify first)\nlocalStorage.setItem('settings', JSON.stringify(userData));\n\n// Retrieve and parse back to object\nconst settings = JSON.parse(localStorage.getItem('settings'));\n\nconsole.log(settings.theme); // dark",
+    "extra": "`localStorage` vs `sessionStorage`, `setItem`, `getItem`, Data persistence, JSON for complex data"
+  },
+  "day23": {
+    "title": "Regular Expressions (Regex)",
+    "definition": "Using **Regular Expressions** to define text patterns for searching, validating, and manipulating strings.",
+    "details": "Learn basic Regex syntax: **Literals, Character Sets (`[]`), Quantifiers (`+`, `*`, `?`), and Anchors (`^`, `$`**). Use JavaScript's built-in methods that accept Regex: **`.test()`, `.exec()`, `string.match()`, `string.replace()`**. Focus on input validation (e.g., email or phone number formats).",
+    "code": "const text = 'email: test@example.com';\nconst pattern = /\\b\\w+@\\w+\\.\\w+\\b/i; // Basic email pattern\n\nconst isValid = pattern.test(text);\nconst found = text.match(pattern);\n\nconsole.log('Is valid:', isValid); // true\nconsole.log('Found:', found[0]);",
+    "extra": "Character Sets, Quantifiers, Anchors, Flags (g, i, m), `.test()`, `.match()`"
+  },
+  "day24": {
+    "title": "Set & Map: Unique Collections",
+    "definition": "Working with the **`Set`** (collection of unique values) and **`Map`** (ordered key-value pairs) objects (ES6+).",
+    "details": "A **`Set`** is ideal for quickly storing a list where duplicates are automatically removed, and for fast membership testing (`set.has(value)`). A **`Map`** is like an object but allows **any data type** (even objects or functions) to be used as keys, and maintains the **insertion order**. Learn the basic methods: **`.add()`, `.has()`, `.get()`, `.set()`**.",
+    "code": "const uniqueNumbers = new Set([1, 2, 2, 3, 4, 4]);\nconsole.log(uniqueNumbers); // {1, 2, 3, 4}\n\nconst userMap = new Map();\nuserMap.set('id', 1);\nuserMap.set('isAdmin', true);\n\nconsole.log(userMap.get('id')); // 1\nconsole.log(userMap.size); // 2",
+    "extra": "`Set` for uniqueness, `Map` for key flexibility, Insertion Order in Maps, `WeakMap`/`WeakSet` concept"
+  },
+  "day25": {
+    "title": "Data & Time Manipulation",
+    "definition": "Working with JavaScript's **`Date`** object for creating, formatting, and calculating time differences.",
+    "details": "Create `Date` instances (`new Date()`). Access date parts using methods like **`.getFullYear()`, `.getMonth()`, `.getDate()`, and `.getTime()`** (milliseconds since epoch). Focus on formatting dates for user display and using the powerful **`Intl.DateTimeFormat`** for internationalized date/time representation.",
+    "code": "const today = new Date();\n\n// Get year and month\nconsole.log(today.getFullYear());\n\n// Calculate time difference (e.g., from now to tomorrow)\nconst tomorrow = new Date();\ntomorrow.setDate(today.getDate() + 1);\n\nconst diffInDays = (tomorrow.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);\nconsole.log('Difference in days:', diffInDays);",
+    "extra": "`.getTime()`, UTC vs Local Time, `Intl.DateTimeFormat`, Timezone handling"
+  },
+  "day26": {
+    "title": "DOM Mini-Project: Simple To-Do List",
+    "definition": "Combining skills from Days 19-21 to build a functional **To-Do List** application, focusing on state management and dynamic DOM rendering.",
+    "details": "Implement the core features: **1. Event Listener** for form submission, **2. Dynamic Element Creation** (`createElement`) for new list items, **3. Event Delegation** to handle clicks on dynamically created 'delete' buttons, and **4. Local Storage** integration (Day 22) to persist the list across page loads.",
+    "code": "/* Pseudo-code for project structure */\n\n// 1. Get DOM Elements (form, list)\n// 2. Load from localStorage (or empty array)\n// 3. Render initial list from data\n// 4. Add Event Listener to Form:\n//    - e.preventDefault()\n//    - Add new item to array/localStorage\n//    - Re-render list",
+    "extra": "Project focus: Event Delegation, Dynamic Rendering, State management, Local Storage integration"
+  },
+  "day27": {
+    "title": "Functional Programming: Immutability & Purity",
+    "definition": "Introduction to **Functional Programming (FP)** principles: **Immutability** and **Pure Functions**.",
+    "details": "A **Pure Function** always returns the same result for the same input and causes no side effects (e.g., doesn't modify external data). **Immutability** means state is never changed; instead, a new state is created (using Spread or array methods). Understand why FP leads to more reliable, testable, and maintainable code. Review `.map()`, `.filter()`, and Spread (`...`) as immutable tools.",
+    "code": "// Pure function example\nconst add = (a, b) => a + b; \n\n// Impure function (side effect)\nlet total = 0;\nconst addToTotal = (val) => { total += val; }; \n\n// Immutable update using Spread\nconst original = { id: 1, name: 'Tisa' };\nconst updated = { ...original, name: 'Tisa Begum' }; // New object created",
+    "extra": "Pure Functions, Side Effects, Immutability, Referential Transparency"
+  },
+  "day28": {
+    "title": "Object Methods: Getters, Setters & Property Descriptors",
+    "definition": "Controlling how object properties are accessed and modified using **Getters and Setters** and understanding property configuration.",
+    "details": "**Getters** (`get propertyName()`) are functions that act like properties when accessed (computed values). **Setters** (`set propertyName(val)`) are functions that run when a property is assigned a value (used for validation). Learn to use **`Object.defineProperty()`** and **`Object.getOwnPropertyDescriptor()`** to control attributes like `writable`, `enumerable`, and `configurable`.",
+    "code": "const user = {\n    firstName: 'Bipul',\n    lastName: 'Hossain',\n    get fullName() { // Getter\n        return `${this.firstName} ${this.lastName}`;\n    },\n    set fullName(name) { // Setter\n        [this.firstName, this.lastName] = name.split(' ');\n    }\n};\n\nuser.fullName = 'New Name'; // Calls the setter\nconsole.log(user.fullName); // Calls the getter",
+    "extra": "Getters/Setters, Property Descriptors, `writable`, `enumerable`, `configurable`, `Object.freeze()`"
+  },
+  "day29": {
+    "title": "Advanced Topics: Generators & Iterators",
+    "definition": "Working with the **Iterator Protocol** and creating custom, memory-efficient iterators using **Generator Functions** (`function*`) and the **`yield`** keyword.",
+    "details": "An object is **Iterable** if it defines a `Symbol.iterator` method. A **Generator** is a function that can be paused and resumed, producing a sequence of values on demand via **`yield`**. This is used for generating large sequences of data lazily and for asynchronous control flow (though mostly replaced by `async/await`).",
+    "code": "function* idMaker() {\n    let index = 0;\n    while(true)\n        yield index++; // Pauses and returns value\n}\n\nconst gen = idMaker();\n\nconsole.log(gen.next().value); // 0\nconsole.log(gen.next().value); // 1\nconsole.log(gen.next().value); // 2",
+    "extra": "Iterator Protocol, Generator Functions, `yield` keyword, Lazy Evaluation, `for...of` iteration"
+  },
+  "day30": {
+    "title": "Review & Final Project: Quiz App",
+    "definition": "Reviewing all core concepts and applying them to a substantial final project: a dynamic **Quiz Application**.",
+    "details": "This project integrates: **1. Data Structure** (Array of Question Objects), **2. DOM Manipulation** (loading questions, displaying answers), **3. Event Listeners** (handling user selections), **4. Control Flow** (checking answers, scoring), and **5. Functions** (to manage the application logic). The focus is on consolidating knowledge and moving beyond small snippets to a functional application.",
+    "code": "/* Final Project Integration: */\n\n// 1. Data model for questions.\n// 2. Function to start/reset the quiz (re-renders DOM).\n// 3. Function to handle answer selection (updates score/state).\n// 4. Function to display final results.\n// 5. Use 'const' for static data and 'let' for mutable state (score, currentQuestion).",
+    "extra": "Project focus: Full stack application logic, Review of Promises/Async, OOP concepts, Best practices"
+  },
+  "interview": {
+    "beginner": [
+      { "q": "What is the difference between let, const, and var?", "a": "let: block-scoped, can be reassigned. const: block-scoped, cannot be reassigned. var: function-scoped, can be reassigned, hoisted." },
+      { "q": "How do you check the type of a variable?", "a": "Use typeof operator: typeof variable. Returns string like 'number', 'string', 'boolean', 'object', 'function', 'undefined'." },
+      { "q": "What is the difference between == and ===?", "a": "== checks value with type coercion, === checks value and type without coercion. Always use === for predictable results." },
+      { "q": "How do you write a function in JavaScript?", "a": "Function declaration: function name() {} or arrow function: const name = () => {} or function expression: const name = function() {}." },
+      { "q": "What is an array and how do you create one?", "a": "Arrays are ordered collections. Create with: const arr = [1,2,3] or const arr = new Array(1,2,3)." },
+      { "q": "How do you add an element to an array?", "a": "push() adds to end, unshift() adds to beginning, or use spread: [...arr, newElement]." },
+      { "q": "What is an object in JavaScript?", "a": "Objects are collections of key-value pairs. Create with: const obj = {key: 'value'} or const obj = new Object()." },
+      { "q": "How do you access object properties?", "a": "Dot notation: obj.property or bracket notation: obj['property'] for dynamic keys or invalid identifiers." },
+      { "q": "What is a callback function?", "a": "A function passed as argument to another function, to be executed later (often after async operation completes)." },
+      { "q": "What is JSON and how do you parse it?", "a": "JSON is data format. Parse with JSON.parse(string), stringify with JSON.stringify(object)." },
+      { "q": "How do you handle errors in JavaScript?", "a": "Use try/catch blocks for synchronous code, .catch() for promises, or try/catch with async/await." },
+      { "q": "What is the DOM?", "a": "Document Object Model - programming interface for web documents, representing page as object tree." },
+      { "q": "How do you select an element by ID?", "a": "document.getElementById('id') or document.querySelector('#id')." },
+      { "q": "What is event handling?", "a": "Responding to user interactions using addEventListener('event', handlerFunction)." },
+      { "q": "What is a promise?", "a": "Promise represents eventual completion of async operation. Has states: pending, fulfilled, rejected." },
+      { "q": "How do you create a promise?", "a": "new Promise((resolve, reject) => { /* async operation */ })." },
+      { "q": "What is async/await?", "a": "Syntactic sugar for promises. async function returns promise, await pauses until promise settles." },
+      { "q": "What is hoisting?", "a": "JavaScript behavior where declarations are moved to top of scope. var and function declarations are hoisted." },
+      { "q": "What is closure?", "a": "Function that remembers and accesses variables from outer scope even when executed outside that scope." },
+      { "q": "What is the 'this' keyword?", "a": "Refers to object that is executing current function. Value depends on how function is called." },
+      { "q": "What are arrow functions?", "a": "Shorter syntax: (params) => expression. No own 'this', arguments, super, or new.target." },
+      { "q": "How do you loop through an array?", "a": "for loop, for...of, forEach(), map(), etc. for...of for values, for...in not recommended for arrays." },
+      { "q": "What is destructuring?", "a": "Extract values from arrays or properties from objects into distinct variables." },
+      { "q": "What is the spread operator?", "a": "... expands iterables. Used for copying arrays/objects, merging, function arguments." },
+      { "q": "What is template literal?", "a": "Backtick strings allowing embedded expressions: `Hello ${name}` and multi-line strings." },
+      { "q": "What is NaN and how to check for it?", "a": "Not-a-Number. Check with isNaN(value) or Number.isNaN(value)." },
+      { "q": "What is null and undefined?", "a": "undefined: variable declared but not assigned. null: intentional absence of value." },
+      { "q": "How do you convert string to number?", "a": "parseInt(string), parseFloat(string), Number(string), or unary plus: +string." },
+      { "q": "What is event bubbling?", "a": "Events propagate from target element up to document root. Use event.stopPropagation() to prevent." },
+      { "q": "What is localStorage?", "a": "Web storage API for persisting data in browser. localStorage.setItem(key, value), localStorage.getItem(key)." }
+    ],
+    "intermediate": [
+      { "q": "Explain event delegation and its benefits.", "a": "Attach single event listener to parent to handle events from children. Benefits: performance, dynamic elements, less memory." },
+      { "q": "What is the event loop?", "a": "JavaScript runtime model that handles async operations. Has call stack, callback queue, microtask queue." },
+      { "q": "Difference between setTimeout and setInterval?", "a": "setTimeout runs once after delay, setInterval runs repeatedly at intervals. Both return timer ID for clearing." },
+      { "q": "What are JavaScript modules?", "a": "ES6 feature to split code into files. Export with export, import with import. Supports named and default exports." },
+      { "q": "Explain promise chaining.", "a": "Multiple .then() calls on promise. Each returns value for next .then(), or promise that resolves to value." },
+      { "q": "What is the difference between let and var in loops?", "a": "let creates new binding for each iteration, var shares same binding. Important in closures with setTimeout in loops." },
+      { "q": "How does 'this' work in arrow functions?", "a": "Arrow functions don't have own 'this'. They inherit 'this' from enclosing lexical scope." },
+      { "q": "What is currying?", "a": "Transforming function with multiple arguments into sequence of functions each with single argument." },
+      { "q": "Explain the module pattern.", "a": "Design pattern using IIFE and closures to create private and public members. Pre-ES6 module solution." },
+      { "q": "What are higher-order functions?", "a": "Functions that take other functions as arguments or return functions as results." },
+      { "q": "Difference between deep copy and shallow copy?", "a": "Shallow copy: nested objects shared. Deep copy: completely new object with all nested objects copied." },
+      { "q": "How do you deep copy an object?", "a": "JSON.parse(JSON.stringify(obj)) for JSON-safe objects, or use libraries like Lodash, or structuredClone() in modern JS." },
+      { "q": "What is the purpose of use strict?", "a": "Strict mode catches common errors, prevents unsafe actions, disables confusing features. Makes code more secure and optimized." },
+      { "q": "Explain prototype chain.", "a": "Mechanism where objects inherit properties from other objects via prototype linkage. Basis of JavaScript inheritance." },
+      { "q": "What is the difference between class and prototype?", "a": "class is syntactic sugar over prototype-based inheritance. Underneath, classes still use prototypes." },
+      { "q": "How do you handle memory leaks?", "a": "Remove event listeners, clear intervals/timeouts, avoid circular references, use weak references where appropriate." },
+      { "q": "What is CORS?", "a": "Cross-Origin Resource Sharing - security feature that restricts cross-origin HTTP requests." },
+      { "q": "What are Web Workers?", "a": "Allow running JavaScript in background threads, separate from main execution thread." },
+      { "q": "Explain the Single Threaded Nature of JavaScript.", "a": "JavaScript has one call stack, executes one thing at a time. Uses event loop for non-blocking I/O operations." },
+      { "q": "What are generators?", "a": "Functions that can be paused and resumed. Use function* and yield keywords." },
+      { "q": "What is the difference between for...in and for...of?", "a": "for...in iterates over enumerable properties (including inherited), for...of iterates over iterable values." },
+      { "q": "What are Symbols?", "a": "Primitive type for unique identifiers. Useful for object properties, avoiding name collisions." },
+      { "q": "What is the purpose of Map and Set?", "a": "Map: key-value collection with any key type. Set: collection of unique values. Both maintain insertion order." },
+      { "q": "What are Proxy and Reflect?", "a": "Proxy: wrapper to intercept operations on objects. Reflect: built-in object with methods for interceptable operations." },
+      { "q": "What is optional chaining?", "a": "?. operator allows safe access to nested properties without checking each level for null/undefined." },
+      { "q": "What is nullish coalescing?", "a": "?? operator returns right-hand operand when left-hand is null or undefined (but not other falsy values)." },
+      { "q": "What are tagged templates?", "a": "Function that processes template literals. Receives string parts and interpolated values as arguments." },
+      { "q": "What is the difference between attribute and property?", "a": "Attributes are in HTML, properties are in DOM. Some sync, some don't. Properties represent current state." },
+      { "q": "What is the purpose of data attributes?", "a": "Custom attributes (data-*) to store extra information in HTML elements, accessible via dataset property." }
+    ],
+    "advanced": [
+      { "q": "Explain the JavaScript event loop in detail.", "a": "Runtime model with call stack, task queue (macrotasks), microtask queue. Microtasks (promises) run before macrotasks (setTimeout)." },
+      { "q": "What is the difference between microtasks and macrotasks?", "a": "Microtasks: promise callbacks, queueMicrotask(). Macrotasks: setTimeout, setInterval, I/O. Microtasks run after current task, before next macrotask." },
+      { "q": "How does JavaScript handle memory management?", "a": "Automatic garbage collection. Mark-and-sweep algorithm. Memory leaks from global variables, closures, detached DOM nodes, timers." },
+      { "q": "What is the Temporal Dead Zone?", "a": "Period between entering scope and variable declaration where variable exists but cannot be accessed (for let/const)." },
+      { "q": "Explain the module loading process in ES6.", "a": "Modules are parsed, imported modules fetched and parsed, then executed in depth-first order. Import hoisted to top." },
+      { "q": "What are Web Components?", "a": "Suite of technologies: Custom Elements, Shadow DOM, HTML Templates. Create reusable custom elements with encapsulated functionality." },
+      { "q": "How do you optimize JavaScript performance?", "a": "Debounce/throttle events, virtualize long lists, use Web Workers for heavy computation, code splitting, lazy loading." },
+      { "q": "What is Service Worker and its use cases?", "a": "Proxy between web app and network. Enables offline functionality, push notifications, background sync." },
+      { "q": "Explain the difference between Object.create and class inheritance.", "a": "Object.create creates object with specified prototype. Class uses constructor functions and prototype chain. Both achieve prototypal inheritance." },
+      { "q": "What is the purpose of Symbol.iterator?", "a": "Makes objects iterable. Defines default iterator for object, used by for...of and spread operator." },
+      { "q": "How do you implement a publish-subscribe pattern?", "a": "Create event emitter with subscribe (on), unsubscribe (off), and publish (emit) methods using object to store callbacks." },
+      { "q": "What is the difference between monkey patching and polyfilling?", "a": "Monkey patching: modifying existing objects at runtime. Polyfilling: adding modern features to older environments." },
+      { "q": "Explain the Revealing Module Pattern.", "a": "Variant of module pattern that explicitly defines public API at end, revealing only what's needed." },
+      { "q": "What are JavaScript decorators?", "a": "Proposed feature for modifying classes/methods at design time. Currently stage 3, requires transpiler." },
+      { "q": "How do you handle race conditions in async code?", "a": "Use flags, debouncing, cancellation tokens, or proper promise handling with Promise.race()/Promise.all()." },
+      { "q": "What is the difference between static and dynamic import?", "a": "Static: analyzed at parse time, must be top-level. Dynamic: import() function returns promise, can be anywhere." },
+      { "q": "Explain the concept of immutability in JavaScript.", "a": "Data that cannot be changed after creation. Achieved with Object.freeze(), immutable libraries, or careful programming." },
+      { "q": "What are generator functions and when to use them?", "a": "function* with yield. Useful for lazy evaluation, async operations, infinite sequences, coroutines." },
+      { "q": "How do you implement memoization?", "a": "Cache function results based on arguments. Use closure to store cache, return cached result if arguments match." },
+      { "q": "What is the purpose of the Intl object?", "a": "ECMAScript Internationalization API for language-sensitive string comparison, number formatting, date and time formatting." },
+      { "q": "Explain the difference between passive and active event listeners.", "a": "Passive: cannot call preventDefault(), improves scroll performance. Active: can call preventDefault()." },
+      { "q": "What is the difference between encoding and escaping?", "a": "Encoding: transforming data for transmission. Escaping: making data safe for specific context (HTML, URL, etc.)." },
+      { "q": "How do you handle binary data in JavaScript?", "a": "Use ArrayBuffer, TypedArrays (Uint8Array, etc.), DataView, Blob, File APIs for binary data manipulation." },
+      { "q": "What is the purpose of the Performance API?", "a": "Provides timing information for performance monitoring: navigation timing, resource timing, user timing measurements." },
+      { "q": "Explain the difference between CSP and CORS.", "a": "CSP: Content Security Policy - whitelist allowed content sources. CORS: Cross-Origin Resource Sharing - control cross-origin requests." },
+      { "q": "What are the different JavaScript module formats?", "a": "IIFE, CommonJS (Node.js), AMD (RequireJS), UMD (universal), ES6 modules (standard)." },
+      { "q": "How do you implement dependency injection in JavaScript?", "a": "Pass dependencies as parameters, use IoC containers, or framework-specific DI systems (Angular, etc.)." },
+      { "q": "What is the difference between functional and object-oriented programming in JS?", "a": "FP: pure functions, immutability, composition. OOP: objects, classes, inheritance, encapsulation. JS supports both." },
+      { "q": "How do you handle security in JavaScript applications?", "a": "Input validation, output encoding, CSP headers, avoid eval(), use HTTPS, secure authentication, regular dependency updates." }
+    ],
+    "coding": [
+      { "q": "Write a function to reverse a string. What is its time complexity?", "a": "One approach: return str.split('').reverse().join(''). Time complexity O(n) where n is string length." },
+      { "q": "How to remove duplicates from an array?", "a": "Use Set: [...new Set(array)] or filter with indexOf. Set approach is O(n), more efficient for large arrays." },
+      { "q": "Implement a debounce function.", "a": "Returns function that delays execution until after wait time has elapsed since last call. Useful for search inputs, resize events." },
+      { "q": "Write a function to deep clone an object.", "a": "Handle circular references, different data types. Can use recursion with proper type checking or structuredClone() in modern browsers." },
+      { "q": "Implement a promise from scratch.", "a": "Create class with then, catch, finally methods. Maintain state (pending, fulfilled, rejected) and callbacks queue." },
+      { "q": "Write a function to flatten a nested array.", "a": "Use recursion or iterative approach with stack. Handle different nesting levels efficiently." },
+      { "q": "Implement a simple event emitter class.", "a": "Include on (subscribe), off (unsubscribe), emit (publish) methods. Store events in object with array of callbacks." },
+      { "q": "Write a function to find the most frequent element in array.", "a": "Use object to count occurrences, track max count and corresponding element. O(n) time complexity." },
+      { "q": "Implement a function to check if two objects are equal (deep comparison).", "a": "Recursively compare properties, handle different types, circular references, and special cases like Date, RegExp." },
+      { "q": "Write a function to group array elements by certain criteria.", "a": "Use reduce to create object where keys are criteria and values are arrays of elements matching that criteria." }
+    ]
+  }
+}

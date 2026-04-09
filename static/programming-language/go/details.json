@@ -1,0 +1,704 @@
+{
+  "interview_index": [
+    { "key": "go_intro", "title": "Go Overview" },
+    { "key": "go_syntax", "title": "Syntax & Types" },
+    { "key": "go_concurrency", "title": "Concurrency (goroutines & channels)" },
+    { "key": "go_interfaces", "title": "Interfaces & Composition" },
+    { "key": "go_error", "title": "Error Handling & Best Practices" },
+    { "key": "go_modules", "title": "Modules & Tooling" },
+    { "key": "go_memory", "title": "Memory Model & GC" },
+    { "key": "go_generics", "title": "Generics (Go 1.18+)" },
+    { "key": "go_networking", "title": "Networking & HTTP" },
+    { "key": "go_testing", "title": "Testing & Benchmarking" },
+    { "key": "go_context", "title": "Context & Cancellation" },
+    { "key": "go_stdlib", "title": "Standard Library Highlights" },
+    { "key": "go_cli", "title": "CLI Tools & Flags" },
+    { "key": "go_databases", "title": "Databases & SQL" },
+    { "key": "go_security", "title": "Security & TLS" },
+    { "key": "go_performance", "title": "Profiling & Performance" },
+    { "key": "go_deployment", "title": "Deployment & Containers" },
+    { "key": "go_observability", "title": "Logging, Metrics & Tracing" },
+    { "key": "go_cgo", "title": "cgo & Interop" },
+    { "key": "go_streaming", "title": "gRPC, Protobuf & Streaming" }
+  ],
+
+  "go_intro": {
+    "title": "Go Overview",
+    "summary": "Why Go: simplicity, concurrency, strong stdlib, and production-grade tooling.",
+    "details": "Go (Golang) is a statically typed, compiled language designed at Google for building reliable, efficient software at scale. It emphasizes readable code, fast compilation, a minimal standard library that 'just works', and first-class concurrency primitives. Go shines in networked services, CLIs, and tooling because of quick build cycles, cross-compilation support, and predictable performance. When learning Go, pair language features with practical concerns: module layout, dependency management (go.mod), testing, observability, and container-friendly builds. Focus on idioms: small interfaces, explicit error handling, and immutable-by-default patterns where possible.",
+    "cheat": "// Quick Go cheat (practical)\n// Tooling\n// init module:   go mod init example.com/myapp\n// tidy deps:     go mod tidy\n// build:         go build -o bin/app ./...\n// run quick:     go run ./cmd/app\n// test:          go test ./... -v -race\n\n// Filesystem layout\n// cmd/<app>/main.go   -> application entrypoint\n// pkg/<lib>           -> reusable packages\n\n// Typical patterns\n// - small interfaces at consumer side\n// - prefer slices over arrays\n// - check errors explicitly\n",
+    "examples": [
+      { "code": "package main\nimport \"fmt\"\nfunc main(){ fmt.Println(\"Hello, Go\") }" },
+      { "code": "// go.mod\nmodule example.com/myapp\n\ngo 1.20" },
+      { "code": "// cross-compile example\n// GOOS=linux GOARCH=amd64 go build -o myapp-linux ./...\n" }
+    ],
+    "interview": [
+      { "q": "What is Go and who created it?", "a": "Go is a statically typed, compiled language created at Google by Robert Griesemer, Rob Pike, and Ken Thompson to simplify systems programming." },
+      { "q": "Why is Go popular for backend services?", "a": "Because of fast compilation, small binaries, strong stdlib, simple concurrency model and good cross-compilation and tooling." },
+      { "q": "How do you build and run Go applications?", "a": "Use 'go build' to compile, 'go run' to run directly, 'go test' for tests and 'go install' to install binaries." },
+      { "q": "What is go.mod?", "a": "go.mod defines the module path and dependency versions for module-aware builds." },
+      { "q": "What are goroutines?", "a": "Lightweight concurrent functions managed by the Go runtime, created with the 'go' keyword." },
+      { "q": "How is dependency management handled?", "a": "Via Go modules (go.mod/go.sum) and GOPROXY for module proxying; use go get, go mod tidy to manage deps." },
+      { "q": "What is the typical Go project layout?", "a": "Use cmd/, pkg/, internal/, and vendor/ as appropriate; keep packages focused and use small interfaces." },
+      { "q": "How does Go handle errors?", "a": "Errors are values returned by functions and checked explicitly; wrapping and inspection use fmt.Errorf, errors.Is and errors.As." },
+      { "q": "What is the philosophy behind Go's design?", "a": "Simplicity, clarity, orthogonality of features, and pragmatic tooling for production systems." },
+      { "q": "How to format Go code?", "a": "Use 'gofmt' or 'go fmt' to format code consistently." },
+      { "q": "How to maintain backward compatibility in Go modules?", "a": "Follow semantic import versioning, bump major versions when making breaking changes, and use modules to version packages." },
+      { "q": "What is the Go runtime's garbage collector like?", "a": "A concurrent, non-blocking GC designed for low latency and scalability with generational-like behavior." },
+      { "q": "How to profile a Go application?", "a": "Use net/http/pprof in-process or runtime/pprof and 'go tool pprof' to analyze CPU and memory profiles." },
+      { "q": "What is race detector in Go?", "a": "'go test -race' enables the race detector to catch data races at runtime in tests." },
+      { "q": "How to cross-compile Go binaries?", "a": "Set GOOS and GOARCH environment variables when building (e.g., GOOS=linux GOARCH=amd64 go build)." },
+      { "q": "What is a Go module proxy?", "a": "A server that caches and serves module downloads; GOPROXY environment variable controls proxy usage." },
+      { "q": "How to write production-ready Go code?", "a": "Use tests, logging, metrics, context for cancellation, proper timeouts, and robust error handling." },
+      { "q": "What are common Go deployment targets?", "a": "Containers (Docker), serverless functions, static binaries deployed to VMs or container orchestration platforms like Kubernetes." },
+      { "q": "Where to find Go standard library docs?", "a": "At https://pkg.go.dev/std or via 'go doc' and 'godoc' tools." },
+      { "q": "How to contribute to Go ecosystem?", "a": "Open source contributions, writing libraries with clear APIs, and improving docs and tooling on GitHub and pkg.go.dev." }
+    ]
+  },
+
+  "go_syntax": {
+    "title": "Syntax & Types",
+    "summary": "Variable declarations, structs, slices, maps, pointers, and idiomatic patterns (short declarations).",
+    "details": "Go's syntax is intentionally compact and opinionated to reduce ceremony while remaining explicit. Learn the short declaration operator (:=), zero-values for all types, composite types (arrays, slices, maps, structs), and how pointers differ from other languages (no pointer arithmetic). Study receiver semantics (value vs pointer receivers), method sets, and how to design APIs that avoid unnecessary copying. Grasp common idioms: defer for cleanup, range loops, and small interfaces like io.Reader/io.Writer. Awareness of conversions, type aliases, and the standard practice of returning explicit errors is important for writing idiomatic Go.",
+    "cheat": "// Syntax cheat\n// var <name> <type> = <value>\n// short declaration: x := 10\n// pointers: & to take address, * to dereference\n// slices: make([]T, len, cap) or []T{...}\n// zero values: default for each type\n\n// Defer and loops\n// defer closes resources, runs at function return\n// for i, v := range s { ... }\n",
+    "examples": [
+      { "code": "x := 42\ns := []int{1,2,3}\nfor i,v := range s { fmt.Println(i, v) }" },
+      { "code": "// pointer receiver example\ntype Counter struct{ n int }\nfunc (c *Counter) Inc(){ c.n++ }\n" },
+      { "code": "// slice capacity growth\ns := make([]int,0,4)\nfor i:=0;i<10;i++ { s = append(s,i) }\n" }
+    ],
+    "interview": [
+      { "q": "What is the short variable declaration?", "a": "The ':=' operator declares and initializes a variable with inferred type in one step." },
+      { "q": "How are zero values defined?", "a": "Each type has a zero value: 0, \"\", false, nil for pointers/slices/maps/interfaces." },
+      { "q": "When to use pointer receivers vs value receivers?", "a": "Use pointer receivers to mutate receiver or avoid copying large structs; value receivers for small immutable values." },
+      { "q": "What is defer used for?", "a": "Defer schedules a function to run when the surrounding function returns, commonly used for cleanup." },
+      { "q": "Explain slices vs arrays.", "a": "Arrays have fixed size and are values; slices are dynamic, reference an underlying array and have length and capacity." },
+      { "q": "How to append to a slice?", "a": "Use append(slice, value...), which may reallocate if capacity is exceeded." },
+      { "q": "How does range work on maps?", "a": "Range over a map yields key and value in arbitrary iteration order." },
+      { "q": "What is a nil slice vs empty slice?", "a": "nil slice has nil underlying array and len==0; empty slice has non-nil array with len==0." },
+      { "q": "How to declare constants?", "a": "Use const name = value; iota helps generate enumerated constants." },
+      { "q": "What are composite literals?", "a": "Literals for structs, arrays, slices, maps like MyStruct{Field: value} or []int{1,2}." },
+      { "q": "How to define methods on types?", "a": "Use func (t T) Method(...) { ... } or with pointer receiver func (t *T) Method(...)." },
+      { "q": "What are anonymous structs?", "a": "Struct types defined inline without a named type; useful for short-lived data." },
+      { "q": "What is type embedding?", "a": "Embedding includes fields of another type directly into a struct, promoting methods and fields." },
+      { "q": "How to handle unused imports or variables?", "a": "Go compiler errors on unused imports/vars; use _ import for side-effects or remove them." },
+      { "q": "What are rune and byte types?", "a": "byte is alias for uint8, rune for int32 representing Unicode code points." },
+      { "q": "How to do multiple return values?", "a": "Functions can return multiple values: func f() (int, error) { return 0, nil }." },
+      { "q": "What are blank identifier uses?", "a": "Use '_' to ignore values you don't need, e.g., _, err := f()." },
+      { "q": "Explain type assertions.", "a": "Assert concrete type of an interface: v, ok := i.(T) to test and extract." },
+      { "q": "How to declare maps with make?", "a": "m := make(map[string]int) creates a map ready to use." },
+      { "q": "What is the idiomatic way to check errors?", "a": "if err := f(); err != nil { handle(err) } — short and explicit checks." }
+    ]
+  },
+
+  "go_concurrency": {
+    "title": "Concurrency (goroutines & channels)",
+    "summary": "Goroutines, channels, select, worker pools, synchronization, and avoiding race conditions.",
+    "details": "Concurrency is a core selling point of Go. Goroutines are lightweight user-space threads managed by the runtime; channels are typed conduits for goroutine communication. Learn and practice common patterns: pipelines (stages connected by channels), worker pools (bounded concurrency), fan-in/fan-out, and select for multiplexing. Always propagate cancellation via context.Context and use buffered channels where backpressure is needed. Avoid shared mutable state when possible; use sync primitives or immutable data, and run 'go test -race' to discover data races early. Design for graceful shutdown to ensure goroutines terminate and resources are released.",
+    "cheat": "// Concurrency cheat\n// goroutine: lightweight concurrent execution\n// channel: typed conduit make(chan T)\n// select: wait on multiple channel operations\n// context: propagate cancellation and deadlines\n\n// Patterns: pipelines, worker pools, fan-in/fan-out\n",
+    "examples": [
+      { "code": "// basic goroutine + channel\nch := make(chan int)\ngo func(){ ch <- 42 }()\nval := <-ch\n" },
+      { "code": "// worker pool sketch\njobs := make(chan Job)\nresults := make(chan Result)\nfor w:=0; w<4; w++ { go func(){ for j := range jobs { results <- do(j) } }() }\n" },
+      { "code": "// select with timeout\nselect {\ncase v := <-ch: return v\ncase <-time.After(2*time.Second): return errors.New(\"timeout\")\n}\n" }
+    ],
+    "interview": [
+      { "q": "What are goroutines?", "a": "Lightweight concurrent functions scheduled by the Go runtime started with the 'go' keyword." },
+      { "q": "What is a channel?", "a": "A typed conduit that allows goroutines to communicate and synchronize by sending and receiving values." },
+      { "q": "Difference between buffered and unbuffered channels?", "a": "Unbuffered channels block sender until receiver is ready; buffered channels allow non-blocking sends up to capacity." },
+      { "q": "What is select used for?", "a": "Select allows waiting on multiple channel operations and handles the one that's ready." },
+      { "q": "How to handle cancellation in concurrent code?", "a": "Use context.Context and listen on ctx.Done() in goroutines to exit promptly." },
+      { "q": "What is a worker pool pattern?", "a": "A set of workers (goroutines) that process jobs from a channel to limit concurrency and reuse goroutines." },
+      { "q": "How to avoid data races?", "a": "Avoid shared mutable state, use channels for communication or use sync.Mutex/atomic operations and run 'go test -race'." },
+      { "q": "What is sync.WaitGroup?", "a": "A counter to wait for a collection of goroutines to finish using Add/Done/Wait." },
+      { "q": "When to use mutex vs channel?", "a": "Use mutex for protecting shared state; use channels for passing data and synchronization when it models the problem naturally." },
+      { "q": "What is a goroutine leak and how to avoid it?", "a": "A goroutine that never returns; avoid by ensuring cancellation signals are checked and resources are closed." },
+      { "q": "How to handle panics in goroutines?", "a": "Recover inside the goroutine or propagate errors via channels; don't let panics silently terminate logic." },
+      { "q": "What is context.WithTimeout vs WithDeadline?", "a": "WithTimeout sets a timeout from now; WithDeadline sets an absolute time for cancellation." },
+      { "q": "How to implement timeouts for channel operations?", "a": "Use select with time.After to implement a timeout case." },
+      { "q": "What is fan-in and fan-out?", "a": "Fan-out sends work to multiple workers; fan-in merges multiple channel streams into one." },
+      { "q": "How to limit concurrency (semaphores)?", "a": "Use buffered channels as semaphores to limit the number of concurrent goroutines." },
+      { "q": "What are atomic operations used for?", "a": "Simple lock-free synchronization for counters and flags via sync/atomic." },
+      { "q": "Why prefer immutable data in concurrency?", "a": "Immutable data is safe to share without synchronization, reducing complexity and races." },
+      { "q": "How to debug concurrent issues?", "a": "Use the race detector, logging with goroutine ids, and reproduce with stress tests." },
+      { "q": "What is the runtime scheduler's role?", "a": "It multiplexes goroutines onto OS threads and manages preemption and scheduling." },
+      { "q": "Best practice for closing channels?", "a": "Close channels only from the sender side when no further values will be sent to avoid panics." }
+    ]
+  },
+
+  "go_interfaces": {
+    "title": "Interfaces & Composition",
+    "summary": "Interface types, implicit implementation, composition over inheritance, and common idioms.",
+    "details": "Interfaces are satisfied implicitly in Go, promoting decoupling: a type implements an interface simply by having the required methods. The recommendation is to declare small interfaces at the 'consumer' side (e.g., io.Reader) and keep them minimal. Embedding allows composition, which is preferred to inheritance. Be mindful of zero values and nil interfaces (an interface containing a nil concrete value is not equal to nil). For testability, define the interface where it's used and inject implementations or fakes.",
+    "cheat": "// Interface cheat\n// Define small consumer-side interfaces\n// implicit implementation: no \"implements\" keyword\n// use io.Reader/io.Writer idioms\n\n// Prefer interface=behavior not data\n",
+    "examples": [
+      { "code": "type Reader interface{ Read(p []byte) (int, error) }\nfunc Copy(r Reader, w io.Writer){ io.Copy(w, r) }\n" },
+      { "code": "// mock for tests\ntype fakeReader struct{ data []byte }\nfunc (f fakeReader) Read(p []byte) (int,error){ return copy(p,f.data), io.EOF }\n" },
+      { "code": "// compile-time assertion\nvar _ Reader = (*os.File)(nil) // ensures os.File implements Reader\n" }
+    ],
+    "interview": [
+      { "q": "How are interfaces implemented in Go?", "a": "Implicitly: a type implements an interface by having the required methods; no explicit declaration needed." },
+      { "q": "Why keep interfaces small?", "a": "Small interfaces are easier to implement, mock and compose, improving decoupling." },
+      { "q": "What is interface nil vs nil concrete value?", "a": "An interface value holding a nil concrete pointer is non-nil; check carefully to avoid nil interface bugs." },
+      { "q": "Where to define interfaces for testability?", "a": "Define interfaces at the consumer boundary (where they are used), not where implemented." },
+      { "q": "What is embedding in structs?", "a": "Embedding includes another type's fields/methods directly into a struct enabling composition." },
+      { "q": "How to assert interface implementation at compile time?", "a": "Use var _ Interface = (*Type)(nil) to assert Type implements Interface." },
+      { "q": "What is type assertion?", "a": "i.(T) extracts concrete type T from interface i and may return ok bool to test safely." },
+      { "q": "What is type switch?", "a": "A type switch compares the dynamic type of an interface value against cases for different types." },
+      { "q": "When to use empty interface (interface{})?", "a": "For generic containers or when working with unknown types; prefer typed interfaces when possible." },
+      { "q": "How to mock interfaces in tests?", "a": "Provide fake implementations that satisfy the interface and inject them into code under test." },
+      { "q": "What are method sets?", "a": "Method set of a type determines which methods satisfy an interface; pointer vs value receivers affect method set." },
+      { "q": "How do pointer receivers affect interfaces?", "a": "A pointer receiver method means only *T implements the interface; value receiver makes both T and *T implement it." },
+      { "q": "What is interface composition?", "a": "An interface may embed other interfaces to form larger interfaces from small ones." },
+      { "q": "How to design API boundaries with interfaces?", "a": "Expose minimal, behavior-focused interfaces and keep concrete types internal when possible." },
+      { "q": "What is reflection's role with interfaces?", "a": "reflect package inspects dynamic types/values stored in interface{} for runtime meta-programming." },
+      { "q": "How to avoid returning interface{} from functions?", "a": "Prefer typed results or small interfaces; use generics where appropriate." },
+      { "q": "What is method value vs method expression?", "a": "Method values bind receiver to function literal; expressions specify function taking receiver as first arg." },
+      { "q": "How to store multiple concrete types in one slice?", "a": "Use []interface{} or a slice of a shared interface type." },
+      { "q": "What are common standard interfaces?", "a": "io.Reader, io.Writer, fmt.Stringer, error, sort.Interface are widely used." },
+      { "q": "Best practice when changing interfaces?", "a": "Prefer adding new small interfaces rather than changing existing ones to avoid breaking implementers." }
+    ]
+  },
+
+  "go_error": {
+    "title": "Error Handling & Best Practices",
+    "summary": "Idiomatic error returns, errors.Is, errors.As, sentinel errors, and when to panic.",
+    "details": "Error handling in Go is explicit: functions return an error value that must be checked. Wrap errors with fmt.Errorf(...%w...) to preserve causality, and use errors.Is / errors.As for inspection. Prefer returning errors instead of panicking, except in unrecoverable program states. For library APIs, document sentinel errors and prefer typed errors for detailed handling. Use structured logging to include error context when sending errors across boundaries.",
+    "cheat": "// Error handling cheat\n// return value, error; check explicitly\n// wrap errors: fmt.Errorf(\"context: %w\", err)\n// inspect: errors.Is / errors.As\n\n// Do not panic for normal errors; use panic for programmer errors only\n",
+    "examples": [
+      { "code": "if err := do(); err != nil { return fmt.Errorf(\"do failed: %w\", err) }\n" },
+      { "code": "// check underlying error\nif errors.Is(err, io.EOF) { /* handle */ }\n" },
+      { "code": "// typed error example\ntype NotFoundError struct{ s string }\nfunc (e NotFoundError) Error() string{ return e.s }\n" }
+    ],
+    "interview": [
+      { "q": "How are errors represented in Go?", "a": "By the built-in error interface: type error interface { Error() string }." },
+      { "q": "How to wrap errors for context?", "a": "Use fmt.Errorf(\"%w\", err) to wrap and preserve the underlying error for inspection." },
+      { "q": "What are errors.Is and errors.As?", "a": "errors.Is checks for equality in error chains; errors.As extracts an error of a specific type." },
+      { "q": "When to use sentinel errors?", "a": "Export sentinel errors when callers must compare errors directly; prefer wrapped errors for context." },
+      { "q": "When is panic appropriate?", "a": "Panic for unrecoverable programmer errors or during initialization; not for routine error handling." },
+      { "q": "How to add context to errors?", "a": "Wrap errors with contextual messages describing operation and arguments while keeping underlying error." },
+      { "q": "What are typed errors?", "a": "Custom error types allow richer inspection and behavior beyond string matching." },
+      { "q": "How to avoid losing error details?", "a": "Wrap errors instead of replacing them and use %w to enable unwrapping." },
+      { "q": "How to handle errors in goroutines?", "a": "Capture results/errors on channels or use sync mechanisms to propagate errors to callers." },
+      { "q": "What is best practice for logging errors?", "a": "Log errors with sufficient context, include request IDs and avoid leaking secrets." },
+      { "q": "How to design APIs that return errors?", "a": "Return errors along with typed values and document possible error cases for callers." },
+      { "q": "How to test error cases?", "a": "Use table-driven tests and create controlled failure scenarios or fakes to trigger errors." },
+      { "q": "What is multi-error handling?", "a": "Collect multiple errors into a combined error type when batching operations; surface details for debugging." },
+      { "q": "How to use sentinel ErrNotFound style?", "a": "Define var ErrNotFound = errors.New(\"not found\") and wrap/return it where appropriate." },
+      { "q": "What is the zero value of error?", "a": "nil represents no error; check err != nil before using it." },
+      { "q": "How to handle retryable errors?", "a": "Classify errors (temporary, timeout) and implement backoff/retry logic based on error type." },
+      { "q": "How to avoid over-logging errors?", "a": "Log at appropriate levels and centralize logging to avoid duplicates, include context only where necessary." },
+      { "q": "When to return fmt.Errorf vs custom type?", "a": "Use fmt.Errorf for simple context; use custom types when callers need to inspect error semantics." },
+      { "q": "How to document error behavior?", "a": "Document error semantics in function comments: which errors are returned and under what conditions." },
+      { "q": "How to handle panics at process boundary?", "a": "Recover in the top-level goroutine, log the panic with stack trace, and decide whether to restart." }
+    ]
+  },
+
+  "go_modules": {
+    "title": "Modules & Tooling",
+    "summary": "go.mod, module versions, go get, formatting, vet, and common toolchain commands.",
+    "details": "Go modules manage dependencies via go.mod and go.sum. Learn how to declare module paths, pin versions with go get modulename@version, and clean unused modules with go mod tidy. Use GOPROXY in corporate networks and understand go.sum checks for module integrity. Tooling (go fmt, go vet, go test) is deliberate: integrate these into CI for consistent style, static checks and tests. Use go list and go mod graph to inspect dependency trees when debugging version conflicts.",
+    "cheat": "// Modules cheat\n// go.mod: module path + go version\n// go.sum: checksums\n// go get module@version to pin\n// go mod tidy to clean\n\n// Use GOPROXY for caching and reproducible builds\n",
+    "examples": [
+      { "code": "go mod init example.com/myapp\ngo get github.com/sirupsen/logrus@v1.8.1\ngo mod tidy" },
+      { "code": "// vendor modules (optional)\n// go mod vendor\n" },
+      { "code": "// inspect modules\n// go list -m all\n" }
+    ],
+    "interview": [
+      { "q": "What files define a module?", "a": "go.mod declares module path and requirements; go.sum records checksums for module integrity." },
+      { "q": "How to add a dependency?", "a": "Use 'go get module@version' or import it and run 'go mod tidy' to add needed modules." },
+      { "q": "What is GOPROXY?", "a": "An environment variable pointing to a module proxy that caches module downloads." },
+      { "q": "How to remove unused dependencies?", "a": "Run 'go mod tidy' to prune unused requirements from go.mod." },
+      { "q": "What is semantic import versioning?", "a": "Module major version is part of the module path for v2+; it ensures versioned module paths." },
+      { "q": "How to ensure reproducible builds?", "a": "Commit go.mod and go.sum, use a GOPROXY, and pin module versions." },
+      { "q": "What is go vet used for?", "a": "Static analysis tool to find suspicious constructs that may be bugs." },
+      { "q": "When to use replace directive in go.mod?", "a": "For local development or to override a module source temporarily; avoid in shared production modules." },
+      { "q": "How to publish a module?", "a": "Tag a release in VCS and ensure module path matches repository path; semantic versioning is recommended." },
+      { "q": "What is module proxy security?", "a": "go.sum plus GOPROXY and GOSUMDB provide supply-chain integrity verification for module downloads." },
+      { "q": "How to audit dependencies?", "a": "Use 'go list -m all', vulnerability scanners and keep dependencies updated regularly." },
+      { "q": "How to manage private modules?", "a": "Use private GOPROXY or direct VCS access; set GOPRIVATE to avoid public proxies and sums." },
+      { "q": "Why commit go.sum?", "a": "It records checksums of module versions ensuring reproducible, verified builds across machines." },
+      { "q": "What is 'go mod vendor' used for?", "a": "Vendors dependencies into vendor/ directory for environments that require vendoring." },
+      { "q": "How to upgrade a dependency?", "a": "Use go get module@latest or go get module@version, then run go mod tidy and test." },
+      { "q": "What are indirect dependencies?", "a": "Dependencies that are required by your dependencies and not directly imported by your code." },
+      { "q": "How to diagnose version conflicts?", "a": "Use 'go mod graph' and 'go list -m -u all' to inspect and resolve conflicts." },
+      { "q": "What is module lazy retrieval?", "a": "Go tooling downloads modules on demand; use GOPROXY/cache to control retrieval." },
+      { "q": "How to pin tooling versions (gofmt, govet)?", "a": "Use a consistent Go toolchain version in CI and toolchain managers and containerized builds." },
+      { "q": "How to run module-aware tests across packages?", "a": "Use 'go test ./...' which runs tests for all packages in the module." }
+    ]
+  },
+
+  "go_memory": {
+    "title": "Memory Model & GC",
+    "summary": "Heap vs stack, escape analysis, garbage collector behavior and tuning allocations.",
+    "details": "Go's runtime uses a concurrent, non-moving garbage collector designed for low latency. Escape analysis determines whether values are heap-allocated; reducing heap allocations can lower GC pressure. Reuse buffers via sync.Pool, batch allocations, and avoid building large transient slices repeatedly. Profile with pprof (CPU & heap) to guide optimizations, and prefer clarity over premature micro-optimizations. When extreme performance is required, measure and iterate on allocation hotspots.",
+    "cheat": "// Memory cheat\n// escape analysis decides heap vs stack\n// reuse buffers: sync.Pool\n// profile: net/http/pprof and go tool pprof\n\n// Avoid unnecessary allocation in hot loops\n",
+    "examples": [
+      { "code": "var bufPool = sync.Pool{New: func() any { return make([]byte, 4096) }}\nb := bufPool.Get().([]byte); defer bufPool.Put(b)\n" },
+      { "code": "// pprof usage\n// import _ \"net/http/pprof\" and expose :6060 then go tool pprof\n" },
+      { "code": "// reduce allocations in loops\nout := make([]byte,0,1024)\nfor _,s := range items { out = append(out, s... ) }\n" }
+    ],
+    "interview": [
+      { "q": "What determines if a value is allocated on heap or stack?", "a": "The compiler's escape analysis decides whether a value must escape to the heap based on its usage." },
+      { "q": "What is escape analysis?", "a": "A compiler phase that determines whether variables can be stack-allocated or must live on the heap." },
+      { "q": "How does Go's GC work conceptually?", "a": "A concurrent garbage collector that runs concurrently with application threads to reclaim unreachable memory." },
+      { "q": "How to reduce GC pressure?", "a": "Reduce allocations, reuse buffers via sync.Pool, avoid short-lived allocations in hot paths." },
+      { "q": "What tools help profile memory?", "a": "net/http/pprof, runtime/pprof and 'go tool pprof' for heap and allocation profiles." },
+      { "q": "When to use sync.Pool?", "a": "For reusing temporary objects to reduce allocations, but measure since it may add contention." },
+      { "q": "What is heap fragmentation and how to mitigate it?", "a": "Fragmentation reduces usable memory efficiency; mitigate with fewer small allocations or specialized allocators." },
+      { "q": "How to inspect allocation sites?", "a": "Use pprof with allocation sampling and view 'alloc_objects' or 'alloc_space' to find hotspots." },
+      { "q": "How to avoid copying large slices?", "a": "Pass slices by reference, use pointers to underlying arrays, or design APIs that accept io.Reader/io.Writer." },
+      { "q": "What is the role of finalizers?", "a": "runtime.SetFinalizer attaches a finalizer to an object but should be used sparingly due to GC complexity." },
+      { "q": "How to profile object lifetimes?", "a": "Use heap profiles and object lifetime traces to see allocation and retention patterns." },
+      { "q": "What is stack shrinking and growth behavior?", "a": "Go grows goroutine stacks as needed and can shrink them; stacks are segmented for efficiency." },
+      { "q": "How to measure GC pauses?", "a": "Use runtime metrics, GODEBUG=gctrace=1 for tracing GC events, and pprof for pause analysis." },
+      { "q": "What is paging and memory overcommit impact?", "a": "Large memory consumption interacts with OS paging; ensure working set fits memory to avoid swapping." },
+      { "q": "How to optimize allocation patterns?", "a": "Preallocate slices with make(cap), reuse buffers and avoid per-iteration allocations." },
+      { "q": "Why avoid large object churn in hot loops?", "a": "Frequent allocations increase GC workload and CPU overhead; reuse objects instead." },
+      { "q": "How does garbage collection affect latency?", "a": "GC introduces latency; Go's concurrent GC reduces stop-the-world pauses but measuring is essential." },
+      { "q": "What is stack vs heap pointer semantics?", "a": "Pointers to stack-allocated values force escape to heap; design APIs to avoid unnecessary escapes." },
+      { "q": "How to use pprof to find leaks?", "a": "Compare heap profiles over time to detect retained objects and trace allocation call sites." },
+      { "q": "Best practices for memory-sensitive apps?", "a": "Profile often, reduce allocations, reuse resources, and configure runtime settings if needed." }
+    ]
+  },
+
+  "go_generics": {
+    "title": "Generics (Go 1.18+)",
+    "summary": "Type parameters, constraints, and generic functions/types — use cases and simple patterns.",
+    "details": "Generics introduce type parameters to functions and types, enabling reusable, type-safe abstractions. Learn to design clear constraints (comparable, ordered, or custom interfaces), avoid over-generalizing APIs, and understand compile-time behavior of type parameter instantiations. Use generics for containers and utility libraries while preserving readability and helpful error messages.",
+    "cheat": "// Generics cheat (Go 1.18+)\n// syntax: func Map[T any, R any](s []T, f func(T) R) []R {}\n// constraints: comparable, custom interfaces\n\n// Keep generics simple and document constraints\n",
+    "examples": [
+      { "code": "func Id[T any](v T) T { return v }\n_ = Id[int](42)\n" },
+      { "code": "type Stack[T any] struct{ items []T }\nfunc (s *Stack[T]) Push(v T){ s.items = append(s.items, v) }\n" },
+      { "code": "// numeric constraint example\n// type Number interface{ ~int | ~float64 }\n" }
+    ],
+    "interview": [
+      { "q": "What are generics in Go?", "a": "Type parameters for functions and types allowing reusable code across types introduced in Go 1.18+." },
+      { "q": "What is a type constraint?", "a": "A constraint restricts acceptable types for a type parameter, e.g., 'comparable' or a custom interface." },
+      { "q": "How do generics affect compilation?", "a": "The compiler instantiates code per used type parameter set, affecting compiled binary shape and possibly compile time." },
+      { "q": "What is 'any' in generics?", "a": "'any' is an alias for interface{} used to indicate no constraint on the type parameter." },
+      { "q": "When to use generics vs interfaces?", "a": "Use generics for compile-time polymorphism when performance or type-safety matters; use interfaces for runtime polymorphism." },
+      { "q": "What are common generic use cases?", "a": "Collections, utilities (Map, Filter), and algorithms that operate on multiple types." },
+      { "q": "What are pitfalls of generics?", "a": "Over-abstracting, unclear APIs, and harder-to-read error messages in complex constraints." },
+      { "q": "How to write generic containers?", "a": "Define a type with a type parameter: type Stack[T any] struct{ items []T } and methods using T." },
+      { "q": "How to constrain numeric operations?", "a": "Use custom constraints that permit + - * / or use ordered constraint proposals or type lists." },
+      { "q": "What is type inference for generics?", "a": "Compiler can deduce type parameters from function arguments in many cases." },
+      { "q": "How to test generic code?", "a": "Use concrete instantiations in tests covering typical type parameter choices." },
+      { "q": "How do generics interact with methods?", "a": "Method sets and receivers with type parameters follow rules similar to non-generic types; be mindful of syntax." },
+      { "q": "What is a type set?", "a": "A set of types that satisfy a constraint, expressed via union '|' in Go's type parameter constraints." },
+      { "q": "How to keep generic APIs simple?", "a": "Prefer minimal constraints, provide clear names and examples, and avoid deeply nested parameterization." },
+      { "q": "Can generics be used for interfaces?", "a": "You can define parametrized types that accept interfaces as constraints to combine behaviors." },
+      { "q": "What is code bloat concern with generics?", "a": "Multiple instantiations can increase binary size; measure and balance reuse vs specialization." },
+      { "q": "How to debug compiler errors with generics?", "a": "Simplify type expressions, add explicit type parameters, and use smaller reproductions for diagnostics." },
+      { "q": "How to implement generic numeric algorithms?", "a": "Define a numeric constraint or use type lists to allow numeric operations safely." },
+      { "q": "What are generic type methods vs functions?", "a": "Both possible; methods on parameterized types allow behavior bound to the type param receiver." },
+      { "q": "Best practices when designing generics?", "a": "Keep constraints explicit, prefer 'any' sparingly, document usage, and provide examples for common cases." }
+    ]
+  },
+
+  "go_networking": {
+    "title": "Networking & HTTP",
+    "summary": "net, net/http, context, building HTTP servers, and common patterns for robust services.",
+    "details": "Go's net and net/http packages make building servers straightforward. Use context for per-request timeouts and cancellation, middleware for cross-cutting concerns, and a shared http.Client for outgoing requests to reuse connections. Add timeouts and circuit-breakers for robustness. Instrument endpoints with metrics/traces and design idempotent APIs when possible. For advanced use consider HTTP/2, gRPC, or low-level net.Conn handling with appropriate backpressure.",
+    "cheat": "// Networking cheat\n// reuse single http.Client with configured Transport to reuse connections\n// use context.WithTimeout for requests\n// instrument endpoints and add timeouts on server\n",
+    "examples": [
+      { "code": "client := &http.Client{ Timeout: 5*time.Second }\nresp, err := client.Get(url)\n" },
+      { "code": "// basic server\nhttp.HandleFunc(\"/\", func(w http.ResponseWriter, r *http.Request){ fmt.Fprintln(w, \"hi\") })\nhttp.ListenAndServe(\":8080\", nil)\n" },
+      { "code": "// httptest example\nsrv := httptest.NewServer(handler); defer srv.Close()\n" }
+    ],
+    "interview": [
+      { "q": "How do you write a simple HTTP server in Go?", "a": "Use net/http, register handlers with http.HandleFunc and call http.ListenAndServe with an address." },
+      { "q": "Why reuse http.Client instances?", "a": "http.Client manages connection pooling; creating many clients can exhaust sockets and reduce performance." },
+      { "q": "How to add request timeouts?", "a": "Use context.WithTimeout for per-request timeouts or set timeouts on http.Client and http.Server." },
+      { "q": "How to do graceful shutdown of an HTTP server?", "a": "Call server.Shutdown with a context to allow inflight requests to finish and stop accepting new ones." },
+      { "q": "What is net.Conn?", "a": "Low-level network connection interface for reading/writing raw bytes and implementing custom protocols." },
+      { "q": "How to handle high concurrency in servers?", "a": "Use appropriate timeouts, connection reuse, backpressure, and efficient handlers avoiding blocking calls." },
+      { "q": "How to implement middleware in Go?", "a": "Wrap http.Handler with another handler function that performs pre/post processing (decorator pattern)." },
+      { "q": "What is HTTP/2 support in Go?", "a": "net/http supports HTTP/2 automatically over TLS when using the standard library server/client." },
+      { "q": "How to use TLS in Go servers?", "a": "Use http.ListenAndServeTLS or configure TLSConfig on http.Server for custom setups." },
+      { "q": "How to stream responses?", "a": "Write to ResponseWriter incrementally and call Flush on http.Flusher to send partial data." },
+      { "q": "How to implement Websockets?", "a": "Use a websocket library (e.g., gorilla/websocket) and upgrade HTTP connections to websocket." },
+      { "q": "How to handle JSON payloads safely?", "a": "Use json.Decoder to stream and limit sizes using io.LimitReader to prevent large payloads." },
+      { "q": "What is connection pool tuning for clients?", "a": "Configure Transport with MaxIdleConns, MaxIdleConnsPerHost, and IdleConnTimeout." },
+      { "q": "How to test HTTP handlers?", "a": "Use net/http/httptest to create test servers and clients for handler-level testing." },
+      { "q": "How to handle CORS in Go?", "a": "Add appropriate headers in middleware (Access-Control-Allow-Origin etc.) or use a CORS library." },
+      { "q": "What is backoff strategy for retries?", "a": "Use exponential backoff with jitter to avoid thundering herd and improve retry success." },
+      { "q": "How to implement health checks?", "a": "Expose endpoints for liveness and readiness that validate dependencies and resource availability." },
+      { "q": "How to manage large file uploads?", "a": "Use streaming via multipart.Reader and set reasonable limits with MaxBytesReader." },
+      { "q": "How to secure HTTP servers?", "a": "Use TLS, validate input, set secure headers, rate-limit, and monitor for anomalies." },
+      { "q": "When to use gRPC vs REST?", "a": "Use gRPC for high-performance, strongly-typed RPC and streaming; REST for broad compatibility and simpler clients." }
+    ]
+  },
+
+  "go_testing": {
+    "title": "Testing & Benchmarking",
+    "summary": "go test, table-driven tests, benchmarks, and race detector.",
+    "details": "Use table-driven tests, httptest for servers, and the race detector for concurrent code. Write small, deterministic unit tests and rely on integration tests for interactions. Benchmarks (testing.B) and -benchmem help track performance and allocations. Integrate tests into CI and run under sanitizers or profilers as needed to catch regressions early.",
+    "cheat": "// Testing cheat\n// table-driven tests, use t.Run for subtests\n// use -race and -bench for benchmarks\n// use httptest for HTTP handlers\n",
+    "examples": [
+      { "code": "func TestSum(t *testing.T){ cases := []struct{a,b,exp int}{ {1,2,3} }; for i,c:=range cases{ t.Run(fmt.Sprint(i), func(t *testing.T){ if got := sum(c.a,c.b); got!=c.exp{ t.Fatalf(\"got %d\", got) } }) } }\n" },
+      { "code": "// Benchmark example\nfunc BenchmarkAdd(b *testing.B){ for i:=0;i<b.N;i++ { add(1,2) } }\n" },
+      { "code": "// race detector\n// go test -race ./...\n" }
+    ],
+    "interview": [
+      { "q": "How do you write table-driven tests?", "a": "Create a slice of test cases and iterate over them in a single Test function asserting outputs for each case." },
+      { "q": "How to benchmark code in Go?", "a": "Write functions starting with Benchmark* using testing.B and run with 'go test -bench=.'." },
+      { "q": "What is the race detector?", "a": "'go test -race' enables runtime detection of data races in tests." },
+      { "q": "How to test HTTP handlers?", "a": "Use net/http/httptest.NewRecorder and httptest.NewRequest or httptest.NewServer for integration tests." },
+      { "q": "How to run subset of tests?", "a": "Use 'go test ./... -run TestNameRegex' to run matching tests." },
+      { "q": "How to use test fixtures?", "a": "Set up and tear down resources in TestMain or helper functions to prepare test environments." },
+      { "q": "What is fuzz testing in Go?", "a": "Go's fuzzing support lets you write Fuzz* functions to discover edge-case inputs automatically (go 1.18+)." },
+      { "q": "How to mock external dependencies?", "a": "Use interfaces for dependencies and provide fake implementations in tests." },
+      { "q": "How to test concurrent code?", "a": "Use deterministic synchronization, the race detector, and careful timing control to avoid flakiness." },
+      { "q": "How to measure allocation in benchmarks?", "a": "Use '-benchmem' to report allocations per operation in benchmarks." },
+      { "q": "What is TestMain used for?", "a": "Provides setup/teardown for package-level tests, runs before any Test* functions." },
+      { "q": "How to skip tests conditionally?", "a": "Call t.Skip or use build tags to skip tests for certain environments." },
+      { "q": "How to assert errors in tests?", "a": "Check error is non-nil or use errors.Is/errors.As to inspect wrapped errors." },
+      { "q": "How to run tests in parallel?", "a": "Call t.Parallel in tests to allow concurrency and manage shared resources accordingly." },
+      { "q": "What is table-driven subtests?", "a": "Use t.Run to create subtests per table entry for clearer reporting." },
+      { "q": "How to test database interactions?", "a": "Use test databases, transactions rolled back after tests, or use sqlmock for unit tests." },
+      { "q": "How to test time-dependent code?", "a": "Inject clock interfaces or use time travel helpers to control time in tests." },
+      { "q": "How to profile tests?", "a": "Use 'go test -run TestName -cpuprofile cpu.out' and analyze with 'go tool pprof'." },
+      { "q": "What to include in CI tests?", "a": "Unit tests, integration tests, linters, vet, race detector, and basic benchmarks where feasible." },
+      { "q": "How to keep tests fast and reliable?", "a": "Isolate tests, avoid network/IO when unit-testing, use mocks, and keep test data small." }
+    ]
+  },
+
+  "go_context": {
+    "title": "Context & Cancellation",
+    "summary": "Use context.Context for deadlines, cancellation and passing request-scoped values.",
+    "details": "Context is the standard way to deliver cancellation signals, deadlines, and small request-scoped values (trace IDs, auth tokens). Accept ctx context.Context as the first parameter in functions performing I/O or long-running work. Use WithCancel/WithTimeout/WithDeadline to derive contexts and make goroutines select on ctx.Done() to exit promptly, avoiding leaks. Do not store large values in context; keep it lightweight.",
+    "cheat": "// Context cheat\n// pass ctx as first parameter: func Do(ctx context.Context, ...)\n// create: ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second); defer cancel()\n// observe: select { case <-ctx.Done(): return ctx.Err() }\n",
+    "examples": [
+      { "code": "ctx, cancel := context.WithCancel(context.Background())\ngo func(){ time.Sleep(time.Second); cancel() }()\n<-ctx.Done()\n" },
+      { "code": "// DB query with context\ndb.QueryContext(ctx, \"SELECT ...\")\n" },
+      { "code": "// HTTP request with context\nreq, _ := http.NewRequestWithContext(ctx, \"GET\", url, nil)\nclient.Do(req)\n" }
+    ],
+    "interview": [
+      { "q": "What is context.Context used for?", "a": "Carrying cancellation signals, deadlines, and small request-scoped values across API boundaries." },
+      { "q": "How should context be passed in functions?", "a": "As the first parameter: func Do(ctx context.Context, ...)." },
+      { "q": "What is WithCancel and WithTimeout?", "a": "Helpers to derive cancelable or time-limited contexts from parent context." },
+      { "q": "How to propagate deadlines?", "a": "Use context.WithDeadline or WithTimeout and pass derived context down the call chain." },
+      { "q": "What should not be stored in context?", "a": "Large objects or mutable state; keep only small request-scoped values like trace IDs." },
+      { "q": "How to detect context cancellation in goroutines?", "a": "Select on <-ctx.Done() and return promptly." },
+      { "q": "Why prefer context over global cancellation flags?", "a": "Context is explicit, propagates across boundaries and composes well with nested calls." },
+      { "q": "How to add values to context?", "a": "Use context.WithValue but sparingly and only for request-scoped data like auth tokens." },
+      { "q": "How to avoid context leaks?", "a": "Ensure cancel functions are called (defer cancel()) and goroutines watch ctx.Done." },
+      { "q": "Can contexts be reused?", "a": "Generally no: derive new contexts for different lifetimes; do not reuse a canceled context." },
+      { "q": "What is background context?", "a": "context.Background is the root context for top-level requests or goroutines." },
+      { "q": "What is TODO context?", "a": "context.TODO is a placeholder used when context is not yet available in code." },
+      { "q": "How to pass context to DB queries?", "a": "Use QueryContext/ExecContext on database drivers that accept context for cancellation." },
+      { "q": "How to set timeouts on HTTP requests?", "a": "Use context.WithTimeout and http.NewRequestWithContext or set deadlines in http.Client." },
+      { "q": "What happens when context is canceled?", "a": "ctx.Err() returns the cancellation error (context.Canceled or context.DeadlineExceeded)." },
+      { "q": "How to test code using context?", "a": "Create contexts with specific timeouts or cancellations and assert expected behavior." },
+      { "q": "What's the difference between cancel and timeout?", "a": "Cancel is explicit by caller; timeout cancels automatically when time elapses." },
+      { "q": "Can context be used for logging keys?", "a": "You can store trace IDs but prefer dedicated tracing libraries and avoid abusing context for many keys." },
+      { "q": "How to compose contexts?", "a": "Create derived contexts using WithCancel/WithTimeout and pass them down; parent cancel cancels children." },
+      { "q": "Best practices for contexts?", "a": "Pass ctx explicitly, don't store in structs long-term, call cancel functions, and avoid storing large data." }
+    ]
+  },
+
+  "go_stdlib": {
+    "title": "Standard Library Highlights",
+    "summary": "Key packages: io, bufio, encoding/json, net/http, time, context, sync, and more.",
+    "details": "Go's standard library is broad and high-quality: io for streaming, bufio for buffering, encoding/json for JSON, net/http for servers, database/sql for DB access, and testing/pprof for testing and profiling. Prefer stdlib components when possible to minimize external dependencies. Learn standard idioms like io.Reader/io.Writer composition and using bufio for efficient IO.",
+    "cheat": "// Stdlib cheat\n// key packages: io, bufio, encoding/json, net/http, time, context, sync\n// prefer streaming APIs (io.Reader/io.Writer) over big buffers\n",
+    "examples": [
+      { "code": "// JSON stream decoder\nvar dec = json.NewDecoder(r)\nfor { var obj T; if err := dec.Decode(&obj); err==io.EOF { break } else if err!=nil { return err } }\n" },
+      { "code": "// copy pattern\nio.Copy(dst, src)\n" },
+      { "code": "// write file\n_ = os.WriteFile(\"out.json\", data, 0644)\n" }
+    ],
+    "interview": [
+      { "q": "What is the io.Reader/io.Writer idiom?", "a": "Abstractions for streaming input/output enabling composability of functions and libraries." },
+      { "q": "When to use bufio?", "a": "For buffered reads/writes to improve performance with many small operations." },
+      { "q": "How to handle JSON with stdlib?", "a": "Use encoding/json with json.Marshal, json.Unmarshal or stream with Decoder/Encoder." },
+      { "q": "What packages help with concurrency?", "a": "sync, sync/atomic, context, and runtime packages provide synchronization primitives." },
+      { "q": "How to parse flags?", "a": "Use the standard flag package or external packages like cobra for complex CLIs." },
+      { "q": "What is net/http/httptest used for?", "a": "Testing HTTP handlers and servers without real network communication." },
+      { "q": "How to use time utilities?", "a": "Use time.Now, time.Duration, time.Ticker and time.After for scheduling and timeouts." },
+      { "q": "What is the strings package useful for?", "a": "Common string manipulation helpers like Split, Join, Contains, and Replace." },
+      { "q": "How to work with files?", "a": "Use os package for file operations and os.File for reads/writes, with io utilities." },
+      { "q": "What is net/http/pprof?", "a": "Handler that exposes pprof profiling endpoints for live profiling." },
+      { "q": "How to work with JSON streaming?", "a": "Use json.Decoder/Encoder to process large JSON incrementally without full buffering." },
+      { "q": "When to use sync.Pool?", "a": "For reusing temporary objects to reduce GC pressure in hot paths." },
+      { "q": "What is the text/template package for?", "a": "Server-side templating with safe text escaping for HTML or textual formats." },
+      { "q": "How to parse CSV?", "a": "Use encoding/csv package providing a Reader/Writer for CSV data." },
+      { "q": "What is context support in stdlib?", "a": "Many stdlib functions accept context, e.g., database/sql and net/http, for cancellation and timeouts." },
+      { "q": "How to format dates?", "a": "Use time.Format with Go's reference time layout to format/parse timestamps." },
+      { "q": "What is net package for?", "a": "Low-level networking primitives including Dial, Listen and Conn interfaces for sockets." },
+      { "q": "How to use encoding/gob?", "a": "Binary encoder/decoder for Go-specific data structures across network or disk." },
+      { "q": "What is the log package vs structured loggers?", "a": "log is simple standard logger; structured logging often uses external packages like zap for richer fields." },
+      { "q": "Best practice for choosing stdlib vs third-party?", "a": "Prefer stdlib for stability and portability; use third-party when stdlib lacks needed functionality." }
+    ]
+  },
+
+  "go_cli": {
+    "title": "CLI Tools & Flags",
+    "summary": "Building command-line tools with flag, cobra, and best practices for UX and configuration.",
+    "details": "Use the flag package for small CLIs and cobra/urfave/cli for multi-command apps. Provide good help, sensible defaults, and support configuration via env vars and config files. Keep business logic separate from CLI parsing for testability and automation.",
+    "cheat": "// CLI cheat\n// simple flags: flag package\n// complex CLI: cobra + viper for config\n// keep business logic outside main for testability\n",
+    "examples": [
+      { "code": "name := flag.String(\"name\",\"\",\"your name\")\nflag.Parse()\nfmt.Println(*name)\n" },
+      { "code": "// cobra: cobra init && cobra add serve\n" },
+      { "code": "// example main separation\nfunc main(){ cmd.Execute() } // cmd contains command definitions and handlers\n" }
+    ],
+    "interview": [
+      { "q": "When to use the standard flag package?", "a": "For simple single-command CLIs with basic flag parsing needs." },
+      { "q": "When to use cobra or urfave/cli?", "a": "For multi-command CLIs requiring subcommands, completion and richer UX." },
+      { "q": "How to structure CLI code for testability?", "a": "Separate parsing from business logic and test functions directly with controlled inputs." },
+      { "q": "How to support environment variables and config files?", "a": "Provide precedence (flags > env > config) and use libraries like viper for convenience." },
+      { "q": "How to provide good help text?", "a": "Include clear descriptions, examples and sensible defaults; use library help mechanisms." },
+      { "q": "How to implement subcommands?", "a": "Use a CLI framework supporting subcommands (cobra) or implement a dispatcher in your main function." },
+      { "q": "How to test CLI behavior?", "a": "Run commands in integration tests using os/exec or abstract CLI logic for unit testing." },
+      { "q": "How to parse complex flags (lists/maps)?", "a": "Use repeated flags, CSV parsing, or custom flag.Value implementations." },
+      { "q": "How to handle exit codes properly?", "a": "Return non-zero exit codes for errors and 0 for success to integrate with scripts." },
+      { "q": "How to implement completion for shells?", "a": "Use cobra's completion support or generate completion scripts for bash/zsh/fish." },
+      { "q": "How to handle logging in CLIs?", "a": "Provide --quiet/--verbose and structured logging toggles and avoid noisy default logs." },
+      { "q": "What is the role of configuration discovery?", "a": "Look in sensible places (cwd, XDG, $HOME) and allow --config override to load settings." },
+      { "q": "How to keep a CLI cross-platform?", "a": "Avoid OS-specific behavior, use filepath for paths and handle differences like line endings." },
+      { "q": "How to deal with long-running commands?", "a": "Support signals, graceful shutdown with contexts and show progress output when appropriate." },
+      { "q": "How to build single-binary distribution?", "a": "Use 'go build' to produce static binaries; embed assets using embed package or include alongside binary." },
+      { "q": "How to version a CLI?", "a": "Embed version info at build time using -ldflags and expose --version flag." },
+      { "q": "How to secure CLI secrets?", "a": "Avoid printing secrets, store in env or secret managers, and document safe handling." },
+      { "q": "How to implement telemetry for CLI?", "a": "Optionally collect anonymous usage metrics with opt-in and document privacy policies." },
+      { "q": "How to support plugins?", "a": "Use subcommands that call external binaries or design plugin APIs with gRPC or exec-based plugins." },
+      { "q": "Best practices for CLI UX?", "a": "Keep commands discoverable, provide helpful errors and examples, and adhere to common CLI conventions." }
+    ]
+  },
+
+  "go_databases": {
+    "title": "Databases & SQL",
+    "summary": "database/sql basics, drivers, connection pooling, transactions and ORMs like sqlx/gorm.",
+    "details": "Use database/sql with proper pooling (SetMaxOpenConns/SetMaxIdleConns), prepared statements, and transaction handling. For mapping, consider sqlx or light wrappers. Monitor query performance and use observability to detect slow queries. Always parameterize queries to avoid injection attacks.",
+    "cheat": "// Databases cheat\n// use database/sql with context-aware methods (QueryContext)\n// tune pool: db.SetMaxOpenConns, SetMaxIdleConns, SetConnMaxLifetime\n// always parameterize queries\n",
+    "examples": [
+      { "code": "db, _ := sql.Open(\"pgx\", dsn)\ndb.SetMaxOpenConns(25)\nrow := db.QueryRowContext(ctx, \"SELECT id FROM users WHERE email=$1\", email)\n" },
+      { "code": "// transaction pattern\ntx, _ := db.BeginTx(ctx, nil)\n_, err := tx.ExecContext(ctx, \"INSERT ...\")\nif err != nil { tx.Rollback(); return err }\nif err := tx.Commit(); err != nil { return err }\n" },
+      { "code": "// sqlx convenience\n// rows, _ := db.QueryxContext(ctx, \"SELECT * FROM users\")\n" }
+    ],
+    "interview": [
+      { "q": "How to open and configure database connections?", "a": "Use sql.Open with the driver, then tune SetMaxOpenConns, SetMaxIdleConns and SetConnMaxLifetime." },
+      { "q": "Why use prepared statements?", "a": "Prepared statements help avoid SQL injection and can improve performance for repeated queries." },
+      { "q": "How to manage transactions in Go?", "a": "Use db.Begin to start a transaction, then Commit or Rollback depending on success." },
+      { "q": "When to use an ORM?", "a": "Use ORMs for productivity in CRUD-heavy apps; prefer sqlx or raw SQL for complex queries and performance." },
+      { "q": "How to avoid SQL injection?", "a": "Always use parameterized queries or prepared statements rather than string concatenation." },
+      { "q": "What is connection pooling behavior?", "a": "database/sql manages a pool; tune limits to match DB capacity and workload." },
+      { "q": "How to handle migrations?", "a": "Use migration tools (migrate, goose) and apply migrations in CI/CD deployment pipelines." },
+      { "q": "How to test DB code?", "a": "Use test databases, transactions rolled back in tests, or use sqlmock for unit tests." },
+      { "q": "How to scan rows into structs?", "a": "Use sqlx.StructScan or manual scanning into struct fields with rows.Scan." },
+      { "q": "How to monitor slow queries?", "a": "Enable DB slow query logs and collect timing metrics in application with tracing." },
+      { "q": "What is optimistic vs pessimistic locking?", "a": "Optimistic detects conflicts at commit (versioning); pessimistic locks rows for exclusive access." },
+      { "q": "When to use connection retries?", "a": "Implement retries with backoff for transient network/database errors but avoid retrying non-idempotent operations." },
+      { "q": "How to handle large result sets?", "a": "Stream results with rows.Next and avoid loading all rows into memory." },
+      { "q": "What is prepared statement lifetime?", "a": "Be mindful of driver behavior; some drivers tie prepared statements to connections." },
+      { "q": "How to handle sharding/replicas?", "a": "Route reads to replicas and writes to primary; use appropriate consistency models in app logic." },
+      { "q": "How to manage DB credentials securely?", "a": "Use secret managers, environment variables, or vault solutions and rotate credentials regularly." },
+      { "q": "What is connection leak and how to detect it?", "a": "Leaking occurs when rows/tx not closed; detect via pool exhaustion and use defer rows.Close()/tx.Rollback()." },
+      { "q": "How to implement pagination?", "a": "Use keyset pagination for large datasets or LIMIT/OFFSET for simple cases, depending on performance." },
+      { "q": "How to migrate schema with zero-downtime?", "a": "Apply backwards-compatible changes, use feature flags, and perform multi-step migrations for disruptive changes." },
+      { "q": "Best practices for DB access in microservices?", "a": "Keep queries optimized, monitor performance, use connection pools, and separate concerns with repositories/services." }
+    ]
+  },
+
+  "go_security": {
+    "title": "Security & TLS",
+    "summary": "TLS, secure defaults, input validation, secret management and common pitfalls.",
+    "details": "Adopt secure defaults: TLS everywhere, validate inputs, sanitize user data, and manage secrets via vaults or cloud secret managers. Rotate secrets, restrict permissions, and keep dependencies updated. For TLS, prefer automated certificate management and modern cipher suites. Log and monitor suspicious activity.",
+    "cheat": "// Security cheat\n// enforce TLS, validate inputs, use parameterized queries\n// store secrets in vaults or environment variables, rotate frequently\n// avoid logging secrets\n",
+    "examples": [
+      { "code": "// TLS server\nsrv := &http.Server{ Addr: \":443\", TLSConfig: &tls.Config{ MinVersion: tls.VersionTLS12 } }\n_ = srv.ListenAndServeTLS(\"cert.pem\",\"key.pem\")\n" },
+      { "code": "// Validate JSON input\nvar req Request\nif err := json.NewDecoder(r.Body).Decode(&req); err != nil { http.Error(w, \"bad request\", 400); return }\n" },
+      { "code": "// use prepared stmt\nstmt, _ := db.PrepareContext(ctx, \"INSERT INTO x (a) VALUES ($1)\")\nstmt.ExecContext(ctx, v)\n" }
+    ],
+    "interview": [
+      { "q": "How to enable TLS for a Go HTTP server?", "a": "Use ListenAndServeTLS or configure TLSConfig on http.Server for custom behavior and certificates." },
+      { "q": "How to manage secrets securely?", "a": "Use vaults, managed secret stores or environment variables with restricted access and rotation." },
+      { "q": "How to prevent injection attacks?", "a": "Use parameterized database queries, validate/sanitize inputs and avoid eval-like operations." },
+      { "q": "What is best practice for logging sensitive data?", "a": "Never log secrets like tokens/passwords; redact or avoid including them in logs." },
+      { "q": "How to validate TLS certificates for clients?", "a": "Verify server certificate chains and hostnames by default using crypto/tls provided helpers." },
+      { "q": "How to enforce secure cipher suites?", "a": "Set TLSConfig.MinVersion and CipherSuites appropriately and keep up with recommended ciphers." },
+      { "q": "How to protect against CSRF?", "a": "Use anti-CSRF tokens, same-site cookies and proper authentication/authorization checks." },
+      { "q": "How to manage auth tokens?", "a": "Use signed tokens (JWT) carefully, store them securely, and rotate/expire tokens." },
+      { "q": "How to handle rate limiting?", "a": "Implement token buckets or leaky bucket algorithms to prevent abuse and DoS." },
+      { "q": "How to secure gRPC connections?", "a": "Use TLS transport credentials and enforce mutual TLS if needed for stronger auth." },
+      { "q": "How to do input validation?", "a": "Validate length, types, ranges, and allowed characters; use libraries or schema validation for JSON." },
+      { "q": "What is Secure by default mentality?", "a": "Ship minimal privileges, secure defaults, and enable opt-in features rather than opt-out." },
+      { "q": "How to prevent open redirects?", "a": "Validate redirect targets against a whitelist or generate safe internal redirect tokens." },
+      { "q": "How to handle CORS safely?", "a": "Set precise Access-Control-Allow-Origin headers and avoid wildcard '*' in production." },
+      { "q": "What is certificate rotation?", "a": "Automate renewing and replacing certificates to avoid service disruption and maintain security." },
+      { "q": "How to store secrets in containers?", "a": "Use orchestrator secret mechanisms (Kubernetes Secrets), not environment variables in VCS." },
+      { "q": "How to perform threat modeling?", "a": "Identify assets, threats, mitigations, and prioritize fixes before implementation." },
+      { "q": "What is HSTS and why use it?", "a": "HTTP Strict Transport Security forces browsers to always use HTTPS, preventing downgrade attacks." },
+      { "q": "How to respond to security incidents?", "a": "Have incident response plan, revoke/rotate secrets, analyze root cause and notify stakeholders." },
+      { "q": "Best practices for dependency security?", "a": "Run vulnerability scanners, pin versions, and update dependencies promptly with tests in CI." }
+    ]
+  },
+
+  "go_performance": {
+    "title": "Profiling & Performance",
+    "summary": "Use pprof, benchmark tools, reduce allocations and optimize hot paths.",
+    "details": "Profile first: use pprof CPU, heap and block profiles to detect hotspots. Reduce allocations, reuse buffers, and minimize lock contention. Use benchmarks (testing.B) for micro-optimizations and ensure any optimization is backed by measurements. In production, sample profiles under realistic load before changing core algorithms.",
+    "cheat": "// Performance cheat\n// profile with pprof (CPU/heap/block)\n// use -bench and -benchmem for benchmarks\n// reduce allocations, reuse buffers, minimize lock contention\n",
+    "examples": [
+      { "code": "// start pprof server\nimport _ \"net/http/pprof\"\n// go tool pprof http://localhost:6060/debug/pprof/profile\n" },
+      { "code": "// benchmark sample\nfunc BenchmarkWork(b *testing.B){ for i:=0;i<b.N;i++ { work() } }\n" },
+      { "code": "// reuse bytes.Buffer\nvar buf bytes.Buffer\nbuf.Reset()\n" }
+    ],
+    "interview": [
+      { "q": "Where to start when optimizing Go code?", "a": "Profile the application (pprof) to find real hotspots before optimizing." },
+      { "q": "How to collect CPU profiles?", "a": "Use runtime/pprof or net/http/pprof and 'go tool pprof' to analyze CPU usage." },
+      { "q": "How to detect allocation hotspots?", "a": "Use heap profiles and '-benchmem' to identify functions causing allocations." },
+      { "q": "When to use sync.Pool?", "a": "For reusing short-lived objects in high-throughput paths to reduce GC pressure." },
+      { "q": "How to reduce lock contention?", "a": "Minimize critical sections, use sharded locks or lock-free algorithms when appropriate." },
+      { "q": "What is inlining and why it matters?", "a": "Inlining reduces function-call overhead; compiler decides based on heuristics and size." },
+      { "q": "How to use benchmarks effectively?", "a": "Write focused Benchmarks (testing.B), run repeatedly and compare with baselines." },
+      { "q": "How to profile live production services safely?", "a": "Expose pprof behind auth, sample under load and avoid profiling at peak if it affects latency." },
+      { "q": "How to measure latency percentiles?", "a": "Collect histograms and record P50/P95/P99 to identify tail latencies." },
+      { "q": "What is the impact of allocations on GC?", "a": "More allocations increase GC work; reduce allocations to lower GC CPU usage." },
+      { "q": "How to avoid premature optimization?", "a": "Measure first; optimize only when data shows a real bottleneck." },
+      { "q": "How to optimize memory usage?", "a": "Reuse buffers, reduce retention, and avoid holding references to large structures." },
+      { "q": "How to profile blocking operations?", "a": "Use goroutine and block profiles to find blocking synchronization points." },
+      { "q": "What is cold vs hot cache effect?", "a": "Warm caches improve performance; cold caches cause initial slow responses—measure both." },
+      { "q": "How to benchmark networked operations?", "a": "Use realistic workloads and measure end-to-end latencies with realistic concurrency." },
+      { "q": "When to use concurrency for performance?", "a": "Use concurrency to utilize multiple cores for parallelizable work but avoid excessive goroutines causing scheduling overhead." },
+      { "q": "How to measure throughput?", "a": "Measure requests/sec or operations/sec under realistic conditions and track resource usage." },
+      { "q": "How to spot false sharing?", "a": "Use profiling to detect contention on cache lines and pad structures if necessary." },
+      { "q": "How to use performance budgets?", "a": "Set acceptable latency/CPU/memory budgets and regress benchmarks to enforce them in CI." },
+      { "q": "Best practices for performance optimization?", "a": "Measure, profile, iterate, and keep changes minimal and well-tested." }
+    ]
+  },
+
+  "go_deployment": {
+    "title": "Deployment & Containers",
+    "summary": "Containerize Go apps, build small images, and deploy to Kubernetes or serverless platforms.",
+    "details": "Use multi-stage Dockerfiles to produce minimal images (distroless/scratch), strip debug symbols for smaller binaries, and handle graceful shutdown via context and signal handling. Configure health/readiness probes and adopt immutable artifacts for reproducible deployments. Automate builds and promote artifacts through CI/CD pipelines.",
+    "cheat": "// Deployment cheat\n// multi-stage Dockerfile to build small images\n// handle SIGTERM for graceful shutdown\n// use readiness/liveness probes in k8s\n",
+    "examples": [
+      { "code": "// Dockerfile (multi-stage)\n// FROM golang:1.20 AS build\n// WORKDIR /app\n// COPY . .\n// RUN go build -o /bin/app ./...\n// FROM gcr.io/distroless/static:nonroot\n// COPY --from=build /bin/app /bin/app\n// ENTRYPOINT [\"/bin/app\"]\n" },
+      { "code": "// graceful shutdown snippet\nctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)\ndefer stop()\n// pass ctx to server Shutdown\n" },
+      { "code": "// health endpoints\nhttp.HandleFunc(\"/healthz\", func(w http.ResponseWriter, r *http.Request){ w.WriteHeader(200) })\n" }
+    ],
+    "interview": [
+      { "q": "How to produce small Docker images for Go?", "a": "Use multi-stage builds and a minimal final base (scratch or distroless) with a statically linked binary." },
+      { "q": "How to implement graceful shutdown in Go services?", "a": "Listen for SIGTERM/SIGINT, cancel contexts, stop accepting new requests and let inflight requests finish." },
+      { "q": "What are Kubernetes readiness and liveness probes?", "a": "Readiness indicates if a pod can receive traffic; liveness detects unhealthy pods to restart." },
+      { "q": "How to manage configuration for deployments?", "a": "Use environment variables, config maps, and secrets with clear precedence rules." },
+      { "q": "How to do zero-downtime deployments?", "a": "Use rolling updates, readiness probes and drain connections before taking pods down." },
+      { "q": "How to build reproducible artifacts?", "a": "Use locked modules, seeded builds, deterministic toolchains and CI pipelines." },
+      { "q": "What is container entrypoint best practice?", "a": "Run a single process, handle signals, and avoid shell wrappers if possible." },
+      { "q": "How to health check dependencies?", "a": "Verify database connectivity, external services and caches in readiness checks, but keep them lightweight." },
+      { "q": "How to monitor resource usage in deployments?", "a": "Define requests/limits in Kubernetes and use metrics to observe memory/CPU usage." },
+      { "q": "How to deploy lambda/serverless Go functions?", "a": "Build small handlers, cross-compile for the platform and use provided SDKs or runtimes." },
+      { "q": "How to handle secrets in containers?", "a": "Use secrets management (Kubernetes Secrets, cloud secret manager) and avoid embedding secrets in images." },
+      { "q": "What is image scanning?", "a": "Scan images for vulnerabilities using Clair, Trivy or cloud provider tools before deployment." },
+      { "q": "How to perform blue/green deployments?", "a": "Run new version alongside old, test, then switch traffic to the new version and remove old." },
+      { "q": "How to configure logging for containers?", "a": "Write structured logs to stdout/stderr and let the platform collect and forward them." },
+      { "q": "What is sidecar pattern?", "a": "Run auxiliary process in same pod for proxies, logging, or metrics collection." },
+      { "q": "How to manage database migrations in CI/CD?", "a": "Apply migrations in a controlled step of deployment with backward-compatible changes." },
+      { "q": "How to roll back deployments safely?", "a": "Keep previous images available and rely on health checks and versioned artifacts to revert." },
+      { "q": "How to reduce image build times?", "a": "Cache dependencies, use build caches, and minimize layers that change often." },
+      { "q": "What is immutable infrastructure?", "a": "Deploy new instances rather than changing live instances to improve reproducibility." },
+      { "q": "Best practices for multi-region deployment?", "a": "Use CDNs, regional clusters, data replication, and health-aware routing for resilience." }
+    ]
+  },
+
+  "go_observability": {
+    "title": "Logging, Metrics & Tracing",
+    "summary": "Structured logging, metrics (Prometheus) and distributed tracing (OpenTelemetry).",
+    "details": "Combine structured logging, metrics, and traces for full observability. Use structured loggers (zap, zerolog) and expose Prometheus metrics for latency, error rate, and throughput. Adopt OpenTelemetry for traces and correlate logs with trace/span ids to expedite debugging. Ensure metrics are meaningful and alerts are set on key SLOs.",
+    "cheat": "// Observability cheat\n// structured logging (zap/zerolog), Prometheus metrics, OpenTelemetry traces\n// correlate logs with trace ids\n",
+    "examples": [
+      { "code": "// zap example\nlogger, _ := zap.NewProduction()\nlogger.Info(\"start\", zap.String(\"addr\", \":8080\"))\n" },
+      { "code": "// Prometheus handler\nhttp.Handle(\"/metrics\", promhttp.Handler())\n" },
+      { "code": "// basic trace span\ntracer := otel.Tracer(\"svc\")\nctx, span := tracer.Start(ctx, \"op\")\ndefer span.End()\n" }
+    ],
+    "interview": [
+      { "q": "What are the three pillars of observability?", "a": "Logs, metrics, and traces — together they help understand system behavior and troubleshoot issues." },
+      { "q": "How to implement structured logging?", "a": "Use structured loggers like zap or zerolog to emit JSON or key-value logs for easy parsing." },
+      { "q": "How to expose Prometheus metrics?", "a": "Use client_golang to register metrics and expose them on /metrics via promhttp.Handler()." },
+      { "q": "What is distributed tracing used for?", "a": "Tracing shows request flow across services and helps identify latency and bottlenecks." },
+      { "q": "How to correlate logs and traces?", "a": "Include trace and span IDs in log entries to link logs to traces for end-to-end debugging." },
+      { "q": "What metrics are essential for HTTP services?", "a": "Request rate, latency distribution (P50/P95/P99), error rate, and resource utilization." },
+      { "q": "How to avoid high-cardinality metrics issues?", "a": "Avoid labeling metrics with high-cardinality values like user IDs; use aggregation or sample." },
+      { "q": "How to instrument code with OpenTelemetry?", "a": "Use SDKs to create tracers and meters, instrument key operations and export to backends." },
+      { "q": "What is alerting based on metrics?", "a": "Define SLOs and set alerts on thresholds (e.g., error rate, latency p99) to detect incidents." },
+      { "q": "How to handle log levels?", "a": "Use levels (debug/info/warn/error) and configure verbosity per environment (dev/prod)." },
+      { "q": "How to minimize observability overhead?", "a": "Sample traces, avoid logging excessive detail at high volume, and use efficient log encoders." },
+      { "q": "How to store and query logs?", "a": "Use centralized logging platforms (Elastic, Loki, Splunk) and structure logs for easy querying." },
+      { "q": "What is service map in tracing?", "a": "A visualization of service interactions showing dependencies and common latency paths." },
+      { "q": "How to add context to metrics?", "a": "Use labels to add relevant dimensions while keeping cardinality under control." },
+      { "q": "How to debug production latency spikes?", "a": "Check p95/p99 metrics, traces, system metrics, and recent deploys or config changes." },
+      { "q": "What is sampling in tracing?", "a": "Reducing the fraction of traces collected to control volume while keeping useful data." },
+      { "q": "How to instrument database calls?", "a": "Record latency, errors, and counts for queries and batches; include query type metadata." },
+      { "q": "How to test observability in CI?", "a": "Verify metrics endpoints, basic traces and logs during integration tests to assert instrumentation." },
+      { "q": "How to secure observability data?", "a": "Restrict access, redact PII in logs, and encrypt telemetry in transit and at rest." },
+      { "q": "Best practices for observability adoption?", "a": "Start with core metrics/traces/logs for critical paths and iterate by adding context and alerts." }
+    ]
+  },
+
+  "go_cgo": {
+    "title": "cgo & Interop",
+    "summary": "Call C from Go when necessary; understand safety, build constraints and CGO overhead.",
+    "details": "Use cgo sparingly: it introduces platform-specific builds, increased binary size, and potential performance overhead by crossing language boundaries. Keep cgo boundaries minimal, manage memory explicitly when interacting with C, and document build requirements. Prefer pure-Go libraries wherever feasible to retain portability and simple cross-compilation.",
+    "cheat": "// cgo cheat\n// use only when necessary; keeps build complex\n// rules: manage C memory and avoid passing Go pointers unsafely\n",
+    "examples": [
+      { "code": "// basic cgo usage\n/*\n#include <stdlib.h>\n*/\nimport \"C\"\n// ptr := C.CString(\"hello\")\n// C.free(unsafe.Pointer(ptr))\n" },
+      { "code": "// free C memory example\ns := C.CString(\"data\")\nC.free(unsafe.Pointer(s))\n" },
+      { "code": "// call C function: C.myfunc()\n" }
+    ],
+    "interview": [
+      { "q": "What is cgo?", "a": "cgo enables calling C code from Go, allowing use of existing C libraries." },
+      { "q": "Why avoid cgo when possible?", "a": "cgo adds build complexity, cross-compilation headaches and runtime overhead." },
+      { "q": "How to pass strings between Go and C?", "a": "Use C.CString to allocate C string and C.free to free it, or work with byte slices." },
+      { "q": "How to manage memory across the boundary?", "a": "Manage allocations explicitly and avoid leaking C memory; free C allocations in Go when appropriate." },
+      { "q": "How to handle Go pointers passed to C?", "a": "Avoid passing Go pointers into C-managed memory unless using cgo rules; use C pointers or copy data." },
+      { "q": "What are build tags and cgo flags?", "a": "Use // #cgo directives for compiler/linker flags and build tags to control cgo usage per platform." },
+      { "q": "How to test cgo code?", "a": "Run tests on target platforms and include integration tests for the C interoperability paths." },
+      { "q": "How to reduce cgo overhead?", "a": "Minimize calls across the boundary and batch operations to reduce crossing costs." },
+      { "q": "What is the effect on binary portability?", "a": "cgo can make binaries platform-specific due to linked C libraries and runtime requirements." },
+      { "q": "How to cross-compile with cgo?", "a": "Set CC and other toolchain env vars or use cross-compilers that provide target C toolchain." },
+      { "q": "What is the rule about passing Go pointers to C?", "a": "There are restrictions: generally avoid passing Go pointers to C that stores them beyond call duration." },
+      { "q": "How to debug cgo issues?", "a": "Use C-side debugging tools, inspect linker errors, and validate memory management with sanitizers where possible." },
+      { "q": "How to wrap C libraries idiomatically in Go?", "a": "Provide a thin cgo wrapper and expose a safe, Go-friendly API that manages resources via RAII-like patterns." },
+      { "q": "What is the performance tradeoff of cgo?", "a": "Crossing language boundary may cost performance; measure and batch calls if needed." },
+      { "q": "Can you call Go from C?", "a": "Yes via exported Go functions with //export directives and building with cgo, but it's more complex." },
+      { "q": "How to document cgo dependencies?", "a": "Document system library requirements, versions and build flags in README and go.mod comments." },
+      { "q": "What about thread-safety across C and Go?", "a": "Be aware of thread creation and scheduling differences; synchronize access and follow CGO threading rules." },
+      { "q": "How to handle callbacks from C into Go?", "a": "Use cgo exported functions and ensure lifetime and concurrency rules are observed." },
+      { "q": "When to choose cgo vs reimplementing in Go?", "a": "Use cgo for mature, complex C libraries; reimplement in Go for portability and ease if feasible." },
+      { "q": "Best practices when using cgo?", "a": "Limit boundary size, manage memory explicitly, test on target platforms, and document build steps." }
+    ]
+  },
+
+  "go_streaming": {
+    "title": "gRPC, Protobuf & Streaming",
+    "summary": "Define services with protobuf, implement gRPC servers/clients and streaming RPCs for efficient microservices.",
+    "details": "Use protobuf to define schemas and gRPC for performant RPC with streaming capabilities. Generate idiomatic Go code using protoc plugins (protoc-gen-go, protoc-gen-go-grpc). For streaming, handle flow-control, deadlines and retries; ensure backward-compatible message evolution and maintain clear versioning strategies. Monitor and test streaming under load to handle resource leaks and backpressure.",
+    "cheat": "// gRPC & protobuf cheat\n// define services in .proto, generate Go with protoc-gen-go and protoc-gen-go-grpc\n// handle deadlines, flow-control and backpressure\n",
+    "examples": [
+      { "code": "// generate\n// protoc --go_out=. --go-grpc_out=. service.proto\n" },
+      { "code": "// client call with deadline\nctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)\ndefer cancel()\nclient.Say(ctx, &pb.EchoRequest{Msg: \"hi\"})\n" },
+      { "code": "// server streaming handler\nfunc (s *srv) Stream(req *pb.Req, stream pb.Svc_StreamServer) error { for { stream.Send(&pb.Reply{...}) } }\n" }
+    ],
+    "interview": [
+      { "q": "What is gRPC and why use it?", "a": "gRPC is a high-performance RPC framework using HTTP/2 and protobuf for efficient, strongly-typed RPCs and streaming." },
+      { "q": "How to generate Go code from .proto files?", "a": "Use protoc with protoc-gen-go and protoc-gen-go-grpc plugins to generate Go types and service stubs." },
+      { "q": "What are unary vs streaming RPCs?", "a": "Unary is single request-response; streaming supports client-stream, server-stream or bidirectional streams." },
+      { "q": "How to handle deadlines and cancellations with gRPC?", "a": "Propagate context with deadlines and cancel when timeouts occur; use contexts with gRPC calls." },
+      { "q": "How to version protobuf messages safely?", "a": "Add new fields with new tags, avoid renumbering or reusing tag numbers, and use optional fields." },
+      { "q": "What is flow control in streaming?", "a": "Mechanisms to manage producer/consumer rates and avoid overwhelming receivers (HTTP/2 flow control too)." },
+      { "q": "How to test gRPC services in Go?", "a": "Use in-process servers, net.Listen with bufconn or start a test server and use generated client stubs." },
+      { "q": "How to implement authentication for gRPC?", "a": "Use TLS for transport and metadata tokens or mTLS for client authentication." },
+      { "q": "What is proto3 and advantages?", "a": "proto3 is the modern protobuf syntax with simpler semantics and default values for fields." },
+      { "q": "How to handle large streaming payloads?", "a": "Chunk data, apply backpressure, and set appropriate limits and resource guards." },
+      { "q": "How to do retries with idempotency in gRPC?", "a": "Design idempotent operations or add unique ids and use retry policies carefully to avoid duplicates." },
+      { "q": "What is the role of interceptors?", "a": "Interceptors allow middleware-like behavior for logging, auth, metrics, and retries in gRPC." },
+      { "q": "How to watch for resource leaks in streams?", "a": "Ensure streams are closed properly, use contexts, and test under load for leaks." },
+      { "q": "How to use reflection and health checking in gRPC?", "a": "Enable reflection for tooling and implement Health service for readiness checks." },
+      { "q": "What transport does gRPC use?", "a": "By default it uses HTTP/2 which provides multiplexing, flow control and header compression." },
+      { "q": "How to interop gRPC with non-Go clients?", "a": "Protobuf/gRPC is language-agnostic with codegen for many languages and standard protocols." },
+      { "q": "How to stream large files?", "a": "Use chunked streaming messages and reassembly on the receiving side with checksums." },
+      { "q": "How to monitor gRPC metrics?", "a": "Instrument with OpenTelemetry or Prometheus metrics for request counts, latencies and errors." },
+      { "q": "How to migrate gRPC APIs?", "a": "Use backward-compatible changes, versioning via service names or packages and gradual rollouts." },
+      { "q": "Best practices for gRPC in microservices?", "a": "Design small focused services, instrument thoroughly, secure transport, and handle retries/backoff." }
+    ]
+  }
+}

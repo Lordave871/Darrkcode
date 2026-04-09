@@ -1,0 +1,1702 @@
+{
+  "category": "mobile",
+  "categoryName": "Mobile Development",
+  "description": "Build cross-platform and native mobile applications",
+  "quizzes": [
+    {
+      "id": 13,
+      "title": "Flutter Fundamentals",
+      "description": "Master Flutter framework for building cross-platform mobile applications with Dart.",
+      "difficulty": "Beginner",
+      "icon": "fas fa-mobile-alt",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which language is Flutter primarily built with?",
+          "options": [
+            "Dart",
+            "JavaScript",
+            "Java",
+            "Python"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "What is the basic building block of Flutter UI?",
+          "options": [
+            "Widget",
+            "Component",
+            "View",
+            "Element"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 3,
+          "question": "Which command creates a new Flutter project?",
+          "options": [
+            "flutter create",
+            "flutter new",
+            "flutter init",
+            "flutter start"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "What does 'hot reload' do in Flutter?",
+          "options": [
+            "Quickly see changes without restarting app",
+            "Reload entire app",
+            "Reset app state",
+            "Compile from scratch"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which widget is used for basic text display?",
+          "options": [
+            "Text",
+            "Label",
+            "TextView",
+            "Display"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "What is the main function entry point in Flutter?",
+          "options": [
+            "main()",
+            "runApp()",
+            "initState()",
+            "build()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "Which widget creates a scrollable list?",
+          "options": [
+            "ListView",
+            "ScrollView",
+            "Column",
+            "Row"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What is StatefulWidget used for?",
+          "options": [
+            "Widgets that can change state",
+            "Static widgets",
+            "Layout widgets",
+            "Navigation widgets"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "Which widget arranges children vertically?",
+          "options": [
+            "Column",
+            "Row",
+            "Stack",
+            "Container"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "What is pubspec.yaml file used for?",
+          "options": [
+            "Manage dependencies and assets",
+            "Define app logic",
+            "Configure UI",
+            "Set permissions"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "Which widget creates a button?",
+          "options": [
+            "ElevatedButton",
+            "Button",
+            "Clickable",
+            "TapWidget"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "What is Scaffold widget used for?",
+          "options": [
+            "Basic material design layout",
+            "Navigation",
+            "State management",
+            "Network calls"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "Which command runs Flutter app?",
+          "options": [
+            "flutter run",
+            "flutter start",
+            "flutter execute",
+            "flutter launch"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What does StatelessWidget represent?",
+          "options": [
+            "Immutable widget",
+            "Stateful widget",
+            "Animation widget",
+            "Navigation widget"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "Which widget adds padding around child?",
+          "options": [
+            "Padding",
+            "Margin",
+            "Space",
+            "Container"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "What is MaterialApp widget for?",
+          "options": [
+            "Implements material design",
+            "Manages state",
+            "Handles navigation",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 17,
+          "question": "Which widget creates a horizontal layout?",
+          "options": [
+            "Row",
+            "Column",
+            "Flex",
+            "Grid"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "What is BuildContext?",
+          "options": [
+            "Location in widget tree",
+            "Build configuration",
+            "Context menu",
+            "Build environment"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "Which widget displays an image?",
+          "options": [
+            "Image",
+            "Picture",
+            "ImageView",
+            "Photo"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "What does setState() do?",
+          "options": [
+            "Triggers widget rebuild",
+            "Changes app state",
+            "Saves state",
+            "Resets state"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "Which widget creates a grid layout?",
+          "options": [
+            "GridView",
+            "Grid",
+            "Table",
+            "FlexGrid"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "What is Navigator used for?",
+          "options": [
+            "Screen navigation",
+            "Widget navigation",
+            "State navigation",
+            "File navigation"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "Which widget creates a text input field?",
+          "options": [
+            "TextField",
+            "TextInput",
+            "InputField",
+            "EditText"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "What is the purpose of initState()?",
+          "options": [
+            "Initialize state",
+            "Build widget",
+            "Dispose widget",
+            "Update widget"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which widget overlays children?",
+          "options": [
+            "Stack",
+            "Overlay",
+            "Layer",
+            "ZStack"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "What is Flutter's rendering engine?",
+          "options": [
+            "Skia",
+            "WebKit",
+            "Blink",
+            "Gecko"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which widget creates a circular progress indicator?",
+          "options": [
+            "CircularProgressIndicator",
+            "ProgressCircle",
+            "LoadingCircle",
+            "Spinner"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "What does dispose() method do?",
+          "options": [
+            "Clean up resources",
+            "Initialize state",
+            "Build widget",
+            "Update state"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "Which widget creates a card with rounded corners?",
+          "options": [
+            "Card",
+            "Container",
+            "Box",
+            "Panel"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "What is Flutter's package manager?",
+          "options": [
+            "pub",
+            "npm",
+            "pip",
+            "gradle"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "React Native Basics",
+      "description": "Learn React Native for building native mobile apps using JavaScript and React.",
+      "difficulty": "Intermediate",
+      "icon": "fab fa-react",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What language is React Native primarily based on?",
+          "options": [
+            "JavaScript",
+            "TypeScript",
+            "Java",
+            "Swift"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which command creates a new React Native project?",
+          "options": [
+            "npx react-native init",
+            "react-native create",
+            "npm create react-native",
+            "yarn new react-native"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "What is the basic UI building block in React Native?",
+          "options": [
+            "View",
+            "Div",
+            "Container",
+            "Widget"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which component displays text?",
+          "options": [
+            "Text",
+            "Label",
+            "TextView",
+            "Span"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "What is used for styling in React Native?",
+          "options": [
+            "StyleSheet",
+            "CSS",
+            "StyledComponents",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 6,
+          "question": "Which component creates a button?",
+          "options": [
+            "TouchableOpacity",
+            "Button",
+            "Pressable",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 7,
+          "question": "What is the purpose of Flexbox in React Native?",
+          "options": [
+            "Layout system",
+            "Animation system",
+            "Navigation system",
+            "State management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "Which component creates a scrollable view?",
+          "options": [
+            "ScrollView",
+            "ListView",
+            "FlatList",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 9,
+          "question": "What is Metro?",
+          "options": [
+            "React Native bundler",
+            "State management",
+            "Navigation library",
+            "UI component"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which command runs React Native app on iOS?",
+          "options": [
+            "npx react-native run-ios",
+            "react-native ios",
+            "npm run ios",
+            "yarn ios"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What is the purpose of AsyncStorage?",
+          "options": [
+            "Persistent key-value storage",
+            "Network requests",
+            "File storage",
+            "Database"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which component displays images?",
+          "options": [
+            "Image",
+            "ImageView",
+            "Picture",
+            "Img"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What does 'Hot Reloading' do?",
+          "options": [
+            "Update app without losing state",
+            "Restart app",
+            "Rebuild from scratch",
+            "Clear cache"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which navigation library is popular in React Native?",
+          "options": [
+            "React Navigation",
+            "React Router",
+            "Navigation",
+            "Router Native"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "What is the purpose of useState hook?",
+          "options": [
+            "Manage component state",
+            "Handle side effects",
+            "Context management",
+            "Performance optimization"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which component creates a text input?",
+          "options": [
+            "TextInput",
+            "TextField",
+            "Input",
+            "EditText"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What is the purpose of useEffect hook?",
+          "options": [
+            "Handle side effects",
+            "Manage state",
+            "Context consumption",
+            "Memoization"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which component creates a list with performance optimization?",
+          "options": [
+            "FlatList",
+            "ScrollView",
+            "ListView",
+            "SectionList"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What is React Native CLI?",
+          "options": [
+            "Command line interface",
+            "Component library",
+            "State management",
+            "Build tool"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which component creates a modal?",
+          "options": [
+            "Modal",
+            "Dialog",
+            "Popup",
+            "Overlay"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "What is the purpose of useContext hook?",
+          "options": [
+            "Consume context",
+            "Create context",
+            "Manage state",
+            "Handle effects"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which component creates an activity indicator?",
+          "options": [
+            "ActivityIndicator",
+            "Loading",
+            "Spinner",
+            "Progress"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What is Expo?",
+          "options": [
+            "Framework/toolset for React Native",
+            "State management",
+            "UI library",
+            "Build system"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which component creates a switch?",
+          "options": [
+            "Switch",
+            "Toggle",
+            "Checkbox",
+            "Radio"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What is the purpose of useRef hook?",
+          "options": [
+            "Access DOM/component instances",
+            "Manage state",
+            "Handle effects",
+            "Context"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which component creates a slider?",
+          "options": [
+            "Slider",
+            "Range",
+            "SeekBar",
+            "ProgressBar"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What is Hermes?",
+          "options": [
+            "JavaScript engine for React Native",
+            "UI library",
+            "State management",
+            "Navigation"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which component creates a picker?",
+          "options": [
+            "Picker",
+            "Select",
+            "Dropdown",
+            "Options"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is the purpose of useCallback hook?",
+          "options": [
+            "Memoize functions",
+            "Manage state",
+            "Handle effects",
+            "Context"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which command builds React Native app for release?",
+          "options": [
+            "npx react-native run-android --variant=release",
+            "react-native build",
+            "npm run build",
+            "yarn release"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Swift Programming",
+      "description": "Explore Swift language for iOS and macOS app development with modern syntax.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-apple",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which company developed Swift?",
+          "options": [
+            "Apple",
+            "Google",
+            "Microsoft",
+            "Facebook"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "What year was Swift first released?",
+          "options": [
+            "2014",
+            "2012",
+            "2016",
+            "2018"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "Which keyword declares a constant?",
+          "options": [
+            "let",
+            "var",
+            "const",
+            "final"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "What is the main iOS app framework?",
+          "options": [
+            "UIKit",
+            "AppKit",
+            "SwiftUI",
+            "Cocoa"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which keyword declares a variable?",
+          "options": [
+            "var",
+            "let",
+            "dynamic",
+            "mutable"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "What does optional represent in Swift?",
+          "options": [
+            "Value that can be nil",
+            "Required value",
+            "Constant value",
+            "Mutable value"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "Which symbol indicates optional type?",
+          "options": [
+            "?",
+            "!",
+            "*",
+            "&"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What is forced unwrapping?",
+          "options": [
+            "Using ! on optional",
+            "Using ? on optional",
+            "if let syntax",
+            "guard let syntax"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "Which statement safely unwraps optionals?",
+          "options": [
+            "if let",
+            "switch",
+            "guard",
+            "Both A and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 10,
+          "question": "What is the entry point for iOS apps?",
+          "options": [
+            "AppDelegate",
+            "ViewController",
+            "SceneDelegate",
+            "Main"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "Which keyword defines a function?",
+          "options": [
+            "func",
+            "function",
+            "def",
+            "fn"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "What is a closure in Swift?",
+          "options": [
+            "Anonymous function",
+            "Named function",
+            "Class method",
+            "Struct method"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "Which keyword defines a class?",
+          "options": [
+            "class",
+            "struct",
+            "enum",
+            "protocol"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What is protocol in Swift?",
+          "options": [
+            "Interface/contract",
+            "Base class",
+            "Struct template",
+            "Enum template"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "Which keyword defines an enumeration?",
+          "options": [
+            "enum",
+            "struct",
+            "class",
+            "union"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "What is a struct in Swift?",
+          "options": [
+            "Value type",
+            "Reference type",
+            "Protocol",
+            "Class"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "Which framework is for declarative UI?",
+          "options": [
+            "SwiftUI",
+            "UIKit",
+            "AppKit",
+            "CoreData"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "What is the main app lifecycle method?",
+          "options": [
+            "application(_:didFinishLaunchingWithOptions:)",
+            "viewDidLoad()",
+            "init()",
+            "deinit()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "Which keyword marks a method that can throw errors?",
+          "options": [
+            "throws",
+            "throw",
+            "try",
+            "catch"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "What is the error handling syntax?",
+          "options": [
+            "do-try-catch",
+            "try-catch",
+            "throw-catch",
+            "error-handle"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "Which property wrapper is for state in SwiftUI?",
+          "options": [
+            "@State",
+            "@Binding",
+            "@Published",
+            "@ObservedObject"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "What is an extension in Swift?",
+          "options": [
+            "Add functionality to existing types",
+            "Create new type",
+            "Inheritance",
+            "Protocol"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "Which keyword defines a computed property?",
+          "options": [
+            "var with get/set",
+            "let",
+            "func",
+            "property"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "What is the memory management model in Swift?",
+          "options": [
+            "ARC (Automatic Reference Counting)",
+            "GC (Garbage Collection)",
+            "Manual",
+            "Reference counting"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which keyword prevents strong reference cycles?",
+          "options": [
+            "weak",
+            "strong",
+            "unowned",
+            "Both A and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 26,
+          "question": "What is a tuple in Swift?",
+          "options": [
+            "Group of multiple values",
+            "Single value",
+            "Array",
+            "Dictionary"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which operator checks type?",
+          "options": [
+            "is",
+            "as",
+            "as?",
+            "as!"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "What is the range operator?",
+          "options": [
+            "...",
+            "..<",
+            "Both A and B",
+            "->"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 29,
+          "question": "Which keyword defines a subscript?",
+          "options": [
+            "subscript",
+            "index",
+            "accessor",
+            "getter"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "What is the latest major version of Swift?",
+          "options": [
+            "Swift 5",
+            "Swift 4",
+            "Swift 3",
+            "Swift 6"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Kotlin for Android",
+      "description": "Master Kotlin programming language for Android app development.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-android",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which company developed Kotlin?",
+          "options": [
+            "JetBrains",
+            "Google",
+            "Oracle",
+            "Microsoft"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "When did Google announce Kotlin as official Android language?",
+          "options": [
+            "2017",
+            "2015",
+            "2019",
+            "2020"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "Which keyword declares a variable in Kotlin?",
+          "options": [
+            "var",
+            "val",
+            "let",
+            "Both A and B"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 4,
+          "question": "What does 'val' mean in Kotlin?",
+          "options": [
+            "Immutable (read-only) variable",
+            "Mutable variable",
+            "Function",
+            "Class"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which keyword defines a function?",
+          "options": [
+            "fun",
+            "function",
+            "def",
+            "fn"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "What is the entry point for Android apps?",
+          "options": [
+            "MainActivity",
+            "Application class",
+            "Both A and B",
+            "Manifest"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "Which operator is for safe calls?",
+          "options": [
+            "?.",
+            "!!",
+            "?:",
+            "?."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What is the Elvis operator?",
+          "options": [
+            "?:",
+            "?.",
+            "!!",
+            "?."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "Which keyword defines a class?",
+          "options": [
+            "class",
+            "object",
+            "data class",
+            "interface"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "What is a data class in Kotlin?",
+          "options": [
+            "Class for holding data",
+            "Abstract class",
+            "Interface",
+            "Sealed class"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "Which keyword defines a singleton?",
+          "options": [
+            "object",
+            "singleton",
+            "static",
+            "companion"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "What is extension function in Kotlin?",
+          "options": [
+            "Add function to existing class",
+            "Override function",
+            "Abstract function",
+            "Inline function"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "Which keyword is for higher-order functions?",
+          "options": [
+            "fun",
+            "lambda",
+            "->",
+            "Both B and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 14,
+          "question": "What is coroutine in Kotlin?",
+          "options": [
+            "Lightweight thread for async",
+            "Thread",
+            "Process",
+            "Service"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "Which scope function executes block on object?",
+          "options": [
+            "apply",
+            "let",
+            "run",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 16,
+          "question": "What is sealed class in Kotlin?",
+          "options": [
+            "Restricted class hierarchy",
+            "Open class",
+            "Abstract class",
+            "Data class"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "Which keyword makes class inheritable?",
+          "options": [
+            "open",
+            "abstract",
+            "Both A and B",
+            "sealed"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 18,
+          "question": "What is companion object?",
+          "options": [
+            "Object tied to class",
+            "Singleton",
+            "Static members",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 19,
+          "question": "Which keyword defines interface?",
+          "options": [
+            "interface",
+            "protocol",
+            "contract",
+            "abstract"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "What is the null safety operator?",
+          "options": [
+            "!!",
+            "?.",
+            "?:",
+            "?."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "Which function is main coroutine builder?",
+          "options": [
+            "launch",
+            "async",
+            "runBlocking",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 22,
+          "question": "What is destructuring in Kotlin?",
+          "options": [
+            "Break object into variables",
+            "Create object",
+            "Destroy object",
+            "Serialize object"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "Which keyword makes function inline?",
+          "options": [
+            "inline",
+            "noinline",
+            "crossinline",
+            "inline"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "What is reified type parameter?",
+          "options": [
+            "Preserve type at runtime",
+            "Generic type",
+            "Type alias",
+            "Type inference"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which annotation marks Android view binding?",
+          "options": [
+            "@BindView",
+            "@ViewById",
+            "findViewById",
+            "View binding"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "What is the Android lifecycle owner?",
+          "options": [
+            "LifecycleOwner",
+            "ViewModel",
+            "LiveData",
+            "Repository"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which architecture component is for UI data?",
+          "options": [
+            "LiveData",
+            "ViewModel",
+            "Room",
+            "WorkManager"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "What is the purpose of ViewModel?",
+          "options": [
+            "Store UI-related data",
+            "Database access",
+            "Network calls",
+            "UI rendering"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "Which function creates LiveData?",
+          "options": [
+            "MutableLiveData",
+            "LiveData",
+            "MediatorLiveData",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 30,
+          "question": "What is the latest Kotlin version?",
+          "options": [
+            "Kotlin 1.8+",
+            "Kotlin 1.5",
+            "Kotlin 1.7",
+            "Kotlin 2.0"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Mobile App UI/UX Design",
+      "description": "Learn mobile app design principles, user experience, and interface best practices.",
+      "difficulty": "Beginner",
+      "icon": "fas fa-paint-brush",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What does UI stand for?",
+          "options": [
+            "User Interface",
+            "User Interaction",
+            "User Integration",
+            "User Involvement"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "What does UX stand for?",
+          "options": [
+            "User Experience",
+            "User Examination",
+            "User Execution",
+            "User Extension"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "What is the minimum recommended touch target size?",
+          "options": [
+            "44x44 points",
+            "30x30 points",
+            "50x50 points",
+            "60x60 points"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which design principle focuses on user comfort?",
+          "options": [
+            "Human Interface Guidelines",
+            "Material Design",
+            "Both A and B",
+            "Flat Design"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 5,
+          "question": "What is wireframing?",
+          "options": [
+            "Basic layout sketch",
+            "High-fidelity design",
+            "Color scheme",
+            "Typography"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "What is prototyping?",
+          "options": [
+            "Interactive model of app",
+            "Static design",
+            "Code implementation",
+            "User testing"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "Which color model is for digital screens?",
+          "options": [
+            "RGB",
+            "CMYK",
+            "HSL",
+            "Pantone"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What is typography?",
+          "options": [
+            "Art of arranging type",
+            "Color selection",
+            "Layout design",
+            "Icon design"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "What is visual hierarchy?",
+          "options": [
+            "Organizing elements by importance",
+            "Color palette",
+            "Font selection",
+            "Icon style"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "What is responsive design?",
+          "options": [
+            "Design adapting to screen sizes",
+            "Fast loading design",
+            "Color responsive",
+            "Touch responsive"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What is accessibility in design?",
+          "options": [
+            "Design for all users including disabilities",
+            "Fast design",
+            "Beautiful design",
+            "Modern design"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "What are design systems?",
+          "options": [
+            "Collection of reusable components",
+            "Single design",
+            "Prototype",
+            "Wireframe"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What is Fitts's Law?",
+          "options": [
+            "Time to reach target depends on size/distance",
+            "Color theory",
+            "Typography rule",
+            "Layout principle"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What is Hick's Law?",
+          "options": [
+            "Decision time increases with choices",
+            "Color harmony",
+            "Font pairing",
+            "Spacing rule"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "What is the fold in mobile design?",
+          "options": [
+            "Content visible without scrolling",
+            "Hidden content",
+            "Navigation menu",
+            "Footer"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "What is the purpose of negative space?",
+          "options": [
+            "Improve readability and focus",
+            "Fill space",
+            "Add color",
+            "Increase content"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What is a design pattern?",
+          "options": [
+            "Reusable solution to common problem",
+            "Color pattern",
+            "Layout template",
+            "Icon set"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "What is a user persona?",
+          "options": [
+            "Fictional representative user",
+            "Real user",
+            "Designer",
+            "Developer"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What is user journey mapping?",
+          "options": [
+            "Visualizing user experience through steps",
+            "User path",
+            "Navigation flow",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 20,
+          "question": "What is A/B testing?",
+          "options": [
+            "Comparing two design versions",
+            "User interview",
+            "Usability testing",
+            "Prototype testing"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "What is the golden ratio in design?",
+          "options": [
+            "1:1.618 proportion",
+            "1:1 proportion",
+            "2:1 proportion",
+            "3:2 proportion"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "What is the rule of thirds?",
+          "options": [
+            "Divide layout into 3x3 grid",
+            "Three color rule",
+            "Three font rule",
+            "Three element rule"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What is a design mockup?",
+          "options": [
+            "High-fidelity static design",
+            "Wireframe",
+            "Prototype",
+            "Sketch"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "What is the purpose of microinteractions?",
+          "options": [
+            "Enhance user experience with small animations",
+            "Major features",
+            "Navigation",
+            "Layout"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What is the iOS Human Interface Guidelines?",
+          "options": [
+            "Apple's design principles",
+            "Google's guidelines",
+            "Microsoft's guidelines",
+            "Web standards"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "What is Material Design?",
+          "options": [
+            "Google's design system",
+            "Apple's design",
+            "Microsoft design",
+            "Flat design"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What is a design sprint?",
+          "options": [
+            "Time-constrained design process",
+            "User testing",
+            "Prototyping",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "What is the purpose of user testing?",
+          "options": [
+            "Get feedback from real users",
+            "Test design with developers",
+            "Check colors",
+            "Validate code"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is the 60-30-10 color rule?",
+          "options": [
+            "60% primary, 30% secondary, 10% accent",
+            "Equal color distribution",
+            "Random color distribution",
+            "Monochromatic scheme"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "What is the difference between UI and UX?",
+          "options": [
+            "UI is visual, UX is overall experience",
+            "Same thing",
+            "UX is visual, UI is experience",
+            "No difference"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+{
+  "interview_index": [
+    { "key": "rust_intro", "title": "Rust Overview" },
+    { "key": "rust_syntax", "title": "Syntax & Types" },
+    { "key": "rust_ownership", "title": "Ownership & Borrowing" },
+    { "key": "rust_concurrency", "title": "Concurrency & async/await" },
+    { "key": "rust_traits", "title": "Traits & Generics" },
+    { "key": "rust_error", "title": "Error Handling & Results" },
+    { "key": "rust_cargo", "title": "Cargo & Tooling" },
+    { "key": "rust_memory", "title": "Memory Model & Safety" },
+    { "key": "rust_std", "title": "Standard Library Highlights" },
+    { "key": "rust_ffi", "title": "FFI & Interop" },
+    { "key": "rust_macros", "title": "Macros & Code Generation" },
+    { "key": "rust_testing", "title": "Testing, Fuzzing & Benchmarks" }
+  ],
+
+  "rust_intro": {
+    "title": "Rust Overview",
+    "summary": "Safe, fast systems programming with ownership and zero-cost abstractions.",
+    "details": "Rust is a systems language that enforces memory safety and concurrency correctness at compile time using ownership, borrowing and lifetimes. It aims for zero-cost abstractions, expressive types, and modern tooling (cargo, rustfmt, clippy). Rust is used for system components, CLIs, networking, webassembly and more. Learn idioms like prefer immutable bindings, propagate errors with Result, and keep unsafe blocks small and documented.",
+    "cheat": "// Quick practical Rust cheat\n// Tooling\n// rustup: install and manage toolchains\n// cargo new myapp --bin; cargo run; cargo build --release; cargo test\n\n// Common patterns\n// - Prefer &str and &T for borrowed views, String/Vec for owned data\n// - Use Result<T,E> and '?' for error propagation\n// - Use iterators, try to avoid cloning by design\n\n// Release tips\n// - Use cargo build --release\n// - Consider [profile.release] lto = true, codegen-units = 1 for size/perf\n",
+    "examples": [
+      { "code": "fn main() { println!(\"Hello, Rust!\"); }" },
+      { "code": "// cargo commands\n// cargo new myapp --bin\n// cd myapp\n// cargo run\n" },
+      { "code": "// quick Result usage\nuse std::fs::read_to_string;\nfn read(path: &str) -> std::io::Result<String> { read_to_string(path) }\n" }
+    ],
+    "interview": [
+      { "q": "What is Rust's main selling point?", "a": "Memory and thread safety without a garbage collector via ownership and borrowing enforced at compile time." },
+      { "q": "What is ownership in one sentence?", "a": "Each value has a single owner; when the owner goes out of scope the value is dropped." },
+      { "q": "How does Rust avoid data races?", "a": "The borrow checker prevents simultaneous mutable and immutable aliasing; Send/Sync traits restrict cross-thread usage." },
+      { "q": "What is zero-cost abstraction?", "a": "Language features that compile to efficient code without runtime overhead compared to hand-written lower-level code." },
+      { "q": "Why use Result instead of exceptions?", "a": "Result makes error handling explicit and composable at the call site, improving clarity and testability." },
+      { "q": "How to run tests in Rust?", "a": "cargo test runs unit and integration tests defined with #[test]." },
+      { "q": "What is cargo?", "a": "Cargo is Rust's package manager and build tool for building, testing and publishing crates." },
+      { "q": "What are crates?", "a": "Crates are Rust's compilation units/packages; a crate can be a binary or a library." },
+      { "q": "What is a crate's edition?", "a": "An edition (2015/2018/2021) selects language improvements and lints while maintaining crate compatibility." },
+      { "q": "What is lifetimes' role?", "a": "Lifetimes express how long borrows are valid and help the compiler ensure no dangling references." },
+      { "q": "When to write unsafe?", "a": "Use unsafe only for low-level operations where you can guarantee invariants that the compiler can't check." },
+      { "q": "How to get help with the compiler?", "a": "Rust compiler error messages are descriptive; use --explain <code> and read suggestions in the output." },
+      { "q": "What is idiomatic error handling in Rust?", "a": "Return Result, propagate with '?', use thiserror/anyhow for higher-level applications." },
+      { "q": "How to structure a medium Rust project?", "a": "Use a crate for library code and a bin crate for binary; use workspaces for multi-crate repos." },
+      { "q": "What is pattern matching used for?", "a": "Destructuring enums/tuples and exhaustively handling cases with match or if let." },
+      { "q": "Why prefer immutable variables?", "a": "Immutable-by-default reduces unexpected side effects and simplifies reasoning about code." },
+      { "q": "How to profile Rust programs?", "a": "Use perf, cargo flamegraph, or platform profilers on release builds to find hotspots." },
+      { "q": "What's the recommended formatter and linter?", "a": "rustfmt for formatting and clippy for common lints and improvements." },
+      { "q": "How to share code between binaries?", "a": "Put shared logic in a library crate and consume it from bin crates or examples." },
+      { "q": "What ecosystem resources to learn?", "a": "Read the Rust Book, Rust By Example, the API docs on docs.rs and follow crates.io for libraries." }
+    ]
+  },
+
+  "rust_syntax": {
+    "title": "Syntax & Types",
+    "summary": "Pattern matching, enums, structs, slices, references and type inference.",
+    "details": "Rust syntax is concise and explicit: let bindings, pattern matching via match/if let, algebraic enums, structs, tuples and slices. Variables are immutable by default; use let mut for mutability. Type inference is strong, but explicit types help in APIs. Learn lifetime elision rules, trait bounds, and when to use associated types versus generic parameters.",
+    "cheat": "// Syntax & types practical cheat\n// let x = 5; let mut y = 6; const PI: f64 = 3.14;\n// fn f(a: i32) -> i32 { a + 1 }\n// pattern matching with match / if let\n// struct, tuple, unit structs and impl blocks\n// enums with variants and associated data\n",
+    "examples": [
+      { "code": "struct User { name: String, age: u8 }\nimpl User { fn new(name: String, age: u8) -> Self { Self { name, age } } }\n" },
+      { "code": "enum Msg { Quit, Move{x:i32,y:i32}, Write(String) }\nmatch msg { Msg::Quit => {}, Msg::Move{x,y} => {}, Msg::Write(s) => println!(\"{}\", s) }\n" },
+      { "code": "let nums = vec![1,2,3]; for (i,v) in nums.iter().enumerate() { println!(\"{}: {}\", i, v); }\n" }
+    ],
+    "interview": [
+      { "q": "What does 'let' default immutability mean?", "a": "Bindings are immutable by default; use 'let mut' to allow mutation." },
+      { "q": "When to annotate types explicitly?", "a": "In public APIs, complex generics, or to improve readability; locals often can be inferred." },
+      { "q": "What is pattern matching advantage?", "a": "Exhaustive handling and ergonomic destructuring of enums and tuples." },
+      { "q": "What are slices and how used?", "a": "&[T] and &str are borrowed views into contiguous memory, avoiding copies." },
+      { "q": "How do enums differ from structs?", "a": "Enums model variants/choices; structs model records with named fields." },
+      { "q": "What is an associated function vs method?", "a": "Associated function has no self parameter (e.g., new), methods take &self/&mut self/self." },
+      { "q": "Explain if let shorthand.", "a": "if let lets you match and destructure a single pattern concisely for simple control flow." },
+      { "q": "What is deref coercion?", "a": "Automatic conversion when borrowing through smart pointer types like Box or &String to &str." },
+      { "q": "How to write generic functions?", "a": "Use fn name<T: Trait>(arg: T) { } with trait bounds as needed." },
+      { "q": "What is the difference between String and &str?", "a": "String owns heap-allocated text; &str is a borrowed view into UTF-8 text." },
+      { "q": "When to use tuples?", "a": "For cheap, unnamed groupings usually within local scope or returning multiple values." },
+      { "q": "What is pattern guard?", "a": "An additional 'if' condition in a match arm to refine pattern matching." },
+      { "q": "How to destructure struct fields?", "a": "let User{name, age} = user; pull fields into local bindings." },
+      { "q": "What is a unit struct?", "a": "A struct with no fields, often used as marker types or for type safety." },
+      { "q": "When to use trait objects?", "a": "When you need dynamic dispatch and heterogeneous collections: Box<dyn Trait>." },
+      { "q": "What are method chaining ergonomics?", "a": "Return self or &mut self for builder patterns enabling chained calls." },
+      { "q": "What is the ? operator in expressions?", "a": "Propagates errors by returning early on Err and unwrapping Ok values." },
+      { "q": "How does Rust treat integer overflow in debug vs release?", "a": "In debug builds it panics on overflow; in release builds it wraps (unless checked explicitly)." },
+      { "q": "What is an iterator adapter?", "a": "Methods like map/filter/collect produce lazy transformations on iterators." },
+      { "q": "How to avoid cloning unintentionally?", "a": "Prefer borrowing, use references and take ownership only when necessary." }
+    ]
+  },
+
+  "rust_ownership": {
+    "title": "Ownership & Borrowing",
+    "summary": "Move semantics, borrowing rules, mutable vs immutable borrows, lifetimes and references.",
+    "details": "Ownership enforces at most one mutable reference or many immutable references at a time. Moves transfer ownership unless a type implements Copy. Lifetimes describe how long references are valid and are often inferred. Interior mutability (RefCell, Mutex) allows mutation through shared references with runtime checks or synchronization.",
+    "cheat": "// Ownership practical cheat\n// - Move: let a = v; let b = a; // a moved unless Copy\n// - Borrow: &T for read, &mut T for mutable borrow\n// - Rules: many &T or one &mut T at a time\n// - Use Rc/Arc for shared ownership, RefCell/Mutex for interior mutability\n",
+    "examples": [
+      { "code": "let s = String::from(\"hello\"); let t = s; // move, s no longer usable\n" },
+      { "code": "fn borrow_example(s: &String){ println!(\"{}\", s); } // s not moved\n" },
+      { "code": "use std::sync::Arc; let shared = Arc::new(data); let c = shared.clone(); // cheap clone increments refcount\n" }
+    ],
+    "interview": [
+      { "q": "What is move semantics?", "a": "Moving transfers ownership of a value without copying its contents." },
+      { "q": "When does a type implement Copy?", "a": "Small, trivially copyable types like integers implement Copy, making moves implicit copies." },
+      { "q": "Why are lifetimes needed?", "a": "Lifetimes describe reference scopes and prevent dangling references at compile time." },
+      { "q": "What is borrowing rule in one sentence?", "a": "You can have either many immutable borrows &T or exactly one mutable borrow &mut T at the same time." },
+      { "q": "What is an owned type vs borrowed type?", "a": "Owned types (String, Vec) own data; borrowed types (&str, &[T]) reference data owned elsewhere." },
+      { "q": "How to share mutable state across threads?", "a": "Use Arc<Mutex<T>> or concurrency primitives that ensure Send/Sync safety." },
+      { "q": "What is interior mutability?", "a": "Types like RefCell allow mutation through shared references with runtime borrow checking." },
+      { "q": "When to use Rc vs Arc?", "a": "Rc for single-threaded shared ownership; Arc for multi-threaded scenarios." },
+      { "q": "What happens to a moved variable?", "a": "It becomes unusable unless it implements Copy; attempting to use it is a compile error." },
+      { "q": "How to express lifetime relationships?", "a": "Use explicit lifetimes in function signatures when inference isn't sufficient, e.g., fn f<'a>(x: &'a str) -> &'a str." },
+      { "q": "What is a dangling pointer scenario Rust prevents?", "a": "Returning a reference to a local stack variable that goes out of scope is prevented by lifetimes." },
+      { "q": "How does borrowing affect API design?", "a": "Prefer accepting references for read-only operations to avoid unnecessary cloning." },
+      { "q": "Can you have multiple &mut borrows in disjoint data?", "a": "Yes if borrows are for non-overlapping fields; the borrow checker can prove disjointness in many cases." },
+      { "q": "How to convert from &str to String?", "a": "Use to_string() or String::from(&str) to allocate an owned String." },
+      { "q": "What is move-only type?", "a": "A type that does not implement Copy and thus can only be moved (not implicitly copied)." },
+      { "q": "What are lifetime ellision rules?", "a": "Compiler infers lifetimes in common patterns like 'fn(&self) -> &Self' so you rarely annotate lifetimes." },
+      { "q": "What does 'static lifetime mean?", "a": "A 'static lifetime lives for the entire program run; often used for string literals." },
+      { "q": "How to avoid clones in hot paths?", "a": "Design APIs to borrow, use Cow when needed, and pass references to avoid allocation." },
+      { "q": "Why doesn't Rust need a GC?", "a": "Ownership and deterministic drop/RAII handle memory lifetimes without a runtime garbage collector." },
+      { "q": "How to handle circular data structures?", "a": "Use Rc/RefCell (single-thread) or Arc<Mutex> and weak references (Weak) to break cycles." }
+    ]
+  },
+
+  "rust_concurrency": {
+    "title": "Concurrency & async/await",
+    "summary": "Threads, Send/Sync traits, message passing, futures, async/await and executor models.",
+    "details": "Rust enforces concurrency safety at compile time using Send and Sync. For OS threads use std::thread and channels; for async use async/await with an executor like tokio. Understand .await points, the need for Send across await boundaries on multithreaded executors, and prefer message passing to shared mutable state.",
+    "cheat": "// Concurrency cheat\n// - Thread: std::thread::spawn(move || { ... }).join().unwrap();\n// - Channels: std::sync::mpsc or crossbeam for performance\n// - Async: async fn, .await, run on tokio or async-std\n// - Ensure types across threads implement Send/Sync\n",
+    "examples": [
+      { "code": "use std::thread;\nlet t = thread::spawn(|| { println!(\"hello\"); }); t.join().unwrap();\n" },
+      { "code": "use std::sync::mpsc::channel; let (tx,rx)=channel(); tx.send(1).unwrap(); let v=rx.recv().unwrap();\n" },
+      { "code": "// tokio example (sketch)\n// #[tokio::main]\n// async fn main(){ let res = reqwest::get(\"https://...\").await.unwrap(); }\n" }
+    ],
+    "interview": [
+      { "q": "What are Send and Sync?", "a": "Auto traits: Send means a type can be moved to another thread; Sync means &T can be shared between threads safely." },
+      { "q": "When to use channels vs shared state?", "a": "Use channels for message passing to avoid locks; use Arc/Mutex when shared mutable state is necessary." },
+      { "q": "What is an executor?", "a": "A runtime that polls and drives futures to completion for async tasks (e.g., tokio)." },
+      { "q": "Why care about Send across await?", "a": "For multithreaded executors, futures must be Send if they can be moved between threads across .await points." },
+      { "q": "How to spawn async tasks?", "a": "Use tokio::spawn(async move { ... }) to schedule tasks on the tokio runtime." },
+      { "q": "What is async/await overhead?", "a": "Futures are zero-cost abstractions when inlined; there's some state-machine overhead but usually low." },
+      { "q": "How to handle blocking ops in async?", "a": "Use spawn_blocking or offload to threads; don't block the async runtime threads." },
+      { "q": "How to cancel async tasks?", "a": "Use cancellation tokens, drop the JoinHandle, or design cooperative cancellation with a shared flag." },
+      { "q": "What is a future in Rust?", "a": "An object representing an asynchronous computation that can be polled to make progress." },
+      { "q": "How to share data across tasks?", "a": "Use Arc for shared ownership and Mutex/RwLock for synchronized mutation." },
+      { "q": "What is await point?", "a": "A point where the current task yields control awaiting completion of another asynchronous operation." },
+      { "q": "How to avoid deadlocks?", "a": "Keep lock scopes small, prefer message passing, and avoid holding locks across await points." },
+      { "q": "What is Tokio's reactor model?", "a": "Tokio uses a reactor for readiness-based non-blocking IO and a scheduler for task execution." },
+      { "q": "How to test concurrent code?", "a": "Use stress tests, deterministic schedulers where possible, and synchronization in tests to verify behavior." },
+      { "q": "What are common concurrency bugs Rust still allows?", "a": "Logic bugs, misuse of unsafe leading to UB, deadlocks, and incorrect synchronization." },
+      { "q": "How to measure concurrency performance?", "a": "Benchmark under realistic workloads, profile wakeups, context switches, and lock contention." },
+      { "q": "What is parking_lot?", "a": "A crate providing faster and simpler synchronization primitives as alternatives to std::sync::Mutex." },
+      { "q": "How to share sockets or file descriptors safely?", "a": "Wrap in Arc and use synchronized access or use OS-level mechanisms designed for concurrency." },
+      { "q": "What are mpsc vs broadcast channels?", "a": "mpsc is multiple producer single consumer; broadcast (or tokio::sync::broadcast) sends to multiple receivers." },
+      { "q": "Best practices for async code readability?", "a": "Keep async functions focused, avoid long-lived mutable state across awaits, and prefer composition of small async helpers." }
+    ]
+  },
+
+  "rust_traits": {
+    "title": "Traits & Generics",
+    "summary": "Traits as interfaces, generic functions/types, associated types and trait bounds.",
+    "details": "Traits define shared behavior; generics provide compile-time polymorphism. Use trait bounds, associated types, and impl Trait to express APIs. Trait objects (dyn Trait) enable dynamic dispatch. Favor clear constraints and prefer generic implementations when performance is critical.",
+    "cheat": "// Traits & generics cheat\n// trait Foo { fn do(&self); }\n// impl Foo for MyType { fn do(&self) {...} }\n// generics: fn f<T: Foo>(t: T) {}\n// impl Trait in returns: fn make() -> impl Iterator<Item=i32> {}\n",
+    "examples": [
+      { "code": "trait Greet { fn greet(&self); }\nimpl Greet for String { fn greet(&self){ println!(\"hi {}\", self); } }\n" },
+      { "code": "fn show<T: std::fmt::Display>(v: T) { println!(\"{}\", v); }\n" },
+      { "code": "fn iter_sum() -> impl Iterator<Item=i32> { (0..10).into_iter() }\n" }
+    ],
+    "interview": [
+      { "q": "What is a trait object?", "a": "A value like Box<dyn Trait> that enables runtime polymorphism via dynamic dispatch." },
+      { "q": "When use impl Trait vs generic parameters?", "a": "Use impl Trait for simpler APIs and type inference; use generics when the concrete type must be exposed or for multiple params." },
+      { "q": "What are associated types?", "a": "Placeholders in traits that implementing types specify to reduce verbose bounds (e.g., Iterator::Item)." },
+      { "q": "How does monomorphization work?", "a": "Generic code is compiled into specialized versions per concrete type use, producing efficient code." },
+      { "q": "What is object safety?", "a": "A trait is object-safe if it can be used as a trait object (no generic methods, uses &self signatures etc.)." },
+      { "q": "How to express multiple trait bounds?", "a": "Use +: fn f<T: Read + Write>(...) or where clauses for readability." },
+      { "q": "What is default method in a trait?", "a": "A trait can provide a default implementation that types may override." },
+      { "q": "How to implement trait for external types?", "a": "Rust's orphan rule prevents implementing foreign traits for foreign types in your crate; one side must be local." },
+      { "q": "What are blanket implementations?", "a": "Implementing a trait generically for any type meeting constraints, e.g., impl<T: Foo> Bar for T where ... ." },
+      { "q": "When to use dyn Trait?", "a": "When you need heterogenous collections or runtime dispatch and the concrete types vary." },
+      { "q": "How do trait bounds affect compile times?", "a": "Complex bounds can increase compile time; prefer simpler constraints and where clauses for clarity." },
+      { "q": "How to avoid boxing when using trait objects?", "a": "Use enums or generics; trait objects require indirection (Box) if heap allocation is needed." },
+      { "q": "What is the difference between associated types and generics in traits?", "a": "Associated types tie the type to the implementor; generics allow specifying types per use-site." },
+      { "q": "How to provide default implementations that use other trait methods?", "a": "Default methods can call required methods, allowing implementers to override minimal set." },
+      { "q": "How to handle conflicting trait methods?", "a": "Specify fully-qualified syntax <Type as Trait>::method(...) to disambiguate." },
+      { "q": "How to create extensible APIs with traits?", "a": "Expose small traits at consumer boundaries and compose traits for larger capabilities." },
+      { "q": "How to test trait implementations?", "a": "Write tests against the trait contract using multiple concrete types and property tests if appropriate." },
+      { "q": "What is specialization (unstable)?", "a": "A nightly feature to provide more specific impls overriding generic ones; unstable and still evolving." },
+      { "q": "How to design trait hierarchies?", "a": "Prefer composition of small traits over deep inheritance trees; keep behavior orthogonal." },
+      { "q": "What is a sealed trait pattern?", "a": "Internal pattern to prevent external implementations by using a private trait impl requirement." }
+    ]
+  },
+
+  "rust_error": {
+    "title": "Error Handling & Results",
+    "summary": "Using Result<T,E>, ? operator, error conversions, and when to panic.",
+    "details": "Rust models recoverable failures with Result and uses ? for propagation. For libraries prefer typed errors (thiserror) and avoid panics; in apps you can use anyhow for ergonomic handling. Add context to errors and use map_err or .context (anyhow) for richer messages. Reserve panic for unrecoverable invariants or tests.",
+    "cheat": "// Error handling cheat\n// - fn f() -> Result<T, E> { ... }\n// - propagate: let v = foo()?;\n// - wrap: Err(format!(\"context: {}\", e)) or use thiserror/anyhow for ergonomics\n// - prefer Result in libraries, panic sparingly\n",
+    "examples": [
+      { "code": "use std::fs::File;\nfn open_file(p: &str) -> std::io::Result<File> { File::open(p) }\n" },
+      { "code": "// thiserror example (sketch)\n// #[derive(thiserror::Error)] enum MyErr { #[error(\"io: {0}\")] Io(#[from] std::io::Error) }\n" },
+      { "code": "let contents = std::fs::read_to_string(\"file.txt\")?; // '?' propagates Err\n" }
+    ],
+    "interview": [
+      { "q": "What does '?' do in Rust?", "a": "It returns the Err early from the current function or unwraps the Ok value to continue." },
+      { "q": "When to use anyhow vs thiserror?", "a": "thiserror for typed library errors, anyhow for quick application-level error handling and context." },
+      { "q": "Why avoid panic in libraries?", "a": "Panic aborts the current thread and is not easy for callers to recover from; libraries should return Results." },
+      { "q": "How to attach context to errors?", "a": "Use anyhow::Context or map_err to include human-readable context while keeping underlying error." },
+      { "q": "What is From/Into for errors?", "a": "Implement From to allow automatic conversion between error types, useful with '?'." },
+      { "q": "How to define custom error types?", "a": "Use enums with thiserror::Error for ergonomics and implement conversions where appropriate." },
+      { "q": "How to test error paths?", "a": "Create controlled failure scenarios and assert error kinds and messages, use integration tests as needed." },
+      { "q": "What is Error::source?", "a": "A method returning the underlying cause error for chained errors." },
+      { "q": "How to use map_err?", "a": "Transform error types: res.map_err(|e| MyError::Wrap(e)) to convert errors." },
+      { "q": "What is panic! used for?", "a": "Indicating unrecoverable conditions, assertions or quick prototyping, not normal error handling." },
+      { "q": "How to avoid losing error details?", "a": "Wrap rather than replace errors and preserve the original error for debugging." },
+      { "q": "What is std::result::Result?", "a": "An enum with Ok(T) and Err(E) representing success or failure of operations." },
+      { "q": "How to pattern-match errors?", "a": "Use match or if let Err(e) = res { ... } to inspect and handle error variants." },
+      { "q": "What is the error trait?", "a": "std::error::Error represents error types and provides Display and source() for chaining." },
+      { "q": "How to convert io::Error to custom errors?", "a": "Implement From<std::io::Error> for your error enum or use #[from] with thiserror." },
+      { "q": "When to return Option vs Result?", "a": "Use Option when absence is acceptable (None) without error detail; Result when failures need reason." },
+      { "q": "How to implement graceful degradation on errors?", "a": "Catch errors, log with context, and fallback to reasonable defaults when safe." },
+      { "q": "What is error bubbling?", "a": "Propagating errors up the call stack to a layer that can handle them meaningfully." },
+      { "q": "How to design error types for APIs?", "a": "Provide specific, inspectable variants and document error semantics for callers." },
+      { "q": "How to log vs return errors?", "a": "Return errors to callers and log at the top-level or when errors cross process boundaries to avoid duplicate logs." }
+    ]
+  },
+
+  "rust_cargo": {
+    "title": "Cargo & Tooling",
+    "summary": "Cargo workflows, workspaces, features, crates.io, rustfmt, clippy and release builds.",
+    "details": "Cargo manages building, testing, dependency resolution and publishing. Use workspaces to coordinate multiple crates, features to enable optional functionality, and rustfmt/clippy for style and linting. Use cargo-audit to scan dependencies for advisories and cargo-release or CI scripts to automate releases.",
+    "cheat": "// Cargo cheat\n// cargo new, cargo build, cargo run, cargo test\n// cargo fmt; cargo clippy; cargo doc --open\n// workspaces: top-level Cargo.toml with [workspace] members\n// publish: cargo publish (ensure version & credentials)\n",
+    "examples": [
+      { "code": "cargo new myapp --bin\ncd myapp\ncargo run\n" },
+      { "code": "// workspace example\n// [workspace]\n// members = [\"crates/*\"]\n" },
+      { "code": "// run clippy\n// cargo clippy -- -D warnings\n" }
+    ],
+    "interview": [
+      { "q": "What is Cargo's role?", "a": "Cargo is Rust's build system and package manager handling compilation, dependencies, testing and publishing." },
+      { "q": "What is Cargo.lock for?", "a": "Records exact dependency versions for reproducible builds; commit for apps but often not for libraries." },
+      { "q": "How do features work in Cargo?", "a": "Features enable optional dependencies or code via cfg(feature = \"name\") conditional compilation." },
+      { "q": "What is a workspace?", "a": "A workspace groups multiple related crates under a single Cargo.toml for coordinated builds." },
+      { "q": "How to publish a crate?", "a": "Ensure version bump, test, then use cargo publish with proper credentials to upload to crates.io." },
+      { "q": "What is rustfmt?", "a": "The official formatter to enforce consistent code style." },
+      { "q": "How to enforce lints in CI?", "a": "Run cargo fmt -- --check and cargo clippy -- -D warnings in CI to fail on issues." },
+      { "q": "How to add a dependency?", "a": "Add to Cargo.toml under [dependencies] and run cargo build or cargo update." },
+      { "q": "What is cargo audit?", "a": "A tool to scan dependencies for known security advisories." },
+      { "q": "How to work with multiple crate versions?", "a": "Use cargo tree and overrides if necessary; prefer avoiding conflicting semver ranges." },
+      { "q": "How to test examples and benchmarks?", "a": "Use cargo test for tests, cargo bench (with criterion) for benchmarks, and examples/ for runnable code." },
+      { "q": "What is cargo doc?", "a": "Generates API documentation from crate docs and doc comments." },
+      { "q": "What is a build script (build.rs)?", "a": "A script run before compilation to generate bindings or perform custom build-time tasks." },
+      { "q": "How to pin toolchain versions?", "a": "Use rust-toolchain or rust-toolchain.toml to pin a specific toolchain per repo." },
+      { "q": "Why commit Cargo.lock for apps?", "a": "It ensures reproducible dependency resolution for running applications." },
+      { "q": "How to handle private crates?", "a": "Use alternate registry or private Git repositories and set [package] and .cargo/config accordingly." },
+      { "q": "What is cargo workspaces benefits?", "a": "Shared dependencies, coordinated versioning, and faster local development via single build graph." },
+      { "q": "How to debug build failures?", "a": "Inspect cargo build output, use RUST_BACKTRACE=1, increase verbosity with -v, and check dependency versions." },
+      { "q": "What are common CI steps for Rust projects?", "a": "Install rustup, set toolchain, run cargo build/test/fmt/clippy, run cargo-audit and run benchmarks if applicable." },
+      { "q": "How to reduce binary size?", "a": "Enable strip, LTO, reduce features, use smaller allocators and disable debug symbols for release artifacts." }
+    ]
+  },
+
+  "rust_memory": {
+    "title": "Memory Model & Safety",
+    "summary": "No GC, ownership-driven memory safety, zero-cost abstractions and unsafe for low-level code.",
+    "details": "Rust uses ownership for deterministic memory management without GC. Smart pointer types (Box, Rc, Arc) and stacks/heap allocations are explicit. Unsafe allows operations that the compiler cannot check; keep unsafe code minimal and well-tested. Use tools like MIRI, sanitizers and heavy testing when interacting with unsafe or FFI.",
+    "cheat": "// Memory cheat\n// - Use Box for heap allocation, Rc/Arc for shared ownership\n// - Avoid unnecessary clones; prefer borrowing\n// - Use Vec::with_capacity to avoid reallocations\n// - Use Miri and sanitizers to validate unsafe code\n",
+    "examples": [
+      { "code": "let b = Box::new(42); // heap allocation\nlet mut v = Vec::with_capacity(16); v.push(1);\n" },
+      { "code": "use std::sync::Arc; let shared = Arc::new(data); let c = shared.clone();\n" },
+      { "code": "// unsafe example (minimal)\n// unsafe { ptr::read(...); }\n" }
+    ],
+    "interview": [
+      { "q": "How does Rust manage memory without GC?", "a": "Ownership and deterministic drop (RAII) ensure memory is freed when owners go out of scope." },
+      { "q": "What is Box<T> used for?", "a": "Box allocates T on the heap with a single owner and cheap pointer semantics." },
+      { "q": "Why prefer Vec::with_capacity in hot loops?", "a": "Preallocating avoids repeated reallocations and reduces heap churn." },
+      { "q": "What is Miri?", "a": "An interpreter that checks undefined behavior and validates unsafe operations at runtime for correctness." },
+      { "q": "How to debug memory errors in Rust?", "a": "Use Miri, sanitizers, careful code review of unsafe blocks, and unit tests." },
+      { "q": "How to share data between threads safely?", "a": "Use Arc for sharing and lock with Mutex/RwLock for mutation or design lock-free patterns." },
+      { "q": "What is a use-after-free in Rust terms?", "a": "Unsafe code can introduce dangling pointers leading to use-after-free; safe Rust prevents this via lifetimes." },
+      { "q": "Why avoid large stack allocations?", "a": "Large stack usage can cause stack overflow; prefer heap or streaming where necessary." },
+      { "q": "What is interior mutability and when to use?", "a": "RefCell/Cell allow mutation with runtime checks in single-threaded contexts; Mutex/RwLock for multi-threaded." },
+      { "q": "How to break reference cycles?", "a": "Use Weak references (Rc::downgrade / Arc::downgrade) for back-references to avoid leaks." },
+      { "q": "What does unsafe allow you to do?", "a": "Perform raw pointer manipulation, call unsafe functions, and do manual memory management when required." },
+      { "q": "When to use custom allocators?", "a": "In low-latency or memory-constrained systems you may choose custom allocators to optimize performance." },
+      { "q": "How to measure heap usage?", "a": "Profile in production or use allocators with profiling hooks, and measure memory footprints over time." },
+      { "q": "What are common unsafe pitfalls?", "a": "Breaking aliasing rules, violating invariants, creating dangling pointers, and incorrect FFI handling." },
+      { "q": "How to audit unsafe code?", "a": "Minimize unsafe surface, document invariants, peer review and write thorough tests and fuzzing." },
+      { "q": "How do Box and Rc differ?", "a": "Box is single-owner, Rc is reference-counted for shared ownership (single-threaded Rc, multi-threaded Arc)." },
+      { "q": "What is drop order significance?", "a": "Drop order affects resources cleanup; struct fields drop in declaration order, which matters with interdependent resources." },
+      { "q": "How to avoid copying large data?", "a": "Use references, slices, or Arc to share ownership without copying." },
+      { "q": "What is 'leak' in Rust?", "a": "Intentionally leaking memory with std::mem::forget or Box::leak to keep memory alive for program lifetime." },
+      { "q": "Best practices for unsafe blocks?", "a": "Keep them small, well-documented, wrap unsafe in safe abstractions and validate via tests." }
+    ]
+  },
+
+  "rust_std": {
+    "title": "Standard Library Highlights",
+    "summary": "IO, collections, async primitives, std::sync, std::fs, std::net and common utilities.",
+    "details": "std provides collections, IO, threading, networking and filesystem utilities. Favor iterator combinators, Option/Result helpers, and standard concurrency primitives. Use ecosystem crates for advanced needs (tokio, serde, reqwest). Learn to work with BufRead, Read, Write, and streaming patterns for large data.",
+    "cheat": "// Stdlib cheat\n// - streams: Read/Write, BufRead for buffered IO\n// - collections: Vec, HashMap, BTreeMap, HashSet\n// - threading: std::thread, std::sync::{Mutex,RwLock,Condvar,Arc}\n// - networking: std::net for blocking sockets; tokio for async\n",
+    "examples": [
+      { "code": "use std::io::Read; let mut s = String::new(); std::fs::File::open(\"file.txt\")?.read_to_string(&mut s)?;\n" },
+      { "code": "let sum: i32 = vec![1,2,3].iter().sum();\n" },
+      { "code": "use std::net::TcpListener; let listener = TcpListener::bind(\"127.0.0.1:8080\")?;\n" }
+    ],
+    "interview": [
+      { "q": "What traits form IO ecosystem in std?", "a": "Read, Write, BufRead and Seek form the core streaming IO traits." },
+      { "q": "When to use HashMap vs BTreeMap?", "a": "HashMap for average O(1) lookups; BTreeMap for ordered keys and range queries." },
+      { "q": "How to read a file into a string?", "a": "std::fs::read_to_string(\"path\") returns a Result<String, Error>." },
+      { "q": "What is io::BufRead for?", "a": "Buffered reading for efficient line-based or chunk processing." },
+      { "q": "How to spawn OS threads?", "a": "std::thread::spawn starts a new thread returning a JoinHandle." },
+      { "q": "What is std::sync::mpsc?", "a": "Multi-producer, single-consumer channel in std for message passing." },
+      { "q": "When use Condvar?", "a": "For signaling between threads when waiting on a condition while holding a lock." },
+      { "q": "What is std::time::Duration used for?", "a": "Represent time intervals for sleeping, timeouts and deadlines." },
+      { "q": "How to do TCP networking in std?", "a": "Use std::net::TcpListener and TcpStream for blocking sockets." },
+      { "q": "How to write portable file paths?", "a": "Use std::path::Path and PathBuf rather than manual string concatenation." },
+      { "q": "What is OsString/OsStr for?", "a": "Platform-native string types for filenames and OS-specific text that may not be UTF-8." },
+      { "q": "How to perform subprocesses?", "a": "Use std::process::Command to spawn and interact with child processes." },
+      { "q": "When to use yield/iterators vs collect?", "a": "Use iterators for lazy transforms; collect when you need a concrete container." },
+      { "q": "How to control file permissions?", "a": "Use std::fs::set_permissions and metadata APIs; platform-specific options available." },
+      { "q": "What is std::env for?", "a": "Access env vars, current dir and args; useful for config via env." },
+      { "q": "How to do serialization with std?", "a": "Std doesn't include JSON; use serde ecosystem for robust serialization." },
+      { "q": "How to handle large binary files?", "a": "Stream via Read/Write and process chunks instead of reading into memory fully." },
+      { "q": "Why use iterators chain over loops?", "a": "Iterator chains are concise, composable and often optimized by the compiler." },
+      { "q": "What is std::panic and when it occurs?", "a": "panic! triggers unwinding or abort depending on build; used for unrecoverable conditions." },
+      { "q": "How to format output?", "a": "Use format!, println!, and implement Display for custom types for user-facing strings." }
+    ]
+  },
+
+  "rust_ffi": {
+    "title": "FFI & Interop",
+    "summary": "Calling C from Rust and exposing Rust APIs to C/other languages; safety and ABI concerns.",
+    "details": "FFI requires attention to ABI compatibility, ownership and allocator conventions. Use #[no_mangle] and extern \"C\" for exports, #[repr(C)] for compatible structs, and bindgen to generate bindings. Document who allocates/frees memory across boundaries and validate pointer lifetimes carefully.",
+    "cheat": "// FFI cheat\n// - extern \"C\" and #[no_mangle] to export functions\n// - #[repr(C)] for struct layout\n// - prefer CStr/CString for strings and clearly document ownership\n// - use bindgen for generating Rust bindings to C headers\n",
+    "examples": [
+      { "code": "#[no_mangle]\npub extern \"C\" fn add(a: i32, b: i32) -> i32 { a + b }\n" },
+      { "code": "// calling C: use bindgen to generate safe Rust wrappers for C headers\n" },
+      { "code": "// pass strings safely using CString/CStr across boundary\n" }
+    ],
+    "interview": [
+      { "q": "How do you expose a Rust function to C?", "a": "Use #[no_mangle] pub extern \"C\" fn name(...) to ensure C-compatible ABI and symbol name." },
+      { "q": "Why use #[repr(C)]?", "a": "It ensures predictable struct layout compatible with C for FFI boundaries." },
+      { "q": "How to pass strings over FFI?", "a": "Use CString on Rust side and CStr on Rust side to interoperate with *const c_char, and document who frees memory." },
+      { "q": "What is bindgen?", "a": "A tool to generate Rust bindings from C headers to make calling C code easier and safer." },
+      { "q": "How to handle ownership across FFI?", "a": "Define clear conventions: who allocates and who frees, and provide matching alloc/free functions." },
+      { "q": "Can you call Rust from C++?", "a": "Yes with extern \"C\" bindings; avoid C++ name mangling or use cxx crate for richer interop." },
+      { "q": "What pitfalls exist with FFI and threads?", "a": "Allocators and thread-local state need careful handling; ensure FFI calls respect thread expectations." },
+      { "q": "How to avoid UB with raw pointers?", "a": "Validate pointers, ensure proper alignment and lifetime, and avoid dereferencing invalid pointers." },
+      { "q": "What is unsafe's role in FFI?", "a": "FFI calls require unsafe because the compiler cannot verify cross-language invariants." },
+      { "q": "How to return allocated memory to C caller?", "a": "Provide explicit free functions that C callers can call to release Rust-allocated memory safely." },
+      { "q": "Why avoid passing Rust-managed pointers to C?", "a": "C has no knowledge of Rust's ownership and could free memory incorrectly; use explicit contracts." },
+      { "q": "How to generate bindings for complex APIs?", "a": "Use bindgen, or hand-write safe wrappers around unsafe raw bindings for safer usage." },
+      { "q": "How to debug FFI issues?", "a": "Reproduce small C/Rust examples, use sanitizers, and validate ABI expectations (sizes, alignment)." },
+      { "q": "When to use cbindgen?", "a": "cbindgen generates C headers for Rust libraries to make exposing APIs to C easier." },
+      { "q": "How to pass callback functions across FFI?", "a": "Pass function pointers with extern \"C\" signature and ensure proper context and lifetime." },
+      { "q": "What is no_mangle's effect?", "a": "Prevents Rust from mangling the symbol name so C can link using the expected name." },
+      { "q": "How to ensure threadsafety across FFI boundary?", "a": "Ensure shared data is synchronized and respects Send/Sync requirements of types used across threads." },
+      { "q": "Can you use Rust's allocator from C?", "a": "Yes if you expose allocation/free functions; be careful with allocator compatibility between runtimes." },
+      { "q": "How to handle C callbacks that store pointers?", "a": "Use opaque pointers and document ownership and lifetime; consider using Box to own data on Rust side." },
+      { "q": "Best practices for FFI safety?", "a": "Minimize unsafe code, write thin safe wrappers, document contracts and test FFI surfaces thoroughly." }
+    ]
+  },
+
+  "rust_macros": {
+    "title": "Macros & Code Generation",
+    "summary": "Declarative (macro_rules!) and procedural macros for code generation and DSLs.",
+    "details": "Macros reduce boilerplate: use macro_rules! for pattern-based macros and procedural macros for derive/attribute/function-like transforms. Keep macros focused, document hygiene issues, and prefer functions/traits when possible. Learn token streams, syn/quote crates for proc macros and test generated code thoroughly.",
+    "cheat": "// Macro cheat\n// - macro_rules! for declarative macros\n// - proc-macro crates for derive/attribute macros\n// - use syn/quote to parse and generate token streams\n// - document generated code and avoid surprising captures\n",
+    "examples": [
+      { "code": "// macro_rules! example\nmacro_rules! vec2 { ($a:expr,$b:expr) => { Vec::from([$a,$b]) }; }\nlet v = vec2!(1,2);\n" },
+      { "code": "// derive proc-macro sketch\n// #[proc_macro_derive(MyTrait)] pub fn my_derive(input: TokenStream) -> TokenStream { ... }\n" },
+      { "code": "// use quote! and syn to parse/generate code\n" }
+    ],
+    "interview": [
+      { "q": "When use macro_rules! vs proc macros?", "a": "Use macro_rules! for simple pattern expansions; use proc macros for complex codegen and syntax transforms." },
+      { "q": "What is macro hygiene?", "a": "Hygiene prevents accidental name capture and keeps introduced identifiers scoped correctly." },
+      { "q": "How to debug procedural macros?", "a": "Print generated tokens, use UI tests, and write small examples to examine expansions." },
+      { "q": "Why prefer functions over macros when possible?", "a": "Functions are easier to read, type-checked and don't change syntax shape; macros when you need codegen." },
+      { "q": "What crates help writing proc macros?", "a": "syn for parsing, quote for code generation, and proc-macro2 for stable token streams." },
+      { "q": "How to test macros?", "a": "Add compile-fail and UI tests, and small sample crates using the macros to ensure expected output." },
+      { "q": "Are macros stable across editions?", "a": "Declarative macros are stable; proc macro APIs are stable but generated code may need updates across language changes." },
+      { "q": "How to export macros from a crate?", "a": "Use pub use my_macro; and ensure crate-type = proc-macro for procedural macros." },
+      { "q": "What are function-like macros?", "a": "Proc macro functions that take TokenStream and produce TokenStream (e.g., sql! macros)." },
+      { "q": "How to avoid painful macro error messages?", "a": "Emit helpful compile errors with span info and keep macros small with clear failure cases." },
+      { "q": "Can macros expand to items?", "a": "Yes, macros can produce items like structs, functions or impl blocks when used at item position." },
+      { "q": "What is repetition syntax in macro_rules!?", "a": "Use $( ... ),* or + for repeating patterns capturing variable-length inputs." },
+      { "q": "When to use attribute macros?", "a": "To modify behavior of items (e.g., #[derive(...)] or custom attributes on functions/types)." },
+      { "q": "How to maintain macro ergonomics?", "a": "Design clear syntax, sensible defaults, and provide good documentation and examples." },
+      { "q": "Are macros type-checked?", "a": "Generated code is type-checked after expansion; macros themselves are not type-checked pre-expansion." },
+      { "q": "How to handle spans for errors?", "a": "Use proc_macro::Span to attach precise error spans for better diagnostics." },
+      { "q": "What is the limit of macro complexity?", "a": "Macros can be arbitrarily powerful but keep complexity manageable to avoid maintenance burdens." },
+      { "q": "How to build DSLs with macros?", "a": "Use function-like or attribute macros to parse concise syntax into generated Rust code." },
+      { "q": "How to avoid name collisions from macros?", "a": "Use hygiene and avoid introducing global identifiers; prefer module-scoped helpers." },
+      { "q": "Best practices for publishing macro crates?", "a": "Provide thorough examples, clear docs, and consider separating runtime helper crate from proc-macro crate." }
+    ]
+  },
+
+  "rust_testing": {
+    "title": "Testing, Fuzzing & Benchmarks",
+    "summary": "Unit tests, integration tests, property testing, fuzzing and harnesses for robust code.",
+    "details": "Use cargo test for unit and integration tests, organize tests under tests/ for integration. Use proptest/quickcheck for property testing, cargo-fuzz for fuzzing, and criterion for benchmarks. Run sanitizers and Miri where appropriate and integrate tests into CI.",
+    "cheat": "// Testing cheat\n// - unit tests: #[cfg(test)] mod tests { #[test] fn t() { ... } }\n// - integration: tests/ directory\n// - fuzz: cargo install cargo-fuzz; cargo fuzz run fuzz_target\n// - benchmarks: criterion crate for robust microbenchmarks\n",
+    "examples": [
+      { "code": "#[test]\nfn it_works() { assert_eq!(2+2,4); }\n" },
+      { "code": "// proptest example (sketch)\n// proptest! { #[test] fn prop(a in 0u32..1000) { assert!(a + 0 == a); } }\n" },
+      { "code": "// criterion benchmark stub\n// fn bench(c: &mut Criterion) { c.bench_function(\"sum\", |b| b.iter(|| sum(black_box(&data)))); }\n" }
+    ],
+    "interview": [
+      { "q": "How to structure tests in Rust?", "a": "Unit tests inside modules, integration tests under tests/ and doctests in doc comments." },
+      { "q": "What is cargo-fuzz?", "a": "A cargo-integrated harness for fuzz testing using libFuzzer to find crashes and UB." },
+      { "q": "When to use proptest/quickcheck?", "a": "For property-based testing generating many randomized inputs to validate invariants." },
+      { "q": "What is Criterion used for?", "a": "A benchmarking crate with statistical analysis for robust microbenchmarks." },
+      { "q": "How to run a single test?", "a": "cargo test <test_name> or use filters with regex match." },
+      { "q": "What is integration test advantage?", "a": "Tests the public API across crates and simulates real usage scenarios." },
+      { "q": "How to test async code?", "a": "Use #[tokio::test] or appropriate runtime test harness to run async tests." },
+      { "q": "How to use Miri in tests?", "a": "Run with cargo miri test to detect undefined behavior and invalid memory usage." },
+      { "q": "How to mock external services?", "a": "Use local test servers, dependency injection or crates like mockito for HTTP mocks." },
+      { "q": "What is fuzzing goal?", "a": "Find crashes, panics, or UB by feeding randomized inputs to functions." },
+      { "q": "How to measure test coverage?", "a": "Use cargo-tarpaulin or LLVM-based coverage tools to measure lines exercised by tests." },
+      { "q": "How to prevent flaky tests?", "a": "Avoid timing dependencies, use deterministic inputs and isolate tests from global state." },
+      { "q": "How to test concurrency issues?", "a": "Use stress tests, run with ThreadSanitizer equivalents and careful synchronization in tests." },
+      { "q": "What is test harness output?", "a": "cargo test outputs summary of passed/failed tests and test names for debugging failures." },
+      { "q": "How to run benchmarks in CI?", "a": "Use stable baselines, run in controlled environments and compare results allowing for noise." },
+      { "q": "When to write property tests?", "a": "When invariants are simple to state but complex to exercise with example tests." },
+      { "q": "How to include heavy tests in CI?", "a": "Mark as slow and run in nightly or scheduled pipelines to avoid blocking PR feedback." },
+      { "q": "How to assert panics in tests?", "a": "Use #[should_panic] or std::panic::catch_unwind to inspect panic details." },
+      { "q": "How to test FFI boundaries?", "a": "Write integration tests that exercise FFI interfaces and check allocation/ownership semantics." },
+      { "q": "Best practices for test data?", "a": "Keep fixtures small, deterministic and version-controlled; avoid embedding secrets in tests." }
+    ]
+  }
+
+}

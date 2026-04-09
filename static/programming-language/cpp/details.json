@@ -1,0 +1,480 @@
+{
+  "interview_index": [
+    { "key": "cpp_intro", "title": "C++ Overview" },
+    { "key": "cpp_syntax", "title": "Basic Syntax & Types" },
+    { "key": "cpp_oop", "title": "Classes & OOP" },
+    { "key": "cpp_memory", "title": "Memory Management & Smart Pointers" },
+    { "key": "cpp_templates", "title": "Templates & Generics" },
+    { "key": "cpp_stl", "title": "STL & Common Containers" },
+    { "key": "cpp_concurrency", "title": "Concurrency & Threading" },
+    { "key": "cpp_build", "title": "Build Systems & Tooling" },
+    { "key": "cpp_lambda", "title": "Lambdas & Functional Utilities" },
+    { "key": "cpp_rvalue", "title": "Move Semantics & Rvalue References" },
+    { "key": "cpp_modern", "title": "Modern C++ Features (C++11..C++20)" },
+    { "key": "cpp_testing", "title": "Testing & Quality" },
+    { "key": "cpp_networking", "title": "Networking & Sockets" },
+    { "key": "cpp_patterns", "title": "Design Patterns & Idioms" }
+  ],
+
+  "cpp_intro": {
+    "title": "C++ Overview",
+    "summary": "History, toolchain, standards (C++11/14/17/20), compilation model and basic workflow.",
+    "details": "C++ is a performance-oriented systems language suitable for low-level systems, games, and high-performance applications. Learn how the language evolved, the compilation model (preprocess → compile → link), and the typical developer toolchain (g++, clang, MSVC, CMake). Focus on modern idioms (RAII, smart pointers, range-based algorithms) rather than old C-style patterns.",
+    "cheat": "// C++ Overview\n// Standards: C++11, C++14, C++17, C++20\n// Compile: g++ -std=c++17 main.cpp -O2 -Wall -o app\n// Build: prefer CMake for projects (out-of-source builds)\n\n#include <iostream>\nint main() {\n    // entry point\n    std::cout << \"Hello C++\" << std::endl;\n    return 0;\n}\n",
+    "examples": [
+      { "code": "#include <iostream>\nint main(){ std::cout << \"Hello C++\" << std::endl; return 0; }" },
+      { "code": "// Compile & run\n// g++ -std=c++17 -O2 main.cpp -o app\n// ./app" }
+    ],
+    "interview": [
+      { "q": "What is C++ and how did it evolve?", "a": "C++ is a general-purpose programming language that evolved from C by adding OOP, templates, and a richer standard library; it has evolved through standardized revisions (C++98,11,14,17,20,23)." },
+      { "q": "How does C++ compilation model work?", "a": "C++ compilation is a multi-step process: preprocessing, compilation to object files, and linking of object files into an executable; headers provide declarations and .cpp files contain definitions." },
+      { "q": "What are common toolchains for C++ development?", "a": "Typical toolchains include GCC (g++), Clang/LLVM, and MSVC on Windows; CMake is commonly used for build orchestration." },
+      { "q": "What does -O2 and -g flags do?", "a": "-O2 enables optimization level 2 for speed; -g includes debug information for debuggers like gdb." },
+      { "q": "What is undefined behavior?", "a": "Undefined behavior is program behavior that the standard does not define, leading to unpredictable results; examples include out-of-bounds access and use-after-free." },
+      { "q": "Why is RAII important in C++?", "a": "RAII ties resource lifetime to object lifetime, ensuring resources are released in destructors, reducing leaks and improving exception safety." },
+      { "q": "What are headers and include guards?", "a": "Headers declare interfaces; include guards (#ifndef/#define) or #pragma once prevent double inclusion." },
+      { "q": "What changed in C++11?", "a": "C++11 introduced move semantics, auto, lambda expressions, range-based for, smart pointers, and many other features." },
+      { "q": "When to use C++ over higher-level languages?", "a": "Use C++ for performance-critical systems, low-level control, systems programming, or when fine-grained resource control is required." },
+      { "q": "What is the Standard Template Library (STL)?", "a": "STL provides containers, algorithms, iterators, and utilities that enable generic programming with good performance." },
+      { "q": "What are translation units?", "a": "A translation unit is a source file after preprocessing; each .cpp and included headers form a translation unit compiled into an object file." },
+      { "q": "How does linking work?", "a": "Linker resolves symbol references between object files and libraries, producing an executable or library; unresolved symbols cause link errors." },
+      { "q": "What are ABI and name mangling?", "a": "ABI is the binary interface for function calling. C++ compilers use name mangling to encode function signatures; extern \"C\" disables mangling for C linkage." },
+      { "q": "How to manage third-party dependencies?", "a": "Use package managers (vcpkg, Conan), submodules, or fetch content in CMake; prefer reproducible builds." },
+      { "q": "What is inline and when to use it?", "a": "inline suggests compiler to inline code and allows function definitions in headers without multiple-definition errors; modern compilers ignore explicit inline heuristics." },
+      { "q": "What is the One Definition Rule (ODR)?", "a": "ODR requires that certain entities have a single definition across the program; violating it leads to undefined behavior." },
+      { "q": "How to debug C++ programs?", "a": "Use gdb/lldb, compile with -g, run sanitizers (ASan, UBSan), add logging, and use core dumps for post-mortem analysis." },
+      { "q": "What are C++11/14/17/20 features to learn next?", "a": "Focus on move semantics, smart pointers, lambdas, std::thread, std::optional, std::filesystem, constexpr, and concepts in C++20." },
+      { "q": "How to write portable C++?", "a": "Avoid platform-specific APIs, use standard library where possible, conditionally compile platform code, and test on target platforms." },
+      { "q": "Best practices for C++ code quality?", "a": "Enable warnings (-Wall -Wextra), use static analysis (clang-tidy), write unit tests, use RAII, prefer smart pointers, and keep functions small and testable." }
+    ]
+  },
+
+  "cpp_syntax": {
+    "title": "Basic Syntax & Types",
+    "summary": "Primitives, auto, type inference, references, pointers, nullptr, enums and initialization styles.",
+    "details": "Understand core types, initialization forms, value categories, and how to use references and pointers safely. Learn modern patterns: uniform initialization, scoped enums, and prefer 'auto' when the type is obvious. Master const-correctness and when to use move vs copy.",
+    "cheat": "// Types & Initialization\n// Prefer brace-init to avoid narrowing: int x{0};\n// Use auto for local type deduction\n\n#include <string>\n\nint x{10};\nauto s = std::string(\"hi\");\nint &r = x; // reference\nint *p = &x; // pointer\n\n// nullptr vs 0\nint *n = nullptr;\n",
+    "examples": [
+      { "code": "int x{10}; double d = 3.14; auto s = std::string(\"hi\"); int &r = x; int *p = &x;" },
+      { "code": "// enum class\nenum class Color { Red, Green, Blue };\nColor c = Color::Red;\n\n// auto and structured binding\nstd::pair<int,int> p{1,2}; auto [a,b] = p;" }
+    ],
+    "interview": [
+      { "q": "What is the difference between int and auto?", "a": "int is an explicit type; auto asks the compiler to deduce the type from the initializer." },
+      { "q": "What is brace initialization and why prefer it?", "a": "Brace initialization (T x{...}) prevents narrowing conversions and unifies initialization syntax." },
+      { "q": "Difference between = and {} initialization?", "a": "{} forbids narrowing and prefers initializer_list; = allows implicit conversions." },
+      { "q": "What is a reference and how is it different from a pointer?", "a": "A reference is an alias that cannot be reseated and must be initialized; a pointer can be null and reseated." },
+      { "q": "What is nullptr?", "a": "nullptr is the null pointer literal of type std::nullptr_t, safer than 0 or NULL." },
+      { "q": "When to use enum class over enum?", "a": "enum class provides scoped, strongly typed enumerations, avoiding implicit conversions." },
+      { "q": "What are type aliases?", "a": "Using using Name = Type; defines an alias. typedef is older syntax." },
+      { "q": "Explain const correctness.", "a": "Mark values that shouldn't change with const to enable safer code and help the compiler optimize." },
+      { "q": "What is constexpr?", "a": "constexpr marks functions/variables evaluable at compile-time when given constant expressions." },
+      { "q": "What is volatile and when to use it?", "a": "volatile prevents certain compiler optimizations for memory that may change externally; rarely used, mostly for hardware/embedded." },
+      { "q": "Explain lvalues and rvalues.", "a": "Lvalues have identities/addressable; rvalues are temporaries. Rvalue references enable move semantics." },
+      { "q": "What is function overloading?", "a": "Multiple functions with same name but different parameter lists; overload resolution picks the best match." },
+      { "q": "What is default argument?", "a": "Function parameters can have defaults provided in the declaration, used when caller omits them." },
+      { "q": "Explain const_cast, static_cast, reinterpret_cast, dynamic_cast.", "a": "They are C++ casts with different guarantees: const_cast removes const, static_cast for safe conversions, reinterpret_cast for low-level, dynamic_cast for polymorphic downcasts." },
+      { "q": "What is a namespace?", "a": "Namespaces group identifiers to avoid name collisions; use namespace qualifiers or using directives carefully." },
+      { "q": "How to pass large objects to functions?", "a": "Pass by const reference or by value with move semantics; avoid unnecessary copies." },
+      { "q": "What is auto&& in templates?", "a": "auto&& is a universal/forwarding reference that forward-captures lvalues and rvalues appropriately." },
+      { "q": "Explain aggregate initialization.", "a": "Aggregates (structs with public members) can be initialized with brace lists without constructors." },
+      { "q": "What are raw string literals?", "a": "R\"(text)\" allow strings with quotes and backslashes without escaping." },
+      { "q": "How to write readable C++ code?", "a": "Use clear naming, small functions, const correctness, prefer standard algorithms, and document invariants." }
+    ]
+  },
+
+  "cpp_oop": {
+    "title": "Classes & OOP",
+    "summary": "Constructors, destructors, copy/move semantics, encapsulation, virtual functions and polymorphism.",
+    "details": "Design classes with clear ownership and lifetime rules. Prefer composition over inheritance, keep interfaces small, and handle resource management via RAII. Understand copy/move semantics to avoid unexpected copies and ensure exception safety.",
+    "cheat": "// Classes & RAII\n// Define ctor/dtor for resource management\n// Rule of 0/3/5: implement copy/move if you manage resources\n\nstruct FileHandle {\n    FILE *f;\n    FileHandle(const char* path){ f = fopen(path,\"r\"); }\n    ~FileHandle(){ if(f) fclose(f); }\n    // forbid copying\n    FileHandle(const FileHandle&) = delete;\n    FileHandle& operator=(const FileHandle&) = delete;\n    // allow move\n    FileHandle(FileHandle&& o) noexcept : f(o.f){ o.f = nullptr; }\n};\n",
+    "examples": [
+      { "code": "struct Vec{ int x,y; Vec(int a,int b):x(a),y(b){} };\nclass Base{ public: virtual void f(){}; virtual ~Base(){} };" },
+      { "code": "// RAII example\n#include <fstream>\nstruct Logger { std::ofstream f; Logger(){ f.open(\"log.txt\"); } ~Logger(){ f.close(); } };" }
+    ],
+    "interview": [
+      { "q": "What is encapsulation?", "a": "Encapsulation hides implementation details behind an interface, typically via private members and public methods." },
+      { "q": "Explain constructors and destructors.", "a": "Constructors initialize objects; destructors clean up. They manage resources via RAII." },
+      { "q": "What is the Rule of Three/Five/Zero?", "a": "If a class manages resources, implement copy constructor, copy assignment, and destructor (Rule of Three); with move semantics, consider move ctor/assign (Rule of Five); prefer no manual resource management (Rule of Zero)." },
+      { "q": "What is polymorphism?", "a": "Polymorphism allows treating derived types via base pointers/references using virtual functions for dynamic dispatch." },
+      { "q": "Why virtual destructor is needed?", "a": "If a base class is deleted through a base pointer, a virtual destructor ensures derived destructors run and resources are freed." },
+      { "q": "What is pure virtual function?", "a": "A pure virtual function (=0) declares an interface that derived classes must implement, making the base abstract." },
+      { "q": "Explain multiple inheritance issues.", "a": "Multiple inheritance can cause ambiguity and the diamond problem; virtual inheritance and careful design mitigate issues." },
+      { "q": "What is object slicing?", "a": "Object slicing occurs when a derived object is copied into a base object by value, losing derived parts; use pointers/references to avoid it." },
+      { "q": "How to design copy/move semantics?", "a": "Decide ownership model: default copy if trivially copyable, delete copy if exclusive ownership, implement move for transfer semantics." },
+      { "q": "What is pImpl idiom?", "a": "pImpl hides implementation details by storing a pointer to an impl type, reducing header dependencies and improving build times." },
+      { "q": "What is CRTP?", "a": "Curiously Recurring Template Pattern lets base templates use derived class types for static polymorphism and code reuse." },
+      { "q": "Explain dynamic_cast usage.", "a": "dynamic_cast safely downcasts polymorphic pointers/references, returning nullptr on failure for pointers or throwing for references." },
+      { "q": "What are access specifiers?", "a": "public, protected, private control visibility of members; private for encapsulation, protected for derived access." },
+      { "q": "How to implement interface classes?", "a": "Define abstract base classes with pure virtual functions and virtual destructor for interfaces." },
+      { "q": "What is composition over inheritance?", "a": "Prefer composing objects with member objects rather than inheritance to reduce coupling and increase reuse." },
+      { "q": "How to make classes exception-safe?", "a": "Use RAII, strong exception safety in operations, and avoid resource leaks by handling allocations and throwing carefully." },
+      { "q": "What is the difference between aggregation and composition?", "a": "Aggregation denotes a 'has-a' relationship with independent lifetimes; composition implies ownership and tied lifetimes." },
+      { "q": "How to hide implementation details in headers?", "a": "Use forward declarations, pImpl, and move as much as possible to .cpp files to reduce compile-time dependencies." },
+      { "q": "Explain method overriding vs overloading.", "a": "Overriding redefines a virtual function in a derived class; overloading defines functions with the same name but different signatures." },
+      { "q": "Best practices for classes?", "a": "Keep small, single-responsibility classes, prefer explicit constructors, delete unwanted operations, and provide clear invariants." }
+    ]
+  },
+
+  "cpp_memory": {
+    "title": "Memory Management & Smart Pointers",
+    "summary": "new/delete, smart pointers (unique_ptr, shared_ptr), ownership models and avoiding leaks & dangling pointers.",
+    "details": "Memory safety is critical: prefer smart pointers (unique_ptr, shared_ptr) and RAII. Understand ownership models, how to break cycles with weak_ptr, and when to use custom allocators for performance-critical code.",
+    "cheat": "// Smart pointers\n// Use unique_ptr for exclusive ownership, shared_ptr for shared ownership\n// Avoid raw owning pointers; prefer make_unique/make_shared\n\n#include <memory>\n\nauto up = std::make_unique<int>(42); // unique ownership\nstd::shared_ptr<int> sp = std::make_shared<int>(42); // shared ownership\n\n// weak_ptr to break cycles\nstd::weak_ptr<int> wp = sp;\n",
+    "examples": [
+      { "code": "auto up = std::make_unique<MyClass>(args);\nauto sp = std::make_shared<MyClass>(args);" },
+      { "code": "// weak_ptr example\nstruct Node{ std::shared_ptr<Node> next; std::weak_ptr<Node> prev; };" }
+    ],
+    "interview": [
+      { "q": "When to use unique_ptr?", "a": "Use unique_ptr for exclusive ownership of a resource; it is lightweight and non-shared." },
+      { "q": "When to use shared_ptr?", "a": "Use shared_ptr when multiple owners need shared lifetime and you accept the overhead of reference counting." },
+      { "q": "How to avoid cyclic references with shared_ptr?", "a": "Use weak_ptr for back-references so cycles are broken and memory can be reclaimed." },
+      { "q": "When to use raw pointers?", "a": "Use raw pointers for non-owning observers or to interoperate with APIs; avoid raw owning pointers." },
+      { "q": "What is a memory leak?", "a": "A memory leak occurs when allocated memory is not reclaimed; RAII and smart pointers help prevent leaks." },
+      { "q": "What is dangling pointer?", "a": "A dangling pointer points to memory that was freed; accessing it is undefined behavior." },
+      { "q": "How to use new/delete safely?", "a": "Prefer smart pointers; when using new/delete manually ensure matching deletes and use RAII wrappers." },
+      { "q": "Explain placement new.", "a": "Placement new constructs an object in a pre-allocated buffer; destructor must be called explicitly." },
+      { "q": "What is allocator concept?", "a": "Allocators abstract memory allocation strategy for containers; std::allocator is default." },
+      { "q": "How to manage arrays of objects?", "a": "Prefer std::vector; if using new[], use delete[] and prefer smart wrappers instead." },
+      { "q": "Why prefer make_unique/make_shared?", "a": "make_unique/make_shared are safer, exception-safe factory functions that avoid manual new and improve efficiency." },
+      { "q": "What is move-only type?", "a": "A type that can be moved but not copied, e.g., unique_ptr; useful for exclusive ownership." },
+      { "q": "How to debug memory issues in C++?", "a": "Use sanitizers (ASan/UBSan), valgrind, and run under a debugger or use logging and unit tests." },
+      { "q": "Explain memory ownership models.", "a": "Ownership can be unique (single owner), shared (multiple owners), or none (observers); model dictates pointer type." },
+      { "q": "What is smart pointer overhead?", "a": "shared_ptr has atomic reference counting overhead; unique_ptr has minimal overhead compared to raw pointers." },
+      { "q": "What is custom deleter?", "a": "Smart pointers can accept custom deleters to manage resources other than memory (files, sockets)." },
+      { "q": "How to store polymorphic objects?", "a": "Use smart pointers to base class (std::unique_ptr<Base>) to manage dynamic polymorphic objects." },
+      { "q": "What is RAII relation to memory management?", "a": "RAII ensures resources including memory are released in destructors, preventing leaks even on exceptions." },
+      { "q": "How to avoid fragmentation?", "a": "Use pool allocators or container reuse; avoid many small allocations in performance-critical code." },
+      { "q": "What is nullptr_t and why use nullptr?", "a": "nullptr_t is the type of nullptr, clarifying null pointer intent and resolving overloads correctly." }
+    ]
+  },
+
+  "cpp_templates": {
+    "title": "Templates & Generics",
+    "summary": "Function and class templates, template type deduction, SFINAE, concepts (C++20) and common patterns.",
+    "details": "Templates enable compile-time generic programming. Learn to write clean template interfaces, constrain templates with concepts (C++20), and use traits and SFINAE where appropriate. Be mindful of compile-time cost and diagnostic clarity.",
+    "cheat": "// Templates basics + C++20 concepts\n// Generic function, type deduction, constrain with concepts\n\ntemplate<typename T>\nT add(T a, T b){ return a + b; }\n\n// concept (C++20)\n// template<typename T> concept Addable = requires(T a, T b){ a + b; };\n\n// use concepts: template<Addable T> T sum(T a, T b){ return a+b; }\n",
+    "examples": [
+      { "code": "template<typename T> T add(T a, T b){ return a+b; }\n// usage: auto v = add(1,2);" },
+      { "code": "// simple type trait\ntemplate<typename T> struct is_ptr{ static constexpr bool value = false; };\ntemplate<typename T> struct is_ptr<T*> { static constexpr bool value = true; };" }
+    ],
+    "interview": [
+      { "q": "What is a template?", "a": "Templates allow generic programming by defining patterns that the compiler instantiates with concrete types." },
+      { "q": "What is SFINAE?", "a": "Substitution Failure Is Not An Error: template instantiation failures during overload resolution are ignored, enabling conditional overloads." },
+      { "q": "What are template specializations?", "a": "You can specialize templates for specific types to provide custom behavior." },
+      { "q": "What are variadic templates?", "a": "Variadic templates accept any number of template parameters (template<typename... Args>) enabling flexible APIs." },
+      { "q": "What is constexpr with templates?", "a": "constexpr enables compile-time evaluation; used with templates for metaprogramming and constants." },
+      { "q": "What are template argument deduction rules?", "a": "Deduction deduces template parameters from function arguments; reference collapsing and top-level cv-qualifiers affect deduction." },
+      { "q": "What are concepts (C++20)?", "a": "Concepts are constraints on template parameters that improve diagnostics and express intent." },
+      { "q": "How to implement type traits?", "a": "Use std::enable_if, std::conditional, and trait templates to detect or transform types." },
+      { "q": "What is CRTP and where used?", "a": "Curiously Recurring Template Pattern implements static polymorphism and mixins by having a template base take derived class." },
+      { "q": "Difference between function template and function template instantiation?", "a": "Function template is a pattern; instantiation is the concrete function generated by the compiler." },
+      { "q": "What is duck typing in templates?", "a": "Templates accept types that meet required operations (duck typing) without explicit interfaces." },
+      { "q": "How to write generic algorithms?", "a": "Use templates constrained by concepts or SFINAE and rely on iterators and iterator_traits." },
+      { "q": "Why prefer templates over macros?", "a": "Templates are type-safe, scope-aware, and integrated with language features; macros are textual substitutions." },
+      { "q": "What is template metaprogramming?", "a": "Compile-time computation using templates to generate types or values; useful for optimization and DSLs." },
+      { "q": "How to debug templates?", "a": "Simplify code, use explicit template arguments, and read compiler errors carefully; modern compilers provide improved diagnostics." },
+      { "q": "What is partial specialization?", "a": "Partial specialization customizes templates for a subset of parameter patterns, commonly used for class templates." },
+      { "q": "What is explicit template instantiation?", "a": "You can instantiate templates explicitly to move instantiation to a specific translation unit to reduce compile times." },
+      { "q": "How to avoid code bloat with templates?", "a": "Limit instantiations, use type erasure when appropriate, and prefer non-template helpers for common code." },
+      { "q": "What is perfect forwarding?", "a": "Perfect forwarding preserves value category using forwarding references (T&& with template) and std::forward." },
+      { "q": "When to use templates vs polymorphism?", "a": "Use templates for compile-time genericity and performance; use runtime polymorphism when types are determined at runtime." }
+    ]
+  },
+
+  "cpp_stl": {
+    "title": "STL & Common Containers",
+    "summary": "Vectors, strings, maps, sets, algorithms, iterators and best practices for choosing containers and algorithms.",
+    "details": "STL is a powerful toolbox: learn container characteristics (complexity, iterator invalidation), common algorithms, and how to combine them with lambdas and ranges. Prefer algorithms over hand-written loops for clarity and correctness.",
+    "cheat": "// Common containers & algorithms\n// Prefer std::vector for dynamic arrays; use algorithms from <algorithm>\n\n#include <vector>\n#include <algorithm>\n\nstd::vector<int> v{3,1,2};\nstd::sort(v.begin(), v.end());\nfor(auto &x : v) std::cout << x << ' ';\n\n// use emplace_back to construct in-place\nv.emplace_back(5);\n",
+    "examples": [
+      { "code": "std::vector<int> v{3,1,2}; std::sort(v.begin(), v.end()); for(auto &x: v) std::cout<<x<<\" \";" },
+      { "code": "// erase-remove idiom\nv.erase(std::remove(v.begin(), v.end(), 1), v.end());" }
+    ],
+    "interview": [
+      { "q": "When to use std::vector vs std::list?", "a": "Vector is generally better due to cache locality; list useful for constant-time insert/remove at arbitrary positions with iterators." },
+      { "q": "What is iterator invalidation?", "a": "Certain container operations (e.g., vector reallocation) invalidate iterators and references; rules vary by container." },
+      { "q": "How to use std::algorithm effectively?", "a": "Prefer algorithms to loops for clarity and potential optimization; use iterators and lambda predicates." },
+      { "q": "What is emplace_back vs push_back?", "a": "emplace_back constructs in-place without copying/moving when given constructor args; push_back copies or moves an existing object." },
+      { "q": "When to use unordered_map vs map?", "a": "unordered_map offers average O(1) lookup; map is ordered with O(log n) lookup and uses less memory in some cases." },
+      { "q": "What are spans (C++20)?", "a": "std::span is a non-owning view over contiguous sequences, useful for passing arrays and subranges." },
+      { "q": "How to sort custom objects?", "a": "Provide operator< or pass a comparison lambda to std::sort." },
+      { "q": "What are algorithms that modify containers in place?", "a": "std::remove is a shifting algorithm; use erase-remove idiom to actually remove elements from containers." },
+      { "q": "What is stable_sort?", "a": "stable_sort preserves relative order of equivalent elements while sorting; may be slower but stable." },
+      { "q": "How to iterate efficiently?", "a": "Use range-based for, iterators, or algorithms; avoid repeated container.size() checks in loops where possible." },
+      { "q": "What is std::move_iterator?", "a": "An iterator adapter that moves elements when dereferenced, useful for move semantics in algorithms." },
+      { "q": "How to choose container for concurrency?", "a": "Choose containers and synchronization strategies carefully; many STL containers are not thread-safe for concurrent writes." },
+      { "q": "What are adaptors like std::stack and std::queue?", "a": "Container adaptors provide specific interfaces built on underlying containers (deque, vector, list)." },
+      { "q": "How to reserve capacity for performance?", "a": "Call reserve for vectors/strings to avoid reallocations when size known in advance." },
+      { "q": "What are input/output iterators?", "a": "Iterator categories define capabilities: input, output, forward, bidirectional, and random-access iterators." },
+      { "q": "When to use string_view?", "a": "std::string_view is a non-owning view of a string, efficient for read-only operations without copying." },
+      { "q": "How to avoid copying containers?", "a": "Use move semantics, references, or pass by const reference; use emplace and in-place construction." },
+      { "q": "What is the erase-remove idiom?", "a": "Use container.erase(std::remove(container.begin(), container.end(), value), container.end()) to remove elements." },
+      { "q": "What are parallel algorithms (C++17/20)?", "a": "Standard algorithms accept execution policies (std::execution) enabling parallel execution where supported." },
+      { "q": "How to profile container-heavy code?", "a": "Measure hotspots, reduce allocations, batch operations, prefer contiguous containers, and consider custom allocators." }
+    ]
+  },
+
+  "cpp_concurrency": {
+    "title": "Concurrency & Threading",
+    "summary": "std::thread, mutexes, atomics, futures, and high-level concurrency patterns; data races and synchronization primitives.",
+    "details": "Concurrency in C++ requires care: understand threading primitives, memory models, atomics, and synchronization. Prefer higher-level abstractions (thread pools, async) and test with sanitizers like TSan.",
+    "cheat": "// Threads & sync primitives\n// Use std::thread / std::async for tasks\n// Protect shared data with mutex or use atomics\n\n#include <thread>\n#include <mutex>\n\nstd::mutex mu;\nint counter = 0;\nvoid worker(){\n  std::lock_guard<std::mutex> lk(mu);\n  ++counter;\n}\n\nstd::thread t(worker); t.join();\n",
+    "examples": [
+      { "code": "#include <thread>\n#include <vector>\nvoid work(int i){ /* ... */ }\nstd::vector<std::thread> ts;\nfor(int i=0;i<4;++i) ts.emplace_back(work,i);\nfor(auto &t:ts) t.join();" },
+      { "code": "// atomic example\n#include <atomic>\nstd::atomic<int> cnt{0}; cnt.fetch_add(1, std::memory_order_relaxed);" }
+    ],
+    "interview": [
+      { "q": "What is a thread in C++?", "a": "A thread represents a sequence of executing instructions; std::thread creates and manages threads." },
+      { "q": "What is a data race?", "a": "A data race occurs when two threads access same memory concurrently and at least one is a write without synchronization." },
+      { "q": "How to avoid data races?", "a": "Use mutexes, locks, atomics, or design lock-free algorithms to synchronize access." },
+      { "q": "What is std::mutex and lock_guard?", "a": "std::mutex provides mutual exclusion; std::lock_guard manages lock lifetime to prevent leaks." },
+      { "q": "What are atomics?", "a": "std::atomic types provide atomic operations without locks, useful for simple synchronization and lock-free patterns." },
+      { "q": "What is deadlock and how to prevent it?", "a": "Deadlock is circular waiting for locks; prevent by lock ordering, lock hierarchies, or using std::lock." },
+      { "q": "What is std::future and std::promise?", "a": "std::promise provides a value to a std::future which retrieves it, enabling communication between threads." },
+      { "q": "What is std::async?", "a": "std::async runs a task asynchronously and returns a std::future for the result; policy controls launch behavior." },
+      { "q": "What is condition_variable used for?", "a": "std::condition_variable allows threads to wait for events or conditions with notifications from other threads." },
+      { "q": "What is lock-free programming?", "a": "Lock-free code uses atomic operations to avoid mutexes, improving performance but harder to reason about." },
+      { "q": "How to design thread-safe classes?", "a": "Synchronize mutable shared state, minimize locking scope, document thread-safety guarantees, and use immutable data when possible." },
+      { "q": "What is memory ordering in atomics?", "a": "Memory orders (relaxed, acquire, release, seq_cst) define visibility and ordering guarantees for atomic operations." },
+      { "q": "When to use std::shared_mutex?", "a": "Use shared_mutex to allow concurrent read access and exclusive write access for readers-writer patterns." },
+      { "q": "What is a race condition?", "a": "A race condition occurs when behavior depends on unpredictable scheduling, typically due to unsynchronized access." },
+      { "q": "How to debug concurrency issues?", "a": "Use thread sanitizer (TSan), add logging, reproduce with stress tests, and analyze synchronization logic." },
+      { "q": "What are thread pools and why use them?", "a": "Thread pools reuse a fixed set of threads to execute tasks, reducing overhead of thread creation." },
+      { "q": "What is false sharing?", "a": "False sharing is when unrelated variables on same cache line are modified by different threads, causing performance degradation." },
+      { "q": "How to stop a thread safely?", "a": "Use cooperative cancellation with atomic flags, std::stop_token (C++20), or joinable signaling rather than forceful termination." },
+      { "q": "What is a futures-based pipeline?", "a": "A pipeline composes asynchronous tasks returning futures, chaining results and enabling concurrency with clearer flow." },
+      { "q": "Best practices for concurrency?", "a": "Minimize shared mutable state, prefer immutable data, keep critical sections small, and profile for contention." }
+    ]
+  },
+
+  "cpp_build": {
+    "title": "Build Systems & Tooling",
+    "summary": "Compiler flags, linkers, CMake basics, debugging, sanitizers, and unit testing frameworks.",
+    "details": "Understand compiler flags, how to structure projects with CMake, and use sanitizers and static analysis to catch bugs early. Learn LTO, ccache, and CI integration to scale development.",
+    "cheat": "// Build flags & tooling\n// Warnings + sanitizers during dev: -Wall -Wextra -fsanitize=address,undefined\n// Release: -O2 -march=native\n\n// Example: compile with AddressSanitizer\n// g++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra main.cpp -o app\n\n# CMake minimal\n# cmake_minimum_required(VERSION 3.12)\n# project(App)\n# add_executable(app main.cpp)\n",
+    "examples": [
+      { "code": "g++ -std=c++17 -Wall -Wextra -O2 main.cpp -o app\ncmake -S . -B build && cmake --build build" },
+      { "code": "// CMake snippet\ncmake_minimum_required(VERSION 3.12)\nproject(Example)\nadd_executable(example main.cpp)\n" }
+    ],
+    "interview": [
+      { "q": "What is CMake and why use it?", "a": "CMake is a cross-platform build system generator that produces native build files (Makefiles, Visual Studio, etc.), simplifying multi-platform builds." },
+      { "q": "What are typical compiler warning flags?", "a": "Use -Wall -Wextra and consider -Werror to treat warnings as errors; add targeted warnings for stricter checks." },
+      { "q": "How to enable sanitizers?", "a": "Compile with -fsanitize=address, -fsanitize=undefined and link accordingly; use -g for better diagnostics." },
+      { "q": "What is incremental build?", "a": "Incremental build recompiles only changed sources, speeded by correct dependency tracking and out-of-source builds." },
+      { "q": "How to speed up C++ builds?", "a": "Use precompiled headers, unity builds, ccache, and reduce header dependencies via pImpl and forward declarations." },
+      { "q": "What is LTO?", "a": "Link Time Optimization performs optimizations at link stage across translation units for better performance." },
+      { "q": "How to manage build configurations (Debug/Release)?", "a": "Use CMake build types or multi-config generators and set flags for optimization, debug info, and sanitizers per config." },
+      { "q": "What is symbol visibility and why control it?", "a": "Control exported symbols to reduce binary size and minimize ODR issues; use visibility attributes or export macros." },
+      { "q": "How to produce reproducible builds?", "a": "Stampless builds, fixed timestamps, consistent build environment, and deterministic tool versions improve reproducibility." },
+      { "q": "What are static vs dynamic libraries?", "a": "Static libraries (.a/.lib) are linked into executables; dynamic libraries (.so/.dll) are linked at runtime enabling smaller exes and shared updates." },
+      { "q": "How to debug link errors?", "a": "Check undefined references, ensure correct library order, verify symbol mangling and linkage (extern \"C\"), and inspect object files." },
+      { "q": "What is continuous integration (CI) for C++?", "a": "CI automates builds, tests, and analysis across platforms on changes to detect regressions early." },
+      { "q": "How to integrate unit tests?", "a": "Use frameworks like GoogleTest, Catch2, and run tests in CI with sanitizers and coverage reports." },
+      { "q": "What is code coverage?", "a": "Code coverage measures which code paths tests exercise, guiding additional test creation." },
+      { "q": "How to use static analyzers?", "a": "Tools like clang-tidy and cppcheck catch style issues, portability, and potential bugs; integrate into CI." },
+      { "q": "Why build in debug with optimizations sometimes?", "a": "Sometimes optimized debug builds (-O1 -g) reproduce bugs that only appear under optimization." },
+      { "q": "What is a build matrix in CI?", "a": "A build matrix runs combinations of compilers, OS, and configurations to ensure broad compatibility." },
+      { "q": "How to reduce binary size?", "a": "Strip symbols, reduce inlining where unnecessary, use LTO, and remove unused code and RTTI if safe." },
+      { "q": "What is cross-compilation?", "a": "Cross-compilation builds binaries for a different target platform than the host; set appropriate toolchains and sysroots." },
+      { "q": "Best practices for build scripts?", "a": "Keep scripts idempotent, avoid environment assumptions, document dependencies, and automate checks in CI." }
+    ]
+  },
+
+  "cpp_lambda": {
+    "title": "Lambdas & Functional Utilities",
+    "summary": "Lambda syntax, capture modes, std::function, and using functional style with algorithms and ranges.",
+    "details": "Lambdas are concise function objects; learn capture-by-value/reference, mutable, generic lambdas, and when to use std::function vs templated callables. Use lambdas to simplify algorithms and callbacks.",
+    "cheat": "// Lambdas: capture by value [=], by ref [&], mutable to modify captured-by-value\n\nauto add = [](int a,int b){ return a + b; };\nstd::vector<int> v{1,2,3};\nstd::for_each(v.begin(), v.end(), [](int &x){ x *= 2; });\n\n// generic lambda (C++14+)\nauto generic = [](auto a, auto b){ return a + b; };\n",
+    "examples": [
+      { "code": "auto sum = [](int a,int b){ return a+b; };\nstd::cout << sum(2,3); // 5" },
+      { "code": "// capture by value\nint x=10; auto f=[x](){ return x+1; };\n// capture by ref\nauto g=[&](){ x+=1; };" }
+    ],
+    "interview": [
+      { "q": "What is a lambda expression?", "a": "A lambda is an anonymous function object with optional captures, parameters, and body, declared with [](...) {...}." },
+      { "q": "What are capture modes [=] and [&]?", "a": "[=] captures local variables by value, [&] captures by reference; can also capture specific variables." },
+      { "q": "What is mutable in lambdas?", "a": "mutable allows modifying captured-by-value variables inside the lambda body." },
+      { "q": "What is a generic lambda?", "a": "Generic lambdas use auto parameter types allowing templates-like behavior for parameter deduction." },
+      { "q": "When to use std::function?", "a": "Use std::function to store type-erased callables, but it has overhead compared to templates or direct callables." },
+      { "q": "How to avoid allocations with lambdas in containers?", "a": "Avoid std::function if possible; use templates or inline lambdas with algorithms to prevent allocations." },
+      { "q": "What is capture-by-move?", "a": "Use [v = std::move(x)] to move a variable into the lambda capture in C++14/C++17 style." },
+      { "q": "How to pass lambdas to threads?", "a": "std::thread accepts callables and captures copy/move semantics apply; be careful with references and lifetimes." },
+      { "q": "What are closures?", "a": "A closure is the function object created by a lambda that holds captured state." },
+      { "q": "How to write constexpr lambdas?", "a": "C++17/20 allow certain lambdas to be constexpr if their body and captures are constexpr-compatible." },
+      { "q": "How to debug lambdas?", "a": "Assign named variables or breakpoints in the lambda, and ensure captured objects are alive when invoked." },
+      { "q": "How do lambdas interact with templates?", "a": "Lambdas are convertible to function objects; template functions can accept generic callables and deduce types." },
+      { "q": "What is the closure type name?", "a": "Closure types are unique compiler-generated types; use auto or std::function if you need to store them." },
+      { "q": "When to use lambda vs named function?", "a": "Use lambda for short local behavior and when capturing local state; use named functions for reuse and clarity." },
+      { "q": "Can lambdas be recursive?", "a": "Yes, using std::function or passing a self-reference via parameters or using Y-combinator patterns." },
+      { "q": "What is capturing this in lambdas?", "a": "Capture this by value [=] or explicitly [this]; in C++17 you can capture *this to copy the object." },
+      { "q": "How to store type-erased callable cheaply?", "a": "Use small-buffer optimization via small function wrappers or templates instead of std::function when performance-critical." },
+      { "q": "What are side effects in lambdas?", "a": "Lambdas may have side effects; be mindful when passing to algorithms that assume pure functions." },
+      { "q": "How to use lambdas with algorithms?", "a": "Pass lambdas as predicates or transformers to std::sort, std::transform, std::for_each, etc., for concise code." },
+      { "q": "Best practices for lambdas?", "a": "Keep lambdas short, avoid heavy captures, prefer explicit captures, and document intent for readability." }
+    ]
+  },
+
+  "cpp_rvalue": {
+    "title": "Move Semantics & Rvalue References",
+    "summary": "Move constructors/assignments, std::move, std::forward, avoiding unnecessary copies and enabling efficient resource transfers.",
+    "details": "Move semantics enable efficient transfers of resources. Learn to implement move constructors/assignments, mark them noexcept where possible, and prefer move-friendly APIs (std::move, emplace). Understand moved-from states and document them.",
+    "cheat": "// Move semantics\n// std::move casts to rvalue to enable move ctor/assign\n\nclass S{\n  std::string s;\npublic:\n  S(std::string v): s(std::move(v)) {}\n  S(S&&) noexcept = default;\n  S& operator=(S&&) noexcept = default;\n};\n\n// use std::forward in forwarding templates\n",
+    "examples": [
+      { "code": "std::string s = \"hello\";\nstd::string t = std::move(s); // s is now moved-from (valid but unspecified)" },
+      { "code": "struct Movable{ std::vector<int> v; Movable(Movable&&)=default; Movable& operator=(Movable&&)=default; };" }
+    ],
+    "interview": [
+      { "q": "What is move semantics?", "a": "Move semantics transfer resources from one object to another without copying, enabled by rvalue references and move constructors/assignments." },
+      { "q": "What does std::move do?", "a": "std::move performs a cast to an rvalue reference, enabling move constructors or move assignments to be selected." },
+      { "q": "What is std::forward?", "a": "std::forward preserves the value category of a forwarding reference for perfect forwarding in templates." },
+      { "q": "When to implement move constructor?", "a": "Implement move constructor when your class owns resources to allow efficient transfer instead of expensive copies." },
+      { "q": "What is an rvalue reference?", "a": "An rvalue reference (T&&) binds to temporaries and allows moving resources from them." },
+      { "q": "What is a forwarding reference?", "a": "A forwarding reference (template T&&) binds to both lvalues and rvalues and forwards them appropriately." },
+      { "q": "How to prevent accidental copies?", "a": "Delete copy constructor/assignment or make them private; prefer move-only semantics when appropriate." },
+      { "q": "What is move assignment operator?", "a": "Move assignment transfers resources from the source and leaves it in a valid but unspecified state." },
+      { "q": "What is noexcept in move operations?", "a": "Declaring move operations noexcept often enables stronger optimizations and usage in containers like vector." },
+      { "q": "How to implement move-and-swap idiom?", "a": "Use swap with a moved temporary to implement assignment that is strongly exception-safe." },
+      { "q": "What is copy elision and RVO?", "a": "Copy elision (including RVO) optimizes away temporary copies; compilers can construct return values in place." },
+      { "q": "When to pass by value vs const ref?", "a": "Passing by value and moving can be efficient for types with cheap moves; otherwise use const reference." },
+      { "q": "How to write perfect forwarding constructors?", "a": "Use template<typename U> X(U&& u) : member(std::forward<U>(u)) {} but beware of overloads/clashes." },
+      { "q": "What is a moved-from object state?", "a": "A moved-from object must be valid and destructible but may be empty or unspecified; document invariants." },
+      { "q": "How do containers use move semantics?", "a": "Containers move elements during reallocation or when using std::move iterators to avoid copies." },
+      { "q": "How to detect expensive copies?", "a": "Profile and use tools; add logging or delete copy operations to force move usage in tests." },
+      { "q": "What is std::move_if_noexcept?", "a": "Returns std::move if move is noexcept, else returns lvalue to prefer copy when moves may throw." },
+      { "q": "How to implement move for classes with pointers?", "a": "Transfer pointer ownership and set source pointer to nullptr to avoid double delete." },
+      { "q": "What pitfalls exist with move semantics?", "a": "Using moved-from objects incorrectly, forgetting noexcept, or unintentionally selecting copies instead of moves." },
+      { "q": "Best practices for move semantics?", "a": "Provide noexcept move where possible, prefer default move when safe, and document moved-from state." }
+    ]
+  },
+
+  "cpp_modern": {
+    "title": "Modern C++ Features (C++11..C++20)",
+    "summary": "Structured bindings, constexpr, auto, range-based for, smart pointers, and C++17/20 enhancements (std::optional, concepts, ranges).",
+    "details": "Modern C++ adds expressive features that improve correctness and performance. Study structured bindings, constexpr, std::optional/variant, ranges, and concepts. Incrementally adopt features and ensure toolchain compatibility.",
+    "cheat": "// Modern idioms\n// structured bindings, constexpr, inline variables, std::optional, std::variant\n\n#include <optional>\nstd::optional<int> parse(){ return 42; }\nif(auto opt = parse(); opt){ auto v = *opt; }\n\n// constexpr for compile-time\nconstexpr int square(int x){ return x*x; }\n",
+    "examples": [
+      { "code": "if(auto opt = std::optional<int>{42}; opt){ auto v = *opt; std::cout<<v; }" },
+      { "code": "// structured binding\nstd::pair<int,int> p{1,2}; auto [a,b] = p; // a==1, b==2" }
+    ],
+    "interview": [
+      { "q": "What are structured bindings?", "a": "Structured bindings unpack tuple-like objects into individual names: auto [a,b] = pair;" },
+      { "q": "What is std::optional?", "a": "std::optional represents an optional value that may or may not be present, safer than sentinel values." },
+      { "q": "What is std::variant?", "a": "std::variant is a type-safe union to hold one of several types with visitation for access." },
+      { "q": "What are constexpr functions?", "a": "constexpr functions can be evaluated at compile time for constant expressions, enabling compile-time computation." },
+      { "q": "Explain inline variables (C++17).", "a": "Inline variables allow definitions in headers without violating ODR, useful for constants." },
+      { "q": "What are ranges (C++20)?", "a": "Ranges provide composable views and actions for sequences, improving algorithm expressiveness." },
+      { "q": "What are concepts used for?", "a": "Concepts constrain template parameters to express requirements, improving readability and diagnostics." },
+      { "q": "What is coroutines in C++20?", "a": "Coroutines enable suspendable functions for asynchronous programming and generators with language support." },
+      { "q": "What is std::filesystem?", "a": "std::filesystem provides portable APIs for file and path operations standardized in C++17." },
+      { "q": "How to use std::any?", "a": "std::any holds single values of any type with type-safe extraction; good for heterogeneous containers." },
+      { "q": "What is a selection of modern idioms?", "a": "Prefer auto, smart pointers, range-based loops, algorithms, and avoid raw loops for clarity and safety." },
+      { "q": "What are immediate functions (consteval)?", "a": "consteval forces evaluation at compile time; introduced to enforce compile-time computation." },
+      { "q": "Explain fold expressions.", "a": "Fold expressions provide concise syntax for variadic template parameter pack operations." },
+      { "q": "What is std::span used for?", "a": "std::span is a non-owning view of contiguous memory useful for passing array-like data." },
+      { "q": "How do modules improve builds?", "a": "C++ modules (C++20) provide a modern alternative to headers that improve build times and encapsulation." },
+      { "q": "What is designated initializer support?", "a": "C++20 adds designated initializers for aggregate types, improving clarity of initialization." },
+      { "q": "What are calendar/date utilities added?", "a": "std::chrono expanded with calendars, time zones, and formatting utilities in modern C++." },
+      { "q": "How to use consteval vs constexpr?", "a": "consteval forces compile-time execution; constexpr allows compile-time or runtime depending on usage." },
+      { "q": "What is std::jthread?", "a": "std::jthread (C++20) automatically joins on destruction and supports cooperative cancellation with stop tokens." },
+      { "q": "How to adopt modern features safely?", "a": "Introduce features incrementally, write tests, and ensure toolchain supports the desired standard level." }
+    ]
+  },
+
+  "cpp_testing": {
+    "title": "Testing & Quality",
+    "summary": "Unit testing frameworks (GoogleTest, Catch2), CI integration, code coverage, static analysis and sanitizers.",
+    "details": "Build a testing culture: unit tests, integration tests, fuzzing, sanitizers and static analysis. Integrate these checks into CI and run them on every change to catch regressions early.",
+    "cheat": "// Testing best-practices\n// Use ASan/UBSan during dev. Run unit tests in CI. Use clang-tidy for static analysis.\n\n// Example (gtest):\n// TEST(Math, Add){ EXPECT_EQ(add(2,3),5); }\n\n// Run with sanitizer:\n// g++ -fsanitize=address,undefined -g test.cpp -o test && ./test\n",
+    "examples": [
+      { "code": "// GoogleTest snippet\n#include <gtest/gtest.h>\nTEST(Math, Add){ EXPECT_EQ(2+3,5); }\n" },
+      { "code": "// Run with ASan\n// g++ -fsanitize=address -g test.cpp -o test && ./test" }
+    ],
+    "interview": [
+      { "q": "Why write unit tests for C++?", "a": "Unit tests catch regressions, verify behavior, and document expected functionality, making maintenance easier." },
+      { "q": "How to set up GoogleTest?", "a": "Add GoogleTest as a dependency, write TEST cases, and integrate into CMake to run tests during CI." },
+      { "q": "What are sanitizers?", "a": "Sanitizers (ASan, UBSan, MSan) detect memory errors, undefined behavior, and uninitialized memory at runtime." },
+      { "q": "How to use address sanitizer?", "a": "Compile with -fsanitize=address -g and run tests to detect heap/stack buffer overflows and use-after-free." },
+      { "q": "What is test-driven development (TDD)?", "a": "TDD writes tests before code to drive design and ensure correctness from the start." },
+      { "q": "How to measure code coverage?", "a": "Use tools like gcov, lcov, or other coverage tools to measure which parts of code your tests exercise." },
+      { "q": "What is fuzz testing?", "a": "Fuzzing supplies malformed or random input to find crashes, security bugs, and undefined behavior." },
+      { "q": "How to run tests in CI?", "a": "Configure CI pipelines to build, run tests, and fail on test failures; include sanitizers and coverage reporting." },
+      { "q": "What is mock testing?", "a": "Mocks replace dependencies in tests to control behavior and isolate units; frameworks like GoogleMock support mocking." },
+      { "q": "How to test multithreaded code?", "a": "Use stress tests, thread sanitizers, deterministic scheduling tools, and careful synchronization in tests." },
+      { "q": "What is regression testing?", "a": "Regression tests ensure new changes do not reintroduce old bugs by running a test suite on changes." },
+      { "q": "Why use static analysis?", "a": "Static analyzers find potential bugs and style issues early without executing code." },
+      { "q": "How to test performance?", "a": "Benchmark critical paths with profiling tools and microbenchmarks; run performance tests in controlled environments." },
+      { "q": "What is unit vs integration testing?", "a": "Unit tests focus on small components in isolation; integration tests check interactions between components." },
+      { "q": "How to handle flaky tests?", "a": "Investigate root causes, add retries sparingly, and make tests deterministic by controlling environment and timing." },
+      { "q": "What is property-based testing?", "a": "Property-based testing generates inputs to validate general properties of code rather than specific examples." },
+      { "q": "How to write maintainable tests?", "a": "Keep tests small, deterministic, expressive, and avoid tight coupling to implementation details." },
+      { "q": "What are acceptance tests?", "a": "Acceptance tests validate the system against user requirements and scenarios, often end-to-end." },
+      { "q": "How to mock hardware or OS resources?", "a": "Abstract dependencies, use interfaces, and provide test doubles or simulators to avoid coupling to real hardware." },
+      { "q": "Best practices for C++ testing in CI?", "a": "Run unit tests, integration tests, sanitizers, static analysis, and measure coverage in automated pipelines." }
+    ]
+  },
+
+  "cpp_networking": {
+    "title": "Networking & Sockets",
+    "summary": "Basics of sockets, Boost.Asio for async networking, protocols (TCP/UDP) and designing networked applications.",
+    "details": "Networking requires solid understanding of sockets, non-blocking IO, and async patterns. Use well-tested libraries like Boost.Asio for portability and correctness. Pay attention to error handling, backpressure, and security (TLS).",
+    "cheat": "// Networking tips\n// Prefer Boost.Asio for portable async IO. Understand blocking vs non-blocking sockets.\n\n// Pseudo (Boost.Asio):\n// io_context ioc;\n// tcp::acceptor acc(ioc, tcp::endpoint(tcp::v4(), 8080));\n// acc.async_accept(...);\n",
+    "examples": [
+      { "code": "// simple connect (blocking)\n// int sock = socket(...); connect(sock, ...);\n" },
+      { "code": "// Boost.Asio pseudo\n// io_context ioc; tcp::acceptor acc(ioc, tcp::endpoint(tcp::v4(), 8080)); acc.async_accept(...);" }
+    ],
+    "interview": [
+      { "q": "What is a socket?", "a": "A socket is an endpoint for network communication used with protocols like TCP and UDP." },
+      { "q": "Difference between TCP and UDP?", "a": "TCP is connection-oriented and reliable; UDP is connectionless and lightweight without guaranteed delivery." },
+      { "q": "What is blocking vs non-blocking IO?", "a": "Blocking IO waits for operations to complete; non-blocking IO returns immediately and uses polling or events." },
+      { "q": "What is Boost.Asio?", "a": "Boost.Asio is a cross-platform C++ library for asynchronous IO, timers, and sockets with both sync and async APIs." },
+      { "q": "What is select/poll/epoll?", "a": "They are OS-level mechanisms to monitor multiple file descriptors for IO readiness, with epoll optimized for many descriptors." },
+      { "q": "How to design a scalable server?", "a": "Use asynchronous IO, thread pools, avoid per-connection threads, and manage resources to handle many connections." },
+      { "q": "What is Nagle's algorithm?", "a": "Nagle's algorithm batches small TCP packets to reduce overhead; it can be disabled (TCP_NODELAY) for low-latency apps." },
+      { "q": "What is endianness and how to handle it?", "a": "Endianness is byte order; use network byte order (htonl/ntohl) for portable network protocols." },
+      { "q": "How to use TLS in C++?", "a": "Use libraries like OpenSSL, Botan, or libraries with TLS support and manage certificates and secure contexts." },
+      { "q": "What is connection pooling?", "a": "Reuse connections to backends to reduce overhead of repeated connect/disconnect operations." },
+      { "q": "What is backpressure in networking?", "a": "Backpressure controls the rate of data production to avoid overwhelming consumers or network buffers." },
+      { "q": "How to test networked applications?", "a": "Use unit tests with mocks, integration tests with test servers, and simulate network faults and latency." },
+      { "q": "What is Keep-Alive?", "a": "TCP keep-alive detects dead peers and maintains connections; HTTP Keep-Alive reuses TCP connections for multiple requests." },
+      { "q": "How to handle partial reads/writes?", "a": "Loop until the requested amount is transferred, handling EAGAIN/EWOULDBLOCK for non-blocking sockets." },
+      { "q": "What is WebSocket vs HTTP?", "a": "WebSocket provides bidirectional, persistent connections; HTTP is request-response stateless by default." },
+      { "q": "How to do asynchronous callbacks safely?", "a": "Use strand or synchronization primitives to serialize handlers and manage object lifetimes carefully." },
+      { "q": "What is zero-copy networking?", "a": "Techniques that avoid copying data between kernel and user space, improving throughput (e.g., sendfile)." },
+      { "q": "How to secure network code?", "a": "Validate input, use TLS, apply authentication/authorization, avoid buffer overflows, and handle errors robustly." },
+      { "q": "What is service discovery?", "a": "Mechanisms to locate services dynamically (DNS, Consul) used in distributed systems." },
+      { "q": "Best practices for network error handling?", "a": "Retry with backoff, log errors, detect partial failures, and design idempotent operations where possible." }
+    ]
+  },
+
+  "cpp_patterns": {
+    "title": "Design Patterns & Idioms",
+    "summary": "Common patterns (Singleton, Factory, Observer) and C++ idioms (pImpl, CRTP) adapted to modern C++ practices.",
+    "details": "Learn practical patterns and modern idioms: favor composition and policy-based designs, use pImpl for ABI stability, and apply CRTP for static polymorphism when needed. Understand trade-offs and prefer simple, testable solutions.",
+    "cheat": "// Patterns & idioms\n// Prefer RAII + composition. Use pImpl to hide implementation and reduce header deps.\n\n// pImpl sketch:\n// class Widget { struct Impl; std::unique_ptr<Impl> p; public: Widget(); ~Widget(); };\n\n// CRTP sketch:\n// template<class D> struct Base { void iface(){ static_cast<D*>(this)->impl(); } };\n",
+    "examples": [
+      { "code": "// Factory example\nstruct Shape{ virtual ~Shape()=default; };\nstruct Circle:Shape{}; struct Square:Shape{};\nstd::unique_ptr<Shape> makeShape(std::string t){ if(t==\"c\") return std::make_unique<Circle>(); return std::make_unique<Square>(); }" },
+      { "code": "// pImpl sketch\nclass Widget{ struct Impl; std::unique_ptr<Impl> p; public: Widget(); ~Widget(); };" }
+    ],
+    "interview": [
+      { "q": "What is the Factory pattern?", "a": "Factory encapsulates object creation, returning base-class pointers to concrete types, decoupling clients from concrete implementations." },
+      { "q": "What is the Singleton pattern and its caveats?", "a": "Singleton ensures a single instance, but global state can hinder testability and increase coupling; prefer dependency injection." },
+      { "q": "What is Observer pattern?", "a": "Observer allows objects to subscribe to events from a subject and be notified on changes, enabling decoupled communication." },
+      { "q": "What is pImpl idiom?", "a": "pImpl hides implementation details in a separate implementation class pointed to by the interface, reducing header dependencies." },
+      { "q": "Explain CRTP (Curiously Recurring Template Pattern).", "a": "CRTP uses a template base class parameterized by the derived class to enable static polymorphism and compile-time customization." },
+      { "q": "When to prefer strategy over inheritance?", "a": "Use strategy (composition of behavior) to switch algorithms at runtime rather than deep inheritance hierarchies." },
+      { "q": "What is RAII and how does it relate to patterns?", "a": "RAII is the idiom of acquiring resources in constructors and releasing in destructors; many patterns rely on RAII for resource safety." },
+      { "q": "What is type erasure and where to use it?", "a": "Type erasure hides concrete types behind a uniform interface (e.g., std::function) enabling heterogeneous containers." },
+      { "q": "What is adapter pattern?", "a": "Adapter converts one interface to another, allowing incompatible interfaces to work together." },
+      { "q": "What is decorator pattern?", "a": "Decorator adds behavior to objects dynamically by wrapping them with additional functionality." },
+      { "q": "What is Proxy pattern?", "a": "Proxy controls access to another object, adding lazy initialization, caching, or access control." },
+      { "q": "What is Command pattern?", "a": "Command encapsulates actions as objects, enabling undo/redo, queuing, and decoupled invocation." },
+      { "q": "How to implement Observer safely in C++?", "a": "Use weak_ptr to avoid dangling observers, or careful lifetime management and unsubscribe mechanics." },
+      { "q": "What is Visitor pattern and its trade-offs?", "a": "Visitor separates operations from object structure; it is extensible for operations but less so for new element types." },
+      { "q": "What is policy-based design?", "a": "Use templated policies for customizable behavior at compile-time enabling highly reusable libraries." },
+      { "q": "How to choose between patterns?", "a": "Base choice on coupling, extensibility, performance, and testability; prefer simple solutions first." },
+      { "q": "What is iterator pattern?", "a": "Iterator provides a way to access elements of a collection sequentially without exposing underlying representation." },
+      { "q": "What is the Mediator pattern?", "a": "Mediator centralizes complex communications between objects, reducing direct coupling." },
+      { "q": "How to use design patterns with modern C++?", "a": "Leverage RAII, smart pointers, templates, and standard library utilities to implement patterns more safely and concisely." },
+      { "q": "Best practices applying patterns in C++?", "a": "Understand trade-offs, prefer composition, avoid premature abstraction, and write tests to validate pattern choices." }
+    ]
+  }
+}

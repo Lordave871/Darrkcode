@@ -1,0 +1,1702 @@
+{
+  "category": "blockchain",
+  "categoryName": "Blockchain",
+  "description": "Explore blockchain technology, smart contracts, and cryptocurrency",
+  "quizzes": [
+    {
+      "id": 28,
+      "title": "Blockchain Fundamentals",
+      "description": "Learn blockchain technology, distributed ledgers, and cryptocurrency basics.",
+      "difficulty": "Beginner",
+      "icon": "fas fa-link",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is a blockchain?",
+          "options": [
+            "A distributed ledger",
+            "A type of cryptocurrency",
+            "A programming language",
+            "A database server"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Who created Bitcoin?",
+          "options": [
+            "Vitalik Buterin",
+            "Satoshi Nakamoto",
+            "Nick Szabo",
+            "Hal Finney"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 3,
+          "question": "What is a 'block' in blockchain?",
+          "options": [
+            "A mining device",
+            "A collection of transactions",
+            "A type of wallet",
+            "A network node"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 4,
+          "question": "What consensus mechanism does Bitcoin use?",
+          "options": [
+            "Proof of Work",
+            "Proof of Stake",
+            "Delegated Proof of Stake",
+            "Proof of Authority"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "What is cryptocurrency mining?",
+          "options": [
+            "Hacking the network",
+            "Trading currencies",
+            "Validating transactions and creating new coins",
+            "Storing cryptocurrencies"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 6,
+          "question": "What is a smart contract?",
+          "options": [
+            "Legal document",
+            "Self-executing contract with code",
+            "Trading agreement",
+            "Insurance policy"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 7,
+          "question": "Which blockchain introduced smart contracts?",
+          "options": [
+            "Bitcoin",
+            "Litecoin",
+            "Ethereum",
+            "Ripple"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "What does 'decentralized' mean in blockchain?",
+          "options": [
+            "Fast transactions",
+            "Low fees",
+            "No central authority",
+            "Private network"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "What is a hash function in blockchain?",
+          "options": [
+            "Mining algorithm",
+            "Wallet address generator",
+            "Cryptographic function for data integrity",
+            "Transaction ID generator"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "What is a wallet in cryptocurrency?",
+          "options": [
+            "Bank account equivalent",
+            "Stores private and public keys",
+            "Exchange platform",
+            "Mining software"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 11,
+          "question": "What is a private key?",
+          "options": [
+            "Public address",
+            "Secret number for accessing and signing transactions",
+            "Transaction password",
+            "Wallet name"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "What is a public key?",
+          "options": [
+            "Secret password",
+            "Address to receive funds",
+            "Mining key",
+            "Network ID"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 13,
+          "question": "What is an ICO?",
+          "options": [
+            "International Crypto Organization",
+            "Internet Coin Operation",
+            "Initial Coin Offering",
+            "Initial Currency Offering"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 14,
+          "question": "What is a node in blockchain?",
+          "options": [
+            "Mining rig",
+            "Wallet application",
+            "Computer participating in the network",
+            "Exchange server"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "What is the longest chain rule?",
+          "options": [
+            "Chain with most transactions",
+            "Chain with most nodes",
+            "Chain with most proof-of-work is valid",
+            "Chain with most miners"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 16,
+          "question": "What is a 51% attack?",
+          "options": [
+            "Hacking 51% of wallets",
+            "Stealing 51% of coins",
+            "Controlling majority of network's hash power",
+            "Controlling 51% of nodes"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is a fork in blockchain?",
+          "options": [
+            "New wallet version",
+            "Network error",
+            "Change in protocol creating divergence",
+            "Exchange update"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 18,
+          "question": "What is a hard fork?",
+          "options": [
+            "Minor update",
+            "Wallet upgrade",
+            "Backward-incompatible protocol change",
+            "Network maintenance"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 19,
+          "question": "What is a soft fork?",
+          "options": [
+            "Major protocol change",
+            "New blockchain creation",
+            "Backward-compatible protocol update",
+            "Network split"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 20,
+          "question": "What is gas in Ethereum?",
+          "options": [
+            "Mining reward",
+            "Wallet balance unit",
+            "Unit for measuring transaction fees",
+            "Network speed metric"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What is DeFi?",
+          "options": [
+            "Digital Finance",
+            "Direct Finance",
+            "Decentralized Finance",
+            "Distributed Finance"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 22,
+          "question": "What is an NFT?",
+          "options": [
+            "New Financial Token",
+            "Network File Transfer",
+            "Non-Fungible Token",
+            "Non-Financial Transaction"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 23,
+          "question": "What is a DAO?",
+          "options": [
+            "Digital Asset Organization",
+            "Distributed Application Operation",
+            "Decentralized Autonomous Organization",
+            "Decentralized Application Organization"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "What is a dApp?",
+          "options": [
+            "Digital Application",
+            "Distributed App",
+            "Decentralized Application",
+            "Direct Application"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "What is proof of stake?",
+          "options": [
+            "Miners solve puzzles",
+            "Nodes vote on transactions",
+            "Validators stake coins as collateral",
+            "Users verify each other"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "What is a Merkle tree?",
+          "options": [
+            "Mining algorithm type",
+            "Wallet security structure",
+            "Data structure for efficient transaction verification",
+            "Network topology design"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What is blockchain immutability?",
+          "options": [
+            "Fast processing capability",
+            "Low cost operation",
+            "High security standard",
+            "Data cannot be altered once recorded"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "What is a cryptocurrency exchange?",
+          "options": [
+            "Mining pool aggregator",
+            "Wallet provider service",
+            "Platform for trading cryptocurrencies",
+            "Blockchain explorer tool"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 29,
+          "question": "What is a blockchain explorer?",
+          "options": [
+            "Mining software",
+            "Wallet application",
+            "Tool to view and search blockchain transactions",
+            "Exchange platform"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "What is the genesis block?",
+          "options": [
+            "Largest block in chain",
+            "Most valuable block",
+            "Last block in blockchain",
+            "First block ever created in a blockchain"
+          ],
+          "correctAnswer": 3
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Smart Contracts with Solidity",
+      "description": "Master Solidity programming for Ethereum smart contracts and decentralized apps.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-file-contract",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the minimum version of Solidity currently recommended?",
+          "options": [
+            "0.4.0",
+            "0.5.0",
+            "0.6.0",
+            "0.8.0"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 2,
+          "question": "Which keyword makes a function callable only by the contract owner?",
+          "options": [
+            "private",
+            "internal",
+            "onlyOwner",
+            "restricted"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What does ERC-20 standard define?",
+          "options": [
+            "Non-Fungible Tokens",
+            "Fungible Tokens",
+            "Decentralized Exchanges",
+            "Oracle Services"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 4,
+          "question": "Which unit represents the smallest fraction of Ether?",
+          "options": [
+            "Wei",
+            "Gwei",
+            "Szabo",
+            "Finney"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "What is a modifier in Solidity?",
+          "options": [
+            "Variable type declaration",
+            "Compiler optimization directive",
+            "Code reuse pattern for function behavior",
+            "Gas calculation method"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 6,
+          "question": "Which function receives Ether sent to contract?",
+          "options": [
+            "receive()",
+            "fallback()",
+            "payable()",
+            "transfer()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What does 'view' function modifier indicate?",
+          "options": [
+            "Writes to blockchain state",
+            "Both reads and writes state",
+            "Reads state but doesn't modify it",
+            "Doesn't consume any gas"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "Which is NOT a global variable in Solidity?",
+          "options": [
+            "msg.sender",
+            "block.timestamp",
+            "tx.origin",
+            "contract.address"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 9,
+          "question": "What is reentrancy attack?",
+          "options": [
+            "Double spending attack",
+            "Front running transactions",
+            "Recursive callback exploiting contract state",
+            "Gas price manipulation"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "Which statement prevents reentrancy?",
+          "options": [
+            "Using mutex lock",
+            "Checks-effects-interactions pattern",
+            "Both A and B",
+            "Using delegatecall carefully"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What is the purpose of 'require()'?",
+          "options": [
+            "Handle errors gracefully",
+            "Validate conditions and revert if false",
+            "Both A and B",
+            "None of above"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 12,
+          "question": "Which storage location is most expensive?",
+          "options": [
+            "storage",
+            "memory",
+            "calldata",
+            "stack"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What does ERC-721 standard define?",
+          "options": [
+            "Fungible Tokens",
+            "Non-Fungible Tokens",
+            "Multi-token standard",
+            "Semi-fungible tokens"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 14,
+          "question": "Which is used for upgradeable contracts?",
+          "options": [
+            "Proxy pattern",
+            "Factory pattern",
+            "Singleton pattern",
+            "Multisig pattern"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "What is 'gas limit'?",
+          "options": [
+            "Minimum gas required",
+            "Gas price in gwei",
+            "Maximum gas user agrees to pay",
+            "Block gas capacity"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 16,
+          "question": "Which library is used for safe math?",
+          "options": [
+            "SafeMath",
+            "MathLib",
+            "SafeArithmetic",
+            "SecureMath"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What does 'payable' modifier do?",
+          "options": [
+            "Makes function more expensive",
+            "Prevents external calls",
+            "Allows function to receive Ether",
+            "Optimizes gas usage"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 18,
+          "question": "Which is used for events in Solidity?",
+          "options": [
+            "emit",
+            "trigger",
+            "event",
+            "log"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What is 'selfdestruct' used for?",
+          "options": [
+            "Pause contract operations",
+            "Upgrade contract logic",
+            "Delete contract and send remaining Ether",
+            "Transfer contract ownership"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 20,
+          "question": "Which pattern prevents overflow/underflow?",
+          "options": [
+            "Use SafeMath library",
+            "Check bounds manually",
+            "Use Solidity 0.8.0+",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 21,
+          "question": "What is 'delegatecall'?",
+          "options": [
+            "Calls external contract",
+            "Creates new contract instance",
+            "Calls another contract in caller's context",
+            "Deletes existing contract"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 22,
+          "question": "Which is used for time in Solidity?",
+          "options": [
+            "seconds",
+            "minutes",
+            "hours",
+            "days"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What does 'immutable' keyword do?",
+          "options": [
+            "Constant variable",
+            "Read-only variable",
+            "Variable set once in constructor",
+            "Temporary variable"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "Which is NOT an integer type?",
+          "options": [
+            "uint256",
+            "int128",
+            "uint8",
+            "float32"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 25,
+          "question": "What is 'constructor'?",
+          "options": [
+            "Initialization function",
+            "Special function called on deployment",
+            "Both A and B",
+            "None of above"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "Which is used for access control?",
+          "options": [
+            "Ownable pattern",
+            "Role-based access",
+            "Both A and B",
+            "AccessControl library"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What does 'unchecked' block do?",
+          "options": [
+            "Disables all safety checks",
+            "Reduces gas costs",
+            "Disables overflow/underflow checks",
+            "Both B and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "Which is used for string manipulation?",
+          "options": [
+            "bytes",
+            "string",
+            "Both A and B",
+            "Arrays only"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is 'fallback' function?",
+          "options": [
+            "Default function when no other matches",
+            "Executed on plain Ether transfers",
+            "Both A and B",
+            "Error handling function"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "Which tool is used for testing Solidity?",
+          "options": [
+            "Hardhat",
+            "Truffle",
+            "Foundry",
+            "All of above"
+          ],
+          "correctAnswer": 3
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Bitcoin & Cryptocurrency",
+      "description": "Understand Bitcoin, cryptocurrency wallets, transactions, and mining.",
+      "difficulty": "Beginner",
+      "icon": "fab fa-bitcoin",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Who is the pseudonymous creator of Bitcoin?",
+          "options": [
+            "Vitalik Buterin",
+            "Satoshi Nakamoto",
+            "Elon Musk",
+            "Changpeng Zhao"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 2,
+          "question": "When was the Bitcoin whitepaper published?",
+          "options": [
+            "January 2009",
+            "March 2010",
+            "October 2008",
+            "December 2011"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What is the process of adding transaction records to Bitcoin's blockchain called?",
+          "options": [
+            "Trading",
+            "Staking",
+            "Mining",
+            "Hashing"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "Which of these is NOT a type of cryptocurrency wallet?",
+          "options": [
+            "Hardware wallet",
+            "Software wallet",
+            "Paper wallet",
+            "Cloud wallet"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 5,
+          "question": "What does the term 'FUD' mean in cryptocurrency?",
+          "options": [
+            "Financial Utility Digital",
+            "Fast Unconfirmed Deposit",
+            "Fear, Uncertainty, and Doubt",
+            "Fully Utilized Digital"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 6,
+          "question": "What is the primary purpose of a cryptocurrency exchange?",
+          "options": [
+            "To store cryptocurrencies securely",
+            "To mine new cryptocurrencies",
+            "To facilitate buying and selling of cryptocurrencies",
+            "To create smart contracts"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "Which cryptocurrency is known as 'digital silver' to Bitcoin's 'digital gold'?",
+          "options": [
+            "Ethereum",
+            "Ripple",
+            "Litecoin",
+            "Cardano"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "What is a 'cold wallet' in cryptocurrency?",
+          "options": [
+            "A wallet stored in cold climate",
+            "A wallet with frozen assets",
+            "A wallet not connected to the internet",
+            "A wallet for cold storage only"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "What does 'KYC' stand for in cryptocurrency exchanges?",
+          "options": [
+            "Keep Your Coins",
+            "Key Your Cryptocurrency",
+            "Know Your Customer",
+            "Know Your Currency"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "Which of these is a popular hardware wallet brand?",
+          "options": [
+            "Coinbase",
+            "Binance",
+            "Ledger",
+            "Kraken"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What is the term for splitting one cryptocurrency into two?",
+          "options": [
+            "Split",
+            "Divide",
+            "Fork",
+            "Branch"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 12,
+          "question": "Which cryptocurrency uses a proof-of-stake consensus mechanism?",
+          "options": [
+            "Bitcoin",
+            "Litecoin",
+            "Monero",
+            "Cardano"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 13,
+          "question": "What is the smallest unit of Ethereum called?",
+          "options": [
+            "Satoshi",
+            "Gwei",
+            "Wei",
+            "Finney"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 14,
+          "question": "What does '2FA' provide in cryptocurrency security?",
+          "options": [
+            "Two financial accounts",
+            "Two-factor authentication",
+            "Two-factor approval",
+            "Two-file authentication"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 15,
+          "question": "Which term describes a sudden drop in cryptocurrency prices?",
+          "options": [
+            "Dip",
+            "Correction",
+            "Crash",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 16,
+          "question": "What is a 'whale' in cryptocurrency markets?",
+          "options": [
+            "New cryptocurrency investor",
+            "Cryptocurrency exchange",
+            "Large holder of cryptocurrency",
+            "Mining farm operator"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "Which cryptocurrency is focused on privacy and anonymity?",
+          "options": [
+            "Bitcoin",
+            "Ethereum",
+            "Litecoin",
+            "Monero"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 18,
+          "question": "What does 'APY' stand for in cryptocurrency staking?",
+          "options": [
+            "Annual Profit Yield",
+            "Average Percentage Yield",
+            "Annual Percentage Yield",
+            "Annual Payment Yield"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 19,
+          "question": "Which of these is a decentralized exchange (DEX)?",
+          "options": [
+            "Binance",
+            "Coinbase",
+            "Uniswap",
+            "Kraken"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 20,
+          "question": "What is the purpose of a 'mempool' in Bitcoin?",
+          "options": [
+            "Stores mining equipment data",
+            "Keeps wallet addresses",
+            "Holds unconfirmed transactions",
+            "Manages network nodes"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What does 'ATH' mean in cryptocurrency trading?",
+          "options": [
+            "Average Trading High",
+            "Automated Trade Handling",
+            "All-Time High",
+            "Annual Trading History"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 22,
+          "question": "Which cryptocurrency is designed for fast, low-cost international payments?",
+          "options": [
+            "Bitcoin",
+            "Ethereum",
+            "Dogecoin",
+            "Ripple (XRP)"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "What is 'sharding' in blockchain technology?",
+          "options": [
+            "Mining technique",
+            "Wallet backup method",
+            "Splitting database into smaller parts",
+            "Exchange trading strategy"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "What does 'TVL' stand for in DeFi?",
+          "options": [
+            "Total Volume Limit",
+            "Transaction Value Limit",
+            "Total Value Locked",
+            "Trade Volume Locked"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "Which of these is a layer-2 scaling solution for Ethereum?",
+          "options": [
+            "Solana",
+            "Cardano",
+            "Polkadot",
+            "Polygon"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 26,
+          "question": "What is a 'rug pull' in cryptocurrency?",
+          "options": [
+            "Price manipulation strategy",
+            "Mining pool operation",
+            "Scam where developers abandon project",
+            "Wallet migration process"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What does 'DAO' stand for in cryptocurrency?",
+          "options": [
+            "Digital Asset Organization",
+            "Distributed Application Operation",
+            "Decentralized Autonomous Organization",
+            "Decentralized Application Organization"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 28,
+          "question": "Which cryptocurrency was created as a joke but gained popularity?",
+          "options": [
+            "Shiba Inu",
+            "Floki",
+            "Dogecoin",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 29,
+          "question": "What is 'yield farming' in DeFi?",
+          "options": [
+            "Farming new cryptocurrencies",
+            "Mining cryptocurrency",
+            "Earning interest on cryptocurrency holdings",
+            "Trading cryptocurrency"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "What does 'HODL' originally stand for in cryptocurrency culture?",
+          "options": [
+            "Hold On for Dear Life",
+            "Misspelling of 'HOLD'",
+            "Hold Our Digital Legacy",
+            "Hold Only Digital Liquidity"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "title": "DeFi & Web3 Development",
+      "description": "Explore decentralized finance, DeFi protocols, and Web3 application development.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-exchange-alt",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the primary purpose of a smart contract?",
+          "options": [
+            "Traditional legal document",
+            "Centralized database",
+            "Self-executing code on blockchain",
+            "Cryptocurrency wallet"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 2,
+          "question": "Which consensus mechanism does Ethereum currently use?",
+          "options": [
+            "Proof of Stake",
+            "Proof of Work",
+            "Proof of Authority",
+            "Proof of History"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 3,
+          "question": "What is an AMM in DeFi?",
+          "options": [
+            "Asset Management Module",
+            "Advanced Mining Mechanism",
+            "Automated Market Maker",
+            "Account Management Model"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "Which language is primarily used for Ethereum smart contracts?",
+          "options": [
+            "Rust",
+            "Vyper",
+            "Solidity",
+            "Both B and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 5,
+          "question": "What is gas in Ethereum?",
+          "options": [
+            "Cryptocurrency type",
+            "Network bandwidth",
+            "Transaction fee unit",
+            "Mining reward"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 6,
+          "question": "What does TVL stand for in DeFi?",
+          "options": [
+            "Transaction Volume Limit",
+            "Token Valuation Logic",
+            "Total Value Locked",
+            "Trade Verification Layer"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "Which protocol introduced flash loans?",
+          "options": [
+            "Aave",
+            "Uniswap",
+            "Compound",
+            "MakerDAO"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "What is the purpose of an oracle in blockchain?",
+          "options": [
+            "Validate transactions",
+            "Store smart contracts",
+            "Provide external data to smart contracts",
+            "Manage private keys"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "Which of these is a Layer 2 scaling solution?",
+          "options": [
+            "Optimism",
+            "Bitcoin",
+            "Ethereum Mainnet",
+            "Binance Chain"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 10,
+          "question": "What does ERC-20 standard define?",
+          "options": [
+            "Non-fungible tokens",
+            "Smart contracts",
+            "Fungible tokens",
+            "Consensus rules"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What is impermanent loss in DeFi?",
+          "options": [
+            "Permanent token loss",
+            "Exchange hack loss",
+            "Temporary loss in AMM liquidity pools",
+            "Wallet compromise"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 12,
+          "question": "Which wallet is commonly used for Web3 dApps?",
+          "options": [
+            "PayPal",
+            "Bank wallet",
+            "MetaMask",
+            "Hardware wallet only"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 13,
+          "question": "What is yield farming?",
+          "options": [
+            "Traditional farming",
+            "Mining cryptocurrency",
+            "Token burning mechanism",
+            "Earning rewards with crypto assets"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 14,
+          "question": "What does DAO stand for?",
+          "options": [
+            "Digital Asset Oracle",
+            "Distributed Application Operator",
+            "Decentralized Autonomous Organization",
+            "Decentralized Application Organization"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "Which protocol is known for stablecoins?",
+          "options": [
+            "Uniswap",
+            "MakerDAO",
+            "Aave",
+            "Compound"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 16,
+          "question": "What is a blockchain bridge?",
+          "options": [
+            "Mining hardware connector",
+            "Wallet interface",
+            "Smart contract template",
+            "Connects different blockchain networks"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 17,
+          "question": "What is the main innovation of Uniswap V3?",
+          "options": [
+            "Lower fees",
+            "Faster transactions",
+            "Concentrated liquidity",
+            "Better user interface"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 18,
+          "question": "What does APY stand for in DeFi?",
+          "options": [
+            "Automated Protocol Yield",
+            "Asset Profit Yearly",
+            "Annual Percentage Yield",
+            "Average Protocol Yield"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 19,
+          "question": "Which is a cross-chain interoperability protocol?",
+          "options": [
+            "Bitcoin",
+            "Ethereum",
+            "Polkadot",
+            "Solana"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 20,
+          "question": "What is a non-custodial wallet?",
+          "options": [
+            "Exchange holds private keys",
+            "Bank-managed wallet",
+            "Hardware wallet",
+            "User controls private keys"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 21,
+          "question": "What does NFT stand for?",
+          "options": [
+            "New Financial Technology",
+            "Network Fund Transfer",
+            "Non-Fungible Token",
+            "Native Fungible Token"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 22,
+          "question": "Which blockchain uses Solana?",
+          "options": [
+            "Privacy blockchain",
+            "Enterprise blockchain",
+            "High-speed blockchain",
+            "Gaming blockchain"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 23,
+          "question": "What is MEV in blockchain?",
+          "options": [
+            "Maximum Economic Value",
+            "Minimum Exchange Volume",
+            "Miner Extractable Value",
+            "Mining Efficiency Variable"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "Which protocol uses veTokenomics?",
+          "options": [
+            "Uniswap",
+            "Aave",
+            "Compound",
+            "Curve Finance"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 25,
+          "question": "What is zk-SNARK technology used for?",
+          "options": [
+            "Smart contracts",
+            "Mining optimization",
+            "Zero-knowledge proofs",
+            "Token creation"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "Which is a DeFi insurance protocol?",
+          "options": [
+            "Uniswap",
+            "Aave",
+            "Nexus Mutual",
+            "Compound"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What is the purpose of a multi-sig wallet?",
+          "options": [
+            "Single signature only",
+            "No signatures needed",
+            "Multiple signatures required for transactions",
+            "Biometric authentication"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 28,
+          "question": "Which blockchain introduced sharding?",
+          "options": [
+            "Ethereum 2.0",
+            "Bitcoin",
+            "Cardano",
+            "Solana"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 29,
+          "question": "What is a liquidity pool?",
+          "options": [
+            "Mining pool",
+            "Staking pool",
+            "Investment fund",
+            "Pool of tokens for decentralized trading"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 30,
+          "question": "Which protocol pioneered algorithmic stablecoins?",
+          "options": [
+            "MakerDAO",
+            "Aave",
+            "Compound",
+            "Terra"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "title": "Consensus Mechanisms",
+      "description": "Learn PoW, PoS, Byzantine algorithms, and different blockchain consensus methods.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-handshake",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What does PoW stand for?",
+          "options": [
+            "Proof of Wealth",
+            "Proof of Work",
+            "Proof of Worth",
+            "Proof of Weight"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 2,
+          "question": "What is the main disadvantage of Proof of Work?",
+          "options": [
+            "Low security",
+            "Centralization tendency",
+            "High energy consumption",
+            "Slow transaction speeds"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What does PoS stand for?",
+          "options": [
+            "Proof of Storage",
+            "Proof of Security",
+            "Proof of Stake",
+            "Proof of Speed"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "In PoS, what do validators 'stake'?",
+          "options": [
+            "Computing power",
+            "Network bandwidth",
+            "Cryptocurrency as collateral",
+            "Storage space"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 5,
+          "question": "What is Byzantine Fault Tolerance?",
+          "options": [
+            "Network speed optimization",
+            "Data compression method",
+            "System tolerance to malicious or faulty nodes",
+            "Encryption standard"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 6,
+          "question": "What consensus does Bitcoin use?",
+          "options": [
+            "Proof of Stake",
+            "Delegated Proof of Stake",
+            "Proof of Work",
+            "Proof of Authority"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "What is a 51% attack?",
+          "options": [
+            "Hacking 51% of wallets",
+            "Stealing 51% of coins",
+            "Controlling majority of network's hash power",
+            "Corrupting 51% of nodes"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "What does DPoS stand for?",
+          "options": [
+            "Distributed Proof of Stake",
+            "Decentralized Proof of Stake",
+            "Delegated Proof of Stake",
+            "Dynamic Proof of Stake"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "What is Practical Byzantine Fault Tolerance?",
+          "options": [
+            "Mining protocol",
+            "Wallet security standard",
+            "Consensus algorithm for distributed systems",
+            "Network topology design"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "What is Proof of Authority?",
+          "options": [
+            "Anyone can validate transactions",
+            "Miners compete to solve puzzles",
+            "Validators are known and trusted entities",
+            "Users vote on validators"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What is Proof of Burn?",
+          "options": [
+            "Energy is burned for mining",
+            "Hardware is destroyed for validation",
+            "Coins are destroyed to gain mining rights",
+            "Data is erased for security"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 12,
+          "question": "What is Proof of Capacity?",
+          "options": [
+            "Uses CPU power",
+            "Uses network bandwidth",
+            "Uses storage space for mining",
+            "Uses memory capacity"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 13,
+          "question": "What is Proof of History?",
+          "options": [
+            "Stores old blocks",
+            "Archives historical data",
+            "Creates historical record for verification",
+            "Timestamps for transactions"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 14,
+          "question": "What is the Nakamoto Consensus?",
+          "options": [
+            "Ethereum's consensus mechanism",
+            "Ripple's consensus method",
+            "Bitcoin's consensus method (PoW + longest chain)",
+            "Cardano's consensus protocol"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "What is Tendermint?",
+          "options": [
+            "PoW mining software",
+            "BFT consensus engine for blockchains",
+            "Wallet protocol standard",
+            "Smart contract platform"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 16,
+          "question": "What is the longest chain rule?",
+          "options": [
+            "Chain with most nodes",
+            "Chain with most coins staked",
+            "Chain with most proof-of-work is valid",
+            "Chain with most transactions"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is Proof of Elapsed Time?",
+          "options": [
+            "Random wait time system",
+            "Timed puzzle solving",
+            "Fair lottery system using wait times",
+            "Scheduled mining windows"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 18,
+          "question": "What is Raft consensus?",
+          "options": [
+            "Democratic voting system",
+            "Random selection algorithm",
+            "Leader-based consensus algorithm",
+            "Lottery-based system"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 19,
+          "question": "What is Proof of Importance?",
+          "options": [
+            "Based on coin age only",
+            "Based on wealth only",
+            "Considers account activity and balance",
+            "Random validator selection"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 20,
+          "question": "What is Casper in Ethereum?",
+          "options": [
+            "PoW mining algorithm",
+            "PoS consensus protocol",
+            "Smart contract language",
+            "Wallet management system"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 21,
+          "question": "What is a Sybil attack?",
+          "options": [
+            "Stealing cryptocurrency",
+            "Double spending attack",
+            "Creating multiple fake identities",
+            "Network flooding attack"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 22,
+          "question": "What is Proof of Space?",
+          "options": [
+            "Uses CPU cycles",
+            "Burns coins for space",
+            "Allocates disk space for mining",
+            "Stakes coins for storage"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 23,
+          "question": "What is Federated Byzantine Agreement?",
+          "options": [
+            "Used by Bitcoin",
+            "Used by Ethereum",
+            "Used by Stellar network",
+            "Used by Cardano"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "What is Proof of Activity?",
+          "options": [
+            "Pure Proof of Work",
+            "Pure Proof of Stake",
+            "Hybrid PoW/PoS mechanism",
+            "PoW with DPoS elements"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "What is the GHOST protocol?",
+          "options": [
+            "Excludes old blocks",
+            "Compresses block data",
+            "Includes uncle blocks in consensus",
+            "Encrypts block headers"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "What is Proof of Reputation?",
+          "options": [
+            "Based on wealth only",
+            "Based on computing power",
+            "Based on node's reputation score",
+            "Based on storage capacity"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What is Algorand's consensus?",
+          "options": [
+            "Pure Proof of Work",
+            "Delegated Proof of Stake",
+            "Pure Proof of Stake with Byzantine agreement",
+            "Proof of Authority"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 28,
+          "question": "What is Avalanche consensus?",
+          "options": [
+            "Classic Byzantine agreement",
+            "Proof-of-Work based",
+            "Uses metastable decisions via subsampling",
+            "Authority-based validation"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 29,
+          "question": "What is Proof of Weight?",
+          "options": [
+            "Specific Proof of Work variant",
+            "Delegated Proof of Stake variant",
+            "Generalized Proof of Stake system",
+            "Proof of Authority variant"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "What is the main goal of consensus mechanisms?",
+          "options": [
+            "Fast transaction processing",
+            "Low transaction fees",
+            "Agreement on valid transactions across network",
+            "Privacy protection"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    }
+  ]
+}

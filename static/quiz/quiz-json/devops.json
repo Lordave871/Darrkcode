@@ -1,0 +1,1702 @@
+{
+  "category": "devops",
+  "categoryName": "Cloud & DevOps",
+  "description": "Master cloud platforms, containerization, and deployment automation",
+  "quizzes": [
+    {
+      "id": 19,
+      "title": "Docker & Containerization",
+      "description": "Learn Docker containers, images, and containerized application deployment.",
+      "difficulty": "Intermediate",
+      "icon": "fab fa-docker",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is Docker?",
+          "options": [
+            "Containerization platform",
+            "Virtual machine",
+            "Operating system",
+            "Programming language"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 2,
+          "question": "What is a Docker image?",
+          "options": [
+            "Read-only template for containers",
+            "Running container",
+            "Docker configuration file",
+            "Virtual machine image"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "Which command runs a Docker container?",
+          "options": [
+            "docker run",
+            "docker start",
+            "docker create",
+            "docker execute"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "What is Dockerfile?",
+          "options": [
+            "Script to build Docker images",
+            "Running container log",
+            "Docker configuration",
+            "Network settings"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which command lists running containers?",
+          "options": [
+            "docker ps",
+            "docker ls",
+            "docker containers",
+            "docker list"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 6,
+          "question": "What is Docker Hub?",
+          "options": [
+            "Registry for Docker images",
+            "Docker IDE",
+            "Container monitor",
+            "Docker CLI"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "Which Dockerfile instruction sets working directory?",
+          "options": [
+            "WORKDIR",
+            "RUN",
+            "COPY",
+            "ENV"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 8,
+          "question": "What is Docker Compose?",
+          "options": [
+            "Tool for multi-container applications",
+            "Single container tool",
+            "Image builder",
+            "Registry tool"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "Which command builds a Docker image?",
+          "options": [
+            "docker build",
+            "docker create",
+            "docker image",
+            "docker make"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "What is a Docker volume?",
+          "options": [
+            "Persistent data storage",
+            "Temporary storage",
+            "Memory storage",
+            "Network storage"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "Which command removes a container?",
+          "options": [
+            "docker rm",
+            "docker delete",
+            "docker remove",
+            "docker kill"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "What is container orchestration?",
+          "options": [
+            "Managing multiple containers",
+            "Single container management",
+            "Image building",
+            "Registry management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "Which is a Docker orchestration tool?",
+          "options": [
+            "Kubernetes",
+            "Docker Swarm",
+            "Both A and B",
+            "Docker Compose"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 14,
+          "question": "What does COPY do in Dockerfile?",
+          "options": [
+            "Copy files from host to container",
+            "Copy between containers",
+            "Copy to host",
+            "Copy to registry"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "Which command shows Docker logs?",
+          "options": [
+            "docker logs",
+            "docker log",
+            "docker output",
+            "docker console"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 16,
+          "question": "What is Docker Swarm?",
+          "options": [
+            "Native Docker clustering",
+            "Image registry",
+            "Container builder",
+            "Network tool"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "Which port mapping is correct?",
+          "options": [
+            "-p 8080:80",
+            "-port 8080 80",
+            "-mapping 8080:80",
+            "-p 80 8080"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 18,
+          "question": "What is containerization?",
+          "options": [
+            "Packaging app with dependencies",
+            "Virtualization",
+            "Cloud computing",
+            "Server management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "Which command pulls an image?",
+          "options": [
+            "docker pull",
+            "docker get",
+            "docker fetch",
+            "docker download"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 20,
+          "question": "What is Docker network?",
+          "options": [
+            "Connect containers",
+            "Internet connection",
+            "Host network",
+            "Registry network"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "Which Dockerfile instruction runs commands?",
+          "options": [
+            "RUN",
+            "CMD",
+            "ENTRYPOINT",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 22,
+          "question": "What is the main advantage of Docker?",
+          "options": [
+            "Consistency across environments",
+            "Faster than VMs",
+            "Lightweight",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "Which command lists Docker images?",
+          "options": [
+            "docker images",
+            "docker list",
+            "docker ps -a",
+            "docker image ls"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "What is a Docker registry?",
+          "options": [
+            "Stores Docker images",
+            "Runs containers",
+            "Builds images",
+            "Manages networks"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which Dockerfile instruction sets environment variables?",
+          "options": [
+            "ENV",
+            "ARG",
+            "SET",
+            "VAR"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 26,
+          "question": "What is Docker daemon?",
+          "options": [
+            "Background service managing containers",
+            "CLI tool",
+            "GUI interface",
+            "Registry service"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which command stops a container?",
+          "options": [
+            "docker stop",
+            "docker halt",
+            "docker pause",
+            "docker kill"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "What is multi-stage build in Docker?",
+          "options": [
+            "Create smaller images",
+            "Build faster",
+            "Test builds",
+            "Debug builds"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "Which file defines Docker Compose services?",
+          "options": [
+            "docker-compose.yml",
+            "docker.yml",
+            "compose.yml",
+            "docker-compose.yaml"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "What is the difference between CMD and ENTRYPOINT?",
+          "options": [
+            "CMD can be overridden, ENTRYPOINT sets main command",
+            "No difference",
+            "CMD for build, ENTRYPOINT for run",
+            "CMD for Linux, ENTRYPOINT for Windows"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Docker & Containerization",
+      "description": "Learn Docker containers, images, and containerized application deployment.",
+      "difficulty": "Intermediate",
+      "icon": "fab fa-docker",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is Docker?",
+          "options": [
+            "Containerization platform",
+            "Virtual machine",
+            "Operating system",
+            "Programming language"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 2,
+          "question": "What is a Docker image?",
+          "options": [
+            "Read-only template for containers",
+            "Running container",
+            "Docker configuration file",
+            "Virtual machine image"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "Which command runs a Docker container?",
+          "options": [
+            "docker run",
+            "docker start",
+            "docker create",
+            "docker execute"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "What is Dockerfile?",
+          "options": [
+            "Script to build Docker images",
+            "Running container log",
+            "Docker configuration",
+            "Network settings"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which command lists running containers?",
+          "options": [
+            "docker ps",
+            "docker ls",
+            "docker containers",
+            "docker list"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 6,
+          "question": "What is Docker Hub?",
+          "options": [
+            "Registry for Docker images",
+            "Docker IDE",
+            "Container monitor",
+            "Docker CLI"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "Which Dockerfile instruction sets working directory?",
+          "options": [
+            "WORKDIR",
+            "RUN",
+            "COPY",
+            "ENV"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 8,
+          "question": "What is Docker Compose?",
+          "options": [
+            "Tool for multi-container applications",
+            "Single container tool",
+            "Image builder",
+            "Registry tool"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "Which command builds a Docker image?",
+          "options": [
+            "docker build",
+            "docker create",
+            "docker image",
+            "docker make"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "What is a Docker volume?",
+          "options": [
+            "Persistent data storage",
+            "Temporary storage",
+            "Memory storage",
+            "Network storage"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "Which command removes a container?",
+          "options": [
+            "docker rm",
+            "docker delete",
+            "docker remove",
+            "docker kill"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "What is container orchestration?",
+          "options": [
+            "Managing multiple containers",
+            "Single container management",
+            "Image building",
+            "Registry management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "Which is a Docker orchestration tool?",
+          "options": [
+            "Kubernetes",
+            "Docker Swarm",
+            "Both A and B",
+            "Docker Compose"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 14,
+          "question": "What does COPY do in Dockerfile?",
+          "options": [
+            "Copy files from host to container",
+            "Copy between containers",
+            "Copy to host",
+            "Copy to registry"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "Which command shows Docker logs?",
+          "options": [
+            "docker logs",
+            "docker log",
+            "docker output",
+            "docker console"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 16,
+          "question": "What is Docker Swarm?",
+          "options": [
+            "Native Docker clustering",
+            "Image registry",
+            "Container builder",
+            "Network tool"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "Which port mapping is correct?",
+          "options": [
+            "-p 8080:80",
+            "-port 8080 80",
+            "-mapping 8080:80",
+            "-p 80 8080"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 18,
+          "question": "What is containerization?",
+          "options": [
+            "Packaging app with dependencies",
+            "Virtualization",
+            "Cloud computing",
+            "Server management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "Which command pulls an image?",
+          "options": [
+            "docker pull",
+            "docker get",
+            "docker fetch",
+            "docker download"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 20,
+          "question": "What is Docker network?",
+          "options": [
+            "Connect containers",
+            "Internet connection",
+            "Host network",
+            "Registry network"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "Which Dockerfile instruction runs commands?",
+          "options": [
+            "RUN",
+            "CMD",
+            "ENTRYPOINT",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 22,
+          "question": "What is the main advantage of Docker?",
+          "options": [
+            "Consistency across environments",
+            "Faster than VMs",
+            "Lightweight",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "Which command lists Docker images?",
+          "options": [
+            "docker images",
+            "docker list",
+            "docker ps -a",
+            "docker image ls"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "What is a Docker registry?",
+          "options": [
+            "Stores Docker images",
+            "Runs containers",
+            "Builds images",
+            "Manages networks"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which Dockerfile instruction sets environment variables?",
+          "options": [
+            "ENV",
+            "ARG",
+            "SET",
+            "VAR"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 26,
+          "question": "What is Docker daemon?",
+          "options": [
+            "Background service managing containers",
+            "CLI tool",
+            "GUI interface",
+            "Registry service"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which command stops a container?",
+          "options": [
+            "docker stop",
+            "docker halt",
+            "docker pause",
+            "docker kill"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "What is multi-stage build in Docker?",
+          "options": [
+            "Create smaller images",
+            "Build faster",
+            "Test builds",
+            "Debug builds"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "Which file defines Docker Compose services?",
+          "options": [
+            "docker-compose.yml",
+            "docker.yml",
+            "compose.yml",
+            "docker-compose.yaml"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "What is the difference between CMD and ENTRYPOINT?",
+          "options": [
+            "CMD can be overridden, ENTRYPOINT sets main command",
+            "No difference",
+            "CMD for build, ENTRYPOINT for run",
+            "CMD for Linux, ENTRYPOINT for Windows"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Kubernetes Orchestration",
+      "description": "Master Kubernetes for container orchestration and scaling applications.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-cube",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the smallest deployable unit in Kubernetes?",
+          "options": [
+            "Pod",
+            "Container",
+            "Node",
+            "Service"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which component manages worker nodes in a cluster?",
+          "options": [
+            "Master Node",
+            "Kubelet",
+            "kube-proxy",
+            "etcd"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "What does a Deployment provide in Kubernetes?",
+          "options": [
+            "Declarative updates for Pods and ReplicaSets",
+            "Network connectivity",
+            "Storage management",
+            "Secret management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which resource provides stable network access to Pods?",
+          "options": [
+            "Service",
+            "Ingress",
+            "ConfigMap",
+            "Secret"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "What is the purpose of a ConfigMap?",
+          "options": [
+            "Store configuration data separate from application code",
+            "Manage secrets",
+            "Store persistent data",
+            "Network configuration"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which component runs on each node and manages containers?",
+          "options": [
+            "Kubelet",
+            "kube-proxy",
+            "Container runtime",
+            "Scheduler"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What does a PersistentVolume (PV) represent?",
+          "options": [
+            "Storage in cluster",
+            "Compute resource",
+            "Network resource",
+            "Memory resource"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "Which object provides external access to services?",
+          "options": [
+            "Ingress",
+            "Service",
+            "LoadBalancer",
+            "NodePort"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "What is the purpose of a ReplicaSet?",
+          "options": [
+            "Maintains stable set of replica Pods",
+            "Manages storage",
+            "Configures networking",
+            "Handles authentication"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which component is Kubernetes' distributed key-value store?",
+          "options": [
+            "etcd",
+            "kube-apiserver",
+            "kube-scheduler",
+            "kube-controller-manager"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What does a DaemonSet ensure?",
+          "options": [
+            "All nodes run copy of a Pod",
+            "Pod scaling",
+            "Service discovery",
+            "Load balancing"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which object stores sensitive information like passwords?",
+          "options": [
+            "Secret",
+            "ConfigMap",
+            "PersistentVolume",
+            "ServiceAccount"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What is a StatefulSet used for?",
+          "options": [
+            "Stateful applications with stable network identity",
+            "Stateless applications",
+            "Background jobs",
+            "Cron jobs"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which command is used to create resources from YAML file?",
+          "options": [
+            "kubectl apply",
+            "kubectl create",
+            "kubectl run",
+            "kubectl deploy"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "What is a Namespace in Kubernetes?",
+          "options": [
+            "Virtual cluster within physical cluster",
+            "Storage partition",
+            "Network segment",
+            "Security zone"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which component schedules Pods on nodes?",
+          "options": [
+            "kube-scheduler",
+            "kubelet",
+            "kube-controller-manager",
+            "kube-proxy"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What does HPA stand for in Kubernetes?",
+          "options": [
+            "Horizontal Pod Autoscaler",
+            "High Performance Application",
+            "Host Port Assignment",
+            "Horizontal Pod Assignment"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which resource manages batch jobs?",
+          "options": [
+            "Job",
+            "CronJob",
+            "Both A and B",
+            "Deployment"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 19,
+          "question": "What is the role of kube-proxy?",
+          "options": [
+            "Maintains network rules on nodes",
+            "Manages containers",
+            "Schedules Pods",
+            "Stores cluster data"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which storage class provides temporary storage?",
+          "options": [
+            "emptyDir",
+            "hostPath",
+            "persistentVolumeClaim",
+            "configMap"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "What is a Node in Kubernetes?",
+          "options": [
+            "Worker machine (VM or physical)",
+            "Container",
+            "Pod",
+            "Service"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which component exposes Kubernetes API?",
+          "options": [
+            "kube-apiserver",
+            "kube-scheduler",
+            "kube-controller-manager",
+            "etcd"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What does RBAC stand for?",
+          "options": [
+            "Role-Based Access Control",
+            "Resource-Based Access Control",
+            "Rule-Based Access Control",
+            "Role-Based Authentication Control"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which command shows cluster nodes?",
+          "options": [
+            "kubectl get nodes",
+            "kubectl describe nodes",
+            "kubectl cluster-info",
+            "kubectl get pods"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What is the purpose of a ServiceAccount?",
+          "options": [
+            "Provides identity for Pods",
+            "Manages storage",
+            "Configures network",
+            "Schedules jobs"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which resource defines resource requests and limits?",
+          "options": [
+            "ResourceQuota",
+            "LimitRange",
+            "Both A and B",
+            "Deployment"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What does CNI stand for in Kubernetes networking?",
+          "options": [
+            "Container Network Interface",
+            "Cluster Network Interface",
+            "Container Node Interface",
+            "Cluster Node Interface"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which command forwards local port to Pod?",
+          "options": [
+            "kubectl port-forward",
+            "kubectl proxy",
+            "kubectl attach",
+            "kubectl exec"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is a Pod Security Policy?",
+          "options": [
+            "Controls security-sensitive aspects of Pod specification",
+            "Network policy",
+            "Storage policy",
+            "Resource policy"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which component manages controller loops?",
+          "options": [
+            "kube-controller-manager",
+            "kube-scheduler",
+            "kube-apiserver",
+            "kubelet"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "CI/CD Pipelines",
+      "description": "Learn continuous integration and deployment with Jenkins, GitLab CI, and GitHub Actions.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-code-branch",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What does CI stand for?",
+          "options": [
+            "Continuous Integration",
+            "Continuous Improvement",
+            "Continuous Inspection",
+            "Continuous Innovation"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 2,
+          "question": "Which is a CI/CD tool?",
+          "options": [
+            "Jenkins",
+            "GitLab CI",
+            "GitHub Actions",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 3,
+          "question": "What is the main purpose of CI?",
+          "options": [
+            "Automatically test code changes",
+            "Deploy to production",
+            "Monitor applications",
+            "Backup code"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "What does CD stand for?",
+          "options": [
+            "Continuous Deployment",
+            "Continuous Delivery",
+            "Both A and B",
+            "Continuous Development"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 5,
+          "question": "Which file configures GitHub Actions?",
+          "options": [
+            ".github/workflows/main.yml",
+            "github-actions.yml",
+            "actions.yml",
+            "workflow.yml"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 6,
+          "question": "What is a pipeline in CI/CD?",
+          "options": [
+            "Automated sequence of steps",
+            "Manual process",
+            "Single script",
+            "Deployment only"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "Which Jenkins component runs jobs?",
+          "options": [
+            "Agent",
+            "Controller",
+            "Master",
+            "Node"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 8,
+          "question": "What is GitLab CI configuration file?",
+          "options": [
+            ".gitlab-ci.yml",
+            "gitlab-ci.yml",
+            ".gitlab-ci.yaml",
+            "ci-config.yml"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "What is a stage in CI/CD pipeline?",
+          "options": [
+            "Logical group of jobs",
+            "Single command",
+            "Test suite",
+            "Deployment target"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which is a benefit of CI/CD?",
+          "options": [
+            "Faster releases",
+            "Better code quality",
+            "Automated testing",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 11,
+          "question": "What is Jenkinsfile?",
+          "options": [
+            "Pipeline definition file",
+            "Configuration file",
+            "Plugin file",
+            "Script file"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which GitHub Actions concept runs jobs?",
+          "options": [
+            "Workflow",
+            "Action",
+            "Runner",
+            "Step"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 13,
+          "question": "What is blue-green deployment?",
+          "options": [
+            "Two identical environments for zero-downtime",
+            "Single environment",
+            "Test environment",
+            "Backup environment"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which command triggers Jenkins pipeline?",
+          "options": [
+            "Build now",
+            "Run pipeline",
+            "Execute job",
+            "Start build"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 15,
+          "question": "What is a runner in GitLab CI?",
+          "options": [
+            "Machine that runs jobs",
+            "Person who runs tests",
+            "Script runner",
+            "Deployment tool"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which is a pipeline stage?",
+          "options": [
+            "Build",
+            "Test",
+            "Deploy",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 17,
+          "question": "What is canary deployment?",
+          "options": [
+            "Gradual rollout to users",
+            "Full deployment",
+            "Test deployment",
+            "Rollback deployment"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which Jenkins plugin manages pipelines?",
+          "options": [
+            "Pipeline",
+            "Workflow",
+            "Build",
+            "Deploy"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 19,
+          "question": "What is a workflow in GitHub Actions?",
+          "options": [
+            "Automated process defined in YAML",
+            "Manual process",
+            "Single action",
+            "Repository setting"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which GitLab CI keyword defines jobs?",
+          "options": [
+            "job",
+            "script",
+            "stage",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 21,
+          "question": "What is infrastructure as code in CI/CD?",
+          "options": [
+            "Manage infrastructure with code",
+            "Code infrastructure",
+            "Infrastructure coding",
+            "Code management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which tool is often used with CI/CD for containers?",
+          "options": [
+            "Docker",
+            "Kubernetes",
+            "Both A and B",
+            "Virtual machines"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 23,
+          "question": "What is rollback in deployment?",
+          "options": [
+            "Revert to previous version",
+            "Move forward",
+            "Stop deployment",
+            "Test deployment"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which GitHub Actions feature shares actions?",
+          "options": [
+            "Marketplace",
+            "Repository",
+            "Organization",
+            "Team"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 25,
+          "question": "What is a pipeline artifact?",
+          "options": [
+            "Files created during pipeline",
+            "Pipeline code",
+            "Configuration",
+            "Documentation"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which is a CI/CD best practice?",
+          "options": [
+            "Fast feedback",
+            "Automated tests",
+            "Version control",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 27,
+          "question": "What is Jenkins agent?",
+          "options": [
+            "Machine that executes jobs",
+            "Plugin",
+            "Configuration",
+            "User"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which GitLab CI keyword runs commands?",
+          "options": [
+            "script",
+            "run",
+            "execute",
+            "command"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 29,
+          "question": "What is continuous deployment?",
+          "options": [
+            "Automatically deploy every change",
+            "Manual deployment",
+            "Scheduled deployment",
+            "Test deployment"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which monitors CI/CD pipelines?",
+          "options": [
+            "Dashboard",
+            "Logs",
+            "Notifications",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Infrastructure as Code",
+      "description": "Explore Terraform and Ansible for managing infrastructure through code.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-server",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is Infrastructure as Code (IaC)?",
+          "options": [
+            "Managing infrastructure using configuration files",
+            "Writing infrastructure in programming languages",
+            "Both A and B",
+            "Manual infrastructure management"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 2,
+          "question": "Which tool uses HCL (HashiCorp Configuration Language)?",
+          "options": [
+            "Terraform",
+            "Ansible",
+            "Chef",
+            "Puppet"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "What does Terraform primarily manage?",
+          "options": [
+            "Infrastructure lifecycle",
+            "Configuration management",
+            "Application deployment",
+            "Monitoring setup"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which Ansible file defines playbooks structure?",
+          "options": [
+            "ansible.cfg",
+            "inventory",
+            "playbook.yml",
+            "requirements.yml"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 5,
+          "question": "What is Terraform state used for?",
+          "options": [
+            "Track resource metadata",
+            "Store credentials",
+            "Define variables",
+            "Manage modules"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which Ansible module executes shell commands?",
+          "options": [
+            "shell",
+            "command",
+            "Both A and B",
+            "script"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "What does 'terraform init' do?",
+          "options": [
+            "Initialize Terraform configuration",
+            "Apply changes",
+            "Plan changes",
+            "Destroy infrastructure"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What is an Ansible playbook?",
+          "options": [
+            "YAML file defining automation tasks",
+            "Collection of roles",
+            "Inventory file",
+            "Configuration file"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "Which Terraform command creates execution plan?",
+          "options": [
+            "terraform plan",
+            "terraform apply",
+            "terraform validate",
+            "terraform fmt"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "What are Ansible roles used for?",
+          "options": [
+            "Organize playbooks into reusable components",
+            "Define variables",
+            "Manage inventory",
+            "Store secrets"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What is Terraform backend?",
+          "options": [
+            "Where state is stored",
+            "Authentication method",
+            "Provider configuration",
+            "Module source"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which Ansible module manages packages?",
+          "options": [
+            "yum/apt",
+            "package",
+            "Both A and B",
+            "pip"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 13,
+          "question": "What does 'terraform apply' do?",
+          "options": [
+            "Apply changes to reach desired state",
+            "Create execution plan",
+            "Initialize configuration",
+            "Destroy resources"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What is Ansible Galaxy?",
+          "options": [
+            "Repository for sharing roles",
+            "Command-line tool",
+            "Both A and B",
+            "Configuration format"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "What are Terraform providers?",
+          "options": [
+            "Plugins to interact with APIs",
+            "Configuration files",
+            "State files",
+            "Variables"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which command runs Ansible playbook?",
+          "options": [
+            "ansible-playbook",
+            "ansible-run",
+            "ansible-execute",
+            "ansible-apply"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What is Terraform workspace?",
+          "options": [
+            "Isolated state environment",
+            "Working directory",
+            "Module collection",
+            "Provider configuration"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "What are Ansible facts?",
+          "options": [
+            "System information gathered from hosts",
+            "Playbook variables",
+            "Configuration data",
+            "Module outputs"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What does 'terraform destroy' do?",
+          "options": [
+            "Destroy managed infrastructure",
+            "Remove state file",
+            "Delete configuration",
+            "Uninstall Terraform"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which Ansible module manages files?",
+          "options": [
+            "copy",
+            "template",
+            "file",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 21,
+          "question": "What are Terraform outputs?",
+          "options": [
+            "Values exported from configuration",
+            "Console logs",
+            "Error messages",
+            "Debug information"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "What is Ansible Vault used for?",
+          "options": [
+            "Encrypt sensitive data",
+            "Store playbooks",
+            "Manage inventory",
+            "Configure roles"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What is Terraform module?",
+          "options": [
+            "Container for multiple resources",
+            "Provider plugin",
+            "State file",
+            "Variable file"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which Ansible module manages services?",
+          "options": [
+            "service",
+            "systemd",
+            "Both A and B",
+            "daemon"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "What is Terraform remote state?",
+          "options": [
+            "State stored in remote backend",
+            "State shared across teams",
+            "Both A and B",
+            "Local state file"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "What are Ansible handlers?",
+          "options": [
+            "Tasks triggered by notifications",
+            "Error handlers",
+            "Variable handlers",
+            "Role handlers"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What does 'terraform refresh' do?",
+          "options": [
+            "Update state with real infrastructure",
+            "Refresh provider tokens",
+            "Update modules",
+            "Clear cache"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "What is Ansible inventory?",
+          "options": [
+            "List of managed hosts",
+            "Playbook structure",
+            "Role definition",
+            "Variable file"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What are Terraform data sources?",
+          "options": [
+            "Read-only resources for external data",
+            "Output values",
+            "Input variables",
+            "Local values"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "What is Ansible ad-hoc command?",
+          "options": [
+            "Single task execution without playbook",
+            "Playbook debugging",
+            "Role testing",
+            "Inventory management"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,569 @@
+{
+  "interview_index": [
+    { "key": "php_intro", "title": "PHP Overview" },
+    { "key": "php_syntax", "title": "Syntax & Types" },
+    { "key": "php_cli", "title": "CLI & Scripts" },
+    { "key": "php_composer", "title": "Composer & Autoloading (PSR-4)" },
+    { "key": "php_namespaces", "title": "Namespaces & Project Layout" },
+    { "key": "php_oop", "title": "Objects & OOP" },
+    { "key": "php_traits_interfaces", "title": "Traits, Interfaces & DI" },
+    { "key": "php_database", "title": "Databases (PDO/ORM)" },
+    { "key": "php_rest", "title": "REST APIs & JSON" },
+    { "key": "php_security", "title": "Security & Best Practices" },
+    { "key": "php_sessions", "title": "Sessions, Cookies & State" },
+    { "key": "php_performance", "title": "Performance & Caching" },
+    { "key": "php_swoole", "title": "Async / Swoole & Workers" },
+    { "key": "php_testing", "title": "Testing & Tooling" },
+    { "key": "php_debug", "title": "Debugging & Profiling" },
+    { "key": "php_deployment", "title": "Deployment & Containers" },
+    { "key": "php_best_practices", "title": "Best Practices & PSRs" }
+  ],
+
+  "php_intro": {
+    "title": "PHP Overview",
+    "summary": "A pragmatic server-side language powering many web apps — from legacy to modern frameworks.",
+    "details": "Learn more — deep dive and practical checklist:\n\nOverview & context\n- PHP is optimized for HTTP request/response workflows but also runs CLI and long-running processes. Understand the server SAPI (apache mod_php vs php-fpm vs cli) and how environment differs across them.\n\nLocal dev & tooling\n- Use Composer for dependency management and autoloading. Keep composer.lock committed; use composer install --no-dev --optimize-autoloader when deploying.\n- Use Docker for consistent development environments: prefer multi-stage builds to produce small runtime images.\n- Use static analysis (PHPStan/Psalm) and linters (PHPCS) early to catch errors before runtime.\n\nPerformance & ops\n- Enable OPcache and tune opcache.memory_consumption and opcache.validate_timestamps according to deploy cadence.\n- Run PHP-FPM behind Nginx for production; tune pm.* settings to match memory and expected concurrency.\n\nSecurity basics\n- Disable display_errors in production; use error_log and centralized error tracking (Sentry).\n- Regularly scan dependencies (composer audit) and subscribe to security advisories for your packages.\n\nLearning path\n- Hands-on: build a small app (routing, DI, DB, tests) then containerize it, add CI with static analysis, and deploy behind php-fpm+nginx. Gradually add background workers and observability.",
+    "cheat": "// Quick commands\nphp -v                      # check PHP version\nphp -S localhost:8000 -t public   # built-in server for local dev\ncomposer install             # install deps (use composer.lock)\ncomposer dump-autoload -o    # optimize autoload for production\nphp -d memory_limit=512M script.php  # run script with custom ini\n\n// php.ini highlights\nopcache.enable=1\nopcache.memory_consumption=128\nerror_reporting=E_ALL\ndisplay_errors=0   # off in prod\n\n// local docker dev\ndocker run --rm -v $(pwd):/app -w /app php:8.1-cli php script.php",
+    "examples": [
+      { "code": "<?php\n// simple script\nfunction greet(string $name): string { return \"Hello, $name\"; }\necho greet('PHP');\n?>" }
+    ],
+    "interview": [
+      { "q": "What is PHP?", "a": "A server-side scripting language primarily used for web development." },
+      { "q": "What versions of PHP are commonly used?", "a": "Modern projects use PHP 7.4, 8.0, 8.1+; each brings performance and language features." },
+      { "q": "What is the PHP request lifecycle?", "a": "Server receives request, PHP executes script, generates response, then returns it to the server." },
+      { "q": "What is Composer?", "a": "Composer is PHP's dependency manager and autoloader tool." },
+      { "q": "What is PSR?", "a": "PHP Standard Recommendations — interoperability standards for PHP libraries." },
+      { "q": "When to use frameworks like Laravel or Symfony?", "a": "For larger apps to gain structure, tooling and community conventions." },
+      { "q": "What is the built-in PHP server for?", "a": "A lightweight server for local development: php -S localhost:8000." },
+      { "q": "What is OPcache?", "a": "A bytecode cache improving performance by caching compiled scripts." },
+      { "q": "How to run PHP from CLI?", "a": "Use php script.php or run interactive mode with php -a." },
+      { "q": "How does autoloading work?", "a": "Composer generates autoloaders mapping namespaces to file paths per PSR-4." },
+      { "q": "What are common uses of PHP today?", "a": "Web apps, APIs, CLI tools, background workers and server-side rendering." },
+      { "q": "What is the difference between PHP and JavaScript on the server?", "a": "PHP is synchronous by default and designed for HTTP; Node.js is event-driven and single-threaded." },
+      { "q": "What are attributes in PHP?", "a": "Metadata annotations introduced to the language (PHP 8+) used for configs and DI." },
+      { "q": "What is JIT in PHP?", "a": "Just-In-Time compilation available in newer PHP versions to improve CPU-bound workloads." },
+      { "q": "Why keep composer.lock in VCS?", "a": "To ensure deterministic dependency versions across environments." },
+      { "q": "What is semantic versioning in PHP packages?", "a": "MAJOR.MINOR.PATCH; breaking changes bump MAJOR." },
+      { "q": "How to secure PHP installations?", "a": "Keep PHP updated, disable unused extensions, and follow secure php.ini practices." },
+      { "q": "What is the role of php-fpm?", "a": "FastCGI Process Manager to run PHP worker processes behind a webserver like Nginx." },
+      { "q": "How to profile PHP apps?", "a": "Use Xdebug or commercial profilers like Blackfire/Tideways." },
+      { "q": "What is a typical upgrade path for legacy PHP apps?", "a": "Incrementally update to newer PHP versions, add tests, and adopt tooling like static analyzers." }
+    ]
+  },
+
+  "php_syntax": {
+    "title": "Syntax & Types",
+    "summary": "Variables, arrays, scalar type hints, union types, null coalescing and strict mode.",
+    "details": "Learn more — language features, idioms and migration notes:\n\nTypes & ergonomics\n- Prefer declare(strict_types=1) across codebases that aim for consistent behavior. Use union types, nullable types (?Type), and typed properties to encode invariants.\n- Use return types and argument types for public APIs; complement with PHPDoc where generics or more detail are needed.\n\nModern syntax\n- Use arrow functions (fn) for short callbacks and use match for exhaustive branch handling (no fallthrough).\n- Nullsafe operator (?->) reduces boilerplate around null checks; combine with ?? for safe defaults.\n\nData handling\n- Prefer associative arrays for simple structures, but use Value Objects and DTOs for domain models to get predictable behavior and easier refactors.\n\nMigration notes\n- When upgrading PHP major versions, run static analyzers, address deprecations, and add tests before enabling new strict features.\n\nPractical tips\n- Use generators (yield) to stream large datasets, and prefer SplFixedArray or object pools in memory-sensitive loops.\n- Format code with phpcs or friendsofphp/php-cs-fixer to maintain consistency across teams.",
+    "cheat": "// Types & operators\ndeclare(strict_types=1);\nfunction sum(int|float $a, int|float $b): int|float { return $a + $b; }\n$value = $maybeNull?->prop ?? 'default';\n$status = match($code) { 200 => 'ok', 404 => 'not found', default => 'unknown' };\n\n// Common snippets\nlist($a,$b) = $arr;          // destructure\narray_map(fn($x)=>$x*2, $arr);\nfunction genRange($n){ for($i=0;$i<$n;$i++) yield $i; }\n\n// Static analysis\n// Add precise types and run phpstan/pasl to find issues early.",
+    "examples": [
+      { "code": "<?php\ndeclare(strict_types=1);\nfunction add(int $a, int $b): int { return $a + $b; }\necho add(2,3);\n?>" },
+      { "code": "<?php\n// nullsafe and match\n$user = null;\necho $user?->name ?? 'guest';\n$status = match(404){ 200 => 'ok', 404 => 'not found', default => 'unknown' };\n" }
+    ],
+    "interview": [
+      { "q": "What does declare(strict_types=1) do?", "a": "Enforces strict scalar type checking within the file." },
+      { "q": "What are union types?", "a": "A type declaration allowing multiple types, e.g., int|float." },
+      { "q": "What is null coalescing operator (??)?", "a": "Returns left operand if set and not null, otherwise the right operand." },
+      { "q": "What is nullsafe operator (?->)?", "a": "Safely accesses properties/methods on possibly null objects." },
+      { "q": "What is a typed property?", "a": "A class property declared with a type (e.g., private string $name;)." },
+      { "q": "What is an arrow function?", "a": "A concise fn(...) => expr; syntax introduced in PHP 7.4." },
+      { "q": "What is the match expression?", "a": "A safer, expression-based alternative to switch introduced in PHP 8." },
+      { "q": "How to declare return types?", "a": "Use function f(): Type { ... } to enforce return type (optionally strict)." },
+      { "q": "What is type coercion?", "a": "Implicit conversion of types; strict_types disables coercion for declared scalars." },
+      { "q": "How to define nullable types?", "a": "Use ?Type or Type|null to allow null." },
+      { "q": "What is the difference between arrays and Traversable?", "a": "Arrays are language primitives; Traversable is an interface for iterable objects." },
+      { "q": "How to destructure arrays in PHP?", "a": "Use list() or [] syntax to assign variables from arrays." },
+      { "q": "What are variadic functions?", "a": "Functions accepting variable numbers of args via ...$args." },
+      { "q": "How to use type hints for callable?", "a": "Declare callable type or use specific function signatures in docblocks." },
+      { "q": "What is the spaceship operator (<=>)?", "a": "Three-way comparison operator returning -1,0,1 for comparisons." },
+      { "q": "How to declare constants?", "a": "Use const NAME = value; inside classes or define('NAME', value) globally." },
+      { "q": "What is heredoc/nowdoc?", "a": "String syntaxes for multi-line strings; nowdoc is literal (no parsing)." },
+      { "q": "How to handle errors in modern PHP?", "a": "Prefer Exceptions and typed error handling; use Throwable for broad catches." },
+      { "q": "What are attributes vs docblocks?", "a": "Attributes are native metadata syntax; docblocks are comments parsed by tools." },
+      { "q": "When to use strict typing selectively?", "a": "Use strict in public APIs to catch errors early and rely on contracts." }
+    ]
+  },
+
+  "php_cli": {
+    "title": "CLI & Scripts",
+    "summary": "Using PHP from the command-line for scripts, cronjobs, and workers.",
+    "details": "Learn more — building robust CLI tools and workers:\n\nCLI app patterns\n- Use symfony/console for structured commands (auto-help, subcommands, options/arguments, interactive prompts). Keep business logic outside command classes for testability.\n\nLong-running workers\n- Use pcntl_signal to handle SIGTERM/SIGINT for graceful shutdown. Periodically call gc_collect_cycles(), monitor memory and restart processes before memory grows unbounded.\n- Use supervisors (systemd, supervisord, docker restart policies) to maintain worker processes and to perform rolling restarts for upgrades.\n\nConfiguration & env\n- Separate CLI and web configuration; prefer environment variables and config objects injected via DI to avoid environment coupling.\n\nTesting & debugging\n- Unit-test business logic and use integration tests for full CLI flows. Use verbose logs to inspect worker behavior and structured logs (JSON) for aggregation.",
+    "cheat": "// CLI basics\nphp script.php arg1 arg2\n$argv[0]; // script name\n$opts = getopt('f:',['limit:']);\n\n// Worker skeleton\npcntl_signal(SIGTERM, fn($sig)=> $shutdown=true);\nwhile(!$shutdown){ $job = getJob(); process($job); gc_collect_cycles(); }\n\n// Useful libs\ncomposer require symfony/console\n// run: vendor/bin/console my:task --limit=100",
+    "examples": [
+      { "code": "<?php\n// greet.php\n$name = $argv[1] ?? 'world'; echo \"Hello, $name\\n\";\n// run: php greet.php Alice\n" },
+      { "code": "<?php\n// worker sketch\nwhile(true){ $job = fetchJob(); process($job); sleep(1); }\n" }
+    ],
+    "interview": [
+      { "q": "When use PHP CLI?", "a": "For scripts, cronjobs, workers, maintenance tasks and local tooling." },
+      { "q": "How to pass arguments to a PHP script?", "a": "Use $argv array or getopt() for named options." },
+      { "q": "What is php -S?", "a": "Starts the built-in development web server." },
+      { "q": "How to write a long-running worker safely?", "a": "Manage memory, handle signals, and periodically restart or use supervisors." },
+      { "q": "What is symfony/console for?", "a": "A library to build robust CLI tools with commands and input handling." },
+      { "q": "How to run background jobs?", "a": "Use queuing systems (Redis, RabbitMQ) and worker processes." },
+      { "q": "How to handle signals in CLI PHP?", "a": "Use pcntl_signal to catch signals and gracefully shutdown." },
+      { "q": "What is daemonizing?", "a": "Running a process detached from terminal, often managed by systemd or supervisord." },
+      { "q": "How to test CLI scripts?", "a": "Isolate logic into services and write unit tests; test CLI integration with process wrappers." },
+      { "q": "How to read stdin?", "a": "Use fopen('php://stdin','r') or stream_select for interactive input." },
+      { "q": "How to output progress in CLI?", "a": "Use symfony/console ProgressBar or write to stdout with carriage returns." },
+      { "q": "How to limit memory in CLI?", "a": "Use ini_set('memory_limit','512M') or run with -d memory_limit=... option." },
+      { "q": "What is Composer global vs project-level install?", "a": "Global installs tools system-wide; project installs are per-project in vendor/bin." },
+      { "q": "How to run PHP unit tests from CLI?", "a": "Use vendor/bin/phpunit or phpunit phar." },
+      { "q": "How to schedule jobs in PHP?", "a": "Use cron or a scheduler library to invoke CLI scripts at intervals." },
+      { "q": "How to log from a CLI script?", "a": "Write to files, syslog, or structured logging outputs." },
+      { "q": "What are common pitfalls with CLI vs web SAPI?", "a": "No superglobals like $_SERVER request-specific, different environment variables and timeouts." },
+      { "q": "How to handle configuration for CLI tools?", "a": "Use env files, config objects, or DI to inject settings." },
+      { "q": "How to secure CLI scripts?", "a": "Restrict execution permissions and avoid executing untrusted inputs." },
+      { "q": "How to restart workers without downtime?", "a": "Use rolling restarts and supervisors to keep replacement workers running." }
+    ]
+  },
+
+  "php_composer": {
+    "title": "Composer & Autoloading (PSR-4)",
+    "summary": "Package management and standard autoloading.",
+    "details": "Learn more — managing dependencies and package hygiene:\n\nComposer best practices\n- Keep composer.lock in VCS for apps; for libraries, consumers control resolution so release with tagged versions.\n- Use PSR-4 autoloading and keep a single top-level namespace per package to avoid collisions.\n\nDependency strategy\n- Prefer stable, minimal dependencies. Use require-dev for dev-only tools (phpunit, phpstan).\n- Use Composer scripts to automate linting, code style fixes, tests and build steps during CI pipelines.\n\nPerformance & CI\n- Cache Composer's cache directory and vendor folder in CI; use composer install --prefer-dist --no-interaction --no-progress --no-suggest in CI.\n\nSecurity\n- Run composer audit and integrate automated dependency update bots (Dependabot) with PRs and test gates to validate upgrades.",
+    "cheat": "// Common Composer commands\ncomposer init\ncomposer require vendor/package\ncomposer require --dev phpunit/phpunit phpstan/phpstan\ncomposer install --no-dev --optimize-autoloader\ncomposer update vendor/package --with-dependencies\ncomposer diagnose\ncomposer show -l  # list deps\ncomposer audit --format=json\n\n// Autoload sample\n\"autoload\": { \"psr-4\": { \"App\\\\\": \"src/\" } }\n\n// CI tip: cache $HOME/.composer/cache and vendor/",
+    "examples": [
+      { "code": "{\n  \"autoload\": { \"psr-4\": { \"App\\\\\": \"src/\" } }\n}\n// then require 'vendor/autoload.php'\n" },
+      { "code": "<?php\nrequire __DIR__ . '/vendor/autoload.php'; $u = new \\App\\User();\n" }
+    ],
+    "interview": [
+      { "q": "What is composer.json for?", "a": "Defines project metadata, dependencies, autoloading and scripts." },
+      { "q": "What does composer.lock do?", "a": "Pins exact dependency versions installed for reproducible builds." },
+      { "q": "What is PSR-4 autoloading?", "a": "Maps namespaces to directory paths for autoloading classes." },
+      { "q": "How to require a package?", "a": "composer require vendor/package and commit composer.lock." },
+      { "q": "How to update dependencies safely?", "a": "Use composer update selectively and run tests; prefer dependabot for PRs." },
+      { "q": "What are composer scripts?", "a": "Hooks allowing commands to run on events like post-install-cmd." },
+      { "q": "How to create a library package?", "a": "Publish composer.json with proper autoload and version tags." },
+      { "q": "How to optimize autoloader for production?", "a": "Use composer install --optimize-autoloader --no-dev." },
+      { "q": "What is semantic version constraint ^1.2?", "a": "Allows updates that do not change the major version (1.x.x)." },
+      { "q": "What is platform requirement in composer?", "a": "Defines PHP or extension versions required, e.g., php: ^8.0." },
+      { "q": "How to handle private packages?", "a": "Use private repositories or Satis/Packagist private endpoints." },
+      { "q": "How to autoload files (not classes)?", "a": "Use the files autoload section to include procedural files." },
+      { "q": "How to require-dev vs require?", "a": "require-dev installs packages only for development/testing, not production." },
+      { "q": "What is composer global require used for?", "a": "Installing CLI tools available system-wide." },
+      { "q": "How to speed up Composer on CI?", "a": "Cache vendor and composer cache between runs." },
+      { "q": "How to add PSR-4 mapping?", "a": "Add autoload:{\"psr-4\":{\"App\\\\\":\"src/\"}} to composer.json." },
+      { "q": "How to handle autoloading conflicts?", "a": "Ensure unique namespaces and correct PSR-4 mapping to avoid collisions." },
+      { "q": "How to run platform checks?", "a": "composer check-platform-reqs validates PHP and extension requirements." },
+      { "q": "What is plugin capability in Composer?", "a": "Composer supports plugins that hook into install/update lifecycle." },
+      { "q": "How to sign packages or verify integrity?", "a": "Use lock files, commit them, and verify checksums via Composer's metadata." }
+    ]
+  },
+
+  "php_namespaces": {
+    "title": "Namespaces & Project Layout",
+    "summary": "Organize code with namespaces, PSR project layout, and separation of concerns.",
+    "details": "Learn more — organizing code and maintaining public APIs:\n\nProject layout\n- Adopt consistent layout: src/ for code, tests/ for tests, public/ for web root. Map namespaces to paths via PSR-4 in composer.json.\n\nNamespace hygiene\n- Limit namespace depth to keep FQCNs readable. Reserve root-level namespaces for public APIs and packages to avoid collisions.\n\nRefactoring & versioning\n- Treat namespaces as part of your public contract. When renaming, provide adapters and plan breaking releases with migration docs.\n\nTooling\n- Use IDE refactors (PhpStorm) and composer dump-autoload -o for optimized maps in production.",
+    "cheat": "// composer.json\n\"autoload\": { \"psr-4\": { \"App\\\\\": \"src/\" } }\n\n// File path -> Namespace\nsrc/Controller/HomeController.php => namespace App\\Controller;\n\n// CLI\ncomposer dump-autoload -o  # regenerate optimized autoload mapping",
+    "examples": [
+      { "code": "<?php\nnamespace App\\Controller;\nclass HomeController { public function index(){ return 'ok'; } }\n" }
+    ],
+    "interview": [
+      { "q": "Why use namespaces?", "a": "Avoid name collisions and organize code logically." },
+      { "q": "How to declare a namespace?", "a": "Use namespace App\\Controller; at the top of a PHP file." },
+      { "q": "What is the global namespace?", "a": "Code without a namespace resides in the global namespace." },
+      { "q": "How to import classes?", "a": "Use use Vendor\\Package\\ClassName; to alias or import." },
+      { "q": "What is PSR-4 mapping purpose?", "a": "Maps namespaces to filesystem directories for autoloaders." },
+      { "q": "How to structure project directories?", "a": "Common layout: src/, tests/, public/, config/ and vendor/." },
+      { "q": "Can namespaces be nested?", "a": "Yes, like App\\Controller\\Api; they map to deeper directory structures." },
+      { "q": "How to alias long namespaces?", "a": "use Some\\Long\\Namespace\\Class as ShortName;" },
+      { "q": "How to handle class name collisions?", "a": "Use namespaces or aliasing via as keyword." },
+      { "q": "What is a namespace prefix?", "a": "Initial segment of namespace used in PSR-4 mapping." },
+      { "q": "How to reference global functions from namespace?", "a": "Prefix with \\ to reference global functions or import them." },
+      { "q": "Why avoid deep namespace hierarchies?", "a": "Can add complexity; prefer flat meaningful boundaries." },
+      { "q": "How do namespaces affect autoloading performance?", "a": "PSR-4 autoloading is efficient; avoid excessive filesystem lookups." },
+      { "q": "What is a vendor namespace?", "a": "Namespace beginning with vendor or package name to avoid collisions." },
+      { "q": "How to organize controllers vs services?", "a": "Keep controllers thin and place business logic in services under different namespaces." },
+      { "q": "How to map multiple namespaces to one directory?", "a": "PSR-4 allows multiple prefixes mapping to the same path." },
+      { "q": "How to test namespaced code?", "a": "Composer autoload enables tests to instantiate classes by their FQCN." },
+      { "q": "How to expose public API namespaces?", "a": "Document and keep backward-compatible public namespaces stable." },
+      { "q": "How to rename namespaces safely?", "a": "Use automated refactors, update composer.json and release as breaking change." },
+      { "q": "How to handle legacy global functions with namespaces?", "a": "Wrap legacy code in adapters inside a namespace to gradually modernize." }
+    ]
+  },
+
+  "php_oop": {
+    "title": "Objects & OOP",
+    "summary": "Classes, typed properties, constructor promotion, DI and testable design.",
+    "details": "Learn more — designing maintainable object-oriented systems in PHP:\n\nDesign principles\n- Apply SOLID: small single-purpose classes, explicit interfaces, and dependency inversion for testability.\n- Favor composition over inheritance; use traits sparingly for small cross-cutting concerns only.\n\nDI & factories\n- Use constructor injection for required dependencies; use factories for complex construction and DI containers (Symfony DI, PHP-DI) for large apps.\n\nImmutable patterns\n- Use value objects and immutable DTOs for domain data. Use readonly properties where appropriate (PHP 8.1+) to enforce immutability.\n\nTesting & contracts\n- Program to interfaces: write tests against interfaces and provide fakes/mocks. Document invariants and exception behavior in PHPDoc.",
+    "cheat": "// constructor promotion\nclass Svc { public function __construct(private Repo $repo, private Logger $log){} }\n\n// typed props\nprivate ?int $id = null;\n\n// sample interface\ninterface UserRepo { public function find(int $id): ?User; }\n\n// factory\nfunction makeUserService(): UserService { return new UserService(new UserRepoImpl()); }",
+    "examples": [
+      { "code": "<?php\nclass User { private string $name; public function __construct(string $n){ $this->name=$n; } public function getName(): string { return $this->name; } }\n?>" },
+      { "code": "<?php\n// constructor promotion (PHP 8)\nclass Point { public function __construct(private float $x, private float $y){} public function x(){return $this->x;} }\n" }
+    ],
+    "interview": [
+      { "q": "What is constructor promotion?", "a": "Declaring and initializing properties in the constructor signature (PHP 8)." },
+      { "q": "What are typed properties?", "a": "Properties declared with types, e.g., private int $id;" },
+      { "q": "What is dependency injection (DI)?", "a": "Providing dependencies to classes via constructor or setter injection." },
+      { "q": "What is SOLID? (brief)", "a": "Five design principles to make code maintainable and testable." },
+      { "q": "What is encapsulation?", "a": "Hiding internal state and exposing a defined API via methods." },
+      { "q": "What is polymorphism?", "a": "Using a common interface to interact with different implementations." },
+      { "q": "What is inheritance vs composition?", "a": "Inheritance extends behavior; composition combines objects to reuse behavior." },
+      { "q": "When to use final classes?", "a": "To prevent extension for stability and API safety." },
+      { "q": "What are magic methods?", "a": "__construct, __get, __set, __toString and others for special behaviors." },
+      { "q": "What is an abstract class?", "a": "A class that cannot be instantiated and may define abstract methods." },
+      { "q": "What is an interface?", "a": "A contract defining public methods a class must implement." },
+      { "q": "How to make code testable with OOP?", "a": "Design small classes, inject dependencies, and program to interfaces." },
+      { "q": "What is value object?", "a": "An immutable object representing a value with equality by state." },
+      { "q": "How to handle large services?", "a": "Split responsibilities and apply single responsibility principle." },
+      { "q": "What are static methods downsides?", "a": "Harder to mock and can introduce global state." },
+      { "q": "How to document OOP APIs?", "a": "Use typed signatures and PHPDoc for complexity and examples." },
+      { "q": "What is Liskov Substitution Principle?", "a": "Subtype must be replaceable for its base type without altering behavior." },
+      { "q": "How to manage object lifecycles?", "a": "Use factories or DI containers to centralize creation and configuration." },
+      { "q": "What is method chaining?", "a": "Returning $this to allow fluent API calls." },
+      { "q": "When to prefer composition?", "a": "When you need flexible behavior reuse and to avoid rigid inheritance." }
+    ]
+  },
+
+  "php_traits_interfaces": {
+    "title": "Traits, Interfaces & Dependency Injection",
+    "summary": "Reuse via traits, interfaces for contracts and DI for decoupling.",
+    "details": "Learn more — composition, contracts and testability:\n\nTraits\n- Use traits for small, reusable method bundles (logging, simple helpers); avoid traits that mutate or contain stateful behavior that breaks encapsulation.\n- Resolve conflicts explicitly with insteadof/as and document reasoning.\n\nInterfaces & DI\n- Keep interfaces small and focused to simplify mocks and alternative implementations. Use interface segregation to avoid fat contracts.\n- Use interface-based factories to create complex object graphs and keep wiring in a composition root.\n\nTesting\n- Use PHPUnit/Mockery/Prophecy to create interface-based mocks; prefer integration tests for verifying real wiring once.",
+    "cheat": "// trait example\ntrait LoggerTrait { protected function log(string $msg){ /* write to logger */ } }\n\n// interface + DI\ninterface Mailer { public function send(string $to, string $body): bool; }\nclass SmtpMailer implements Mailer { public function send(string $to,string $body): bool { return true; } }\n\n// container pseudo\n$container->bind(Mailer::class, SmtpMailer::class);",
+    "examples": [
+      { "code": "<?php\ntrait LoggerTrait { protected function log($m){ echo $m; } }\ninterface Mailer { public function send(string $to, string $body); }\nclass SmtpMailer implements Mailer { public function send(string $to, string $body){} }\n" }
+    ],
+    "interview": [
+      { "q": "What is a trait?", "a": "A code reuse mechanism to include methods across classes." },
+      { "q": "When to use traits?", "a": "For horizontal code reuse when inheritance is unsuitable." },
+      { "q": "What is an interface?", "a": "A contract defining public methods without implementation." },
+      { "q": "How do traits differ from interfaces?", "a": "Traits provide method implementations; interfaces declare signatures." },
+      { "q": "What is dependency injection (DI)?", "a": "Pattern to supply dependencies from outside, improving testability." },
+      { "q": "What is constructor vs setter injection?", "a": "Constructor injection provides dependencies at creation; setter injection allows later configuration." },
+      { "q": "What is Service Locator anti-pattern?", "a": "A global registry hiding dependencies and reducing testability." },
+      { "q": "How to resolve trait method conflicts?", "a": "Use insteadof and as to resolve and alias methods." },
+      { "q": "How to design interfaces for testing?", "a": "Keep them small and focused to ease mocking." },
+      { "q": "What is interface segregation?", "a": "Prefer multiple specific interfaces over one large interface." },
+      { "q": "How to mock interfaces?", "a": "Use testing frameworks like PHPUnit to create mocks based on interfaces." },
+      { "q": "When to use abstract classes over interfaces?", "a": "When you need shared implementation as well as contracts." },
+      { "q": "What is DI container responsibility?", "a": "Resolve and instantiate services and their dependencies." },
+      { "q": "How to avoid overusing traits?", "a": "Limit traits to small, well-scoped behavior to keep clarity." },
+      { "q": "What is composition over inheritance?", "a": "Prefer composing behavior from small objects rather than deep inheritance." },
+      { "q": "How to design extension points with interfaces?", "a": "Expose interfaces for replaceable components and keep implementations private." },
+      { "q": "How to version interfaces safely?", "a": "Avoid breaking changes; add new interfaces instead of modifying existing ones." },
+      { "q": "How to handle optional dependencies in DI?", "a": "Use nullable types with defaults or factories to create optional services." },
+      { "q": "What is contract-first design?", "a": "Define interfaces before implementations to guide architecture." },
+      { "q": "How to test trait logic?", "a": "Wrap trait in a small testable class or use anonymous classes in tests." }
+    ]
+  },
+
+  "php_database": {
+    "title": "Databases (PDO & ORMs)",
+    "summary": "Use PDO prepared statements, transactions and be aware of N+1s when using ORMs.",
+    "details": "Learn more — practical relational database patterns for PHP apps:\n\nSQL safety & usage\n- Always use parameterized queries with PDO or prepared statements from your ORM. Avoid building SQL strings by concatenation.\n\nTransactions & concurrency\n- Use transactions for multi-step updates, keep them short, and be aware of isolation levels. Use consistent ordering of resource access to reduce deadlocks.\n\nORM caution\n- Watch for N+1 queries; use eager loading or explicit joins and profile with query log or DB slow query log.\n\nMigrations & ops\n- Use migration tools (Phinx, Doctrine Migrations) and include rollback paths for risky changes. Run migrations in CI/staging before production and ensure backups are available.\n\nScaling\n- Use read replicas for scaling reads and caching layers (Redis, memcached) to reduce DB load for common queries.",
+    "cheat": "// PDO example\n$pdo = new PDO('mysql:host=127.0.0.1;dbname=app', 'user', 'pass', [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);\n$stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');\n$stmt->execute(['id'=>$id]);\n$row = $stmt->fetch(PDO::FETCH_ASSOC);\n\n// transaction\n$pdo->beginTransaction(); try{ /* ... */ $pdo->commit(); } catch(Exception $e){ $pdo->rollBack(); throw $e; }\n\n// index advice\nCREATE INDEX idx_users_email ON users(email);  -- used for lookups",
+    "examples": [
+      { "code": "<?php\n$pdo = new PDO('mysql:host=127.0.0.1;dbname=test', 'user', 'pass');\n$stmt = $pdo->prepare('SELECT name FROM users WHERE id = :id');\n$stmt->execute(['id' => 42]);\n$user = $stmt->fetch(PDO::FETCH_ASSOC);\n" }
+    ],
+    "interview": [
+      { "q": "How to prevent SQL injection?", "a": "Always use prepared statements and bound parameters." },
+      { "q": "What is PDO?", "a": "PHP Data Objects — a database abstraction layer supporting prepared statements." },
+      { "q": "What is an ORM?", "a": "Object-Relational Mapper mapping DB rows to objects (e.g., Doctrine, Eloquent)." },
+      { "q": "What is N+1 problem?", "a": "Excessive queries due to lazy-loading related records in loops." },
+      { "q": "How to use transactions?", "a": "Begin a transaction, commit on success and rollback on errors." },
+      { "q": "What is connection pooling?", "a": "Reusing DB connections to reduce overhead (managed by drivers/infra)." },
+      { "q": "How to index DB tables properly?", "a": "Create indexes on frequently searched/joined columns, but avoid over-indexing." },
+      { "q": "How to handle migrations?", "a": "Use migration tools to version schema changes and apply them reliably." },
+      { "q": "How to store credentials securely?", "a": "Keep DB credentials in environment variables or secret stores, not in VCS." },
+      { "q": "When to use prepared statements vs ORM?", "a": "Use prepared statements for raw SQL performance-sensitive queries; ORM for productivity." },
+      { "q": "How to paginate large result sets?", "a": "Use cursor-based pagination or limit/offset with care for performance." },
+      { "q": "What is query profiling?", "a": "Measure queries to find slow statements and optimize or add indexes." },
+      { "q": "How to handle DB sharding?", "a": "Partition data across instances based on keys, handle routing in the app." },
+      { "q": "How to avoid deadlocks?", "a": "Access tables in consistent order and keep transactions short." },
+      { "q": "How to cache DB results?", "a": "Cache heavyweight queries in Redis or memcached with TTLs." },
+      { "q": "How to handle migrations in CI/CD?", "a": "Run migrations as part of deploy process with rollbacks and backups." },
+      { "q": "How to store JSON in DB?", "a": "Use JSON column types (if available) and index JSON paths as needed." },
+      { "q": "How to test DB interactions?", "a": "Use transactional tests, in-memory DBs, or containerized ephemeral DBs." },
+      { "q": "What is eventual consistency?", "a": "A model where data becomes consistent over time across distributed stores." },
+      { "q": "When to denormalize?", "a": "For read-heavy systems to improve performance, at the cost of complexity." }
+    ]
+  },
+
+  "php_rest": {
+    "title": "REST APIs & JSON",
+    "summary": "Design endpoints, use proper status codes, validation and documentation.",
+    "details": "Learn more — API design, error handling and evolving contracts:\n\nDesign & semantics\n- Use nouns in URIs, HTTP verbs for actions, and proper status codes: 200, 201 (create), 204 (no content), 400/422 (validation), 401 (auth), 403 (authorization), 404 (not found), 429 (rate limit), 500 (server error).\n\nValidation & errors\n- Validate inputs server-side and return structured error payloads containing code, message and optionally field-level details. Use consistent schemas and document them in OpenAPI.\n\nVersioning & compatibility\n- Version early (URL or header) and follow a deprecation strategy. Keep changes backward-compatible when possible; if breaking changes are needed, bump major version.\n\nSecurity & performance\n- Use TLS, authenticate with OAuth2/JWT where applicable, throttle abusive clients and set cache headers (ETag, Cache-Control). Consider pagination and filtering for large lists.",
+    "cheat": "// JSON helpers\nheader('Content-Type: application/json');\nhttp_response_code(200);\necho json_encode(['data' => $payload]);\n\n// create response\nhttp_response_code(201);\nheader('Location: /v1/users/123');\n\n// error response\nhttp_response_code(422);\necho json_encode(['error'=>'validation','details'=>$errors]);",
+    "examples": [
+      { "code": "<?php\nheader('Content-Type: application/json'); http_response_code(200);\necho json_encode(['data' => ['id'=>1, 'name'=>'Alice']]);\n" }
+    ],
+    "interview": [
+      { "q": "What makes an API RESTful?", "a": "Statelessness, resource-based URIs, standard HTTP verbs and proper status codes." },
+      { "q": "What status code for creation?", "a": "201 Created, usually with a Location header." },
+      { "q": "How to handle validation?", "a": "Validate inputs server-side and return clear error payloads with 4xx codes." },
+      { "q": "How to version an API?", "a": "Use URL versioning (/v1/) or header-based versioning and maintain backward compatibility." },
+      { "q": "What is idempotency?", "a": "Making repeated requests have the same effect as a single request." },
+      { "q": "How to paginate responses?", "a": "Provide limit/offset or cursor-based pagination and include metadata." },
+      { "q": "How to document APIs?", "a": "Use OpenAPI/Swagger to describe endpoints, schemas and examples." },
+      { "q": "How to handle authentication?", "a": "Use tokens (JWT/OAuth) or session-based auth depending on clients." },
+      { "q": "Why use proper content types?", "a": "Set Content-Type and Accept headers for content negotiation." },
+      { "q": "How to handle errors consistently?", "a": "Return structured error objects with codes and messages." },
+      { "q": "What is HATEOAS?", "a": "Hypermedia links in responses to navigate the API; less common in many APIs." },
+      { "q": "How to secure APIs?", "a": "Use HTTPS, rate-limiting, authentication and input validation." },
+      { "q": "When use GraphQL vs REST?", "a": "GraphQL fits flexible queries but adds complexity; REST is simpler for standard CRUD." },
+      { "q": "How to stream large responses?", "a": "Use chunked transfer encoding or pagination to avoid large payloads." },
+      { "q": "How to support content negotiation?", "a": "Respect Accept header and return the requested format when possible." },
+      { "q": "How to test APIs?", "a": "Use integration tests and contract tests to validate behavior." },
+      { "q": "How to handle rate limiting?", "a": "Implement quotas per client and return 429 with Retry-After header." },
+      { "q": "What is CORS and why care?", "a": "Cross-Origin Resource Sharing controls browser access to resources; configure appropriately." },
+      { "q": "How to design resource URIs?", "a": "Use nouns, hierarchical paths and avoid verbs in URIs." },
+      { "q": "What are cache headers for APIs?", "a": "Use Cache-Control and ETag/Last-Modified to enable client/proxy caching." }
+    ]
+  },
+
+  "php_security": {
+    "title": "Security & Best Practices",
+    "summary": "Sanitize input, use prepared statements, CSRF protections and secure file handling.",
+    "details": "Learn more — security checklist and hardening steps:\n\nInput & output\n- Validate and sanitize inputs with whitelists; escape output according to context: HTML, JS, URL, CSS.\n\nAuthentication & sessions\n- Use password_hash/password_verify for passwords. Use secure session storage, regenerate session IDs on login and use HttpOnly/Secure/SameSite cookie flags.\n\nNetwork & infra\n- Enforce HTTPS with HSTS; terminate TLS at load balancer and validate headers. Apply rate limits, WAF rules and IP-level protections where necessary.\n\nDependencies & supply chain\n- Use composer audit, pin versions, scan images for vulnerable CVEs, and consider SBOMs for higher security assurance.\n\nIncident readiness\n- Centralize logs, implement anomaly alerts, have response runbooks and rotate credentials periodically.",
+    "cheat": "// passwords\n$hash = password_hash($pw, PASSWORD_DEFAULT);\nif (password_verify($pw, $hash)) { /* ok */ }\n\n// csrp\n// generate: $_SESSION['csrf'] = bin2hex(random_bytes(32)); include hidden input and verify on submit\n\n// secure cookie\nsetcookie('sess', $id, ['httponly'=>true, 'secure'=>true, 'samesite'=>'Lax']);",
+    "examples": [
+      { "code": "<?php\n$hash = password_hash('s3cr3t', PASSWORD_DEFAULT);\nif(password_verify($input, $hash)){ /* ok */ }\n" }
+    ],
+    "interview": [
+      { "q": "How to prevent SQL injection?", "a": "Use prepared statements and parameterized queries." },
+      { "q": "How to prevent XSS?", "a": "Escape output with htmlspecialchars and use Content Security Policy." },
+      { "q": "How to handle CSRF?", "a": "Use CSRF tokens and same-site cookies or framework CSRF protections." },
+      { "q": "How to store passwords?", "a": "Use password_hash and password_verify with strong algorithms." },
+      { "q": "How to secure file uploads?", "a": "Validate file types, store outside web root, and scan for malware." },
+      { "q": "How to manage secrets?", "a": "Use environment variables or secret managers, not VCS." },
+      { "q": "What is input validation vs output escaping?", "a": "Validate inputs for correctness; escape outputs for the target context." },
+      { "q": "How to use HTTPS correctly?", "a": "Redirect all traffic to HTTPS and use HSTS headers." },
+      { "q": "How to mitigate session fixation?", "a": "Regenerate session ID at login and use secure cookies." },
+      { "q": "What is secure cookie configuration?", "a": "Use HttpOnly, Secure, and SameSite attributes." },
+      { "q": "How to prevent remote code execution?", "a": "Avoid eval(), validate inputs and run minimal permission scripts." },
+      { "q": "How to keep dependencies secure?", "a": "Scan for vulnerabilities and update dependencies regularly." },
+      { "q": "How to log securely?", "a": "Avoid logging secrets and use structured logs with access controls." },
+      { "q": "What is rate limiting for security?", "a": "Throttle requests to prevent brute-force attacks." },
+      { "q": "How to implement authorization?", "a": "Use role/permission checks and enforce on server side." },
+      { "q": "How to handle error messages?", "a": "Avoid leaking internal details; provide user-friendly messages." },
+      { "q": "What is content security policy (CSP)?", "a": "A header-based mechanism to restrict what resources can be loaded/executed." },
+      { "q": "How to secure cookies across domains?", "a": "Use proper domain and sameSite settings; prefer server-side sessions." },
+      { "q": "When to use prepared statements vs escaping?", "a": "Prepared statements are preferred for DB queries; escaping for output contexts." },
+      { "q": "What is defense in depth?", "a": "Multiple overlapping security measures to reduce risk." }
+    ]
+  },
+
+  "php_sessions": {
+    "title": "Sessions, Cookies & State",
+    "summary": "Server-side sessions, secure cookies and stateless alternatives with care.",
+    "details": "Learn more — managing state robustly across environments:\n\nSession stores\n- Use Redis or DB-backed session handlers for multi-instance deployments. Avoid file-based sessions in distributed apps.\n\nSecurity & lifecycle\n- Regenerate session IDs after privilege change, enforce timeouts and implement absolute expiry. Clear session on logout and invalidate tokens on password change.\n\nStateless alternatives\n- JWTs can be used for stateless authentication but plan for revocation (short TTLs + refresh tokens or server-side blacklist).\n\nPerformance\n- Keep session payloads small by storing identifiers; fetch full state from DB/cache as needed. Monitor session store memory and purge expired entries.",
+    "cheat": "// start and secure\nsession_start();\nsession_regenerate_id(true);\n\n// Redis session handler (php.ini)\nsession.save_handler = redis\nsession.save_path = \"tcp://127.0.0.1:6379\"\n\n// set cookie with flags\nsetcookie('sid', $val, ['httponly'=>true,'secure'=>true,'samesite'=>'Strict']);",
+    "examples": [
+      { "code": "<?php\nsession_start(); $_SESSION['user_id'] = 123;\n" }
+    ],
+    "interview": [
+      { "q": "How to start a session?", "a": "Call session_start() before output to initialize session data." },
+      { "q": "How to secure sessions?", "a": "Use secure, HttpOnly and SameSite cookies and store session data server-side." },
+      { "q": "Why regenerate session id?", "a": "To prevent session fixation, regenerate after privilege changes like login." },
+      { "q": "When to use JWT vs sessions?", "a": "JWTs fit stateless APIs; sessions are simpler for server-side stateful auth." },
+      { "q": "How to store sessions in distributed systems?", "a": "Use centralized stores like Redis or database-backed session handlers." },
+      { "q": "What are cookie flags?", "a": "Attributes like Secure, HttpOnly and SameSite to control cookie behavior." },
+      { "q": "How to expire sessions?", "a": "Set proper session.gc_maxlifetime and implement inactivity timeouts." },
+      { "q": "How to handle logout?", "a": "Destroy session data and clear session cookie on logout." },
+      { "q": "How to prevent session hijacking?", "a": "Use TLS, rotate IDs, and tie sessions to user IP/agent heuristics." },
+      { "q": "How to share sessions across subdomains?", "a": "Set cookie domain to parent domain, with secure flags." },
+      { "q": "How to store minimal data in sessions?", "a": "Store identifiers; retrieve full data from DB to keep sessions small." },
+      { "q": "What is session locking?", "a": "Mechanism preventing concurrent writes to the same session to avoid races." },
+      { "q": "How to use cookies safely for sensitive data?", "a": "Never store secrets directly in cookies; use references and server-side stores." },
+      { "q": "How to handle cookies for APIs?", "a": "Prefer token-based auth for cross-origin APIs or configure CORS and credentials." },
+      { "q": "What is SameSite Lax vs Strict?", "a": "Lax allows some cross-site navigations; Strict blocks most cross-site requests." },
+      { "q": "How to manage session GC in high-traffic apps?", "a": "Use external session stores and tune TTLs rather than relying on GC." },
+      { "q": "How to test session-dependent features?", "a": "Use integration tests that simulate user flows and session persistence." },
+      { "q": "How to recover from corrupted sessions?", "a": "Rotate ID, clear data safely, and log incidents for investigation." },
+      { "q": "How to encrypt session data at rest?", "a": "Encrypt storage or use infrastructure that provides encryption for session stores." },
+      { "q": "How to audit session activity?", "a": "Log session creation, changes and logout events for security monitoring." }
+    ]
+  },
+
+  "php_performance": {
+    "title": "Performance & Caching",
+    "summary": "OPcache, Redis/memcached, optimize hot paths and profile before optimizing.",
+    "details": "Learn more — profiling, caching and scaling strategies:\n\nProfile-driven optimization\n- Start with profiling (Xdebug, Blackfire, Tideways) to find hotspots and high-allocation paths before optimizing.\n\nCaching layers\n- Use OPcache for code, HTTP cache headers for clients/CDNs, and Redis/memcached for application-level caches. Implement cache invalidation strategies carefully (cache-aside, write-through).\n\nDB & I/O\n- Optimize queries, add appropriate indexes, use pagination/cursors and offload heavy reports to dedicated batch jobs or read replicas.\n\nInfrastructure\n- Keep app servers stateless, scale horizontally behind a load balancer and manage shared state in centralized stores. Use autoscaling and circuit breakers for dependent services.",
+    "cheat": "// enable opcache (php.ini)\nopcache.enable=1\nopcache.memory_consumption=128\n\n// profile locally\ncomposer require --dev phpunit phpbench xdebug\nXDEBUG_MODE=profile vendor/bin/phpunit --filter hotPath\n\n// naive cache example\n$key = 'user:'.$id;\n$cached = $redis->get($key);\nif(!$cached){ $cached = fetchFromDb($id); $redis->set($key, json_encode($cached), 3600); }",
+    "examples": [
+      { "code": "<?php\n// naive cache pattern\n$key = 'user:'.$id; $cached = $redis->get($key);\nif(!$cached){ $cached = fetchFromDb($id); $redis->set($key, json_encode($cached), 3600); }\n" }
+    ],
+    "interview": [
+      { "q": "What is OPcache?", "a": "A bytecode cache that stores compiled PHP for faster execution." },
+      { "q": "How to profile PHP?", "a": "Use Xdebug for dev and Blackfire/Tideways for production profiling." },
+      { "q": "When to cache results?", "a": "Cache expensive computations or DB queries with predictable TTLs." },
+      { "q": "What is cold start vs warm start?", "a": "Cold start loads resources anew; warm start benefits from caches and ready processes." },
+      { "q": "How to reduce memory usage?", "a": "Free large variables, use generators and avoid loading entire datasets." },
+      { "q": "What are generators?", "a": "Yield-based iterators that allow lazy sequences to save memory." },
+      { "q": "How to optimize DB queries?", "a": "Add indexes, avoid N+1, and select only needed columns." },
+      { "q": "When to use Redis vs memcached?", "a": "Redis for advanced data structures and persistence; memcached for simple cache." },
+      { "q": "How to measure latency?", "a": "Measure request timings end-to-end and for internal services." },
+      { "q": "How to benchmark safely?", "a": "Use load testing tools in non-production environments with realistic data." },
+      { "q": "What is code hot path optimization?", "a": "Focus on optimizing frequently executed code for best ROI." },
+      { "q": "How to tune PHP-FPM?", "a": "Adjust pm settings, process counts and memory limits to match workload." },
+      { "q": "How to use CDN with PHP apps?", "a": "Offload static assets and aggressive caching to reduce server load." },
+      { "q": "How to implement HTTP caching?", "a": "Use Cache-Control, ETag, and Vary headers appropriately." },
+      { "q": "How to avoid premature optimization?", "a": "Profile first, identify bottlenecks, then optimize targeted areas." },
+      { "q": "How to reduce I/O overhead?", "a": "Batch disk/db writes and use in-memory caching where appropriate." },
+      { "q": "What is asynchronous PHP?", "a": "Using libs like Swoole or ReactPHP to run non-blocking code." },
+      { "q": "How to scale PHP horizontally?", "a": "Stateless app servers behind load balancers with shared caches and session stores." },
+      { "q": "How to handle large file uploads efficiently?", "a": "Stream uploads to storage rather than loading in memory." },
+      { "q": "How to monitor performance in production?", "a": "Use APM tools, metrics, and health checks to track performance trends." }
+    ]
+  },
+
+  "php_swoole": {
+    "title": "Async / Swoole & Workers",
+    "summary": "Use Swoole/ReactPHP for async services; manage memory and lifecycle carefully.",
+    "details": "Learn more — building and operating async PHP services:\n\nWhen to use async runtimes\n- Use Swoole or ReactPHP for workloads with many concurrent I/O operations (websockets, long polling). For CPU-heavy work, offload to worker processes.\n\nLifecycle & memory\n- Long-running processes require careful memory management: detect and fix leaks, periodically recycle processes via supervisors and monitor RSS.\n\nCompatibility\n- Some libraries expect per-request lifecycle; isolate or adapt them for coroutine contexts. Prefer non-blocking clients or delegate blocking calls to thread pools.\n\nObservability\n- Instrument coroutines with tracing, log per-request IDs and ensure graceful draining on SIGTERM for rolling upgrades.",
+    "cheat": "// Swoole quick start\n$server = new Swoole\\Http\\Server('0.0.0.0', 9501);\n$server->on('request', function($req, $res){ $res->end('ok'); });\n$server->start();\n\n// supervisor config: autorestart on-failure; monitor memory and restart when threshold exceeded",
+    "examples": [
+      { "code": "<?php\n// Swoole pseudo\n$server->on('request', function($req, $res){ $res->end('Hello Swoole'); });\n" }
+    ],
+    "interview": [
+      { "q": "What is Swoole?", "a": "A PHP extension enabling asynchronous, coroutine-based servers." },
+      { "q": "When to use Swoole?", "a": "For high-concurrency low-latency backends where async model helps." },
+      { "q": "What are fibers in PHP?", "a": "Lightweight primitives for concurrency introduced in PHP 8.1." },
+      { "q": "What is ReactPHP?", "a": "A pure-PHP event-loop library for asynchronous programming." },
+      { "q": "How to manage memory in long-running processes?", "a": "Monitor memory, avoid leaks, and periodically restart or recycle workers." },
+      { "q": "How to handle blocking IO?", "a": "Use non-blocking clients or delegate blocking tasks to dedicated workers." },
+      { "q": "What is coroutine?", "a": "A function that can pause and resume, enabling cooperative multitasking." },
+      { "q": "How to deploy Swoole apps?", "a": "Run as a service with supervisors and expose via TCP/HTTP endpoints." },
+      { "q": "How to test async code?", "a": "Use event-loop aware testing or integration tests in controlled environments." },
+      { "q": "How to share state between worker processes?", "a": "Use external stores like Redis rather than shared memory." },
+      { "q": "What are common pitfalls with async PHP?", "a": "Library compatibility, unexpected blocking calls, and lifecycle management." },
+      { "q": "How to handle signals in long-running processes?", "a": "Register handlers to gracefully shutdown and cleanup resources." },
+      { "q": "How to integrate async with frameworks?", "a": "Use adapters or isolate async components to avoid changing sync codebase." },
+      { "q": "What is backpressure?", "a": "Mechanism to slow producers when consumers can't keep up in async systems." },
+      { "q": "How to perform CPU-bound work in async apps?", "a": "Offload to worker pools or separate services to avoid blocking event loop." },
+      { "q": "How to debug async code?", "a": "Use specialized logs, traces and sampling profilers aware of coroutines." },
+      { "q": "How to handle timeouts?", "a": "Set per-operation timeouts and handle cancellations in async flows." },
+      { "q": "How to scale Swoole workers?", "a": "Run multiple worker processes per machine and load balance across machines." },
+      { "q": "How to manage dependencies in async apps?", "a": "Ensure libraries are non-blocking or isolated behind worker boundaries." },
+      { "q": "What are typical use-cases for Swoole?", "a": "Web sockets, realtime services, microservices and RPC backends." }
+    ]
+  },
+
+  "php_testing": {
+    "title": "Testing & Tooling",
+    "summary": "PHPUnit, static analysis (PHPStan/Psalm), linters and CI integration.",
+    "details": "Learn more — testing pyramid and practical tooling:\n\nUnit tests\n- Keep fast, deterministic unit tests; mock external dependencies and assert behavior.\n\nIntegration tests\n- Use ephemeral containers for DBs/services in CI to run realistic integration tests. Test migrations and schema changes.\n\nStatic analysis & mutation\n- Run PHPStan/Psalm in CI and use mutation testing (infection) to evaluate test quality.\n\nTest hygiene\n- Track flaky tests, quarantine until stable and parallelize tests where possible to shorten CI times.",
+    "cheat": "// common commands\ncomposer require --dev phpunit/phpunit phpstan/phpstan\nvendor/bin/phpunit --testsuite unit\nvendor/bin/phpstan analyse src --level=7\n\n// run tests with coverage\nphpunit --coverage-html coverage/",
+    "examples": [
+      { "code": "<?php\n// PHPUnit example\nuse PHPUnit\\Framework\\TestCase;\nclass MathTest extends TestCase{ public function testAdd(){ $this->assertEquals(5, 2+3); } }\n" }
+    ],
+    "interview": [
+      { "q": "What testing tools are common in PHP?", "a": "PHPUnit for unit tests, Pest as a wrapper, and integration with CI tools." },
+      { "q": "What is unit vs integration test?", "a": "Unit tests isolate components; integration tests verify component interactions." },
+      { "q": "How to mock dependencies?", "a": "Use PHPUnit mocks or mocking libraries to replace collaborators in tests." },
+      { "q": "What is test isolation?", "a": "Ensuring tests do not depend on each other's state or external systems." },
+      { "q": "How to test external services?", "a": "Use mocks, stubs, or spin ephemeral services in CI with containers." },
+      { "q": "What are acceptance tests?", "a": "End-to-end tests verifying user flows often via browser automation." },
+      { "q": "How to run tests in CI?", "a": "Install dependencies and run vendor/bin/phpunit as part of pipeline." },
+      { "q": "What is code coverage?", "a": "A metric showing percentage of code exercised by tests; not a quality guarantee." },
+      { "q": "How to use fixtures?", "a": "Prepare known data states for tests, either via factories or DB seeders." },
+      { "q": "How to test database interactions?", "a": "Use transactional tests or ephemeral DBs to isolate side effects." },
+      { "q": "What is mutation testing?", "a": "Altering code to ensure tests detect changes, used to assess test quality." },
+      { "q": "How to run tests faster?", "a": "Parallelize tests, avoid heavyweight integration for unit suites." },
+      { "q": "What is static analysis role in testing?", "a": "Catch issues early via tools like PHPStan or Psalm complementing tests." },
+      { "q": "How to test legacy code?", "a": "Introduce seams, extract logic, and add characterization tests gradually." },
+      { "q": "What is flaky test and how to avoid it?", "a": "Intermittent failing test; avoid by removing timing/dependency on external state." },
+      { "q": "How to test async code?", "a": "Use event-loop-aware test helpers or integration tests with controlled async events." },
+      { "q": "How to test CLI commands?", "a": "Invoke commands programmatically and assert output and exit codes." },
+      { "q": "How to structure test directory?", "a": "Mirror src/ structure under tests/ for easy mapping and discovery." },
+      { "q": "What is continuous testing?", "a": "Run tests automatically on commits or PRs in CI to catch regressions early." },
+      { "q": "How to measure test flakiness over time?", "a": "Track flaky failures in CI and quarantine unstable tests until fixed." }
+    ]
+  },
+
+  "php_debug": {
+    "title": "Debugging & Profiling",
+    "summary": "Xdebug, structured logs and production-safe profiling.",
+    "details": "Learn more — observability, tracing and production-safe diagnostics:\n\nLocal debugging\n- Use Xdebug for step-through debugging and for collecting profiles. Keep dev config separate from production.\n\nProduction observability\n- Use structured logs, metrics and traces (OpenTelemetry) to correlate user requests and backend calls. Use sampling for traces to limit overhead.\n\nRemote diagnosis\n- Capture request context (headers, user id, trace id) on errors, but redact sensitive fields. Keep error retention and rotation policies in place.",
+    "cheat": "// Xdebug local\nexport XDEBUG_MODE=develop,debug\n\n// quick log\nerror_log(json_encode(['level'=>'error','msg'=>'failed','context'=>$ctx]));\n\n// remote error tracking: configure Sentry/rollbar dsn and send exceptions with context",
+    "examples": [
+      { "code": "<?php\nerror_log(json_encode(['level'=>'error','msg'=>'failed','id'=>123]));\n" }
+    ],
+    "interview": [
+      { "q": "When to use Xdebug?", "a": "For step-debugging, stack traces and profiling in development." },
+      { "q": "Why avoid var_dump in production?", "a": "It can leak sensitive data and break response formats." },
+      { "q": "What is a stack trace?", "a": "A list of calls showing execution path at an error point." },
+      { "q": "How to log effectively?", "a": "Use structured logs with severity levels and contextual metadata." },
+      { "q": "What are sampling profilers?", "a": "Tools that periodically sample stack traces to find hotspots with low overhead." },
+      { "q": "How to debug performance issues?", "a": "Profile, analyze hotspots, and optimize critical paths." },
+      { "q": "How to capture errors centrally?", "a": "Use error tracking services like Sentry to collect exceptions and contexts." },
+      { "q": "How to enable verbose errors in dev only?", "a": "Show full error pages locally and generic messages in production." },
+      { "q": "How to trace distributed requests?", "a": "Use tracing systems like OpenTelemetry to follow requests across services." },
+      { "q": "How to debug memory leaks?", "a": "Track allocations, use profilers and look for static caches or closures holding refs." },
+      { "q": "How to reproduce production bugs locally?", "a": "Capture inputs, logs and environment details to replicate the conditions." },
+      { "q": "What is conditional logging?", "a": "Logging only when certain conditions or thresholds are met to reduce noise." },
+      { "q": "How to strip debug code in production?", "a": "Use build steps to remove dev-only hooks and ensure debug flags are off." },
+      { "q": "How to use assertions?", "a": "Validate assumptions in code during development to catch regressions early." },
+      { "q": "What is remote debugging?", "a": "Attach a debugger to a remote process via network for step-through debugging." },
+      { "q": "How to handle noisy logs?", "a": "Rate-limit, aggregate, and index logs for efficient search and alerting." },
+      { "q": "How to annotate code for observability?", "a": "Emit structured metadata and spans to help tracing and debugging." },
+      { "q": "How to debug concurrency issues?", "a": "Record interleavings, use deterministic tests and logging to reproduce." },
+      { "q": "How to secure debug endpoints?", "a": "Protect them with auth and restrict access to internal networks." },
+      { "q": "How to combine logs and metrics for debugging?", "a": "Use logs for context and metrics to detect anomalies and trends." }
+    ]
+  },
+
+  "php_deployment": {
+    "title": "Deployment & Containers",
+    "summary": "Dockerize apps, configure PHP-FPM + Nginx, use CI/CD and health checks.",
+    "details": "Learn more — release engineering and operational best practices:\n\nBuild pipelines\n- CI should run tests, static analysis and build artifacts (images or deployable archives). Sign and store artifacts in an immutable registry.\n\nDeploy strategies\n- Use blue/green or canary deployments with health checks and observability to limit blast radius. Automate database migrations with care — prefer backward-compatible migrations.\n\nRuntime hardening\n- Scan images for vulnerabilities, run processes with least privilege, enable resource limits and centralize logging/metrics for monitoring.",
+    "cheat": "// Dockerfile sketch\nFROM composer:2 as build\nWORKDIR /app\nCOPY composer.json composer.lock ./\nRUN composer install --no-dev --optimize-autoloader\nCOPY . .\nRUN composer dump-autoload -o\nFROM php:8.1-fpm\nCOPY --from=build /app /var/www/html\n\n// deploy flow\nbuild -> test -> push -> run migrations -> health-check -> promote",
+    "examples": [
+      { "code": "# Dockerfile (sketch)\nFROM php:8.1-fpm AS build\nWORKDIR /app\nCOPY composer.* ./\nRUN composer install --no-dev --optimize-autoloader\nFROM php:8.1-fpm\nCOPY --from=build /app /var/www/html\n" }
+    ],
+    "interview": [
+      { "q": "How to containerize PHP apps?", "a": "Use multi-stage Dockerfiles, install dependencies in build stage, and copy artifacts to runtime image." },
+      { "q": "What is PHP-FPM?", "a": "FastCGI Process Manager that runs PHP worker processes behind webservers." },
+      { "q": "How to achieve zero-downtime deploys?", "a": "Use rolling updates, blue/green deployments, or readiness probes in orchestration." },
+      { "q": "What is a multi-stage build?", "a": "Docker technique to separate build-time tools from runtime image to reduce size." },
+      { "q": "How to run migrations safely during deploy?", "a": "Run migrations in a separate step with backups and checks for downtime." },
+      { "q": "How to configure health checks?", "a": "Expose endpoints returning readiness and liveness status for orchestrators." },
+      { "q": "How to manage secrets in containers?", "a": "Use secret stores or orchestrator-native secrets rather than env vars in images." },
+      { "q": "How to tune PHP-FPM for concurrency?", "a": "Adjust pm.max_children and related settings to match memory and load." },
+      { "q": "How to build reproducible images?", "a": "Pin base images, install deterministic dependencies and use composer.lock." },
+      { "q": "How to run scheduled tasks in containers?", "a": "Use cron in sidecar containers or external schedulers invoking jobs." },
+      { "q": "How to handle logs in containers?", "a": "Write logs to stdout/stderr and collect via centralized logging." },
+      { "q": "How to reduce image size?", "a": "Use slim/base images and clean package caches during build." },
+      { "q": "How to perform canary releases?", "a": "Route a fraction of traffic to new version and monitor metrics before full rollout." },
+      { "q": "How to manage blue/green configs?", "a": "Keep infrastructure to route traffic between blue and green environments." },
+      { "q": "What is immutable infrastructure?", "a": "Replace instances rather than mutate them to reduce configuration drift." },
+      { "q": "How to handle database migrations in zero-downtime?", "a": "Use backward-compatible migrations and phased deploys." },
+      { "q": "How to update dependencies in production?", "a": "Test in staging, pin versions, and perform canary rollouts." },
+      { "q": "What is health check vs readiness?", "a": "Liveness ensures process running; readiness indicates service ready to serve traffic." },
+      { "q": "How to rollback a failed deploy?", "a": "Use orchestrator rollbacks or switch traffic back to previous stable version." },
+      { "q": "How to secure container images?", "a": "Scan images for vulnerabilities and use minimal base images." }
+    ]
+  },
+
+  "php_best_practices": {
+    "title": "Best Practices & PSRs",
+    "summary": "Follow PSRs, use strict types, avoid global state, and enforce tests and static analysis in CI.",
+    "details": "Learn more — team-level practices and long-term maintainability:\n\nQuality & process\n- Enforce code style, static analysis and tests in CI. Use code reviews focused on design, test coverage and security.\n\nAPI stewardship\n- Keep public APIs small, document changes, publish migration guides and follow semantic versioning for libraries.\n\nArchitecture\n- Design for observability: emit metrics, structured logs and traces. Keep components decoupled and well-bounded.\n\nContinuous improvement\n- Track technical debt, schedule refactors, and use performance budgets to prevent regressing on latency and memory footprints.",
+    "cheat": "// enforce style\nvendor/bin/phpcs --standard=PSR12 src/\n\n// static checks\nvendor/bin/phpstan analyse --level=7 src/\n\n// CI checks: run tests, phpstan, phpcs, composer audit on every PR",
+    "examples": [
+      { "code": "<?php\n// Service with DI\nclass UserService{ private UserRepo $repo; public function __construct(UserRepo $r){ $this->repo = $r; } }\n" }
+    ],
+    "interview": [
+      { "q": "What are PSRs and why follow them?", "a": "Standards improving interoperability and consistency across projects." },
+      { "q": "Why use static analysis?", "a": "Catch type and logical errors early before runtime." },
+      { "q": "What is continuous integration (CI)?", "a": "Automated testing and builds triggered on commits/PRs." },
+      { "q": "How to avoid global state?", "a": "Use DI, avoid singletons and pass dependencies explicitly." },
+      { "q": "Why write small functions?", "a": "Easier to test, reason about and reuse." },
+      { "q": "How to implement logging conventions?", "a": "Standardize levels, formats and correlation IDs across services." },
+      { "q": "Why keep public APIs stable?", "a": "To avoid breaking downstream consumers and to enable safe upgrades." },
+      { "q": "What is semantic versioning policy?", "a": "Follow semver to communicate breaking changes and compatible updates." },
+      { "q": "How to use feature flags?", "a": "Gradually roll out features and quickly disable if issues arise." },
+      { "q": "How to write maintainable tests?", "a": "Keep them deterministic, small, and fast with clear assertions." },
+      { "q": "What is code review best practice?", "a": "Review for clarity, tests, security, performance and design." },
+      { "q": "How to handle technical debt?", "a": "Track, prioritize and allocate time to refactor and pay down debt." },
+      { "q": "How to document code and APIs?", "a": "Provide inline docs, README guides and OpenAPI for public endpoints." },
+      { "q": "How to enforce coding style?", "a": "Use linters and formatters like PHP_CodeSniffer or PHPCS with CI checks." },
+      { "q": "Why write migration-safe DB changes?", "a": "To allow deploys without downtime and avoid incompatible schema changes." },
+      { "q": "How to design for observability?", "a": "Emit metrics, structured logs and traces for monitoring and debugging." },
+      { "q": "When to refactor?", "a": "Refactor when adding features, fixing bugs or when code readability suffers." },
+      { "q": "How to handle third-party libraries?", "a": "Audit, pin versions and sandbox when possible." },
+      { "q": "What is contract-driven development?", "a": "Design interfaces and contracts first, then implement to the spec." },
+      { "q": "How to cultivate secure defaults?", "a": "Enable secure settings by default and require opt-in to relax security." }
+    ]
+  }
+}

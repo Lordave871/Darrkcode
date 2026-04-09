@@ -1,0 +1,166 @@
+{
+  "beginner": [
+    {
+      "title": "Calculator Application",
+      "description": "A simple console-based calculator that performs basic arithmetic operations.",
+      "difficulty": "Beginner",
+      "requirements": [
+        "Implement addition, subtraction, multiplication, and division",
+        "Handle user input for numbers and operations",
+        "Display results with proper formatting"
+      ],
+      "features": [
+        "Basic arithmetic operations",
+        "Error handling for division by zero",
+        "Continuous calculation option"
+      ],
+      "steps": [
+        "Set up the main class structure",
+        "Create methods for each operation",
+        "Implement user input handling",
+        "Add error handling and validation",
+        "Test with various inputs"
+      ],
+      "technologies": ["Java", "Scanner class"],
+      "code": "import java.util.Scanner;\n\npublic class Calculator {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        \n        System.out.println(\"Simple Calculator\");\n        System.out.println(\"===============\");\n        \n        while (true) {\n            System.out.print(\"\\nEnter first number: \");\n            double num1 = scanner.nextDouble();\n            \n            System.out.print(\"Enter operator (+, -, *, /) or 'q' to quit: \");\n            char operator = scanner.next().charAt(0);\n            \n            if (operator == 'q') {\n                System.out.println(\"Goodbye!\");\n                break;\n            }\n            \n            System.out.print(\"Enter second number: \");\n            double num2 = scanner.nextDouble();\n            \n            double result;\n            \n            switch (operator) {\n                case '+':\n                    result = num1 + num2;\n                    break;\n                case '-':\n                    result = num1 - num2;\n                    break;\n                case '*':\n                    result = num1 * num2;\n                    break;\n                case '/':\n                    if (num2 != 0) {\n                        result = num1 / num2;\n                    } else {\n                        System.out.println(\"Error: Division by zero!\");\n                        continue;\n                    }\n                    break;\n                default:\n                    System.out.println(\"Invalid operator!\");\n                    continue;\n            }\n            \n            System.out.println(\"Result: \" + num1 + \" \" + operator + \" \" + num2 + \" = \" + result);\n        }\n        \n        scanner.close();\n    }\n}"
+    },
+    {
+      "title": "Student Management System",
+      "description": "A console application to manage student records with basic CRUD operations.",
+      "difficulty": "Beginner",
+      "requirements": [
+        "Add new student records",
+        "View all students",
+        "Search for students by ID or name",
+        "Update student information",
+        "Delete student records"
+      ],
+      "features": [
+        "Data persistence using ArrayList",
+        "Input validation",
+        "Menu-driven interface"
+      ],
+      "steps": [
+        "Create Student class with attributes",
+        "Implement main menu system",
+        "Add CRUD operations",
+        "Implement search functionality",
+        "Add input validation"
+      ],
+      "technologies": ["Java", "ArrayList", "Scanner"],
+      "code": "import java.util.ArrayList;\nimport java.util.Scanner;\n\nclass Student {\n    private int id;\n    private String name;\n    private int age;\n    private String course;\n    \n    public Student(int id, String name, int age, String course) {\n        this.id = id;\n        this.name = name;\n        this.age = age;\n        this.course = course;\n    }\n    \n    // Getters and setters\n    public int getId() { return id; }\n    public String getName() { return name; }\n    public int getAge() { return age; }\n    public String getCourse() { return course; }\n    \n    public void setName(String name) { this.name = name; }\n    public void setAge(int age) { this.age = age; }\n    public void setCourse(String course) { this.course = course; }\n    \n    @Override\n    public String toString() {\n        return \"ID: \" + id + \", Name: \" + name + \", Age: \" + age + \", Course: \" + course;\n    }\n}\n\npublic class StudentManagementSystem {\n    private static ArrayList<Student> students = new ArrayList<>();\n    private static int nextId = 1;\n    private static Scanner scanner = new Scanner(System.in);\n    \n    public static void main(String[] args) {\n        while (true) {\n            System.out.println(\"\\n=== Student Management System ===\");\n            System.out.println(\"1. Add Student\");\n            System.out.println(\"2. View All Students\");\n            System.out.println(\"3. Search Student\");\n            System.out.println(\"4. Update Student\");\n            System.out.println(\"5. Delete Student\");\n            System.out.println(\"6. Exit\");\n            System.out.print(\"Enter choice: \");\n            \n            int choice = scanner.nextInt();\n            scanner.nextLine(); // consume newline\n            \n            switch (choice) {\n                case 1:\n                    addStudent();\n                    break;\n                case 2:\n                    viewAllStudents();\n                    break;\n                case 3:\n                    searchStudent();\n                    break;\n                case 4:\n                    updateStudent();\n                    break;\n                case 5:\n                    deleteStudent();\n                    break;\n                case 6:\n                    System.out.println(\"Goodbye!\");\n                    System.exit(0);\n                default:\n                    System.out.println(\"Invalid choice!\");\n            }\n        }\n    }\n    \n    private static void addStudent() {\n        System.out.print(\"Enter name: \");\n        String name = scanner.nextLine();\n        System.out.print(\"Enter age: \");\n        int age = scanner.nextInt();\n        scanner.nextLine();\n        System.out.print(\"Enter course: \");\n        String course = scanner.nextLine();\n        \n        Student student = new Student(nextId++, name, age, course);\n        students.add(student);\n        System.out.println(\"Student added successfully!\");\n    }\n    \n    private static void viewAllStudents() {\n        if (students.isEmpty()) {\n            System.out.println(\"No students found!\");\n            return;\n        }\n        System.out.println(\"\\n=== All Students ===\");\n        for (Student student : students) {\n            System.out.println(student);\n        }\n    }\n    \n    private static void searchStudent() {\n        System.out.print(\"Enter student ID to search: \");\n        int id = scanner.nextInt();\n        scanner.nextLine();\n        \n        for (Student student : students) {\n            if (student.getId() == id) {\n                System.out.println(\"Student found: \" + student);\n                return;\n            }\n        }\n        System.out.println(\"Student not found!\");\n    }\n    \n    private static void updateStudent() {\n        System.out.print(\"Enter student ID to update: \");\n        int id = scanner.nextInt();\n        scanner.nextLine();\n        \n        for (Student student : students) {\n            if (student.getId() == id) {\n                System.out.print(\"Enter new name (current: \" + student.getName() + \"): \");\n                String name = scanner.nextLine();\n                if (!name.isEmpty()) {\n                    student.setName(name);\n                }\n                \n                System.out.print(\"Enter new age (current: \" + student.getAge() + \"): \");\n                String ageInput = scanner.nextLine();\n                if (!ageInput.isEmpty()) {\n                    student.setAge(Integer.parseInt(ageInput));\n                }\n                \n                System.out.print(\"Enter new course (current: \" + student.getCourse() + \"): \");\n                String course = scanner.nextLine();\n                if (!course.isEmpty()) {\n                    student.setCourse(course);\n                }\n                \n                System.out.println(\"Student updated successfully!\");\n                return;\n            }\n        }\n        System.out.println(\"Student not found!\");\n    }\n    \n    private static void deleteStudent() {\n        System.out.print(\"Enter student ID to delete: \");\n        int id = scanner.nextInt();\n        scanner.nextLine();\n        \n        for (int i = 0; i < students.size(); i++) {\n            if (students.get(i).getId() == id) {\n                students.remove(i);\n                System.out.println(\"Student deleted successfully!\");\n                return;\n            }\n        }\n        System.out.println(\"Student not found!\");\n    }\n}"
+    }
+  ],
+  "intermediate": [
+    {
+      "title": "Inventory Management System",
+      "description": "A complete inventory management system with file persistence and GUI.",
+      "difficulty": "Intermediate",
+      "requirements": [
+        "Add, update, delete inventory items",
+        "Track stock levels and reorder points",
+        "Generate inventory reports",
+        "Persist data to files",
+        "Simple GUI interface"
+      ],
+      "features": [
+        "File-based data persistence",
+        "Search and filter inventory",
+        "Low stock alerts",
+        "Sales tracking"
+      ],
+      "steps": [
+        "Design Item class structure",
+        "Implement file I/O operations",
+        "Create GUI using Swing",
+        "Add CRUD operations",
+        "Implement reporting features"
+      ],
+      "technologies": ["Java", "Swing", "File I/O", "Collections"]
+    },
+    {
+      "title": "Library Management System",
+      "description": "Manage library operations including book lending, returns, and member management.",
+      "difficulty": "Intermediate",
+      "requirements": [
+        "Book catalog management",
+        "Member registration",
+        "Book lending and returns",
+        "Fine calculation",
+        "Search functionality"
+      ],
+      "features": [
+        "Database connectivity",
+        "Due date tracking",
+        "Fine calculation",
+        "Multiple search criteria"
+      ],
+      "steps": [
+        "Design database schema",
+        "Create Book and Member classes",
+        "Implement JDBC connectivity",
+        "Add transaction management",
+        "Create reporting module"
+      ],
+      "technologies": ["Java", "JDBC", "MySQL", "Swing"]
+    }
+  ],
+  "advanced": [
+    {
+      "title": "E-commerce Platform",
+      "description": "Full-featured e-commerce platform with user authentication, shopping cart, and payment integration.",
+      "difficulty": "Advanced",
+      "requirements": [
+        "User authentication and authorization",
+        "Product catalog with categories",
+        "Shopping cart functionality",
+        "Order management system",
+        "Payment gateway integration"
+      ],
+      "features": [
+        "Spring Boot backend",
+        "RESTful APIs",
+        "JWT authentication",
+        "Database transactions",
+        "Email notifications"
+      ],
+      "steps": [
+        "Set up Spring Boot project",
+        "Design database schema",
+        "Implement security with Spring Security",
+        "Create REST controllers",
+        "Integrate payment gateway",
+        "Add testing and deployment"
+      ],
+      "technologies": ["Spring Boot", "Spring Security", "JPA/Hibernate", "MySQL", "REST API"]
+    },
+    {
+      "title": "Microservices Banking System",
+      "description": "Distributed banking system using microservices architecture.",
+      "difficulty": "Advanced",
+      "requirements": [
+        "Account management service",
+        "Transaction service",
+        "User authentication service",
+        "Notification service",
+        "API Gateway"
+      ],
+      "features": [
+        "Microservices architecture",
+        "Docker containerization",
+        "Kubernetes deployment",
+        "Event-driven communication",
+        "Circuit breaker pattern"
+      ],
+      "steps": [
+        "Design microservices architecture",
+        "Implement individual services",
+        "Add service discovery",
+        "Configure API Gateway",
+        "Containerize with Docker",
+        "Deploy with Kubernetes"
+      ],
+      "technologies": ["Spring Cloud", "Docker", "Kubernetes", "Kafka", "Redis"]
+    }
+  ]
+}

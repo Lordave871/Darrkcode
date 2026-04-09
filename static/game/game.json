@@ -1,0 +1,136 @@
+{
+  "games": [
+    {
+      "id": 1,
+      "name": "Type & Code Arena",
+      "subtitle": "Hybrid Typing Challenge",
+      "icon": "⌨️",
+      "color": "#7C4DFF",
+      "type": "practice",
+      "difficulty": "beginner",
+      "description": "Master typing while coding in real-time challenges"
+    },
+    {
+      "id": 2,
+      "name": "Keyboard Coder Quest",
+      "subtitle": "Algorithm Challenge",
+      "icon": "🎮",
+      "color": "#00E5A8",
+      "type": "practice",
+      "difficulty": "intermediate",
+      "description": "Type algorithms and solve data structure problems"
+    },
+    {
+      "id": 3,
+      "name": "CodeType Challenge",
+      "subtitle": "Debug & Type",
+      "icon": "🚀",
+      "color": "#FFD24C",
+      "type": "practice",
+      "difficulty": "advanced",
+      "description": "Find and type fixes for buggy code snippets"
+    },
+    {
+      "id": 4,
+      "name": "Syntax Typing Master",
+      "subtitle": "JavaScript Speed",
+      "icon": "⚡",
+      "color": "#FF6B8B",
+      "type": "practice",
+      "difficulty": "intermediate",
+      "description": "Type JavaScript syntax at incredible speed"
+    },
+    {
+      "id": 5,
+      "name": "TypeCraft Programmer",
+      "subtitle": "Python Typing",
+      "icon": "🐍",
+      "color": "#6FC3FF",
+      "type": "practice",
+      "difficulty": "beginner",
+      "description": "Learn Python by typing real code examples"
+    },
+    {
+      "id": 6,
+      "name": "Logic & Typing Battle",
+      "subtitle": "Speed Math",
+      "icon": "⚔️",
+      "color": "#A78BFA",
+      "type": "practice",
+      "difficulty": "intermediate",
+      "description": "Solve logic problems while improving typing speed"
+    },
+    {
+      "id": 7,
+      "name": "Type-to-Code Adventure",
+      "subtitle": "Memory Recall",
+      "icon": "🗺️",
+      "color": "#F87171",
+      "type": "practice",
+      "difficulty": "beginner",
+      "description": "Epic journey through typing challenges and memory tests"
+    },
+    {
+      "id": 8,
+      "name": "ByteSpeed Coding Race",
+      "subtitle": "Pattern Racing",
+      "icon": "🏎️",
+      "color": "#06B6D4",
+      "type": "practice",
+      "difficulty": "beginner",
+      "description": "Race against the clock typing code patterns"
+    },
+    {
+      "id": 9,
+      "name": "TypeSkill Hacker Mode",
+      "subtitle": "Syntax Sorting",
+      "icon": "🔓",
+      "color": "#10B981",
+      "type": "learning",
+      "difficulty": "intermediate",
+      "description": "Hack through sorting challenges by typing code"
+    },
+    {
+      "id": 10,
+      "name": "Turbo Typing Coder",
+      "subtitle": "Version Control",
+      "icon": "⏱️",
+      "color": "#F59E0B",
+      "type": "learning",
+      "difficulty": "beginner",
+      "description": "Type at turbo speed while learning Git commands"
+    }
+  ],
+  "categories": [
+    {
+      "id": "coding",
+      "name": "Coding Practice",
+      "description": "Improve your programming skills with interactive coding challenges",
+      "color": "#7C4DFF"
+    },
+    {
+      "id": "typing",
+      "name": "Typing Speed",
+      "description": "Enhance your typing speed and accuracy with code snippets",
+      "color": "#00E5A8"
+    },
+    {
+      "id": "brain",
+      "name": "Brain Practice",
+      "description": "Sharpen your logical thinking and problem-solving skills",
+      "color": "#FF6B8B"
+    },
+    {
+      "id": "puzzle",
+      "name": "Puzzle Games",
+      "description": "Solve challenging puzzles to improve your algorithmic thinking",
+      "color": "#6FC3FF"
+    },
+    {
+      "id": "learning",
+      "name": "Learning Games",
+      "description": "Fun games to learn programming concepts and best practices",
+      "color": "#FFD24C"
+    }
+  ]
+}

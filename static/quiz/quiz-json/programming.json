@@ -1,0 +1,3058 @@
+{
+  "category": "programming",
+  "categoryName": "Programming Languages",
+  "description": "Test your knowledge of various programming languages and concepts",
+  "quizzes": [
+    {
+      "id": 1,
+      "title": "JavaScript Fundamentals",
+      "description": "Test your knowledge of JavaScript basics including variables, functions, and control structures.",
+      "difficulty": "Beginner",
+      "icon": "fab fa-js-square",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the correct way to declare a variable in JavaScript?",
+          "options": [
+            "variable x;",
+            "let x;",
+            "v x;",
+            "declare x;"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 2,
+          "question": "Which of the following is not a JavaScript data type?",
+          "options": [
+            "String",
+            "Boolean",
+            "Float",
+            "Undefined"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What will 'typeof null' return in JavaScript?",
+          "options": [
+            "null",
+            "undefined",
+            "object",
+            "string"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "Which operator is used for strict equality comparison?",
+          "options": [
+            "==",
+            "===",
+            "=",
+            "!=="
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 5,
+          "question": "How do you write a single-line comment in JavaScript?",
+          "options": [
+            "// This is a comment",
+            "<!-- This is a comment --",
+            "/* This is a comment */",
+            "# This is a comment"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "What does the 'push()' method do to an array?",
+          "options": [
+            "Removes the first element",
+            "Adds elements to the beginning",
+            "Adds elements to the end",
+            "Reverses the array"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "Which function is used to parse a string to an integer?",
+          "options": [
+            "parseInt()",
+            "stringToInt()",
+            "toInteger()",
+            "int()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What is the result of Boolean('false')?",
+          "options": [
+            "false",
+            "true",
+            "undefined",
+            "NaN"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 9,
+          "question": "Which keyword is used to declare a constant variable?",
+          "options": [
+            "let",
+            "var",
+            "const",
+            "constant"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "What does 'NaN' stand for?",
+          "options": [
+            "Not a Number",
+            "Null and None",
+            "No Assignment",
+            "Not Assigned Now"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "Which method converts a JSON string to a JavaScript object?",
+          "options": [
+            "JSON.parse()",
+            "JSON.stringify()",
+            "JSON.toObject()",
+            "JSON.convert()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "What is the scope of 'var' declared variables?",
+          "options": [
+            "Block scope",
+            "Function scope",
+            "Global only",
+            "Module scope"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 13,
+          "question": "Which loop is guaranteed to execute at least once?",
+          "options": [
+            "for loop",
+            "while loop",
+            "do-while loop",
+            "forEach loop"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 14,
+          "question": "What does the 'this' keyword refer to?",
+          "options": [
+            "The previous object",
+            "The global object",
+            "The current object",
+            "The parent object"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "Which of these is not a JavaScript framework?",
+          "options": [
+            "React",
+            "Angular",
+            "Vue",
+            "Django"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 16,
+          "question": "What is the purpose of the 'return' statement?",
+          "options": [
+            "To stop function execution",
+            "To return a value from function",
+            "To exit a loop",
+            "To skip an iteration"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 17,
+          "question": "Which symbol is used for template literals?",
+          "options": [
+            "Double quotes",
+            "Single quotes",
+            "Backticks",
+            "Parentheses"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 18,
+          "question": "What does 'DOM' stand for?",
+          "options": [
+            "Document Object Model",
+            "Data Object Management",
+            "Digital Output Mode",
+            "Display Object Method"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "Which array method creates a new array?",
+          "options": [
+            "push()",
+            "pop()",
+            "map()",
+            "shift()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 20,
+          "question": "What is the default value of an uninitialized variable?",
+          "options": [
+            "0",
+            "null",
+            "undefined",
+            "NaN"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "Which event occurs when a user clicks on an element?",
+          "options": [
+            "onhover",
+            "onchange",
+            "onclick",
+            "onload"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 22,
+          "question": "What will '3' + 2 return in JavaScript?",
+          "options": [
+            "5",
+            "32",
+            "Error",
+            "undefined"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 23,
+          "question": "Which is not a valid way to create a function?",
+          "options": [
+            "function myFunc() {}",
+            "let myFunc = function() {}",
+            "let myFunc = () => {}",
+            "function = myFunc() {}"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 24,
+          "question": "What does the 'splice()' method do?",
+          "options": [
+            "Joins two arrays",
+            "Adds/removes array elements",
+            "Sorts the array",
+            "Filters array elements"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 25,
+          "question": "Which operator returns the remainder?",
+          "options": [
+            "+",
+            "%",
+            "/",
+            "*"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 26,
+          "question": "What is hoisting in JavaScript?",
+          "options": [
+            "Variable declaration moved to top",
+            "Variable deletion",
+            "Type conversion",
+            "Error handling"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which method converts an object to a JSON string?",
+          "options": [
+            "JSON.parse()",
+            "JSON.stringify()",
+            "toString()",
+            "toJSON()"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 28,
+          "question": "What does 'let' have that 'var' doesn't?",
+          "options": [
+            "Global scope",
+            "Function scope",
+            "Block scope",
+            "Module scope"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 29,
+          "question": "Which is a truthy value in JavaScript?",
+          "options": [
+            "0",
+            "''",
+            "null",
+            "'0'"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 30,
+          "question": "What is the purpose of 'use strict'?",
+          "options": [
+            "Enables strict mode",
+            "Disables features",
+            "Optimizes code",
+            "Defines constants"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Python Programming",
+      "description": "Master Python concepts from basic syntax to advanced features like list comprehensions.",
+      "difficulty": "Intermediate",
+      "icon": "fab fa-python",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the output of print(2 ** 3)?",
+          "options": [
+            "5",
+            "6",
+            "8",
+            "9"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 2,
+          "question": "Which of these is not a Python data type?",
+          "options": [
+            "int",
+            "float",
+            "real",
+            "complex"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "How do you create a list in Python?",
+          "options": [
+            "list = ()",
+            "list = []",
+            "list = {}",
+            "list = <>"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 4,
+          "question": "What does the 'len()' function do?",
+          "options": [
+            "Returns the length of an object",
+            "Returns the largest number",
+            "Returns the last element",
+            "Returns the type of object"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which keyword is used to define a function?",
+          "options": [
+            "def",
+            "function",
+            "func",
+            "define"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "What is the result of 5 + 3 * 2?",
+          "options": [
+            "16",
+            "11",
+            "13",
+            "10"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 7,
+          "question": "How do you start a for loop in Python?",
+          "options": [
+            "for i in range(5):",
+            "for (i=0; i<5; i++)",
+            "loop i in range(5):",
+            "foreach i in range(5):"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What does 'append()' do for lists?",
+          "options": [
+            "Removes an element",
+            "Adds an element to the end",
+            "Sorts the list",
+            "Reverses the list"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 9,
+          "question": "Which operator is used for floor division?",
+          "options": [
+            "/",
+            "//",
+            "%",
+            "**"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 10,
+          "question": "What is the correct way to import a module?",
+          "options": [
+            "import math",
+            "include math",
+            "require math",
+            "using math"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What does 'strip()' do for strings?",
+          "options": [
+            "Removes whitespace",
+            "Splits the string",
+            "Converts to uppercase",
+            "Finds substring"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which of these is a mutable data type?",
+          "options": [
+            "tuple",
+            "string",
+            "list",
+            "int"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 13,
+          "question": "What is the output of bool(0)?",
+          "options": [
+            "True",
+            "False",
+            "0",
+            "Error"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 14,
+          "question": "How do you create a dictionary?",
+          "options": [
+            "dict = []",
+            "dict = ()",
+            "dict = {}",
+            "dict = <>"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "What does 'continue' do in a loop?",
+          "options": [
+            "Stops the loop",
+            "Skips to next iteration",
+            "Breaks the loop",
+            "Restarts the loop"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 16,
+          "question": "Which method returns string in lowercase?",
+          "options": [
+            "lower()",
+            "tolower()",
+            "casefold()",
+            "small()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What is the result of 10 % 3?",
+          "options": [
+            "3",
+            "1",
+            "0",
+            "3.33"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 18,
+          "question": "How do you open a file for reading?",
+          "options": [
+            "open('file.txt', 'r')",
+            "open('file.txt', 'read')",
+            "open('file.txt', 'w')",
+            "open('file.txt')"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What is a lambda function?",
+          "options": [
+            "A named function",
+            "An anonymous function",
+            "A recursive function",
+            "A built-in function"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 20,
+          "question": "Which symbol is used for comments?",
+          "options": [
+            "//",
+            "/* */",
+            "#",
+            "--"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What does 'sorted()' return?",
+          "options": [
+            "Original list",
+            "Sorted list",
+            "Sorted tuple",
+            "Sorted dictionary"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 22,
+          "question": "How do you handle exceptions?",
+          "options": [
+            "try-except",
+            "catch-throw",
+            "error-handle",
+            "try-catch"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What is PEP 8?",
+          "options": [
+            "Python version",
+            "Style guide",
+            "Package manager",
+            "Debugger tool"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 24,
+          "question": "Which is used to install packages?",
+          "options": [
+            "pip",
+            "npm",
+            "installer",
+            "pypi"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What does 'isinstance()' check?",
+          "options": [
+            "Value equality",
+            "Type/class of object",
+            "Identity",
+            "Truthiness"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 26,
+          "question": "How to add an element to a set?",
+          "options": [
+            "add()",
+            "append()",
+            "insert()",
+            "push()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What is list comprehension?",
+          "options": [
+            "A way to create lists",
+            "A sorting algorithm",
+            "A data structure",
+            "A debugging tool"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which module supports regular expressions?",
+          "options": [
+            "regex",
+            "re",
+            "regexp",
+            "pattern"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 29,
+          "question": "What does 'pass' do?",
+          "options": [
+            "Exits program",
+            "Does nothing",
+            "Raises error",
+            "Continues loop"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 30,
+          "question": "How to get keys from dictionary?",
+          "options": [
+            "dict.keys()",
+            "dict.keys",
+            "keys(dict)",
+            "dict.key()"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Java Programming",
+      "description": "Test your Java skills including OOP concepts, exceptions, collections, and multithreading.",
+      "difficulty": "Intermediate",
+      "icon": "fab fa-java",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which of the following is not a valid Java keyword?",
+          "options": [
+            "abstract",
+            "assert",
+            "boolean",
+            "nullptr"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 2,
+          "question": "What is the default value of a local variable in Java?",
+          "options": [
+            "0",
+            "null",
+            "Depends on data type",
+            "No default value"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 3,
+          "question": "Which method is the entry point for a Java application?",
+          "options": [
+            "main()",
+            "start()",
+            "init()",
+            "run()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which data type would you use for a decimal number?",
+          "options": [
+            "int",
+            "float",
+            "char",
+            "boolean"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 5,
+          "question": "What does OOP stand for in Java?",
+          "options": [
+            "Object-Oriented Programming",
+            "Object-Optimized Programming",
+            "Operational Object Protocol",
+            "Oriented Object Programming"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which of these is not an OOP principle?",
+          "options": [
+            "Inheritance",
+            "Polymorphism",
+            "Compilation",
+            "Encapsulation"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "What is used to achieve multiple inheritance in Java?",
+          "options": [
+            "Multiple classes",
+            "Abstract classes",
+            "Interfaces",
+            "It's not possible"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "Which keyword is used to create a class in Java?",
+          "options": [
+            "class",
+            "new",
+            "struct",
+            "object"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "What is the superclass of all Java classes?",
+          "options": [
+            "Object",
+            "Main",
+            "Super",
+            "Parent"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which modifier makes a member accessible only within its own class?",
+          "options": [
+            "public",
+            "private",
+            "protected",
+            "default"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 11,
+          "question": "What is the size of int data type in Java?",
+          "options": [
+            "16 bits",
+            "32 bits",
+            "64 bits",
+            "Depends on platform"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "Which collection maintains insertion order?",
+          "options": [
+            "HashSet",
+            "TreeSet",
+            "LinkedHashSet",
+            "HashMap"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 13,
+          "question": "Which keyword is used for exception handling?",
+          "options": [
+            "try",
+            "error",
+            "mistake",
+            "check"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What is the parent class of all exceptions?",
+          "options": [
+            "Error",
+            "RuntimeException",
+            "Throwable",
+            "Exception"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "Which method is used to start a thread?",
+          "options": [
+            "init()",
+            "start()",
+            "run()",
+            "execute()"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 16,
+          "question": "What does JVM stand for?",
+          "options": [
+            "Java Virtual Machine",
+            "Java Variable Memory",
+            "Java Verified Method",
+            "Java Visual Module"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "Which is not a Java feature?",
+          "options": [
+            "Platform independent",
+            "Architecture neutral",
+            "Use of pointers",
+            "Object-oriented"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 18,
+          "question": "What is the default value of a boolean variable?",
+          "options": [
+            "true",
+            "false",
+            "0",
+            "null"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 19,
+          "question": "Which keyword is used for constants?",
+          "options": [
+            "static",
+            "final",
+            "const",
+            "constant"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 20,
+          "question": "What is autoboxing in Java?",
+          "options": [
+            "Automatic conversion to box type",
+            "Converting primitive to wrapper object",
+            "Packing objects into arrays",
+            "Automatic garbage collection"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 21,
+          "question": "Which package contains the Scanner class?",
+          "options": [
+            "java.lang",
+            "java.util",
+            "java.io",
+            "java.awt"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 22,
+          "question": "What is the purpose of finally block?",
+          "options": [
+            "To handle exceptions",
+            "To clean up resources",
+            "To define final variables",
+            "To terminate program"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 23,
+          "question": "Which is faster: StringBuffer or StringBuilder?",
+          "options": [
+            "StringBuffer",
+            "StringBuilder",
+            "Both are same",
+            "Depends on situation"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 24,
+          "question": "What is polymorphism?",
+          "options": [
+            "Many forms",
+            "Data hiding",
+            "Code reusability",
+            "Memory management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which is used to create an immutable class?",
+          "options": [
+            "final class",
+            "private constructor",
+            "final variables",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 26,
+          "question": "What is garbage collection?",
+          "options": [
+            "Memory allocation",
+            "Memory deallocation",
+            "Both A and B",
+            "None of the above"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 27,
+          "question": "Which is synchronized: ArrayList or Vector?",
+          "options": [
+            "ArrayList",
+            "Vector",
+            "Both",
+            "None"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 28,
+          "question": "What is method overloading?",
+          "options": [
+            "Same method name, different parameters",
+            "Same method name, same parameters",
+            "Different method name, same parameters",
+            "Inheriting methods"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "Which interface does HashMap implement?",
+          "options": [
+            "List",
+            "Set",
+            "Map",
+            "Collection"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "What is the default capacity of ArrayList?",
+          "options": [
+            "5",
+            "10",
+            "15",
+            "20"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "C++ Programming",
+      "description": "Master C++ concepts including pointers, memory management, templates, and STL.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-copyright",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the correct syntax to declare a pointer in C++?",
+          "options": [
+            "int ptr;",
+            "int *ptr;",
+            "pointer int ptr;",
+            "int &ptr;"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 2,
+          "question": "Which operator is used for dynamic memory allocation in C++?",
+          "options": [
+            "malloc()",
+            "new",
+            "alloc",
+            "create"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 3,
+          "question": "What does STL stand for?",
+          "options": [
+            "Standard Template Library",
+            "Simple Template Library",
+            "Standard Type Library",
+            "System Template Library"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which of the following is a valid C++ access specifier?",
+          "options": [
+            "public",
+            "open",
+            "expose",
+            "external"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "What is the output of: cout << sizeof(char);",
+          "options": [
+            "1",
+            "2",
+            "4",
+            "8"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which header file is used for file handling in C++?",
+          "options": [
+            "<iostream>",
+            "<fstream>",
+            "<filestream>",
+            "<file.h>"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 7,
+          "question": "What is a constructor?",
+          "options": [
+            "A function called when object is created",
+            "A function called when object is destroyed",
+            "A function to allocate memory",
+            "A function to inherit classes"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "Which keyword is used for function overriding?",
+          "options": [
+            "overload",
+            "override",
+            "virtual",
+            "extends"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 9,
+          "question": "What is the default access specifier for class members?",
+          "options": [
+            "public",
+            "private",
+            "protected",
+            "package"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 10,
+          "question": "Which data type has the largest size?",
+          "options": [
+            "int",
+            "float",
+            "double",
+            "long long"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What does 'cout' stand for?",
+          "options": [
+            "Character Output",
+            "Console Output",
+            "C Output",
+            "Common Output"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "Which loop is guaranteed to execute at least once?",
+          "options": [
+            "for",
+            "while",
+            "do-while",
+            "foreach"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 13,
+          "question": "What is encapsulation?",
+          "options": [
+            "Binding data and functions together",
+            "Hiding implementation details",
+            "Multiple inheritance",
+            "Function overloading"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which operator cannot be overloaded?",
+          "options": [
+            "+",
+            "-",
+            "::",
+            "*"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "What is a pure virtual function?",
+          "options": [
+            "Function with no body",
+            "Function with virtual keyword",
+            "Function that returns void",
+            "Static function"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which container provides constant time insertion?",
+          "options": [
+            "vector",
+            "list",
+            "array",
+            "deque"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 17,
+          "question": "What is the correct way to use namespace?",
+          "options": [
+            "namespace std;",
+            "using namespace std;",
+            "use namespace std;",
+            "import namespace std;"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 18,
+          "question": "Which is NOT a type of constructor?",
+          "options": [
+            "Default",
+            "Copy",
+            "Static",
+            "Parameterized"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 19,
+          "question": "What is the size of an empty class?",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "4"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 20,
+          "question": "Which keyword prevents inheritance?",
+          "options": [
+            "sealed",
+            "final",
+            "static",
+            "private"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 21,
+          "question": "What is polymorphism?",
+          "options": [
+            "One name multiple forms",
+            "Data hiding",
+            "Code reusability",
+            "Memory management"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which is a valid way to pass parameters?",
+          "options": [
+            "By value",
+            "By reference",
+            "By pointer",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "What is a destructor?",
+          "options": [
+            "~ClassName()",
+            "!ClassName()",
+            "#ClassName()",
+            "$ClassName()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which is NOT a smart pointer?",
+          "options": [
+            "unique_ptr",
+            "shared_ptr",
+            "weak_ptr",
+            "raw_ptr"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 25,
+          "question": "What is function overloading?",
+          "options": [
+            "Same name different parameters",
+            "Different name same parameters",
+            "Virtual functions",
+            "Templates"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which is used for exception handling?",
+          "options": [
+            "try-catch",
+            "throw",
+            "finally",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 27,
+          "question": "What is the range of signed char?",
+          "options": [
+            "-128 to 127",
+            "0 to 255",
+            "-127 to 128",
+            "0 to 127"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which is faster: pass by value or reference?",
+          "options": [
+            "By value",
+            "By reference",
+            "Same speed",
+            "Depends on data size"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 29,
+          "question": "What is the 'this' pointer?",
+          "options": [
+            "Pointer to current object",
+            "Pointer to base class",
+            "Pointer to derived class",
+            "Pointer to function"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which is NOT a valid STL algorithm?",
+          "options": [
+            "sort()",
+            "search()",
+            "find()",
+            "transform()"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "title": "TypeScript Mastery",
+      "description": "Learn TypeScript for type-safe JavaScript development with interfaces, generics, and decorators.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-code",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is TypeScript primarily known for?",
+          "options": [
+            "Adding static types to JavaScript",
+            "Being a replacement for JavaScript",
+            "Making code run faster",
+            "Reducing file size"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which keyword is used to define an interface in TypeScript?",
+          "options": [
+            "interface",
+            "type",
+            "class",
+            "struct"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "How do you define an optional property in a TypeScript interface?",
+          "options": [
+            "property?: type",
+            "property: type?",
+            "optional property: type",
+            "property: optional<type>"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "What is the correct way to type an array of numbers in TypeScript?",
+          "options": [
+            "number[]",
+            "Array<number>",
+            "Both A and B",
+            "List<number>"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 5,
+          "question": "What does the 'readonly' modifier do in TypeScript?",
+          "options": [
+            "Makes a property immutable",
+            "Makes a property private",
+            "Makes a property static",
+            "Makes a property optional"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which symbol is used for type assertion in TypeScript?",
+          "options": [
+            "as",
+            "<>",
+            "Both A and B",
+            "::"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "What is a tuple in TypeScript?",
+          "options": [
+            "Array with fixed number of elements with known types",
+            "A key-value pair",
+            "A type alias",
+            "A generic type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "How do you define a generic function in TypeScript?",
+          "options": [
+            "function name<T>() {}",
+            "function name<generic>() {}",
+            "function name[Type]() {}",
+            "function name(generic) {}"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "What is the purpose of 'never' type in TypeScript?",
+          "options": [
+            "Represents values that never occur",
+            "Represents null values",
+            "Represents undefined values",
+            "Represents any type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which TypeScript feature helps catch errors during compilation rather than runtime?",
+          "options": [
+            "Static type checking",
+            "Dynamic type checking",
+            "Runtime validation",
+            "Type coercion"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What does 'strictNullChecks' compiler option do?",
+          "options": [
+            "Prevents null and undefined from being assignable to any type",
+            "Allows automatic null checks",
+            "Converts null to undefined",
+            "Disables null checking"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "How do you create a type alias in TypeScript?",
+          "options": [
+            "type AliasName = Type",
+            "interface AliasName = Type",
+            "class AliasName = Type",
+            "alias AliasName = Type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What is discriminated union in TypeScript?",
+          "options": [
+            "Union type with a common property to discriminate members",
+            "Union of discriminated types",
+            "Union with type guards",
+            "Union of any types"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which access modifier is not available in TypeScript?",
+          "options": [
+            "protected",
+            "private",
+            "public",
+            "internal"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 15,
+          "question": "What does 'keyof' operator do in TypeScript?",
+          "options": [
+            "Creates union type of property names",
+            "Gets key value",
+            "Checks if key exists",
+            "Creates object keys"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "How do you make all properties optional in a type?",
+          "options": [
+            "Partial<Type>",
+            "Optional<Type>",
+            "Nullable<Type>",
+            "Maybe<Type>"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What is a namespace in TypeScript?",
+          "options": [
+            "Logical grouping of related code",
+            "A type declaration",
+            "A module system",
+            "A package manager"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which file extension is used for TypeScript declaration files?",
+          "options": [
+            ".d.ts",
+            ".tsd",
+            ".decl.ts",
+            ".types.ts"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What does 'as const' assertion do?",
+          "options": [
+            "Makes all properties readonly and literal",
+            "Converts to constant",
+            "Makes type constant",
+            "Creates const type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "How do you define an enum in TypeScript?",
+          "options": [
+            "enum Name { ... }",
+            "enumeration Name { ... }",
+            "const enum Name { ... }",
+            "Both A and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 21,
+          "question": "What is the difference between 'interface' and 'type'?",
+          "options": [
+            "Interfaces can be extended, types can use union",
+            "Types are faster",
+            "Interfaces are for objects only",
+            "No difference"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "What are decorators in TypeScript?",
+          "options": [
+            "Special declarations that can modify classes/methods",
+            "Type decorations",
+            "Style decorators",
+            "Runtime modifiers"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What does 'unknown' type represent?",
+          "options": [
+            "Type-safe counterpart of 'any'",
+            "Unknown error type",
+            "Undefined type",
+            "Null type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "How do you create mapped types in TypeScript?",
+          "options": [
+            "{ [K in Keys]: Type }",
+            "Map<Keys, Type>",
+            "mapped { Keys: Type }",
+            "type Map = Keys => Type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What is the purpose of 'satisfies' operator?",
+          "options": [
+            "Validates expression matches type without changing type",
+            "Checks type satisfaction",
+            "Converts type",
+            "Validates runtime type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which TypeScript version introduced optional chaining?",
+          "options": [
+            "3.7",
+            "4.0",
+            "2.9",
+            "3.0"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What does 'declare' keyword do?",
+          "options": [
+            "Tells TypeScript something exists without implementation",
+            "Declares variable",
+            "Declares function",
+            "Declares type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "How do you create conditional types in TypeScript?",
+          "options": [
+            "T extends U ? X : Y",
+            "if T is U then X else Y",
+            "T => U ? X : Y",
+            "conditional<T, U, X, Y>"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is the 'infer' keyword used for?",
+          "options": [
+            "Infer types within conditional types",
+            "Infer runtime types",
+            "Infer generic types",
+            "Infer any type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which compiler option enables strict mode?",
+          "options": [
+            "strict: true",
+            "strictMode: true",
+            "enableStrict: true",
+            "useStrict: true"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "title": "Go Programming",
+      "description": "Master Go language for building fast, efficient systems with goroutines and concurrency.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-gavel",
+      "questions": [
+        {
+          "id": 1,
+          "question": "How do you declare a variable in Go?",
+          "options": [
+            "var x int",
+            "int x",
+            "x := int",
+            "variable x int"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "What is the zero value of a pointer in Go?",
+          "options": [
+            "0",
+            "nil",
+            "null",
+            "undefined"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 3,
+          "question": "How do you start a goroutine?",
+          "options": [
+            "go function()",
+            "goroutine function()",
+            "async function()",
+            "thread function()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which keyword defines a constant?",
+          "options": [
+            "const",
+            "constant",
+            "final",
+            "let"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "What does the 'defer' keyword do?",
+          "options": [
+            "Delays function execution",
+            "Skips function",
+            "Runs function immediately",
+            "Defines anonymous function"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "How to check interface value type?",
+          "options": [
+            "type assertion",
+            "typeof",
+            "instanceof",
+            "typecheck"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What is a channel in Go?",
+          "options": [
+            "Communication mechanism",
+            "Data type",
+            "File handler",
+            "Error type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "How to create a slice?",
+          "options": [
+            "make([]int, 5)",
+            "new([]int, 5)",
+            "slice([]int, 5)",
+            "create([]int, 5)"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "What does 'range' do in for loop?",
+          "options": [
+            "Iterates over elements",
+            "Sets loop limits",
+            "Creates range of numbers",
+            "Filters elements"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "How to handle errors in Go?",
+          "options": [
+            "Return error value",
+            "Try-catch",
+            "Panic-recover",
+            "Error handling block"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What is the entry point of a Go program?",
+          "options": [
+            "main() function",
+            "init() function",
+            "start() function",
+            "run() function"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "How to import a package?",
+          "options": [
+            "import \"fmt\"",
+            "include \"fmt\"",
+            "require \"fmt\"",
+            "using \"fmt\""
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What does 'go mod init' do?",
+          "options": [
+            "Initializes new module",
+            "Installs dependencies",
+            "Updates Go version",
+            "Creates project structure"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "How to define a struct?",
+          "options": [
+            "type Person struct {}",
+            "struct Person {}",
+            "define Person struct {}",
+            "class Person {}"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "What is the short variable declaration?",
+          "options": [
+            ":=",
+            "=",
+            "var",
+            "let"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "How to write to a channel?",
+          "options": [
+            "ch <- value",
+            "ch.send(value)",
+            "write(ch, value)",
+            "channel.write(value)"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What does 'select' statement do?",
+          "options": [
+            "Waits on multiple channels",
+            "Selects case randomly",
+            "Filters data",
+            "Chooses best algorithm"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "How to convert string to int?",
+          "options": [
+            "strconv.Atoi()",
+            "int.Parse()",
+            "strconv.ParseInt()",
+            "string.ToInt()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What is a method receiver?",
+          "options": [
+            "Parameter defining method owner",
+            "Return value",
+            "Error handler",
+            "Channel listener"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "How to create a map?",
+          "options": [
+            "make(map[string]int)",
+            "new(map[string]int)",
+            "map[string]int{}",
+            "create(map[string]int)"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "What does 'interface{}' mean?",
+          "options": [
+            "Empty interface",
+            "Error interface",
+            "Generic type",
+            "Any type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "How to read from a channel?",
+          "options": [
+            "<-ch",
+            "ch.read()",
+            "read(ch)",
+            "channel.read(ch)"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What is 'go fmt' used for?",
+          "options": [
+            "Code formatting",
+            "Dependency management",
+            "Testing",
+            "Building"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "How to define an array?",
+          "options": [
+            "var arr [5]int",
+            "arr := array[5]int",
+            "arr = [5]int",
+            "array arr[5]int"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What is a rune in Go?",
+          "options": [
+            "Unicode code point",
+            "String type",
+            "Byte alias",
+            "Character type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "How to iterate over a map?",
+          "options": [
+            "for key, value := range map",
+            "for map.iterate()",
+            "for each in map",
+            "map.forEach()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What is 'go test' for?",
+          "options": [
+            "Running tests",
+            "Testing performance",
+            "Code analysis",
+            "Debugging"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "How to create a pointer?",
+          "options": [
+            "&variable",
+            "*variable",
+            "new(variable)",
+            "pointer(variable)"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What does 'panic' do?",
+          "options": [
+            "Stops normal execution",
+            "Logs error",
+            "Returns error",
+            "Skips code"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "How to recover from panic?",
+          "options": [
+            "recover()",
+            "catch()",
+            "handle()",
+            "rescue()"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "title": "Rust Programming",
+      "description": "Explore Rust for systems programming with memory safety and zero-cost abstractions.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-crab",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is Rust's main memory safety guarantee?",
+          "options": [
+            "No garbage collector needed",
+            "Automatic memory management",
+            "No null or dangling pointers",
+            "Built-in memory encryption"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 2,
+          "question": "What does the 'mut' keyword mean in Rust?",
+          "options": [
+            "Mutable reference",
+            "Mutable binding",
+            "Multiple ownership",
+            "Memory utility"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 3,
+          "question": "Which of these is NOT a Rust ownership rule?",
+          "options": [
+            "Each value has one owner",
+            "Only one mutable reference allowed",
+            "Values are copied by default",
+            "References must always be valid"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "What is a 'trait' in Rust?",
+          "options": [
+            "A type of variable",
+            "Similar to interfaces in other languages",
+            "A memory allocation method",
+            "A concurrency primitive"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 5,
+          "question": "What is the purpose of 'unwrap()'?",
+          "options": [
+            "To extract value from Option/Result",
+            "To wrap a value in a box",
+            "To remove mutability",
+            "To convert between types"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which macro is used for printing in Rust?",
+          "options": [
+            "println!",
+            "print!",
+            "echo!",
+            "display!"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What is 'cargo' in Rust?",
+          "options": [
+            "Package manager and build system",
+            "A data type",
+            "Memory allocator",
+            "Testing framework"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What does the '?' operator do?",
+          "options": [
+            "Early return on error",
+            "Null check",
+            "Type conversion",
+            "Pattern matching"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "Which of these is a Rust string type?",
+          "options": [
+            "String",
+            "&str",
+            "Both A and B",
+            "str only"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "What is 'lifetime' in Rust?",
+          "options": [
+            "How long a program runs",
+            "Scope for which a reference is valid",
+            "Time until garbage collection",
+            "Duration of a thread"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 11,
+          "question": "What is 'shadowing' in Rust?",
+          "options": [
+            "Declaring new variable with same name",
+            "Memory corruption",
+            "Pointer aliasing",
+            "Thread safety issue"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which keyword is used for pattern matching?",
+          "options": [
+            "match",
+            "switch",
+            "case",
+            "pattern"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What is 'Box<T>' used for?",
+          "options": [
+            "Heap allocation",
+            "Stack allocation",
+            "Thread safety",
+            "Memory mapping"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What does 'Send' trait indicate?",
+          "options": [
+            "Can be sent between threads",
+            "Can be serialized",
+            "Can be printed",
+            "Can be cloned"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "What is 'Rc<T>' short for?",
+          "options": [
+            "Reference Counter",
+            "Rust Compiler",
+            "Runtime Check",
+            "Resource Control"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "What does 'clone()' do?",
+          "options": [
+            "Creates deep copy",
+            "Creates shallow copy",
+            "Moves ownership",
+            "Creates reference"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "Which of these is a Rust concurrency primitive?",
+          "options": [
+            "Mutex",
+            "Arc",
+            "Channel",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 18,
+          "question": "What does 'dyn' keyword indicate?",
+          "options": [
+            "Dynamic dispatch",
+            "Dynamic allocation",
+            "Dynamic typing",
+            "Dynamic linking"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What is 'unsafe' in Rust?",
+          "options": [
+            "Code that bypasses some safety checks",
+            "Unoptimized code",
+            "Untested code",
+            "Uncompiled code"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which type represents a collection that can fail?",
+          "options": [
+            "Option",
+            "Result",
+            "Either",
+            "Maybe"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 21,
+          "question": "What does 'derive' attribute do?",
+          "options": [
+            "Automatically implements traits",
+            "Creates inheritance",
+            "Derives new type",
+            "Compiles faster"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "What is 'Cow' in Rust?",
+          "options": [
+            "Clone-on-write smart pointer",
+            "Compiler optimization",
+            "Concurrent ownership wrapper",
+            "Constant object wrapper"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "Which crate is used for async programming?",
+          "options": [
+            "tokio",
+            "async-std",
+            "Both A and B",
+            "futures only"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "What is 'borrow checker'?",
+          "options": [
+            "Part of compiler checking references",
+            "Memory leak detector",
+            "Code formatter",
+            "Package manager"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What does '#[test]' attribute do?",
+          "options": [
+            "Marks a test function",
+            "Enables testing mode",
+            "Compiles test only",
+            "Runs benchmarks"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "What is 'impl' keyword used for?",
+          "options": [
+            "Implementing traits or methods",
+            "Importing modules",
+            "Implicit conversion",
+            "Improving performance"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which is NOT a Rust integer type?",
+          "options": [
+            "i32",
+            "u64",
+            "f32",
+            "isize"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 28,
+          "question": "What does 'move' keyword do in closures?",
+          "options": [
+            "Moves environment into closure",
+            "Moves closure to heap",
+            "Moves data between threads",
+            "Moves ownership to caller"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is 'PhantomData' used for?",
+          "options": [
+            "Marking unused type parameters",
+            "Ghost memory allocation",
+            "Debugging tool",
+            "Performance measurement"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which macro is used for defining custom data types?",
+          "options": [
+            "struct",
+            "type!",
+            "def!",
+            "macro!"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "title": "Ruby on Rails",
+      "description": "Learn Ruby and Rails framework for rapid web application development.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-gem",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is Ruby on Rails?",
+          "options": [
+            "A web application framework",
+            "A programming language",
+            "A database system",
+            "An operating system"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which command creates a new Rails application?",
+          "options": [
+            "rails new app_name",
+            "ruby create app_name",
+            "rails generate app_name",
+            "new rails app_name"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "What does MVC stand for in Rails?",
+          "options": [
+            "Model View Controller",
+            "Main View Component",
+            "Model Variable Controller",
+            "Multiple View Control"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which ORM is used by default in Rails?",
+          "options": [
+            "ActiveRecord",
+            "DataMapper",
+            "Sequel",
+            "MongoID"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "What is the Rails console command?",
+          "options": [
+            "rails console",
+            "ruby console",
+            "rails c",
+            "Both A and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 6,
+          "question": "Which database is used by default in new Rails apps?",
+          "options": [
+            "SQLite",
+            "PostgreSQL",
+            "MySQL",
+            "MongoDB"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What does 'rake' stand for?",
+          "options": [
+            "Ruby Make",
+            "Rails Make",
+            "Ruby AKE",
+            "Rake is not an acronym"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "How do you run Rails server?",
+          "options": [
+            "rails server",
+            "ruby server",
+            "rails s",
+            "Both A and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 9,
+          "question": "What is a migration in Rails?",
+          "options": [
+            "Database schema changes",
+            "Ruby version update",
+            "Server migration",
+            "File transfer"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which command generates a model?",
+          "options": [
+            "rails generate model User",
+            "rails g model User",
+            "ruby create model User",
+            "Both A and B"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 11,
+          "question": "What is the Rails asset pipeline?",
+          "options": [
+            "Manages CSS, JavaScript, images",
+            "Database pipeline",
+            "API pipeline",
+            "Testing pipeline"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which file defines routes in Rails?",
+          "options": [
+            "config/routes.rb",
+            "app/routes.rb",
+            "routes/config.rb",
+            "config/routes.yml"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What is ERB in Rails?",
+          "options": [
+            "Embedded Ruby",
+            "External Ruby",
+            "Extended Ruby",
+            "Efficient Ruby"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What is a Rails scaffold?",
+          "options": [
+            "Generates MVC for resource",
+            "Database scaffolding",
+            "UI framework",
+            "Testing framework"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "Which is NOT a Rails environment?",
+          "options": [
+            "development",
+            "production",
+            "staging",
+            "runtime"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 16,
+          "question": "What is the purpose of Gemfile?",
+          "options": [
+            "Lists gem dependencies",
+            "Ruby configuration",
+            "Database config",
+            "Route definitions"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "How do you run database migrations?",
+          "options": [
+            "rake db:migrate",
+            "rails db:migrate",
+            "ruby migrate",
+            "Both A and B"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 18,
+          "question": "What is the Rails 'params'?",
+          "options": [
+            "Hash with request parameters",
+            "Database parameters",
+            "URL parameters only",
+            "Form parameters only"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "Which method is used for validations?",
+          "options": [
+            "validates",
+            "validate",
+            "validation",
+            "valid?"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "What is the 'flash' in Rails?",
+          "options": [
+            "Temporary message storage",
+            "Animation effect",
+            "Database flash",
+            "Cache storage"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "What does CRUD stand for?",
+          "options": [
+            "Create Read Update Delete",
+            "Create Retrieve Update Destroy",
+            "Craft Read Upgrade Delete",
+            "Create Read Upload Delete"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which is a Rails testing framework?",
+          "options": [
+            "RSpec",
+            "Minitest",
+            "Test::Unit",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "What is 'yield' in Rails layouts?",
+          "options": [
+            "Inserts view content",
+            "Database yield",
+            "Method return",
+            "Loop construct"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "What is the purpose of 'before_action'?",
+          "options": [
+            "Filters run before controller actions",
+            "Before database action",
+            "Before view rendering",
+            "Before model save"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What is 'REST' in Rails?",
+          "options": [
+            "Representational State Transfer",
+            "Rapid State Transfer",
+            "Ruby State Transfer",
+            "Rails State Transfer"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which command starts the Rails console?",
+          "options": [
+            "rails console",
+            "rails c",
+            "bundle exec rails c",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 27,
+          "question": "What is a Rails helper?",
+          "options": [
+            "Methods available in views",
+            "Database helpers",
+            "Model helpers",
+            "Route helpers"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "What is the purpose of 'render'?",
+          "options": [
+            "Renders view template",
+            "Renders JSON",
+            "Renders XML",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 29,
+          "question": "What does 'belongs_to' do?",
+          "options": [
+            "Defines association",
+            "Creates foreign key",
+            "Adds validation",
+            "Both A and B"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 30,
+          "question": "Which is NOT a Rails convention?",
+          "options": [
+            "Configuration over Convention",
+            "Convention over Configuration",
+            "Don't Repeat Yourself",
+            "Fat Models, Thin Controllers"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "title": "PHP & Backend Development",
+      "description": "Master PHP for server-side development, Laravel framework, and database integration.",
+      "difficulty": "Intermediate",
+      "icon": "fab fa-php",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What does PHP stand for?",
+          "options": [
+            "Hypertext Preprocessor",
+            "Personal Home Page",
+            "Processor Hypertext Protocol",
+            "Programming Hypertext Page"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which PHP superglobal variable contains information from HTTP headers?",
+          "options": [
+            "$_SERVER",
+            "$_GET",
+            "$_POST",
+            "$_SESSION"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "What is the default method for sending form data in HTML?",
+          "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "REQUEST"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which function is used to start a session in PHP?",
+          "options": [
+            "session_start()",
+            "start_session()",
+            "session_begin()",
+            "init_session()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "What does PDO stand for in PHP?",
+          "options": [
+            "PHP Data Objects",
+            "PHP Database Objects",
+            "Persistent Data Objects",
+            "Program Data Objects"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which operator is used for concatenation in PHP?",
+          "options": [
+            ".",
+            "+",
+            "&",
+            "|"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What is the correct way to create a constant in PHP?",
+          "options": [
+            "define(\"CONSTANT\", value)",
+            "const CONSTANT = value",
+            "Both A and B",
+            "set_constant(\"CONSTANT\", value)"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "Which function converts a string to lowercase in PHP?",
+          "options": [
+            "strtolower()",
+            "strlower()",
+            "lowercase()",
+            "str_lower()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "What is the purpose of Composer in PHP?",
+          "options": [
+            "Dependency management",
+            "Code compilation",
+            "Database migration",
+            "Template rendering"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which HTTP status code means 'Not Found'?",
+          "options": [
+            "404",
+            "200",
+            "500",
+            "302"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What is Laravel's built-in ORM called?",
+          "options": [
+            "Eloquent",
+            "Doctrine",
+            "ActiveRecord",
+            "Model"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which method is used to redirect in Laravel?",
+          "options": [
+            "redirect()",
+            "to()",
+            "route()",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 13,
+          "question": "What is the purpose of middleware in Laravel?",
+          "options": [
+            "Filter HTTP requests",
+            "Manage database connections",
+            "Handle views",
+            "Process sessions"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which PHP framework follows MVC architecture?",
+          "options": [
+            "Laravel",
+            "Symfony",
+            "CodeIgniter",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 15,
+          "question": "What does CRUD stand for?",
+          "options": [
+            "Create, Read, Update, Delete",
+            "Create, Retrieve, Update, Destroy",
+            "Copy, Read, Update, Delete",
+            "Create, Read, Upload, Delete"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which SQL statement is used to insert data?",
+          "options": [
+            "INSERT INTO",
+            "ADD RECORD",
+            "CREATE DATA",
+            "NEW ROW"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What is XSS attack?",
+          "options": [
+            "Cross-site Scripting",
+            "XML Site Scripting",
+            "Cross Server Scripting",
+            "External Site Scripting"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which function prevents SQL injection in PHP?",
+          "options": [
+            "mysqli_real_escape_string()",
+            "escape_sql()",
+            "sql_safe()",
+            "injection_prevent()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "What is REST API?",
+          "options": [
+            "Representational State Transfer",
+            "Remote Service Transfer",
+            "Resource State Transfer",
+            "Representative Server Transfer"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which HTTP method is idempotent?",
+          "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "Both A and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 21,
+          "question": "What is the purpose of .env file in Laravel?",
+          "options": [
+            "Store environment variables",
+            "Configure routes",
+            "Define models",
+            "Set up views"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which command creates a new Laravel project?",
+          "options": [
+            "composer create-project laravel/laravel",
+            "laravel new project",
+            "php artisan new",
+            "laravel create"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What is Blade in Laravel?",
+          "options": [
+            "Template engine",
+            "Database tool",
+            "Testing framework",
+            "Command line tool"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which function returns the current date and time in PHP?",
+          "options": [
+            "date()",
+            "time()",
+            "now()",
+            "datetime()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What does AJAX stand for?",
+          "options": [
+            "Asynchronous JavaScript and XML",
+            "Advanced JavaScript and XML",
+            "Asynchronous jQuery and XML",
+            "Advanced jQuery Ajax XML"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which PHP function sends raw HTTP header?",
+          "options": [
+            "header()",
+            "send_header()",
+            "http_header()",
+            "set_header()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What is the purpose of php.ini file?",
+          "options": [
+            "PHP configuration",
+            "Database settings",
+            "Application routes",
+            "User permissions"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which operator compares value and type in PHP?",
+          "options": [
+            "===",
+            "==",
+            "=",
+            "!=="
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is namespacing in PHP?",
+          "options": [
+            "Organizing code into logical groups",
+            "Creating variable names",
+            "Managing sessions",
+            "Handling errors"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which Laravel command creates a controller?",
+          "options": [
+            "php artisan make:controller",
+            "laravel create:controller",
+            "php controller:make",
+            "artisan new:controller"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    }
+  ]
+}

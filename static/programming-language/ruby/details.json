@@ -1,0 +1,763 @@
+{
+  "interview_index": [
+    { "key": "rb_intro", "title": "Ruby Overview" },
+    { "key": "rb_syntax", "title": "Syntax & Primitives" },
+    { "key": "rb_oop", "title": "Objects & OOP" },
+    { "key": "rb_metaprogramming", "title": "Metaprogramming & DSLs" },
+    { "key": "rb_metaprogramming_adv", "title": "Advanced Metaprogramming" },
+    { "key": "rb_gems", "title": "Gems & Packaging" },
+    { "key": "rb_bundler", "title": "Bundler & Dependency Management" },
+    { "key": "rb_concurrency", "title": "Threads, Fibers & Async" },
+    { "key": "rb_evented_io", "title": "Evented I/O (EventMachine, Async)" },
+    { "key": "rb_performance", "title": "Performance & Memory" },
+    { "key": "rb_profiling", "title": "Profiling & Benchmarking" },
+    { "key": "rb_c_extensions", "title": "C Extensions & Native Gems" },
+    { "key": "rb_wasm", "title": "WebAssembly & Ruby" },
+    { "key": "rb_testing", "title": "Testing (RSpec, Minitest)" },
+    { "key": "rb_tooling", "title": "Tooling, Linters & CI" },
+    { "key": "rb_sorbet", "title": "Type Checking with Sorbet" },
+    { "key": "rb_steep", "title": "Static Types with Steep" },
+    { "key": "rb_debugging", "title": "Debugging & REPL (pry/irb)" },
+    { "key": "rb_deployment", "title": "Deployment & Containers" },
+    { "key": "rb_db", "title": "Databases & ActiveRecord" },
+    { "key": "rb_graphql", "title": "GraphQL & Typed Schemas" },
+    { "key": "rb_security", "title": "Security & Best Practices" },
+    { "key": "rb_cli", "title": "CLI Tools & Thor/Cli Frameworks" }
+  ],
+
+  "rb_intro": {
+    "title": "Ruby Overview",
+    "summary": "A dynamic, expressive language focused on developer happiness.",
+    "details": "Ruby was designed for programmer productivity and joy: expressive syntax, clear standard library, and a mature ecosystem (gems, Bundler, Rails). Start by installing Ruby (rbenv/rvm/asdf recommended), using the REPL (irb/pry) to experiment, and exploring core classes (String, Array, Hash, Enumerable). Learn the runtime differences between MRI, JRuby and TruffleRuby and when to choose each.\n\nPractical steps:\n- Install a version manager (rbenv/asdf) and use a stable Ruby LTS (e.g., 3.x). \n- Use irb/pry to try small snippets; read core docs at ruby-doc.org.\n- Build tiny scripts and gem-based projects to learn packaging and testing.\n\nCommon pitfalls:\n- Overusing metaprogramming can harm readability—prefer explicit code for public APIs.\n- Avoid global state; prefer dependency injection and small modules.\n\nNext steps: create a small CLI script, publish as a gem locally, and write tests with RSpec.",
+    "cheat": "// Ruby quickstart & workflow\n// Install: curl -sSL https://get.rvm.io | bash (or use rbenv/asdf)\n// Create a new gem/project: bundle gem my_gem\n// Run script: ruby script.rb\n// REPL: irb  OR pry (gem install pry)\n// Run tests: bundle exec rspec\n// Format & lint: rubocop --auto-correct\n// Package: gem build my_gem.gemspec && gem push <pkg>\n// Useful commands: ruby -v; gem list; bundle install; bundle exec rake\n// Debugging: ruby -r debug script.rb or require 'pry'; binding.pry\n",
+    "examples": [
+      { "code": "def greet(name)\n  \"Hello, #{name}\"\nend\nputs greet('Ruby')\n" }
+    ],
+    "interview": [
+      { "q": "What is Ruby and why was it created?", "a": "Ruby is a high-level, dynamic language created to prioritize programmer productivity and happiness with readable syntax." },
+      { "q": "What is the reference implementation of Ruby?", "a": "MRI (Matz's Ruby Interpreter), also called CRuby; it uses YARV as the virtual machine." },
+      { "q": "Name other Ruby implementations.", "a": "JRuby (JVM), TruffleRuby, Rubinius." },
+      { "q": "How do you run Ruby code interactively?", "a": "Use irb or pry for a REPL to experiment with code." },
+      { "q": "How do gems relate to Ruby?", "a": "Gems are packaged Ruby libraries managed via RubyGems and Bundler." },
+      { "q": "What is Bundler used for?", "a": "Bundler manages a project's dependencies via Gemfile and Gemfile.lock." },
+      { "q": "How does Ruby handle memory management?", "a": "Ruby uses a garbage collector (GC); modern MRI uses a generational, incremental GC." },
+      { "q": "What is Rake?", "a": "Rake is Ruby's task runner (build tool) similar to Make but in Ruby." },
+      { "q": "How do you test a Ruby project?", "a": "Common frameworks: RSpec (behavior-driven), Minitest; run via bundle exec rspec or ruby -Ilib:test test/file_test.rb." },
+      { "q": "What are common package hosting options?", "a": "RubyGems.org for public gems; private gem servers or Git-based gem sourcing for internal packages." },
+      { "q": "How do you specify Ruby version for a project?", "a": "Use .ruby-version or specify in Gemfile and CI toolchains." },
+      { "q": "How to measure performance in Ruby?", "a": "Use benchmark-ips for microbenchmarks and stackprof/ruby-prof for profiling." },
+      { "q": "What is the usual workflow to release a gem?", "a": "Update version, build gem (gem build), run tests, push to RubyGems (gem push) typically automated in CI." },
+      { "q": "How to manage multiple Ruby versions locally?", "a": "Use version managers like rbenv, rvm or asdf to switch Ruby versions." },
+      { "q": "What is a Gemfile.lock", "a": "Lockfile capturing exact dependency versions to ensure reproducible installs for applications." },
+      { "q": "How to add development-only dependencies?", "a": "Group them in Gemfile under group :development, :test." },
+      { "q": "What is the safe way to run untrusted Ruby code?", "a": "Run in isolated environments (containers/VMs) and avoid evaluating arbitrary input; use sandboxing where possible." },
+      { "q": "How to check for vulnerable gems?", "a": "Use bundle-audit, GitHub Dependabot or Snyk to scan dependencies." },
+      { "q": "How to contribute to Ruby open-source?", "a": "Fork, run tests, write clear PRs, and follow contribution guidelines; documentation helps a lot." },
+      { "q": "Where to find the Ruby standard library docs?", "a": "At https://ruby-doc.org/stdlib/ or via 'ri' / 'rdoc' locally." }
+    ]
+  },
+
+  "rb_syntax": {
+    "title": "Syntax & Primitives",
+    "summary": "Strings, arrays, hashes, blocks, procs, symbols and common idioms.",
+    "details": "Ruby syntax centers on objects and messages; nearly everything is an object. Master the basic types: String, Integer/Float, Symbol, Array, Hash, Range, and Enumerable. Blocks ({} or do..end) and Procs are idiomatic—use blocks for callbacks, procs when you need reuse. Learn keyword arguments, safe navigation (&.) and pattern matching (3.0+) for expressive control flow.\n\nPractical tips:\n- Favor symbols for keys when keys are identifiers. \n- Use Enumerable methods (map/select/reduce) instead of manual loops for readability. \n- Prefer frozen string literals and frozen constants where appropriate to reduce allocations.\n\nPitfalls:\n- Beware of mutating shared objects (Arrays/Hashes) across calls; prefer dup or freeze when needed.\n\nNext steps: rewrite a small loop using map/select and apply pattern matching to destructure nested hashes.",
+    "cheat": "// Syntax & primitives cheat\n// Literals: 42, 3.14, 'str', :symbol, [1,2], { a: 1 }\n// Block forms: do..end (multi-line) and { } (single-line)\n// Proc/lambda: p = proc { |x| x*2 } ; l = lambda { |x| x*2 }\n// Strings: \"#{expr}\" interpolation; %q and %Q for quoting\n// Safe navigation: obj&.dig(:a,:b) ; fetch: hash.fetch(:k, default)\n// Freeze constants: MY_CONST = 'x'.freeze or using frozen_string_literal pragma\n",
+    "examples": [
+      { "code": "arr = [1,2,3]\narr.map { |n| n * 2 } # => [2,4,6]\n\n# keyword args\ndef foo(a:, b: 2)\n  a + b\nend\nfoo(a: 3)\n" }
+    ],
+    "interview": [
+      { "q": "What is a block in Ruby?", "a": "An anonymous chunk of code passed to methods, using {} or do..end." },
+      { "q": "Difference between Proc and lambda?", "a": "Lambdas check arity and return behaves like a method; Procs are looser and return exits differently." },
+      { "q": "How to define keyword arguments?", "a": "def f(a:, b: 1); end — callers pass a: val." },
+      { "q": "What is the safe navigation operator?", "a": "Operator &. avoids NoMethodError on nil by returning nil instead." },
+      { "q": "How to destructure arrays/hashes?", "a": "Use multiple assignment or pattern matching (Ruby 2.7+/3.0+)." },
+      { "q": "What is Enumerable?", "a": "Module providing collection helpers like map, select, reduce; include it to get iteration utilities." },
+      { "q": "How to freeze strings and why?", "a": "freeze prevents mutation and reduces allocations; use frozen_string_literal or .freeze." },
+      { "q": "What is symbol vs string performance trade-off?", "a": "Symbols are immutable and reused, lower allocation cost; avoid symbols for untrusted input (memory leak risks in old Ruby versions)." },
+      { "q": "How to convert between types?", "a": "Use to_s, to_i, to_h, to_a methods or parse where appropriate." },
+      { "q": "What are percent literals?", "a": "%w[a b c] for arrays, %q for single-quoted, %Q for double-quoted strings." },
+      { "q": "How does ||= operator work?", "a": "x ||= y assigns y to x if x is nil or false; beware false vs nil semantics." },
+      { "q": "How to safely access nested hash keys?", "a": "Use dig or chained safe navigation with &. or use fetch with defaults." },
+      { "q": "What is method_missing used for?", "a": "To catch undefined calls and implement dynamic dispatch; use cautiously." },
+      { "q": "When to use map vs each?", "a": "Use map to transform and return new array; each for side effects." },
+      { "q": "What is a symbol garbage issue historically?", "a": "Prior to Ruby 2.2, symbols weren't GC'd, so dynamic symbol creation could leak memory—modern Rubies GC symbols." },
+      { "q": "Explain ranges usage", "a": "Ranges express sequences (1..5 includes 5; 1...5 excludes 5) and work with include?/cover? and iteration." },
+      { "q": "How to write one-line conditional?", "a": "Use inline modifiers: do_something if condition" },
+      { "q": "What is thread-safety concern with mutables?", "a": "Mutating shared objects across threads needs synchronization or thread-safe patterns." },
+      { "q": "How to represent binary data?", "a": "Use String in Ruby with encoding binary (force_encoding('BINARY')) or use String#b literal." },
+      { "q": "How to enforce argument types at runtime?", "a": "Manual checks, contracts, or use libraries like Sorbet/sorbet-runtime for gradual typing." }
+    ]
+  },
+
+  "rb_oop": {
+    "title": "Objects & OOP",
+    "summary": "Classes, modules (mixins), visibility, singleton methods & duck typing.",
+    "details": "Ruby's OOP model treats everything as an object. Use classes to encapsulate state and behavior; modules provide namespaces and reusable mixins. Understand method visibility (public/protected/private), singleton methods (per-object methods), and the eigenclass for meta-programming control. Embrace duck typing—design APIs around behavior (respond_to?) rather than explicit types.\n\nPractical guidance:\n- Prefer composition over deep inheritance hierarchies. \n- Use modules to extract shared behavior; avoid mixing too many responsibilities. \n- Document method contracts and expected invocation patterns.\n\nPitfalls:\n- Monkey-patching core classes can cause surprising behavior across libraries; prefer refinements or wrapper modules.\n\nNext steps: refactor a small class to extract shared behavior into a module, add unit tests for public methods.",
+    "cheat": "// OOP cheat\n// class Person; attr_accessor :name; def initialize(name); @name = name; end; end\n// module mixin: module M; def m; 'm' end; end; class C; include M; end\n// singleton method: obj.define_singleton_method(:greet){ 'hi' }\n// attr_reader/attr_writer/attr_accessor shortcuts\n",
+    "examples": [
+      { "code": "class User\n  attr_reader :name\n  def initialize(name) @name = name end\n  def display\n    \"Name: #{name}\"\n  end\nend\n\nu = User.new('Sam')\nputs u.display\n" }
+    ],
+    "interview": [
+      { "q": "What is 'everything is an object' in Ruby?", "a": "Even primitives like numbers and classes themselves are objects with methods." },
+      { "q": "How to define getters/setters quickly?", "a": "Use attr_reader, attr_writer, attr_accessor macros to generate methods." },
+      { "q": "What is a module in Ruby?", "a": "A namespace and mixin construct; cannot be instantiated but can be included/extended." },
+      { "q": "Difference include vs extend?", "a": "include mixes methods as instance methods; extend adds methods as class methods." },
+      { "q": "What is a singleton method?", "a": "A method defined on a single object instance, altering that object's behavior only." },
+      { "q": "What is the eigenclass?", "a": "An object's singleton class that holds its per-object methods and eigen behavior." },
+      { "q": "How to check for method availability?", "a": "Use respond_to?(:method_name) to detect support at runtime." },
+      { "q": "Explain 'duck typing'.", "a": "If it quacks like a duck (responds to methods), it can be used—no formal type needed." },
+      { "q": "How to make a class immutable?", "a": "Freeze instances and avoid exposing mutating methods; freeze internal structures." },
+      { "q": "When to use mixins over inheritance?", "a": "Use mixins to share behavior across unrelated classes, avoiding deep inheritance chains." },
+      { "q": "Why avoid global variables?", "a": "They create hidden coupling and make code unpredictable and hard to test." },
+      { "q": "How to define class-level attributes?", "a": "Use class << self; attr_accessor :foo; end or self.foo = value patterns." },
+      { "q": "What is method visibility?", "a": "public/protected/private control callable contexts; private methods cannot be called with explicit receiver." },
+      { "q": "What is method aliasing use?", "a": "Alias methods to wrap behavior or deprecate old names while keeping compatibility." },
+      { "q": "How to create factory methods?", "a": "Use self.build or class methods to centralize construction logic." },
+      { "q": "What is forwardable?", "a": "Use Forwardable or SimpleDelegator to delegate methods to an internal object instead of inheritance." },
+      { "q": "How to implement interfaces in Ruby?", "a": "No formal interfaces—use duck typing and document required methods; use modules to assert behavior." },
+      { "q": "What is a mixin conflict and resolution?", "a": "Method name collisions between modules; resolve with prepend/include order or explicitly define method." },
+      { "q": "How to test object invariants?", "a": "Write unit tests validating state after construction and public method calls; use contracts or checks inside methods." },
+      { "q": "How to hide implementation details?", "a": "Keep helper methods private and prefer composition, not exposing internals via public API." }
+    ]
+  },
+
+  "rb_metaprogramming": {
+    "title": "Metaprogramming & DSLs",
+    "summary": "define_method, method_missing, class_eval and building DSLs.",
+    "details": "Ruby's runtime makes metaprogramming natural: define_method, module_eval/class_eval, method_missing and refinements enable dynamic APIs and DSLs. Use metaprogramming to eliminate repetitive boilerplate (attribute macros, scopes) but keep generated surface predictable and well-documented. Provide explicit error messages for DSL misuse.\n\nPractical tips:\n- When generating methods, add clear names and guardrails (argument checks). \n- Prefer define_singleton_method or Module#prepend over method_missing where possible for clarity. \n- Test generated APIs with example-based tests.\n\nPitfalls:\n- Heavy metaprogramming can obscure stack traces and IDE support; balance magic with discoverability.\n\nNext steps: implement a small DSL (e.g., simple routing table) with tests and explicit docs.",
+    "cheat": "// Metaprogramming cheat\n// define_method(:name){ |args| ... }\n// class_eval(\"def dynamic; ...; end\") to inject methods\n// method_missing(:name, *args) for proxies but implement respond_to_missing?\n// Module#prepend to wrap methods using super\n// Use refinements to limit global monkey patches\n",
+    "examples": [
+      { "code": "class CommandSet\n  def self.command(name, &blk)\n    define_method(name, &blk)\n  end\nend\n\nclass App < CommandSet\n  command :hello do |who|\n    \"Hello #{who}\"\n  end\nend\n" }
+    ],
+    "interview": [
+      { "q": "What is define_method and when to use it?", "a": "define_method dynamically creates instance methods at runtime—use for repetitive method generation." },
+      { "q": "What is method_missing used for?", "a": "To intercept calls to undefined methods and implement dynamic dispatch or proxies." },
+      { "q": "Why implement respond_to_missing? ", "a": "So respond_to? accurately reports methods handled by method_missing." },
+      { "q": "What is class_eval vs module_eval?", "a": "They evaluate code in class/module context adding methods or altering definitions." },
+      { "q": "When to prefer Module#prepend?", "a": "To inject behavior that calls super, providing cleaner method wrapping than reopen+alias." },
+      { "q": "What are refinements?", "a": "Scoped monkey-patching to limit changes to certain lexical scopes." },
+      { "q": "How to debug generated methods?", "a": "Log generation, assign readable names, write tests and inspect method source where possible." },
+      { "q": "What is a DSL and how does Ruby help build it?", "a": "Domain-specific language—Ruby's flexible syntax and method_missing allow concise DSLs." },
+      { "q": "What are risks of heavy metaprogramming?", "a": "Harder debugging, brittle APIs, poor editor support and surprising side effects." },
+      { "q": "How to test DSLs?", "a": "Write acceptance-style tests covering common DSL usages and edge cases." },
+      { "q": "How to implement attribute macros?", "a": "Metaprogramming to define getters/setters and validations based on attribute lists." },
+      { "q": "How to keep metaprogramming readable?", "a": "Limit scope, document behavior, prefer explicit helper methods and small macros." },
+      { "q": "What is define_singleton_method?", "a": "Creates a method on a single object (singleton), useful for per-object behavior." },
+      { "q": "How to avoid performance pitfalls?", "a": "Cache computed method lookups where possible and avoid generating methods in hot loops." },
+      { "q": "How to maintain IDE support?", "a": "Provide static docs, examples, and avoid totally hidden APIs; offer typed interfaces where possible." },
+      { "q": "When is metaprogramming the right tool?", "a": "When it reduces significant boilerplate and improves maintainability without hiding intent." },
+      { "q": "What is TracePoint used for?", "a": "Runtime instrumentation hook to trace events like calls, returns, exceptions for debugging/profiling." },
+      { "q": "How to compose metaprogramming safely across gems?", "a": "Name macros clearly, guard against conflicts, and keep global side-effects minimal." },
+      { "q": "How to document generated APIs?", "a": "Generate docs during build or write explicit examples showing available methods and options." },
+      { "q": "What testing strategy for metaprogramming?", "a": "Unit test macro logic and separately test generated methods with behavior-driven tests." }
+    ]
+  },
+
+  "rb_metaprogramming_adv": {
+    "title": "Advanced Metaprogramming",
+    "summary": "Refinements, eigenclasses, method hooks and safe DSL patterns.",
+    "details": "Advanced metaprogramming covers eigenclasses (singleton classes), refinements for scoped monkey-patching, method_added / method_missing hooks, and TracePoint for runtime instrumentation. Use these tools to build robust internal DSLs and instrumentation while minimizing global side-effects. Prefer explicit, testable DSL entry points and document edge cases.\n\nPractical tips:\n- Use Module#prepend instead of reopening classes when possible. \n- Use refinements to localize behavior changes and avoid global patches. \n- If using TracePoint for profiling, ensure it's used in dev/test only.\n\nPitfalls:\n- Overused hooks can significantly complicate debugging and performance. \n\nNext steps: build a small attribute macro that generates validations and unit-test its edge cases.",
+    "cheat": "// Advanced metaprogramming cheat\n// Use refinements to scope monkey-patches\n// Use method_added hook to react to new methods\n// Use TracePoint for tracing calls/returns in dev only\n// Use Module#prepend to wrap methods safely with super\n",
+    "examples": [
+      { "code": "module Logging\n  def execute(*args)\n    puts \"Executing: \"+__method__.to_s\n    super\n  end\nend\n\nclass Job\n  prepend Logging\n  def execute; puts 'job'; end\nend\n" }
+    ],
+    "interview": [
+      { "q": "What are refinements and how do they differ from monkey-patching?", "a": "Refinements apply method changes only within a lexical module scope, avoiding global effects of monkey-patching." },
+      { "q": "What is the method_added hook?", "a": "A hook called whenever an instance method is added to a class or module, allowing meta behavior." },
+      { "q": "What is TracePoint?", "a": "An API to instrument runtime events like calls, returns and exceptions for tracing/profiling." },
+      { "q": "How to implement safe DSLs with minimal side-effects?", "a": "Limit scope, validate inputs, and expose explicit entry points while avoiding global state." },
+      { "q": "What is eigenclass and common use-cases?", "a": "Eigenclass is the singleton class for per-object methods and class-level behavior; used for per-instance customization." },
+      { "q": "How to use Module#prepend for AOP-like behavior?", "a": "Prepend a module so its methods run before the class's versions and call super to delegate." },
+      { "q": "How to avoid TracePoint overhead in production?", "a": "Only enable TracePoint in development/CI and guard with flags to prevent runtime overhead." },
+      { "q": "What is a safe pattern for method generation?", "a": "Generate methods once at class load and add explicit guards and documentation." },
+      { "q": "How to keep stack traces readable with metaprogramming?", "a": "Use explicit method names, avoid anonymous evals, and include helpful error messages." },
+      { "q": "How to handle conflicts from multiple gems using the same metaprogramming hooks?", "a": "Use namespacing, clear rubygem contracts and avoid touching core classes unless necessary." },
+      { "q": "When to use refinements vs prepend?", "a": "Use refinements for localized changes; prepend when you need controlled method wrapping at runtime." },
+      { "q": "What is a common pitfall with method_added?", "a": "It can run during class load and cause recursive behavior—ensure idempotence and guards." },
+      { "q": "How to test code using TracePoint?", "a": "Assert emitted events in controlled tests and ensure TracePoint is disabled in other contexts." },
+      { "q": "What are singleton methods for classes?", "a": "They are class methods defined on the class's singleton (eigen) class." },
+      { "q": "How to document metaprogrammed APIs?", "a": "Provide generated docs, examples, and describe the DSL surface explicitly in README." },
+      { "q": "How to debug refinements issues?", "a": "Check lexical scope, requiring modules in the right place and ensure the using keyword is applied." },
+      { "q": "How to safely deprecate metaprogrammed features?", "a": "Provide warnings, maintain compatibility shims, and schedule removal with clear changelogs." },
+      { "q": "What are tracepoints useful for besides profiling?", "a": "Coverage, auditing and debugging complex runtime behaviors in development." },
+      { "q": "How to limit metaprogramming scope in a library?", "a": "Provide explicit opt-in APIs and avoid altering global core classes by default." },
+      { "q": "How to ensure compatibility across Ruby versions when metaprogramming?", "a": "Test on multiple Ruby versions in CI and avoid relying on undocumented internal behaviors." }
+    ]
+  },
+
+  "rb_gems": {
+    "title": "Gems & Packaging",
+    "summary": "Create, publish and version gems; gemspec fields and semantic versioning.",
+    "details": "Gems are the unit of code distribution in Ruby. Use Bundler to scaffold gems, write a clear gemspec (metadata, dependencies, files), and follow semantic versioning. Include README, CHANGELOG, and tests. Automate releases with CI (build, test, sign, push) and consider signing gems for provenance.\n\nPractical checklist:\n- Use bundle gem to scaffold; include LICENSE, README, and tests. \n- Use rake or GitHub Actions to build and publish: gem build / gem push. \n- Maintain changelog and follow semver for compatibility.\n\nPitfalls:\n- Publishing gems with accidental credentials or large unnecessary files—use .gemspec to limit files.\n\nNext steps: publish a small 'hello-world' gem to a private gem server or local gem install to learn the flow.",
+    "cheat": "// Gems & packaging cheat\n// Scaffold: bundle gem my_gem --test=rspec\n// Local build: gem build my_gem.gemspec && gem install --local my_gem-0.1.0.gem\n// Publish: gem push my_gem-0.1.0.gem (use API key stored in ~/.gem/credentials)\n// Versioning: follow semver and update version in lib/my_gem/version.rb\n// CI: build/test, gem build, gem push from CI with secure credentials\n// Use gem signing and checksums for integrity where needed\n",
+    "examples": [
+      { "code": "Gem::Specification.new do |s|\n  s.name = 'my_gem'\n  s.version = '0.1.0'\n  s.summary = 'An example gem'\n  s.files = Dir['lib/**/*.rb']\nend\n" }
+    ],
+    "interview": [
+      { "q": "What is a gemspec file?", "a": "A Ruby DSL file that describes a gem's metadata, files and dependencies." },
+      { "q": "How do you version a gem?", "a": "Follow semantic versioning and update the version constant in lib/<gem>/version.rb and changelog." },
+      { "q": "How to publish a gem securely?", "a": "Use CI with encrypted API keys, avoid committing credentials, and use gem signing if needed." },
+      { "q": "What is bundler gem scaffold?", "a": "bundle gem creates a new gem structure with suggested files and test setup." },
+      { "q": "How to test gem installation locally?", "a": "gem build my_gem.gemspec then gem install --local my_gem-<ver>.gem in a clean environment." },
+      { "q": "How to limit files included in a gem?", "a": "Set s.files in gemspec or use git ls-files to include tracked files; exclude secrets and large assets." },
+      { "q": "What is a development dependency vs runtime dependency?", "a": "Development deps are needed for tests/build; runtime deps are required by consumers." },
+      { "q": "How to handle native extensions in gems?", "a": "Provide extconf.rb (mkmf) and test builds on target platforms; consider precompiled gems for users." },
+      { "q": "How to deprecate a gem API?", "a": "Add warnings, document alternatives, and provide migration guides across releases." },
+      { "q": "How to provide backward compatibility?", "a": "Maintain APIs where possible, add feature flags and major version bumps for breaking changes." },
+      { "q": "How to sign a gem?", "a": "Use gem cert and signing tools; configure consumers to trust signed gems." },
+      { "q": "How to handle license metadata?", "a": "Include license field in gemspec and a LICENSE file in the repo." },
+      { "q": "How to automate releases?", "a": "Use GitHub Actions or other CI to build, test and push gems on tagged releases." },
+      { "q": "What is pry-doc or rdoc generation?", "a": "Generate documentation from code with rdoc or yard and publish yard docs." },
+      { "q": "How to test compatibility with multiple Ruby versions?", "a": "Run CI matrix across versions and use tools like Appraisal for dependency matrices." },
+      { "q": "How to handle pre-release versions?", "a": "Use version suffixes like 0.1.0.pre and document stability expectations." },
+      { "q": "When to vendor a gem?", "a": "When you need deterministic builds in restricted environments, vendor/cache may be used." },
+      { "q": "How to retire a gem?", "a": "Deprecate in docs, mark as yanked on RubyGems and communicate via changelog and README." },
+      { "q": "How to manage transitive dependency conflicts?", "a": "Pin direct dependencies, use conservative version constraints and coordinate upgrades." },
+      { "q": "What to include in gem README?", "a": "Usage examples, installation steps, API highlights, contributing and license information." }
+    ]
+  },
+
+  "rb_bundler": {
+    "title": "Bundler & Dependency Management",
+    "summary": "Gemfile, Gemfile.lock, groups and reproducible installs.",
+    "details": "Bundler manages project dependencies via Gemfile and ensures reproducible installs with Gemfile.lock. Commit lockfiles for apps; avoid committing for libraries that should stay flexible. Use groups to separate test/dev dependencies and run bundle exec to ensure the correct environment. Use bundle-audit and Dependabot to detect vulnerabilities and schedule regular dependency updates.\n\nPractical tips:\n- Use gem 'foo', '~> x.y' for safe upgrades. \n- In CI run: bundle install --jobs=4 --retry=3 and bundle exec rspec.\n\nPitfalls:\n- Using --without in production without testing the result can hide missing runtime deps.\n\nNext steps: add Dependabot to a repo and repair/update a vulnerable gem via PR workflow.",
+    "cheat": "// Bundler cheat\n// Initialize: bundle init\n// Add dependency: bundle add <gem>\n// Install: bundle install --path vendor/bundle (for isolation)\n// Use bundle exec <cmd> to run in bundle context\n// Update: bundle update <gem>\n// Check vulnerabilities: bundle audit\n// CI: bundle config set --local frozen '1' && bundle install --without development test\n",
+    "examples": [
+      { "code": "source 'https://rubygems.org'\ngem 'rails', '~> 6.1'\ngem 'rspec', group: :test\n" }
+    ],
+    "interview": [
+      { "q": "What is Gemfile.lock and when should you commit it?", "a": "It locks exact versions; commit for apps to ensure reproducible installs but libraries often omit to avoid forcing consumers." },
+      { "q": "What does bundle exec do?", "a": "Runs a command in the context of the bundle, ensuring the bundled gems are used." },
+      { "q": "How to pin a gem to a specific version?", "a": "In Gemfile use gem 'name', '1.2.3' or use bundle add name --version '1.2.3'." },
+      { "q": "How to update dependencies safely?", "a": "Use bundle update <gem>, run tests, read changelogs and update in CI-backed PRs." },
+      { "q": "How to handle private gem sources?", "a": "Configure source in Gemfile and set credentials in CI securely via environment variables or credentials files." },
+      { "q": "What is bundle-audit?", "a": "Tool to check for known vulnerabilities in Gemfile.lock." },
+      { "q": "How to vendor dependencies?", "a": "Use bundle package to vendor gems into vendor/cache for offline installs." },
+      { "q": "What is the --path option?", "a": "Installs gems to a local path (e.g., vendor/bundle) to avoid global gem pollution." },
+      { "q": "How to manage platform-specific gems?", "a": "Use platforms option in Gemfile or restrict via conditionals." },
+      { "q": "How to debug dependency resolution issues?", "a": "Use bundle viz or bundle why to inspect dependencies and conflicts." },
+      { "q": "What is Gemfile.lock's format?", "a": "It includes exact versions and checksums in a deterministic format used by Bundler." },
+      { "q": "How to handle native gem compilation in CI?", "a": "Install necessary system packages (dev headers) and use CI images matching production." },
+      { "q": "How to reduce bundle size?", "a": "Avoid unnecessary dev dependencies in production and prune unused gems." },
+      { "q": "How to isolate dev/test deps?", "a": "Place them in group :development, :test and exclude in production install with --without." },
+      { "q": "How to use gem sources mirrors?", "a": "Configure GOPROXY-like mirrors? Bundler supports mirror settings in .bundle/config." },
+      { "q": "How to check for outdated gems?", "a": "Use bundle outdated to list gems with newer versions available." },
+      { "q": "What is frozen bundle?", "a": "Setting bundle config frozen ensures Gemfile.lock isn't changed during install in CI." },
+      { "q": "How to handle dependency conflicts?", "a": "Use conservative version constraints or coordinate upgrades across gems to resolve conflicts." },
+      { "q": "How to test with multiple Ruby versions and gems?", "a": "Use matrix CI jobs across ruby versions and bundle install in each job." },
+      { "q": "What is the best practice for production bundle installs?", "a": "Use --deployment or frozen mode and install only runtime groups to ensure deterministic deploys." }
+    ]
+  },
+
+  "rb_concurrency": {
+    "title": "Threads, Fibers & Async",
+    "summary": "MRI GIL, Fibers, Thread usage, async gems and Sidekiq for background jobs.",
+    "details": "MRI's Global VM Lock (GIL) limits parallel Ruby execution of Ruby code, but IO-bound concurrency still benefits from threads. Fibers and async gems (async, concurrent-ruby) provide structured concurrency for cooperative multitasking. For background processing, Sidekiq (Redis-based) is an industry standard—design idempotent jobs and handle retries.\n\nPractical patterns:\n- Use threads for IO-bound parallel tasks. \n- Use Sidekiq for background jobs and ensure job idempotency. \n- Use Fibers/async when building high-concurrency servers with non-blocking IO.\n\nPitfalls:\n- Blocking operations in an event loop will freeze the server—offload long work to threads or workers.\n\nNext steps: build a small Sidekiq worker, instrument with metrics, and run with concurrency tuned for your CPU/RAM.",
+    "cheat": "// Concurrency cheat\n// Threads: t = Thread.new { ... } ; t.join\n// Fibers: f = Fiber.new { ... } ; f.resume\n// Use Thread.abort_on_exception = true in development to surface thread errors\n// Sidekiq: gem 'sidekiq' ; class MyWorker; include Sidekiq::Worker; def perform(args); end; end\n// Use Concurrent::Promises or async gem for structured concurrency\n// Always use thread-safe data structures or mutex/synchronization when sharing state\n",
+    "examples": [
+      { "code": "t = Thread.new { sleep 1; puts 'done' }\nt.join\n\n# Sidekiq worker skeleton\nclass HardWorker\n  include Sidekiq::Worker\n  def perform(name)\n    puts \"Working on #{name}\"\n  end\nend\n" }
+    ],
+    "interview": [
+      { "q": "What is the GIL and how does it affect concurrency in Ruby?", "a": "Global Interpreter Lock serializes execution of Ruby bytecode in MRI affecting CPU-bound parallelism but not IO concurrency." },
+      { "q": "When should you use threads in Ruby?", "a": "Use threads for IO-bound tasks to overlap waits; use background workers for CPU-bound work." },
+      { "q": "What is a Fiber?", "a": "A lightweight cooperative concurrency primitive where the developer yields control voluntarily." },
+      { "q": "How does Sidekiq process jobs?", "a": "Sidekiq uses Redis queues and threads within processes to execute background jobs concurrently." },
+      { "q": "How to ensure Sidekiq job idempotency?", "a": "Design jobs so repeated execution doesn't cause incorrect side effects and use unique job keys where necessary." },
+      { "q": "What is Concurrent-Ruby?", "a": "A gem providing concurrency abstractions like futures, promises, thread pools and actors for Ruby." },
+      { "q": "How to detect data races in Ruby?", "a": "Use thorough tests and careful synchronization; Ruby lacks a built-in race detector like Go's -race." },
+      { "q": "When to use thread pools?", "a": "When you have many short tasks and want to limit concurrent threads to control resource usage." },
+      { "q": "How to cancel a long-running thread?", "a": "Use shared flags or thread-safe signals and check them periodically; avoid forcibly killing threads." },
+      { "q": "What are pitfalls of Thread.abort_on_exception?", "a": "It makes debugging easier in dev but can crash processes unexpectedly if not intended for production." },
+      { "q": "How to avoid starving the event loop?", "a": "Keep callbacks short, avoid blocking IO and delegate heavy work to threads or external services." },
+      { "q": "How to handle thread exceptions?", "a": "Log exceptions in threads and propagate results via queues or futures to the main thread." },
+      { "q": "What is backpressure in concurrency?", "a": "Mechanisms to slow producers when consumers can't keep up, preventing resource overload." },
+      { "q": "When to use JRuby for concurrency?", "a": "Choose JRuby for true OS-thread parallelism if you need parallel CPU-bound Ruby tasks." },
+      { "q": "How to share state safely between threads?", "a": "Use Mutex, Monitor, Queue or atomic primitives from concurrent-ruby and limit shared mutable state." },
+      { "q": "What is actor model in Ruby?", "a": "An approach where actors process messages serially, reducing shared-state concurrency issues." },
+      { "q": "How to test concurrent code?", "a": "Use deterministic tests where possible, stress tests, and stub external dependencies to avoid flakiness." },
+      { "q": "What is fiber schedulers (Ruby 3.0) about?", "a": "Fiber schedulers enable non-blocking I/O implementations to integrate with Fibers for concurrency." },
+      { "q": "How to monitor background job health?", "a": "Track queue lengths, job latency, success/failure rates and worker process metrics." },
+      { "q": "Best practices for thread usage in web apps?", "a": "Avoid blocking handlers, set thread pool sizes carefully and use connection pools for DB access." }
+    ]
+  },
+
+  "rb_evented_io": {
+    "title": "Evented I/O (EventMachine, Async)",
+    "summary": "Event-driven frameworks for high-concurrency I/O and streaming servers.",
+    "details": "Evented I/O frameworks let one process handle many concurrent connections efficiently by avoiding blocking. EventMachine and async offer event loops; modern alternatives like Falcon and Async pair well with non-blocking libraries. When using evented designs, ensure all libraries are non-blocking and offload CPU work to worker pools.\n\nPractical tips:\n- Keep callbacks short and non-blocking. \n- Use streaming APIs and backpressure mechanisms for large payloads. \n- Monitor connection counts and memory usage closely.\n\nPitfalls:\n- Accidentally using blocking DB or file calls in the event loop will stall all clients.\n\nNext steps: create a simple async server, benchmark with wrk and replace blocking calls with async equivalents.",
+    "cheat": "// Evented I/O cheat\n// Use async gem: gem 'async', require 'async'\n// Example: Async do |task| task.async { ... } end\n// Avoid blocking: move blocking calls to thread pool (Async::Task.current.async or use Thread) or use non-blocking libs\n// Use Falcon server for async Rack servers\n",
+    "examples": [
+      { "code": "# pseudocode\nAsync do |task|\n  server = Async::HTTP::Server.new(handler)\n  server.run\nend\n" }
+    ],
+    "interview": [
+      { "q": "What is evented I/O?", "a": "A model using an event loop to handle many IO connections with few threads by avoiding blocking operations." },
+      { "q": "When to prefer evented I/O over threading?", "a": "When you have many lightweight connections with small CPU work per request and need low memory per connection." },
+      { "q": "What is EventMachine?", "a": "An older event-driven Ruby library for network servers; async is a modern alternative." },
+      { "q": "What are typical pitfalls with event loops?", "a": "Blocking calls inside the loop, long-running callbacks, and using blocking libraries inadvertently." },
+      { "q": "How to offload blocking work in evented apps?", "a": "Use thread pools, background workers, or external services for CPU or blocking tasks." },
+      { "q": "What is backpressure in streaming?", "a": "Mechanisms to signal producers to slow down when consumers can't keep up." },
+      { "q": "How to test evented servers?", "a": "Use integration tests, simulate many connections and check latency under load." },
+      { "q": "How to integrate async with Rails?", "a": "Rails is traditionally sync; use separate async services or gems that support Rack async servers like Falcon." },
+      { "q": "What is fiber vs event loop relation?", "a": "Fibers can be scheduled cooperatively inside event loops enabling asynchronous-like coding style." },
+      { "q": "What is reactor pattern?", "a": "Pattern where a central loop waits for events and dispatches handlers, core to evented I/O." },
+      { "q": "How to debug an event loop stuck issue?", "a": "Find blocking calls, add instrumentation/metrics and reproduce locally with similar load." },
+      { "q": "How to choose between async and threaded servers?", "a": "Consider the libraries you depend on and whether you can avoid blocking operations." },
+      { "q": "What is non-blocking socket?", "a": "A socket configured to return immediately when operations would block, integrated with event loop readiness notifications." },
+      { "q": "How to implement flow-control?", "a": "Use windowing and backpressure signals between producer and consumer layers." },
+      { "q": "What is epoll/kqueue behind evented frameworks?", "a": "OS-level scalable IO multiplexing APIs used by event loops for readiness notifications." },
+      { "q": "How to handle timeouts in evented apps?", "a": "Schedule timers inside the loop and cancel or reject slow operations proactively." },
+      { "q": "When to use streaming APIs?", "a": "For large payloads where incremental processing and low memory usage are important." },
+      { "q": "How to ensure compatibility with libraries?", "a": "Prefer non-blocking libraries or wrap blocking calls in thread pools." },
+      { "q": "What metrics to monitor?", "a": "Connections, active tasks, event loop latency, GC pauses and memory usage." },
+      { "q": "How to scale evented servers?", "a": "Horizontally across processes/containers and use load-balancing; monitor per-process resource usage." }
+    ]
+  },
+
+  "rb_performance": {
+    "title": "Performance & Memory",
+    "summary": "Profiling, GC tuning, reducing allocations and using JRuby/Truffle when needed.",
+    "details": "Optimize Ruby by measuring first. Use alloc profilers (stackprof, objspace), benchmark-ips for micro-benchmarks, and derailed_benchmarks for Rails apps. Reduce object churn, prefer string interpolation carefully, reuse buffers, and leverage JRuby or TruffleRuby for specialized workloads. Tune Ruby GC time thresholds (RUBY_GC_HEAP_*) for long-lived processes.\n\nPractical steps:\n- Profile under realistic load, identify allocation hotspots, and reduce churn. \n- Use object pools for heavy per-request allocations. \n- Consider JIT or alternative VMs for CPU-bound code.\n\nPitfalls:\n- Premature micro-optimizations without profiling often harm readability for little gain.\n\nNext steps: profile a hot endpoint, reduce top allocation sites and re-run benchmarks to verify improvements.",
+    "cheat": "// Performance cheat\n// Microbench: gem 'benchmark-ips'\n// CPU sample: stackprof --mode cpu\n// Allocation: stackprof --mode object or use objspace and allocation tracers\n// Rails: derailed_benchmarks: bundle exec derailed bundle:mem\n// Reuse buffers, freeze string literals, avoid temporary objects in hot loops\n",
+    "examples": [
+      { "code": "require 'benchmark/ips'\nBenchmark.ips do |x|\n  x.report('concat') { 'a' + 'b' }\n  x.report('interpolate') { \"#{'a'}#{'b'}\" }\n  x.compare!\nend\n" }
+    ],
+    "interview": [
+      { "q": "What tools exist for profiling Ruby?", "a": "stackprof, ruby-prof, derailed_benchmarks, objspace, and standard benchmark-ips." },
+      { "q": "How to measure allocations in Ruby?", "a": "Use stackprof in :object mode or objspace to sample allocations and find high-churn sites." },
+      { "q": "When to use JRuby/TruffleRuby?", "a": "When needing JVM features, different GC/parallelism, or special runtime performance characteristics." },
+      { "q": "How to reduce GC pressure?", "a": "Reduce short-lived object allocations, reuse objects, and use frozen literals." },
+      { "q": "What is derailed_benchmarks?", "a": "A gem to benchmark Rails boot and memory usage to identify leaks and heavy dependencies." },
+      { "q": "How to benchmark code reliably?", "a": "Use benchmark-ips with warmup, multiple iterations and isolate environment for reproducibility." },
+      { "q": "What is the cost of string concatenation?", "a": "Concatenation allocates new strings; prefer StringIO or buffers for repeated concatenation." },
+      { "q": "How to profile in production safely?", "a": "Use sampling profilers or pprof-like tools with low overhead and sample during peak load." },
+      { "q": "What are common memory leak causes in Ruby?", "a": "Global caches, long-lived references, accumulating arrays or hashes, and incorrect lifecycle management." },
+      { "q": "How to detect slow database queries?", "a": "Use DB logs, EXPLAIN, and app-level instrumentation (New Relic, Datadog) to find slow queries." },
+      { "q": "How to test performance changes?", "a": "Automate benchmarks and compare against baselines before and after changes." },
+      { "q": "Why avoid premature optimization?", "a": "It may complicate code; optimize only after profiling shows a real bottleneck." },
+      { "q": "How to use GC tuning env vars?", "a": "Set RUBY_GC_HEAP_INIT_SLOTS, RUBY_GC_HEAP_GROWTH_FACTOR, etc., for long-lived services after measuring." },
+      { "q": "What impact does frozen_string_literal have?", "a": "Reduces allocations by freezing literals; beneficial in many cases." },
+      { "q": "How to reduce memory per request?", "a": "Avoid heavy per-request allocations, reuse objects and use streaming for large payloads." },
+      { "q": "What is warmup effect for Ruby apps?", "a": "JIT and caches may improve performance after initial run; measure steady-state behavior." },
+      { "q": "How to profile GC?", "a": "Use GC.stat, TracePoint for GC events, and heap dumps to understand retention." },
+      { "q": "When to use native extensions for perf?", "a": "When Ruby-level code is insufficient and cross-language overhead is acceptable for critical hotspots." },
+      { "q": "How to evaluate memory vs CPU trade-offs?", "a": "Consider constraints and optimize for the limiting resource while measuring impact." },
+      { "q": "What logging/metrics help detect perf regressions?", "a": "Request latency, allocations per request, GC pause durations, and error rates." }
+    ]
+  },
+
+  "rb_profiling": {
+    "title": "Profiling & Benchmarking",
+    "summary": "stackprof, ruby-prof, benchmark-ips and real-user profiling.",
+    "details": "Benchmark critical code paths with benchmark-ips, profile CPU with ruby-prof or stackprof, and analyze heap with derailed_benchmarks or objspace. For web apps use rack-mini-profiler and collect pprof or flamegraphs from production samples. Use the data to guide targeted changes and validate improvements with repeatable benchmarks.\n\nPractical steps:\n- Use benchmark-ips for microbenchmarks and stackprof for CPU sampling. \n- Generate flamegraphs to visualize hot call paths. \n- Re-run tests after changes to ensure no regressions.\n\nNext steps: add benchmark tests to your repo and compare major implementations before committing to a rewrite.",
+    "cheat": "// Profiling cheat\n// CPU sampling: stackprof --mode cpu\n// Microbench: benchmark-ips\n// Flamegraphs: convert stackprof dumps to flamegraphs with tools\n// Rails: use rack-mini-profiler for endpoint sampling\n// Always profile real workloads and not just synthetic loops\n",
+    "examples": [
+      { "code": "require 'stackprof'\nStackProf.run(mode: :cpu, out: 'tmp/stackprof.dump') do\n  do_work\nend\n" }
+    ],
+    "interview": [
+      { "q": "What is stackprof and when to use it?", "a": "A sampling profiler yielding flamegraphs and hotspots with low overhead for CPU profiling." },
+      { "q": "What is benchmark-ips used for?", "a": "Comparing performance in iterations per second for microbenchmarks." },
+      { "q": "How do flamegraphs help?", "a": "Visualize call stack costs and aggregate hotspots to guide optimizations." },
+      { "q": "What is rack-mini-profiler?", "a": "A middleware to profile HTTP requests in development/show per-request breakdowns." },
+      { "q": "Why avoid profiling in dev-only workloads?", "a": "Dev environment may not reflect production characteristics; profile realistic loads." },
+      { "q": "How to profile memory allocations?", "a": "Use allocation samplers or stackprof in object mode and analyze retained objects." },
+      { "q": "How to interpret profile results?", "a": "Focus on expensive or frequently called functions and prioritize changes with high impact." },
+      { "q": "How to benchmark I/O-bound code?", "a": "Measure end-to-end latency and concurrency behavior under realistic network conditions." },
+      { "q": "What is sampling vs instrumentation?", "a": "Sampling periodically inspects stacks (low overhead); instrumentation measures every call (higher overhead)." },
+      { "q": "How to capture production profiles safely?", "a": "Use short sampling windows, secure dumps, and ensure privacy/security of traces." },
+      { "q": "How to convert stackprof dumps to flamegraphs?", "a": "Use stackprof-web tools or conversion utilities to generate flamegraphs for visualization." },
+      { "q": "How to add benchmark tests to CI?", "a": "Run deterministic benchmarks under controlled environment and compare against baselines." },
+      { "q": "What is pprof integration?", "a": "Collect profiles and use pprof-compatible tools for analysis and flamegraphs." },
+      { "q": "How to reduce noise in benchmarks?", "a": "Warm up, set CPU affinity, run multiple iterations and isolate environment." },
+      { "q": "What metrics to capture with profiling?", "a": "CPU time, wall time, allocations, GC pauses, and I/O latencies." },
+      { "q": "How to profile DB interactions?", "a": "Record SQL duration, counts per request, and use DB EXPLAIN for slow queries." },
+      { "q": "What is the impact of GC on profiling?", "a": "GC pauses can distort timing; capture GC events and allocate profiles to understand impact." },
+      { "q": "How to prioritize profile-driven work?", "a": "Target hotspots with high cost and easy wins first, and validate improvements with benchmarks." },
+      { "q": "How to profile background jobs?", "a": "Sample job runs, measure latency and resource usage under realistic concurrency." },
+      { "q": "How to track regressions over time?", "a": "Store periodic baselines and compare new runs to detect performance regressions." }
+    ]
+  },
+
+  "rb_c_extensions": {
+    "title": "C Extensions & Native Gems",
+    "summary": "Writing native extensions with C, FFI, C-API and handling cross-platform builds.",
+    "details": "Native extensions can deliver large speedups but increase maintenance burden. Prefer FFI for simpler bindings; choose mkmf or Rice for C extensions when performance demands it. Automate native builds with rake-compiler and test on all target platforms. Document required system libraries and include CI jobs for native builds.\n\nPractical tips:\n- Use Ruby's C-API carefully, manage memory and GC interactions. \n- Prefer FFI for simple bindings to avoid compilation complexity. \n- Cross-compile and test on macOS/Linux/Windows in CI if distributing native gems.\n\nPitfalls:\n- Native extensions can break across Ruby versions; prefer pure Ruby when performance is adequate.\n\nNext steps: write a tiny FFI binding to a C library to understand calling conventions and memory management.",
+    "cheat": "// Native extensions cheat\n// mkmf extconf.rb: require 'mkmf'; create_makefile('my_ext')\n// Build: ruby extconf.rb && make\n// FFI: gem 'ffi'; FFI::Library; ffi_lib 'c'\n// Use rake-compiler for cross-platform packaging\n// Document native deps (libssl-dev, libpq-dev) and test builds in CI containers\n",
+    "examples": [
+      { "code": "require 'mkmf'\ncreate_makefile('my_ext')\n" }
+    ],
+    "interview": [
+      { "q": "When to write a C extension for Ruby?", "a": "When Ruby-level code is too slow for a hotspot and FFI overhead is unacceptable; otherwise prefer pure Ruby." },
+      { "q": "What is mkmf?", "a": "A helper library to generate Makefiles for compiling C extensions." },
+      { "q": "What is FFI and when to use it?", "a": "Foreign Function Interface to call native libraries without compiling a C extension; good for quick bindings." },
+      { "q": "How to manage cross-platform native builds?", "a": "Use rake-compiler, CI matrix across OSes and provide precompiled gems when possible." },
+      { "q": "What memory rules apply when interfacing with C?", "a": "Manage allocations explicitly, avoid passing Ruby objects to C without protecting from GC, and free native memory." },
+      { "q": "How to handle Ruby GC with native extensions?", "a": "Use RB_GC_GUARD and Mark/Free functions to protect objects and avoid premature collection." },
+      { "q": "What is Rice?", "a": "A C++ wrapper library that simplifies writing Ruby C extensions with nicer API." },
+      { "q": "How to distribute a gem with native code?", "a": "Provide ext directory, build scripts and consider compiled platform gems to ease user installs." },
+      { "q": "What tooling helps diagnose native crashes?", "a": "Use gdb/lldb, crash logs, and sanitizers when possible during native development." },
+      { "q": "How to test native extensions in CI?", "a": "Run builds on target platforms, run unit tests, and exercise error handling." },
+      { "q": "How to avoid symbol conflicts?", "a": "Use proper namespacing and avoid global C symbols; use extern \"C\" when interacting with C++." },
+      { "q": "How to call Ruby API from C?", "a": "Use VALUE types and C-API functions like rb_funcall to interact with Ruby objects." },
+      { "q": "What is performance overhead of FFI?", "a": "Moderate call overhead compared to a compiled extension; acceptable for less-frequent calls." },
+      { "q": "How to manage threading with native extensions?", "a": "Release the GVL (rb_thread_call_without_gvl) when performing blocking native operations." },
+      { "q": "What is ABI compatibility concern?", "a": "Native extensions can break across Ruby or platform versions; test and provide rebuilds accordingly." },
+      { "q": "How to debug memory leaks in native code?", "a": "Use valgrind, ASan and careful instrumentation to track allocations and frees." },
+      { "q": "How to document native gem prerequisites?", "a": "List system packages and provide scripts or Docker images to reproduce build environment." },
+      { "q": "What security concerns exist in native code?", "a": "Buffer overflows, unsafe pointer handling and improper input validation—treat native code with same security rigor." },
+      { "q": "How to package native dependencies for users?", "a": "Provide precompiled binaries (gems) for common platforms or clear build instructions." },
+      { "q": "What alternatives to native extensions exist?", "a": "FFI, microservices in other languages, or optimizing Ruby-first with C-accelerated libraries." }
+    ]
+  },
+
+  "rb_wasm": {
+    "title": "WebAssembly & Ruby",
+    "summary": "Calling WASM from Ruby or creating small WASM modules; practical use cases.",
+    "details": "WASM is growing; Ruby integration is still maturing. For heavy compute, compile Rust → WASM and provide a microservice or native binding layer. AssemblyScript or Wasmtime can be useful for embedding. Evaluate trade-offs: binary size, startup cost, and interop overhead. For web clients, WASM is more common; on server side, consider Rust native extensions for tight loops.\n\nPractical steps:\n- Prototype a Rust function compiled to WASM and call it from a small Ruby wrapper (HTTP or FFI). \n- Measure end-to-end latency to ensure benefits justify complexity.\n\nNext steps: build a small proof-of-concept that runs an FFT in WASM and compare to a Ruby native implementation.",
+    "cheat": "// WASM cheat\n// Compile Rust to WASM: use wasm-pack for JS targets or wasm32-unknown-unknown for WASM binary\n// For Ruby server, consider calling WASM via native binding or run WASM module inside a separate service and call via HTTP\n// Use Wasmtime or Wasmer for embedding WASM in native apps\n",
+    "examples": [
+      { "code": "// pattern: expose WASM module as microservice and call from Ruby via HTTP client" }
+    ],
+    "interview": [
+      { "q": "What is WebAssembly (WASM)?", "a": "A portable binary instruction format for safe, fast execution in various runtimes." },
+      { "q": "Is WASM commonly used with Ruby?", "a": "Not yet mainstream; more common in web clients or specialized compute services." },
+      { "q": "How to call WASM from Ruby?", "a": "Use native bindings to a WASM runtime (Wasmtime) or expose WASM functionality via a microservice." },
+      { "q": "When to choose WASM vs native extension?", "a": "WASM for portable sandboxed compute; native extensions for tight integration and lower overhead." },
+      { "q": "What tooling helps build WASM from Rust?", "a": "wasm-pack, cargo and wasm-bindgen for JS-targets; Wasmtime/Wasmer for running WASM." },
+      { "q": "What interop overhead to expect?", "a": "Calling across language boundaries has marshaling costs—measure end-to-end latency." },
+      { "q": "How to test WASM integration?", "a": "Run integration tests and measure performance under realistic workloads." },
+      { "q": "What are WASM security benefits?", "a": "Sandboxed execution reduces risk from native memory safety issues." },
+      { "q": "How to distribute WASM artifacts?", "a": "Publish WASM binaries or package with platform-specific runners depending on consumers." },
+      { "q": "When to use AssemblyScript?", "a": "When you prefer TypeScript-like language targeting WASM for easier web integration." },
+      { "q": "How to profile WASM?", "a": "Use runtime-specific profilers and measure host ↔ WASM boundary costs." },
+      { "q": "Can Ruby run WASM natively?", "a": "With runtimes like Wasmtime or Wasmer via native bindings; not native in MRI without embedding a runtime." },
+      { "q": "How to handle memory in WASM modules?", "a": "Use module's linear memory and exchange buffers carefully to avoid copying large payloads." },
+      { "q": "What is the best deployment pattern for WASM with Ruby?", "a": "Run WASM in a dedicated service or embed via a runtime with appropriate isolation." },
+      { "q": "How to manage versioning of WASM modules?", "a": "Semantic versioning and clear ABI contracts for host-module interactions." },
+      { "q": "How to handle platform constraints?", "a": "Ensure runtime availability on target platform or provide a fallback implementation." },
+      { "q": "What workloads benefit most from WASM?", "a": "CPU-bound, deterministic algorithms where portability and sandboxing matter." },
+      { "q": "What are size concerns with WASM?", "a": "WASM binary size and runtime footprint may matter for serverless or client apps." },
+      { "q": "How to interop complex data structures?", "a": "Use shared memory buffers or serialize/deserialize via efficient formats." },
+      { "q": "What are future directions for Ruby+WASM?", "a": "Tighter runtimes, better tooling and direct embedding may improve adoption." }
+    ]
+  },
+
+  "rb_testing": {
+    "title": "Testing (RSpec, Minitest)",
+    "summary": "Unit, integration, property and system tests plus CI integration.",
+    "details": "Testing is essential in dynamic languages. RSpec offers expressive BDD-style specs; Minitest is lightweight and fast. Use transactional tests for DB isolation, factories (FactoryBot) for fixtures, and tools like VCR/WebMock for external HTTP stubs. Integrate test runs, linting and security scanners in CI to prevent regressions.\n\nPractical steps:\n- Start with unit tests around pure logic, add integration tests for external interactions. \n- Use simple, deterministic fixtures and avoid network calls in unit tests. \n- Run tests in CI and track flakiness metrics.\n\nPitfalls:\n- Flaky tests reduce confidence—make tests deterministic and isolate side effects.\n\nNext steps: add RSpec and SimpleCov to your project and enforce coverage minimums in CI.",
+    "cheat": "// Testing cheat\n// RSpec init: rspec --init\n// Run: bundle exec rspec\n// Use FactoryBot: factory_girl syntax; create(:user)\n// HTTP stubs: gem 'webmock' or 'vcr'\n// Coverage: gem 'simplecov' and enable in spec_helper\n",
+    "examples": [
+      { "code": "RSpec.describe Math do\n  it 'adds' do\n    expect(1+1).to eq(2)\n  end\nend\n" }
+    ],
+    "interview": [
+      { "q": "Why use RSpec over Minitest?", "a": "RSpec offers expressive DSL and readable specs; Minitest is minimal and faster for simple suites." },
+      { "q": "What are table-driven tests?", "a": "Tests that iterate over input/output cases in a table, improving readability and coverage." },
+      { "q": "How to stub external HTTP calls?", "a": "Use WebMock or VCR to record and replay HTTP interactions in tests." },
+      { "q": "What is FactoryBot used for?", "a": "Create flexible test fixtures via factories to avoid brittle fixtures." },
+      { "q": "How to test background jobs?", "a": "Use test adapters to run jobs inline or assert enqueued jobs with Sidekiq testing helpers." },
+      { "q": "How to measure test coverage?", "a": "Use SimpleCov and report coverage to CI to enforce thresholds." },
+      { "q": "How to avoid flaky tests?", "a": "Isolate tests, avoid time dependencies, and mock external services." },
+      { "q": "How to run tests in parallel?", "a": "Use parallel_tests, Rails parallel testing, or CI parallelization to speed up suites." },
+      { "q": "What is continuous testing in CI?", "a": "Run tests on every PR/commit to catch regressions early." },
+      { "q": "What is property-based testing?", "a": "Generate inputs to test general properties rather than specific cases (shrinking helps find minimal failing cases)." },
+      { "q": "How to test database migrations?", "a": "Run migrations in a test environment and include tests that cover schema changes." },
+      { "q": "What are system/integration tests?", "a": "End-to-end tests verifying full stack interactions; keep them fewer and more focused." },
+      { "q": "How to mock time in tests?", "a": "Use Timecop or ActiveSupport::Testing::TimeHelpers to freeze or travel in time." },
+      { "q": "How to test private methods?", "a": "Test public behavior; if private logic is complex, extract into testable classes." },
+      { "q": "How to test multi-threaded code?", "a": "Use deterministic constructs, thread synchronization in tests, and stress tests." },
+      { "q": "What is contract testing?", "a": "Ensure APIs between services adhere to expected contracts via consumer-driven contract tests." },
+      { "q": "When to use integration vs unit tests?", "a": "Unit tests for isolated logic, integration for cross-component interactions and real dependencies." },
+      { "q": "How to run tests with different DBs?", "a": "Use CI matrix to run suite against supported DBs and connection settings." },
+      { "q": "What role do linters play in testing?", "a": "Linters catch style and some correctness issues; include in CI as part of quality gate." },
+      { "q": "How to ensure deterministic test order?", "a": "Avoid global state and random ordering; use seed if necessary and fix order-dependent tests." }
+    ]
+  },
+
+  "rb_tooling": {
+    "title": "Tooling, Linters & CI",
+    "summary": "RuboCop, Brakeman, Bundler audit, formatters, and CI pipelines.",
+    "details": "A strong toolchain increases reliability: RuboCop for style and linting, Brakeman for security scanning in Rails apps, bundler-audit for dependency checks, and Sorbet/Steep for optional typing. Integrate these tools into pre-commit hooks (Overcommit, Husky) and CI pipelines to block regressions automatically.\n\nPractical steps:\n- Add RuboCop with a shared config and auto-correct on save. \n- Run security scans in CI and automate dependency updates with Dependabot.\n\nPitfalls:\n- Ignoring linter warnings; treat important warnings as failing in CI.\n\nNext steps: configure GitHub Actions to run rubocop, rspec, and bundler-audit on pull requests.",
+    "cheat": "// Tooling cheat\n// rubocop --auto-correct\n// brakeman for Rails security: brakeman -A\n// bundle-audit: bundle audit check --update\n// CI: run rubocop, rspec, brakeman, bundle-audit in pipeline\n// Pre-commit hooks: Overcommit or simple git hooks to run quick checks\n",
+    "examples": [
+      { "code": "# .rubocop.yml\nAllCops:\n  TargetRubyVersion: 3.0\n  Exclude: ['db/schema.rb']\n" }
+    ],
+    "interview": [
+      { "q": "What is RuboCop?", "a": "A linter and formatter enforcing style and catching some code issues." },
+      { "q": "What is Brakeman?", "a": "Static analysis security scanner specifically for Rails apps." },
+      { "q": "What is bundle-audit?", "a": "Tool to check Gemfile.lock for known vulnerable gems." },
+      { "q": "Why include linting in CI?", "a": "To ensure consistent style and catch common problems before merging." },
+      { "q": "How to set up pre-commit hooks?", "a": "Use Overcommit or Husky to run quick linters/tests before commit." },
+      { "q": "How to automate dependency updates?", "a": "Use Dependabot or Renovate to propose PRs for updated dependencies." },
+      { "q": "How to enforce formatting in teams?", "a": "Add formatting rules and fail CI on deviations, provide editor plugins." },
+      { "q": "How to run quick checks locally?", "a": "Provide a bin/setup or rake task to run linters/tests quickly." },
+      { "q": "What is the role of code owners in CI?", "a": "Code owners help route reviews and enforce domain knowledge for PRs." },
+      { "q": "How to integrate security scans into PRs?", "a": "Run Brakeman and dependency scans and annotate PRs with findings." },
+      { "q": "What is Sorbet and Steep role in tooling?", "a": "Optional type systems that provide static checks for Ruby code." },
+      { "q": "How to manage Ruby versions in CI?", "a": "Matrix CI jobs across target Ruby versions with rbenv/asdf setup." },
+      { "q": "How to measure test flakiness?", "a": "Track unstable tests and use retry or investigate root cause to stabilize." },
+      { "q": "What are fast feedback loops for developers?", "a": "Local pre-commit checks and fast CI to catch issues before long feedback cycles." },
+      { "q": "How to do performance checks in CI?", "a": "Run performance benchmarks or regression tests periodically, not on every PR." },
+      { "q": "How to share common configs across repos?", "a": "Create shared RuboCop/CI configurations and reference them in projects." },
+      { "q": "How to use GitHub Actions secrets for publishing gems?", "a": "Store credentials in Actions secrets and use them in release workflows securely." },
+      { "q": "How to validate docs in CI?", "a": "Build docs with Yard and fail when doc generation breaks or examples fail." },
+      { "q": "How to handle multi-repo tool configs?", "a": "Use centralized tooling repo or templates to keep consistency." },
+      { "q": "What is the benefit of toolchain automation?", "a": "Reduces human error, speeds releases and ensures consistent quality across projects." }
+    ]
+  },
+
+  "rb_sorbet": {
+    "title": "Type Checking with Sorbet",
+    "summary": "Gradual typing with Sorbet: RBI files, sigs and runtime checks.",
+    "details": "Sorbet enables gradual typing in Ruby via sig annotations and RBI stubs. Use sorbet init to scaffold, annotate critical APIs for safety, and add sorbet-runtime to enforce important checks at runtime. Integrate type checks into CI and generate RBI files for third-party gems to improve coverage.\n\nPractical steps:\n- Run sorbet init and progressively add sigs to public interfaces. \n- Use RBI generation tools for gems and maintain a types/ directory in the repo. \n- Run srb tc in CI to catch signature mismatches.\n\nPitfalls:\n- Heavy upfront annotation is costly; prioritize public APIs and high-risk modules.\n\nNext steps: add Sorbet to a small library, annotate 10 core methods and run srb tc to learn diagnostics.",
+    "cheat": "// Sorbet cheat\n// Install: gem 'sorbet', gem 'sorbet-runtime'\n// Init: srb init\n// Add signature: sig { params(x: Integer).returns(String) }\n// Run: srb tc\n// Use sorbet-runtime to check at runtime: include RBuiltins or require 'sorbet-runtime'\n",
+    "examples": [
+      { "code": "sig { params(n: Integer).returns(String) }\ndef format(n); n.to_s; end\n" }
+    ],
+    "interview": [
+      { "q": "What is Sorbet?", "a": "A gradual type checker for Ruby providing sig annotations and RBI stubs for static analysis." },
+      { "q": "What are RBI files?", "a": "Separate signature files used by Sorbet to describe method signatures of libraries." },
+      { "q": "How to run Sorbet type checking?", "a": "Run srb tc to type-check the codebase and inspect errors." },
+      { "q": "What is sorbet-runtime?", "a": "A runtime library enabling runtime type checks for Sorbet signatures." },
+      { "q": "When to adopt Sorbet in a codebase?", "a": "Gradually, starting with public APIs, to reduce upfront annotation cost." },
+      { "q": "How to generate RBI files for gems?", "a": "Use sorbet gem generators or tools like tapioca to create RBIs for dependencies." },
+      { "q": "What is the trade-off of using Sorbet?", "a": "Improved correctness at cost of annotation effort and potential runtime checks if using sorbet-runtime." },
+      { "q": "How to integrate Sorbet in CI?", "a": "Run srb tc in CI and fail builds on type errors." },
+      { "q": "How to silence type errors temporarily?", "a": "Use typed: :off or inline typed comments to ignore files during migration." },
+      { "q": "How to combine Sorbet with dynamic patterns?", "a": "Use 'returns(T.untyped)' or carefully typed wrappers to bridge dynamic code." },
+      { "q": "What is the Sorbet LSP support?", "a": "Sorbet provides LSP server for editor integration with inline type feedback." },
+      { "q": "How to keep RBI files in sync?", "a": "Regenerate with tools and run checks in CI to ensure compatibility." },
+      { "q": "How to type metaprogrammed methods?", "a": "Provide manual RBIs describing the generated API surface." },
+      { "q": "How to handle third-party gems lacking RBIs?", "a": "Create RBIs in types/ directory or use community-provided signatures." },
+      { "q": "How to measure Sorbet migration progress?", "a": "Track files with typed: levels and run srb tc to monitor errors reduced over time." },
+      { "q": "How to annotate blocks and procs?", "a": "Use T.proc and T.proc.void types to express callable shapes in Sorbet." },
+      { "q": "How to handle optional/nilable types?", "a": "Use T.nilable(Type) to annotate possible nil values." },
+      { "q": "What is the typical Sorbet workflow?", "a": "Add sigs for core APIs, run srb tc, fix or annotate, and iterate." },
+      { "q": "How to debug Sorbet errors?", "a": "Read error messages for locations and add small repros or explicit types to narrow issues." },
+      { "q": "When not to use Sorbet?", "a": "For tiny scripts or where annotation cost outweighs benefits; consider partial adoption." }
+    ]
+  },
+
+  "rb_steep": {
+    "title": "Static Types with Steep",
+    "summary": "Type checking with Steep and RBS type signatures.",
+    "details": "Steep uses RBS for separate type definitions and static checks. RBS files describe types for libraries and apps without altering source. Use steep init to start, generate baseline RBS with steep gems and integrate steep check in CI for additional safety without runtime overhead.\n\nPractical steps:\n- Add RBS for core application types and run steep check. \n- Share RBS files across monorepos for consistent typing.\n\nPitfalls:\n- RBS coverage can lag behind code; keep type files synced with API changes.\n\nNext steps: author an RBS file for a small class and run steep check to verify signatures.",
+    "cheat": "// Steep cheat\n// Install: gem 'steep'\n// Init: steep init\n// Write .rbs files under sig/ or types/\n// Run: steep check\n// Use type annotations to verify without runtime cost\n",
+    "examples": [
+      { "code": "# example.rbs\nclass User\n  def name: -> String\nend\n" }
+    ],
+    "interview": [
+      { "q": "What is RBS?", "a": "Ruby Signature language used to express types separate from code for static analysis." },
+      { "q": "What does Steep do?", "a": "Performs static type checks using RBS definitions against Ruby source." },
+      { "q": "How is Steep different from Sorbet?", "a": "Steep uses external RBS files for typing; Sorbet embeds sigs in code." },
+      { "q": "How to write a basic RBS file?", "a": "Create a .rbs declaring class and method signatures matching your code." },
+      { "q": "How to integrate Steep in CI?", "a": "Run steep check and fail the build on type errors." },
+      { "q": "When to choose Steep vs Sorbet?", "a": "Steep if you prefer separate signature files; Sorbet if you want inline annotations and runtime checks." },
+      { "q": "How to generate RBS for gems?", "a": "Use rbs gems or steep gem generation tools to create RBI-like signatures." },
+      { "q": "What are advantages of external RBS files?", "a": "No code changes required, easier to maintain signatures across multiple languages." },
+      { "q": "How to handle third-party gem types?", "a": "Write RBS stubs for the gem's API or use community-provided signatures." },
+      { "q": "What limitations exist with RBS?", "a": "RBS may lag with dynamic patterns and metaprogramming—manual effort needed." },
+      { "q": "How to debug type mismatches?", "a": "Use steep's diagnostics to locate conflicts and refine signatures or code." },
+      { "q": "How to handle generics in RBS?", "a": "RBS supports parameterized types and module typing for generic containers." },
+      { "q": "Can Steep check Rails apps?", "a": "Yes, but dynamic ActiveRecord APIs may need additional RBS coverage and stubs." },
+      { "q": "How to incrementally adopt Steep?", "a": "Start with core libs and public APIs, then expand signatures gradually." },
+      { "q": "What tooling integrates with Steep?", "a": "Editor LSP plugins and CI scripts to surface type errors during development." },
+      { "q": "How to keep RBS in sync?", "a": "Regenerate or update signatures when changing APIs and run steep check in CI." },
+      { "q": "How to express union types in RBS?", "a": "Use '|' to denote union types (e.g., String | Integer)." },
+      { "q": "How to annotate block types?", "a": "Use Proc types or block notation in RBS for yields and callables." },
+      { "q": "What is a practical first step with Steep?", "a": "Add RBS for a simple class and run steep check to see diagnostics." },
+      { "q": "How to collaborate on RBS in teams?", "a": "Treat RBS files as first-class, review changes and keep them in repo for CI validation." }
+    ]
+  },
+
+  "rb_debugging": {
+    "title": "Debugging & REPL (pry/irb)",
+    "summary": "Interactive REPLs, pry debugging, and practical debugging workflows.",
+    "details": "Use pry as an interactive debugger and REPL—binding.pry lets you drop into runtime state. For step debugging use byebug or ruby's debug gem. Inspect backtraces, reproduce issues in small scripts, and add focused unit tests to guard regressions. Log context (request IDs) for production traces and use structured logging to correlate across services.\n\nPractical tips:\n- Add binding.pry for local exploration and byebug for step debugging. \n- Use pry-rescue/remote for remote debugging sessions when safe. \n- Capture and analyze stack traces to identify root causes.\n\nNext steps: add a binding.pry to a failing case, step through execution, and write a regression test.",
+    "cheat": "// Debugging cheat\n// Install: gem install pry pry-byebug\n// Use: require 'pry'; binding.pry to pause and inspect\n// Step-through: byebug or debug gem for line-by-line stepping\n// Capture backtrace: exception.backtrace or use tools like Sentry for production\n// Use logging with request IDs for correlation in production\n",
+    "examples": [
+      { "code": "require 'pry'\nbinding.pry\n# inspect local variables and step through\n" }
+    ],
+    "interview": [
+      { "q": "What is pry and how is it used?", "a": "Pry is an enhanced REPL and debugging tool; use binding.pry to drop into a runtime session." },
+      { "q": "When would you use byebug?", "a": "For step-by-step debugging with breakpoints and stepping features." },
+      { "q": "How to capture and interpret a backtrace?", "a": "Inspect exception.backtrace and map frames to source lines and contexts." },
+      { "q": "How to safely debug production issues?", "a": "Prefer logs and traces; use remote pry only in secure, controlled environments." },
+      { "q": "How to log with context?", "a": "Include request IDs, user IDs and other correlation data in structured logs." },
+      { "q": "How to reproduce bugs locally?", "a": "Create minimal reproducible scripts and run under same Ruby version and deps." },
+      { "q": "How to record and replay HTTP interactions?", "a": "Use VCR to record external HTTP and replay for deterministic tests." },
+      { "q": "What is the debug gem?", "a": "Ruby's stdlib debug gem providing modern step debugging and inspector tools." },
+      { "q": "How to inspect object internals?", "a": "Use pry and pretty-printing with pp or use Object#instance_variables and send methods." },
+      { "q": "How to add temporary debugging hooks?", "a": "Add binding.pry in development or use conditional logging toggles." },
+      { "q": "How to avoid leaving debug code in production?", "a": "Use environment flags and ensure CI checks remove debug toggles before release." },
+      { "q": "How to debug memory leaks?", "a": "Use memory profilers, heap dumps and compare snapshots to find retained objects." },
+      { "q": "How to debug performance issues?", "a": "Profile with stackprof and benchmark-ips to find hotspots before optimizing." },
+      { "q": "How to inspect gem internals?", "a": "Open gem code under ~/.rbenv/versions/... or use require 'pry'; binding.pry inside gem context." },
+      { "q": "How to use remote debugging?", "a": "Use pry-remote or remote debug adapters with secure tunnels and limited access." },
+      { "q": "How to reproduce concurrency bugs?", "a": "Stress tests, deterministic scheduling tools or dedicated concurrency test frameworks." },
+      { "q": "How to add assertions while debugging?", "a": "Use raise or test helpers to assert invariants during execution to catch issues earlier." },
+      { "q": "How to handle intermittent bugs?", "a": "Collect additional logs/traces, add monitoring, and try to reproduce with similar load." },
+      { "q": "What is the role of instrumentation?", "a": "Collect traces and metrics to pinpoint where problems happen in production." },
+      { "q": "How to document debugging findings?", "a": "Write concise reproduction steps, root cause and fix in issue tracker for future reference." }
+    ]
+  },
+
+  "rb_deployment": {
+    "title": "Deployment & Containers",
+    "summary": "Docker multi-stage builds, process management, workers and zero-downtime deploys.",
+    "details": "Containerize Ruby apps with multi-stage Dockerfiles, keep images minimal, and use process managers (Puma, Passenger) with proper thread/process configuration. Implement graceful shutdown (SIGTERM handling) and health/readiness probes for orchestrators. Use CI to build, test, and publish images; maintain configuration via env vars and secrets managers.\n\nPractical steps:\n- Use multi-stage builds to install deps and compile assets in builder stage. \n- Configure Puma with proper workers/threads for your CPU and memory. \n- Use health endpoints and set readiness probes in Kubernetes.\n\nPitfalls:\n- Running database migrations without coordination can break live traffic—use deploy strategies that run migrations safely.\n\nNext steps: build a Docker image, deploy to a staging cluster, validate graceful restarts and readiness checks.",
+    "cheat": "// Deployment cheat\n// Dockerfile multi-stage: build deps in builder stage and copy only runtime files to final image\n// Run server: bundle exec puma -C config/puma.rb\n// Graceful shutdown: trap SIGTERM and finish requests before exit\n// CI: build, test, tag and push image; deploy with rolling updates\n// Secrets: use secret manager (Vault, K8s secrets, cloud secret manager)\n",
+    "examples": [
+      { "code": "FROM ruby:3.1\nWORKDIR /app\nCOPY Gemfile* ./\nRUN bundle install --jobs 4\nCOPY . .\nCMD [\"bundle\",\"exec\",\"puma\",\"-C\",\"config/puma.rb\"]\n" }
+    ],
+    "interview": [
+      { "q": "What is a multi-stage Docker build and why use it?", "a": "Build artifacts in a separate stage and copy only necessary runtime files into a smaller final image." },
+      { "q": "How to handle graceful shutdown in Ruby web servers?", "a": "Trap SIGTERM, stop accepting new requests and let workers finish, then exit." },
+      { "q": "How to deploy zero-downtime for DB migrations?", "a": "Use backward-compatible migrations, run deploys in phases and avoid breaking changes that require immediate code updates." },
+      { "q": "What process servers are common for Ruby?", "a": "Puma, Passenger, Unicorn (less common for thread-based workloads)." },
+      { "q": "How to manage environment configuration?", "a": "Use environment variables, 12-factor config and secret managers for sensitive data." },
+      { "q": "How to scale background workers?", "a": "Scale worker processes/pods and tune concurrency to match CPU and memory resources." },
+      { "q": "How to build small Docker images for Ruby?", "a": "Use multi-stage builds, remove dev deps and pick minimal base images (alpine or distroless with care for glibc)." },
+      { "q": "How to monitor app health in Kubernetes?", "a": "Use readiness and liveness probes and expose health endpoints." },
+      { "q": "How to handle asset compilation in Rails?", "a": "Precompile assets during build stage and serve via CDN in production." },
+      { "q": "What is the role of a sidecar?", "a": "Auxiliary containers (sidecars) can handle logging, proxying or other cross-cutting concerns." },
+      { "q": "How to coordinate database migrations?", "a": "Use migration jobs, run migrations during maintenance windows or use online migration patterns." },
+      { "q": "How to do blue/green deploys for Ruby apps?", "a": "Deploy new version to separate environment, verify, then switch traffic with load balancer." },
+      { "q": "How to roll back deploys?", "a": "Keep immutable artifacts and use orchestrator features to revert to previous image tag." },
+      { "q": "How to containerize gems requiring native deps?", "a": "Install system packages in Dockerfile before bundle install and test in same image." },
+      { "q": "How to secure container images?", "a": "Scan images for vulnerabilities, minimize layers, and run as non-root where possible." },
+      { "q": "How to perform health checks for background jobs?", "a": "Expose metrics like queue length and worker liveness endpoints." },
+      { "q": "How to manage secrets in CI/CD?", "a": "Use encrypted secrets in CI and inject at runtime via secret managers." },
+      { "q": "What is immutable infrastructure?", "a": "Treat deployed artifacts as immutable and replace them instead of in-place updates." },
+      { "q": "How to optimize cold-start time?", "a": "Preload apps, avoid expensive initialization on start or use warmup strategies." },
+      { "q": "How to test deployments safely?", "a": "Deploy to staging matching production and use health checks and performance tests before promoting." }
+    ]
+  },
+
+  "rb_db": {
+    "title": "Databases & ActiveRecord",
+    "summary": "Migrations, associations, eager loading, transactions, and performance patterns.",
+    "details": "Use ActiveRecord for majority of apps but be ready to write optimized SQL for heavy queries. Leverage transactions for multi-step changes, use indexes and eager loading (includes) to prevent N+1 queries, and adopt a migration strategy that minimizes locks. For large datasets use find_each/streaming and background jobs for heavy processing.\n\nPractical tips:\n- Add covering indexes for common queries and use explain to tune queries. \n- Keep migrations reversible and small; avoid long schema changes during peak traffic. \n- Use prepared statements and parameterized queries to avoid injection.\n\nNext steps: profile a slow DB query with EXPLAIN and add appropriate indices or rewrite as an optimized query.",
+    "cheat": "// DB & ActiveRecord cheat\n// Eager load: Model.includes(:assoc).where(...)\n// Batch process: Model.find_each(batch_size: 100) { |r| do_work(r) }\n// Use transaction: ActiveRecord::Base.transaction { ... }\n// Use prepared queries to avoid injection: where('id = ?', id)\n// Index: add_index :table, :column, name: 'index_name'\n",
+    "examples": [
+      { "code": "Post.includes(:comments).where(published: true).limit(20)\n# use find_each for large scopes\nPost.where(active: true).find_each(batch_size: 100) { |p| process(p) }\n" }
+    ],
+    "interview": [
+      { "q": "What is the N+1 query problem and how to fix it?", "a": "Multiple queries per record for associations; fix with eager loading (includes) or joins." },
+      { "q": "How to use transactions in ActiveRecord?", "a": "ActiveRecord::Base.transaction { ... } ensures atomic multi-step DB operations." },
+      { "q": "How to tune slow queries?", "a": "Use EXPLAIN, add indexes, and rewrite queries or use raw SQL for complex aggregations." },
+      { "q": "How to perform bulk inserts?", "a": "Use insert_all or gems for bulk operations to reduce round trips." },
+      { "q": "What is connection pooling?", "a": "Pool maintains DB connections; configure pool size to match concurrency and worker count." },
+      { "q": "How to avoid long-running migrations?", "a": "Use non-blocking migration patterns and deploy backwards-compatible changes." },
+      { "q": "What is find_each?", "a": "Iterates records in batches to avoid loading large datasets into memory." },
+      { "q": "How to add an index in migration?", "a": "add_index :table, :column, name: 'index_name'" },
+      { "q": "When to use raw SQL?", "a": "When ORM cannot express efficient queries; encapsulate in repository layer." },
+      { "q": "How to test DB changes?", "a": "Run migration on test DB and include integration tests validating behavior." },
+      { "q": "How to detect slow DB calls at runtime?", "a": "Instrument queries with logs, APM and measure latency per endpoint." },
+      { "q": "What are covering indexes?", "a": "Indexes that include columns needed by query to avoid extra lookups." },
+      { "q": "How to handle schema drift in teams?", "a": "Use migration CI checks and coordinate migration deployment sequences." },
+      { "q": "What is optimistic locking?", "a": "ActiveRecord's lock_version column to detect concurrent updates and avoid overwrites." },
+      { "q": "How to paginate results efficiently?", "a": "Use keyset pagination for large datasets instead of offset-based pagination." },
+      { "q": "Why avoid SELECT * in production?", "a": "Select only needed columns to reduce bandwidth and allocations." },
+      { "q": "How to monitor DB indexes usage?", "a": "Use DB explain plans and index usage stats to remove unused indexes." },
+      { "q": "How to store JSON data?", "a": "Use JSON/JSONB columns with appropriate indexes and caution for heavy queries." },
+      { "q": "What is sharding vs partitioning?", "a": "Partitioning divides a table logically within DB; sharding distributes across multiple DB servers." },
+      { "q": "How to safely migrate large tables?", "a": "Create new tables, backfill in background, and switch pointers to avoid locks." }
+    ]
+  },
+
+  "rb_graphql": {
+    "title": "GraphQL & Typed Schemas",
+    "summary": "graphql-ruby, schema design, resolvers and performance patterns.",
+    "details": "graphql-ruby provides schema-first or class-based approaches. Use dataloader patterns to avoid N+1, design clear schema boundaries, and progressively add complexity with proper pagination and limits. Keep resolvers thin and delegate heavy work to services. Use codegen for clients and ensure schema evolution is backward-compatible.\n\nPractical tips:\n- Batch DB calls in resolvers with Dataloader. \n- Validate inputs and use custom scalars for types like DateTime. \n- Monitor query complexity and limit depth where needed.\n\nNext steps: implement a GraphQL query with Dataloader and benchmark behavior under simulated load.",
+    "cheat": "// GraphQL-Ruby cheat\n// Schema: class MySchema < GraphQL::Schema\n// Use batch loading: Loaders::RecordLoader.for(Model).load(id)\n// Validate: use input types and custom scalars\n// Protect: limit depth and complexity, enable query whitelisting if needed\n",
+    "examples": [
+      { "code": "class QueryType < GraphQL::Schema::Object\n  field :user, UserType, null: true do\n    argument :id, ID, required: true\n  end\n  def user(id:)\n    Loaders::RecordLoader.for(User).load(id)\n  end\nend\n" }
+    ],
+    "interview": [
+      { "q": "What is GraphQL and how does it differ from REST?", "a": "GraphQL is a query language allowing clients to request specific data shapes; it contrasts with fixed REST endpoints." },
+      { "q": "What is graphql-ruby?", "a": "A Ruby implementation to define GraphQL schemas and resolvers using Ruby classes or SDL." },
+      { "q": "What causes N+1 in GraphQL and how to fix it?", "a": "Resolvers calling DB per field cause N+1; fix with batching (Dataloader) or eager loading." },
+      { "q": "What are input types used for?", "a": "Define structured inputs for mutations to validate and document expected fields." },
+      { "q": "How to paginate GraphQL results?", "a": "Use cursor-based pagination (Relay-style) for efficiency and consistency." },
+      { "q": "How to version GraphQL schemas?", "a": "Prefer deprecation and additive changes rather than breaking changes; use field deprecations." },
+      { "q": "How to protect GraphQL from expensive queries?", "a": "Limit query depth, complexity and rate-limit heavy operations." },
+      { "q": "What are resolvers and best practices?", "a": "Keep resolvers thin and delegate to services; avoid heavy work directly in resolvers." },
+      { "q": "What is code generation for GraphQL clients?", "a": "Tools that generate typed client code from schema/operations improving safety on client side." },
+      { "q": "How to handle authentication in GraphQL?", "a": "Use context to pass current user and enforce authorization in field-level or service layer." },
+      { "q": "What are custom scalars?", "a": "Custom scalar types to represent domains like DateTime or JSON with validation and parsing." },
+      { "q": "How to test GraphQL APIs?", "a": "Write operation-based tests verifying query responses and edge cases with mock data." },
+      { "q": "How to implement subscriptions?", "a": "Use ActionCable or WebSocket delivery with GraphQL subscriptions for real-time updates." },
+      { "q": "How to measure query performance?", "a": "Log execution times, trace resolver costs and profile DB calls used by queries." },
+      { "q": "How to handle errors in GraphQL?", "a": "Return structured errors with codes and messages; avoid exposing internals." },
+      { "q": "What is persisted queries pattern?", "a": "Pre-compile and store operations server-side to avoid parsing overhead and improve security." },
+      { "q": "How to evolve schema safely?", "a": "Deprecate fields, add new fields, and communicate changes to clients." },
+      { "q": "What is the schema-first vs code-first tradeoff?", "a": "Schema-first defines SDL for language-agnostic contracts; code-first integrates tightly with host language and types." },
+      { "q": "How to avoid over-fetching?", "a": "GraphQL clients specify exact fields; server should design efficient resolvers." },
+      { "q": "What monitoring is useful for GraphQL?", "a": "Track query latency, complexity distribution and resolver-level timings." }
+    ]
+  },
+
+  "rb_security": {
+    "title": "Security & Best Practices",
+    "summary": "Input validation, parameter safety, CSRF/XSS mitigations and dependency audits.",
+    "details": "Security in Ruby apps requires runtime defenses: sanitize user input, use prepared statements (ActiveRecord parameterization), enable strong CSP headers, and use Rails' built-in CSRF/token protections. Automate dependency scanning (bundle-audit, GitHub security alerts) and rotate secrets via secret managers. Add rate-limiting and robust authentication/authorization (Devise/Pundit or custom policies).\n\nPractical tips:\n- Validate inputs at boundaries and avoid trusting client data. \n- Use parameterized queries and avoid string interpolation into SQL. \n- Scan dependencies and patch regularly.\n\nNext steps: run brakeman and bundle-audit on your project and remediate any high severity issues.",
+    "cheat": "// Security cheat\n// Use parameterized queries: where('email = ?', email)\n// Escape HTML in views: use helpers (sanitize, h) or safe templates\n// Enable CSP headers via middleware/config\n// Use Brakeman: brakeman -A to scan Rails apps\n// Rotate secrets and store in vault/secret manager\n",
+    "examples": [
+      { "code": "# avoid\nUser.where(\"email = '#{params[:email]}'\")\n# prefer\nUser.where(email: params[:email])\n" }
+    ],
+    "interview": [
+      { "q": "How to prevent SQL injection in Rails?", "a": "Use parameterized queries or ActiveRecord query methods instead of string interpolation." },
+      { "q": "What is CSRF and how to protect Rails apps?", "a": "Cross-site request forgery—Rails includes CSRF tokens automatically for forms; verify authenticity tokens." },
+      { "q": "How to prevent XSS in views?", "a": "Escape user content by default and sanitize any allowed HTML." },
+      { "q": "What is strong parameters?", "a": "A Rails mechanism to whitelist permitted params to avoid mass-assignment vulnerabilities." },
+      { "q": "How to audit dependencies for vulnerabilities?", "a": "Use bundle-audit, GitHub security alerts and Snyk to detect vulnerable gems." },
+      { "q": "How to manage secrets safely?", "a": "Use secret managers or environment variables managed by CI/CD with strict access controls." },
+      { "q": "How to enforce HTTPS and secure cookies?", "a": "Set secure cookie flags and enforce SSL/TLS for all traffic." },
+      { "q": "What is Certificate pinning and where used?", "a": "Pinning verifies server certs against known fingerprints—used in high-security clients." },
+      { "q": "How to rate-limit endpoints?", "a": "Use Rack::Attack or API gateway features to throttle abusive clients." },
+      { "q": "What is content security policy (CSP)?", "a": "HTTP header to restrict sources for scripts/styles and mitigate XSS." },
+      { "q": "How to handle file uploads securely?", "a": "Validate file types, scan for malware, and store in secure object stores with signed URLs." },
+      { "q": "How to protect against mass assignment?", "a": "Use strong params and ensure model attributes are not blindly mass-assigned." },
+      { "q": "How to handle authentication best practices?", "a": "Use established libraries (Devise), enforce strong passwords and multi-factor auth." },
+      { "q": "How to implement authorization?", "a": "Use policy libraries like Pundit or custom role-based checks to enforce access control." },
+      { "q": "How to secure background jobs?", "a": "Validate job inputs and avoid running unsafe code; limit worker privileges." },
+      { "q": "What logging practices aid security?", "a": "Log security-relevant events and avoid logging secrets; integrate with SIEM." },
+      { "q": "How to handle third-party CDN and dependencies?", "a": "Trust vetted providers, enable Subresource Integrity (SRI) for public assets, and pin versions." },
+      { "q": "How to test for security regressions?", "a": "Automate Brakeman/bundle-audit in CI and run scheduled scanning." },
+      { "q": "What is dependency pinning trade-off?", "a": "Pins ensure stability but may delay important security updates—use automation to update safely." },
+      { "q": "How to respond to security incidents?", "a": "Have an incident plan, rotate secrets, patch vulnerable components and notify affected parties quickly." }
+    ]
+  },
+
+  "rb_cli": {
+    "title": "CLI Tools & Thor/Cli Frameworks",
+    "summary": "Use Thor, GLI or optparse for building robust command-line tools.",
+    "details": "Build CLI apps with Thor for subcommands or optparse for simple flags. Keep parsing logic separate from execution logic to facilitate testing. Provide --help, sensible defaults, and support configuration via env vars and config files. Keep business logic separate from CLI parsing for testability.\n\nPractical tips:\n- Structure a CLI with a small core library and thin CLI wrapper for testability. \n- Offer config via env vars and config files with clear precedence. \n- Provide man pages or shell completions for UX.\n\nNext steps: scaffold a small Thor-based CLI and add unit tests for core commands.",
+    "cheat": "// CLI cheat\n// Thor: gem 'thor' ; class CLI < Thor; desc 'hello NAME', 'Say hello'; def hello(name); puts \"Hello #{name}\"; end; end\n// Optparse for simple flags: require 'optparse'\n// Testing CLIs: use Aruba or call command classes directly in unit tests\n",
+    "examples": [
+      { "code": "class CLI < Thor\n  desc 'hello NAME', 'Say hello'\n  def hello(name); puts \"Hello #{name}\"; end\nend\nCLI.start(ARGV)\n" }
+    ],
+    "interview": [
+      { "q": "When to use Thor vs optparse?", "a": "Use Thor for multi-command CLIs and optparse for simple single-command tools." },
+      { "q": "How to structure a testable CLI?", "a": "Keep core logic in library classes and use the CLI layer only for parsing and I/O." },
+      { "q": "How to provide shell completions?", "a": "Generate completion scripts (bash/zsh) in CLI install step or via Thor helpers." },
+      { "q": "How to handle configuration precedence?", "a": "Env vars override config files; CLI flags override both—document rules clearly." },
+      { "q": "How to test CLI end-to-end?", "a": "Use Aruba or run commands in isolated temp environments to validate outputs." },
+      { "q": "How to implement version flags?", "a": "Provide --version and show CLI and underlying library versions for debugging." },
+      { "q": "How to handle interactive prompts in tests?", "a": "Stub STDIN or use non-interactive mode flags for automated testing." },
+      { "q": "How to distribute CLI as gem?", "a": "Provide executables in gemspec's executables field and install via gem install." },
+      { "q": "How to handle exit codes?", "a": "Return appropriate non-zero codes on errors and document behavior." },
+      { "q": "How to localize CLI messages?", "a": "Use I18n libraries if internationalization is required." },
+      { "q": "How to log from CLI tools?", "a": "Use structured logging with verbosity flags (--quiet/--verbose) and allow JSON output for automation." },
+      { "q": "Why separate parser and action logic?", "a": "Separability improves testability and reuse in non-CLI contexts (APIs)." },
+      { "q": "How to handle errors gracefully?", "a": "Catch exceptions at top-level, print helpful messages and use appropriate exit codes." },
+      { "q": "How to support subcommands?", "a": "Use Thor or similar frameworks to organize subcommands and help text." },
+      { "q": "How to create man pages?", "a": "Generate man pages from help text or use tools to author and include them in packages." },
+      { "q": "How to implement robust argument parsing?", "a": "Validate inputs early and provide clear usage examples and error messages." },
+      { "q": "How to implement plugin architectures for CLIs?", "a": "Discover plugins via gemspec entry points or load hooks and keep plugin API stable." },
+      { "q": "How to select defaults suitable for CI?", "a": "Provide non-interactive defaults and flags to force behaviors appropriate for automation." },
+      { "q": "How to keep CLI fast startup?", "a": "Minimize heavy requires on startup and lazily load large libraries only when needed." },
+      { "q": "How to document CLI for users?", "a": "Provide examples, flags, and common workflows in README and man pages." }
+    ]
+  }
+}

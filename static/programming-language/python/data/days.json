@@ -1,0 +1,572 @@
+[
+  {
+    "day": 1,
+    "title": "Python Setup & Basics",
+    "description": "Install Python, set up virtual environment, and run your first script.",
+    "code": "# hello.py\nprint(\"Hello, Python!\")\nprint(f\"Python version: {sys.version}\")",
+    "objectives": [
+      "Install Python and verify installation",
+      "Set up a virtual environment",
+      "Write and execute your first Python script",
+      "Understand Python's interactive shell"
+    ],
+    "topics": ["Installation", "Virtual Environments", "Hello World", "Interactive Shell"],
+    "exercises": [
+      "Install Python on your system",
+      "Create a virtual environment",
+      "Write a script that prints your name",
+      "Run a Python script from terminal"
+    ]
+  },
+  {
+    "day": 2,
+    "title": "Data Types & Variables",
+    "description": "Master Python's fundamental data types and learn how to work with variables effectively.",
+    "code": "# Dynamic typing\nx = 42\nname = \"Alice\"\nscores = [95, 87, 91]\nperson = {\"name\": \"Bob\", \"age\": 30}",
+    "objectives": [
+      "Understand Python's dynamic typing",
+      "Work with basic data types",
+      "Create and manipulate variables",
+      "Perform type conversions"
+    ],
+    "topics": ["Variables", "Data Types", "Type Conversion", "Mutability"],
+    "exercises": [
+      "Create variables of different types",
+      "Perform arithmetic operations",
+      "Convert between data types",
+      "Explore mutable vs immutable types"
+    ]
+  },
+  {
+    "day": 3,
+    "title": "Control Flow",
+    "description": "Control program execution with conditional statements and loops.",
+    "code": "# If-elif-else example\nscore = 85\nif score >= 90:\n    grade = 'A'\nelif score >= 80:\n    grade = 'B'\nelse:\n    grade = 'C'",
+    "objectives": [
+      "Use conditional statements",
+      "Implement loops",
+      "Create list comprehensions",
+      "Control program flow"
+    ],
+    "topics": ["If-Else", "Loops", "List Comprehensions", "Control Statements"],
+    "exercises": [
+      "Write a program with if-elif-else",
+      "Create a loop that prints numbers",
+      "Use list comprehensions",
+      "Implement break and continue"
+    ]
+  },
+  {
+    "day": 4,
+    "title": "Functions",
+    "description": "Create reusable code blocks with functions, parameters, and return values.",
+    "code": "def greet(name, greeting=\"Hello\"):\n    return f\"{greeting}, {name}!\"\n\nresult = greet(\"Alice\", \"Hi\")\nprint(result)",
+    "objectives": [
+      "Define and call functions",
+      "Use parameters and arguments",
+      "Understand return values",
+      "Work with scope"
+    ],
+    "topics": ["Function Definition", "Parameters", "Return Values", "Scope"],
+    "exercises": [
+      "Create a function with parameters",
+      "Use default arguments",
+      "Return multiple values",
+      "Understand local vs global scope"
+    ]
+  },
+  {
+    "day": 5,
+    "title": "File I/O Operations",
+    "description": "Read from and write to files using Python's file handling capabilities.",
+    "code": "with open('data.txt', 'r') as file:\n    content = file.read()\n\nwith open('output.txt', 'w') as file:\n    file.write(\"Hello, World!\")",
+    "objectives": [
+      "Read from files",
+      "Write to files",
+      "Use context managers",
+      "Handle different file formats"
+    ],
+    "topics": ["File Reading", "File Writing", "Context Managers", "File Formats"],
+    "exercises": [
+      "Read content from a text file",
+      "Write data to a file",
+      "Use with statement",
+      "Work with CSV files"
+    ]
+  },
+  {
+    "day": 6,
+    "title": "Error Handling",
+    "description": "Use try/except blocks to handle exceptions gracefully.",
+    "code": "try:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero!\")\nexcept Exception as e:\n    print(f\"An error occurred: {e}\")",
+    "objectives": [
+      "Handle exceptions",
+      "Use try/except blocks",
+      "Create custom exceptions",
+      "Implement finally clause"
+    ],
+    "topics": ["Exception Handling", "Try-Except", "Custom Exceptions", "Finally"],
+    "exercises": [
+      "Handle division by zero",
+      "Create custom exception classes",
+      "Use try-except-else-finally",
+      "Handle file not found errors"
+    ]
+  },
+  {
+    "day": 7,
+    "title": "Modules & Packages",
+    "description": "Import and use modules, create your own packages.",
+    "code": "import math\nfrom datetime import datetime\nimport numpy as np",
+    "objectives": [
+      "Import built-in modules",
+      "Install external packages",
+      "Create custom modules",
+      "Understand package structure"
+    ],
+    "topics": ["Import Statement", "Built-in Modules", "External Packages", "Custom Modules"],
+    "exercises": [
+      "Import and use math module",
+      "Install a package with pip",
+      "Create your own module",
+      "Understand __init__.py"
+    ]
+  },
+  {
+    "day": 8,
+    "title": "OOP Basics",
+    "description": "Create classes, objects, and understand inheritance.",
+    "code": "class Animal:\n    def __init__(self, name):\n        self.name = name\n    \n    def speak(self):\n        return \"Some sound\"",
+    "objectives": [
+      "Define classes",
+      "Create objects",
+      "Understand inheritance",
+      "Use special methods"
+    ],
+    "topics": ["Classes", "Objects", "Inheritance", "Special Methods"],
+    "exercises": [
+      "Create a simple class",
+      "Implement inheritance",
+      "Use __init__ method",
+      "Add methods to classes"
+    ]
+  },
+  {
+    "day": 9,
+    "title": "Advanced OOP",
+    "description": "Learn about encapsulation, polymorphism, and magic methods.",
+    "code": "class Vector:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    \n    def __add__(self, other):\n        return Vector(self.x + other.x, self.y + other.y)",
+    "objectives": [
+      "Implement encapsulation",
+      "Understand polymorphism",
+      "Use magic methods",
+      "Create abstract classes"
+    ],
+    "topics": ["Encapsulation", "Polymorphism", "Magic Methods", "Abstract Classes"],
+    "exercises": [
+      "Use private attributes",
+      "Implement operator overloading",
+      "Create abstract base class",
+      "Understand method resolution order"
+    ]
+  },
+  {
+    "day": 10,
+    "title": "Decorators",
+    "description": "Use decorators to modify function behavior.",
+    "code": "def timer_decorator(func):\n    import time\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        end = time.time()\n        print(f\"Time taken: {end - start} seconds\")\n        return result\n    return wrapper",
+    "objectives": [
+      "Create decorators",
+      "Use functools.wraps",
+      "Understand decorator syntax",
+      "Apply multiple decorators"
+    ],
+    "topics": ["Function Decorators", "Class Decorators", "functools.wraps", "Decorator Chains"],
+    "exercises": [
+      "Create a simple decorator",
+      "Use @ syntax",
+      "Create a class decorator",
+      "Apply multiple decorators"
+    ]
+  },
+  {
+    "day": 11,
+    "title": "Generators & Iterators",
+    "description": "Create memory-efficient generators using yield.",
+    "code": "def fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b",
+    "objectives": [
+      "Create generators",
+      "Understand yield keyword",
+      "Work with iterators",
+      "Use generator expressions"
+    ],
+    "topics": ["Generators", "Yield Keyword", "Iterators", "Generator Expressions"],
+    "exercises": [
+      "Create a generator function",
+      "Use yield statement",
+      "Create an iterator class",
+      "Use generator expressions"
+    ]
+  },
+  {
+    "day": 12,
+    "title": "List Comprehensions",
+    "description": "Advanced list comprehensions with conditions.",
+    "code": "matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nflattened = [num for row in matrix for num in row]\nprimes = [x for x in range(2, 50) if all(x % y != 0 for y in range(2, int(x**0.5)+1))]",
+    "objectives": [
+      "Create nested comprehensions",
+      "Use conditions in comprehensions",
+      "Transform data efficiently",
+      "Understand performance benefits"
+    ],
+    "topics": ["List Comprehensions", "Nested Comprehensions", "Conditional Comprehensions", "Performance"],
+    "exercises": [
+      "Create a nested list comprehension",
+      "Use if conditions in comprehensions",
+      "Transform data with comprehensions",
+      "Compare with traditional loops"
+    ]
+  },
+  {
+    "day": 13,
+    "title": "Lambda Functions",
+    "description": "Create anonymous functions with lambda.",
+    "code": "add = lambda x, y: x + y\nnumbers = [1, 2, 3, 4, 5]\nsquared = list(map(lambda x: x**2, numbers))\neven = list(filter(lambda x: x % 2 == 0, numbers))",
+    "objectives": [
+      "Create lambda functions",
+      "Use with map and filter",
+      "Understand anonymous functions",
+      "Apply in functional programming"
+    ],
+    "topics": ["Lambda Functions", "Map Function", "Filter Function", "Functional Programming"],
+    "exercises": [
+      "Create lambda functions",
+      "Use with map()",
+      "Use with filter()",
+      "Sort with lambda key"
+    ]
+  },
+  {
+    "day": 14,
+    "title": "Working with JSON",
+    "description": "Parse and generate JSON data.",
+    "code": "import json\n\ndata = {\"name\": \"Alice\", \"age\": 30}\njson_str = json.dumps(data)\nparsed = json.loads(json_str)",
+    "objectives": [
+      "Serialize Python objects to JSON",
+      "Parse JSON data",
+      "Handle JSON files",
+      "Work with nested JSON"
+    ],
+    "topics": ["JSON Serialization", "JSON Parsing", "JSON Files", "Complex JSON"],
+    "exercises": [
+      "Convert dictionary to JSON",
+      "Parse JSON string",
+      "Read JSON from file",
+      "Handle nested JSON structures"
+    ]
+  },
+  {
+    "day": 15,
+    "title": "Regular Expressions",
+    "description": "Pattern matching with Python's re module.",
+    "code": "import re\n\ntext = \"Contact us at support@example.com or sales@company.org\"\nemails = re.findall(r'[\\w\\.-]+@[\\w\\.-]+\\.\\w+', text)",
+    "objectives": [
+      "Use regular expressions",
+      "Match patterns",
+      "Extract data from text",
+      "Validate input"
+    ],
+    "topics": ["Regular Expressions", "Pattern Matching", "re Module", "Validation"],
+    "exercises": [
+      "Match email addresses",
+      "Extract phone numbers",
+      "Validate input formats",
+      "Use regex groups"
+    ]
+  },
+  {
+    "day": 16,
+    "title": "Unit Testing",
+    "description": "Write tests with unittest module.",
+    "code": "import unittest\n\ndef add(a, b):\n    return a + b\n\nclass TestMath(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)\n        self.assertEqual(add(-1, 1), 0)",
+    "objectives": [
+      "Write unit tests",
+      "Use unittest framework",
+      "Run test suites",
+      "Understand test coverage"
+    ],
+    "topics": ["Unit Testing", "unittest Module", "Test Cases", "Test Runners"],
+    "exercises": [
+      "Write test cases",
+      "Run tests",
+      "Use assertions",
+      "Create test suites"
+    ]
+  },
+  {
+    "day": 17,
+    "title": "pytest Framework",
+    "description": "Advanced testing with pytest.",
+    "code": "# test_math.py\ndef test_addition():\n    assert 1 + 1 == 2\n\ndef test_subtraction():\n    assert 5 - 3 == 2",
+    "objectives": [
+      "Install and use pytest",
+      "Write pytest tests",
+      "Use fixtures",
+      "Run parameterized tests"
+    ],
+    "topics": ["pytest Framework", "Fixtures", "Parameterized Tests", "Test Discovery"],
+    "exercises": [
+      "Install pytest",
+      "Write simple tests",
+      "Use fixtures",
+      "Run tests with pytest"
+    ]
+  },
+  {
+    "day": 18,
+    "title": "Working with APIs",
+    "description": "Make HTTP requests using requests library.",
+    "code": "import requests\n\nresponse = requests.get('https://api.github.com')\ndata = {\"key\": \"value\"}\nresponse = requests.post('https://httpbin.org/post', json=data)",
+    "objectives": [
+      "Make GET requests",
+      "Make POST requests",
+      "Handle API responses",
+      "Work with authentication"
+    ],
+    "topics": ["HTTP Requests", "REST APIs", "requests Library", "Authentication"],
+    "exercises": [
+      "Make GET request to API",
+      "Send POST request with data",
+      "Handle JSON responses",
+      "Use API authentication"
+    ]
+  },
+  {
+    "day": 19,
+    "title": "Web Scraping",
+    "description": "Extract data from websites with BeautifulSoup.",
+    "code": "import requests\nfrom bs4 import BeautifulSoup\n\nurl = 'https://example.com'\nresponse = requests.get(url)\nsoup = BeautifulSoup(response.text, 'html.parser')\nlinks = soup.find_all('a')",
+    "objectives": [
+      "Extract web data",
+      "Parse HTML",
+      "Navigate DOM",
+      "Handle pagination"
+    ],
+    "topics": ["Web Scraping", "BeautifulSoup", "HTML Parsing", "Data Extraction"],
+    "exercises": [
+      "Extract data from webpage",
+      "Find specific elements",
+      "Navigate HTML structure",
+      "Handle multiple pages"
+    ]
+  },
+  {
+    "day": 20,
+    "title": "Database Operations",
+    "description": "Connect to SQLite database and execute queries.",
+    "code": "import sqlite3\n\nconn = sqlite3.connect('example.db')\ncursor = conn.cursor()\ncursor.execute('''CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)''')",
+    "objectives": [
+      "Connect to databases",
+      "Execute SQL queries",
+      "Handle transactions",
+      "Use ORM tools"
+    ],
+    "topics": ["Database Connection", "SQL Queries", "SQLite", "Database Operations"],
+    "exercises": [
+      "Create database connection",
+      "Execute SQL statements",
+      "Insert and query data",
+      "Handle transactions"
+    ]
+  },
+  {
+    "day": 21,
+    "title": "Async Programming",
+    "description": "Write asynchronous code with async/await.",
+    "code": "import asyncio\n\nasync def fetch_data():\n    print(\"Fetching data...\")\n    await asyncio.sleep(2)\n    print(\"Data fetched!\")\n    return {\"data\": \"sample\"}",
+    "objectives": [
+      "Write async functions",
+      "Use await keyword",
+      "Run concurrent tasks",
+      "Handle async I/O"
+    ],
+    "topics": ["Async/Await", "asyncio", "Concurrent Programming", "Async I/O"],
+    "exercises": [
+      "Create async function",
+      "Use await statement",
+      "Run multiple tasks",
+      "Handle async exceptions"
+    ]
+  },
+  {
+    "day": 22,
+    "title": "Flask Web Framework",
+    "description": "Build a simple web application with Flask.",
+    "code": "from flask import Flask, jsonify\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return \"Hello, Flask!\"\n\n@app.route('/api/data')\ndef get_data():\n    return jsonify({\"message\": \"Hello from API!\"})",
+    "objectives": [
+      "Create Flask application",
+      "Define routes",
+      "Handle requests",
+      "Return responses"
+    ],
+    "topics": ["Flask Framework", "Web Routes", "Request Handling", "Response Formatting"],
+    "exercises": [
+      "Create basic Flask app",
+      "Add routes",
+      "Handle different HTTP methods",
+      "Return JSON responses"
+    ]
+  },
+  {
+    "day": 23,
+    "title": "FastAPI Framework",
+    "description": "Create high-performance APIs with FastAPI.",
+    "code": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass Item(BaseModel):\n    name: str\n    price: float\n\n@app.post(\"/items/\")\ndef create_item(item: Item):\n    return {\"item\": item.dict(), \"created\": True}",
+    "objectives": [
+      "Create FastAPI application",
+      "Define Pydantic models",
+      "Handle requests",
+      "Use automatic documentation"
+    ],
+    "topics": ["FastAPI", "Pydantic Models", "API Documentation", "Request Validation"],
+    "exercises": [
+      "Create FastAPI app",
+      "Define data models",
+      "Add API endpoints",
+      "Use Swagger documentation"
+    ]
+  },
+  {
+    "day": 24,
+    "title": "Data Analysis with Pandas",
+    "description": "Manipulate and analyze data using Pandas.",
+    "code": "import pandas as pd\n\ndata = {'Name': ['Alice', 'Bob', 'Charlie'], 'Age': [25, 30, 35]}\ndf = pd.DataFrame(data)\nprint(df.head())",
+    "objectives": [
+      "Create DataFrames",
+      "Manipulate data",
+      "Perform analysis",
+      "Visualize results"
+    ],
+    "topics": ["Pandas", "DataFrames", "Data Manipulation", "Data Analysis"],
+    "exercises": [
+      "Create DataFrame",
+      "Filter and sort data",
+      "Perform calculations",
+      "Group and aggregate data"
+    ]
+  },
+  {
+    "day": 25,
+    "title": "Data Visualization",
+    "description": "Create charts and graphs with Matplotlib.",
+    "code": "import matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.linspace(0, 10, 100)\ny = np.sin(x)\n\nplt.plot(x, y)\nplt.show()",
+    "objectives": [
+      "Create basic plots",
+      "Customize charts",
+      "Save visualizations",
+      "Create multiple plots"
+    ],
+    "topics": ["Matplotlib", "Data Visualization", "Charts", "Graphs"],
+    "exercises": [
+      "Create line plot",
+      "Customize plot appearance",
+      "Save plot to file",
+      "Create subplots"
+    ]
+  },
+  {
+    "day": 26,
+    "title": "NumPy Arrays",
+    "description": "Work with numerical arrays using NumPy.",
+    "code": "import numpy as np\n\narr1 = np.array([1, 2, 3, 4, 5])\narr2 = np.zeros((3, 3))\narr3 = np.random.rand(5, 5)",
+    "objectives": [
+      "Create NumPy arrays",
+      "Perform array operations",
+      "Use mathematical functions",
+      "Understand broadcasting"
+    ],
+    "topics": ["NumPy", "Arrays", "Mathematical Operations", "Broadcasting"],
+    "exercises": [
+      "Create arrays",
+      "Perform array operations",
+      "Use math functions",
+      "Understand broadcasting rules"
+    ]
+  },
+  {
+    "day": 27,
+    "title": "Machine Learning Basics",
+    "description": "Introduction to scikit-learn for ML.",
+    "code": "from sklearn import datasets\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\n\ndiabetes = datasets.load_diabetes()\nX_train, X_test, y_train, y_test = train_test_split(diabetes.data, diabetes.target)\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)",
+    "objectives": [
+      "Load datasets",
+      "Split training/test data",
+      "Train models",
+      "Make predictions"
+    ],
+    "topics": ["Machine Learning", "scikit-learn", "Model Training", "Predictions"],
+    "exercises": [
+      "Load dataset",
+      "Split data",
+      "Train model",
+      "Make predictions"
+    ]
+  },
+  {
+    "day": 28,
+    "title": "Docker for Python",
+    "description": "Containerize Python applications with Docker.",
+    "code": "# Dockerfile\nFROM python:3.9-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nCMD [\"python\", \"app.py\"]",
+    "objectives": [
+      "Create Dockerfile",
+      "Build Docker image",
+      "Run container",
+      "Understand Docker basics"
+    ],
+    "topics": ["Docker", "Containers", "Dockerfile", "Containerization"],
+    "exercises": [
+      "Write Dockerfile",
+      "Build image",
+      "Run container",
+      "Mount volumes"
+    ]
+  },
+  {
+    "day": 29,
+    "title": "CI/CD Pipeline",
+    "description": "Set up continuous integration with GitHub Actions.",
+    "code": "# .github/workflows/python.yml\nname: Python CI\n\non: [push]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v2\n    - name: Set up Python\n      uses: actions/setup-python@v2",
+    "objectives": [
+      "Create GitHub Actions workflow",
+      "Run tests automatically",
+      "Deploy applications",
+      "Understand CI/CD concepts"
+    ],
+    "topics": ["CI/CD", "GitHub Actions", "Automated Testing", "Deployment"],
+    "exercises": [
+      "Create workflow file",
+      "Run automated tests",
+      "Deploy to staging",
+      "Monitor pipeline"
+    ]
+  },
+  {
+    "day": 30,
+    "title": "Final Project",
+    "description": "Build a complete Python application from scratch.",
+    "code": "# Project structure\nmyapp/\n├── app/\n│   ├── __init__.py\n│   ├── main.py\n│   └── utils.py\n├── tests/\n├── requirements.txt\n├── Dockerfile\n└── README.md",
+    "objectives": [
+      "Plan complete project",
+      "Implement all components",
+      "Write tests",
+      "Deploy application"
+    ],
+    "topics": ["Project Planning", "Full-stack Development", "Testing", "Deployment"],
+    "exercises": [
+      "Design application",
+      "Implement features",
+      "Write comprehensive tests",
+      "Deploy to production"
+    ]
+  }
+]

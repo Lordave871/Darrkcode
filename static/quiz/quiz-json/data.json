@@ -1,0 +1,2380 @@
+{
+  "category": "data",
+  "categoryName": "Data Science",
+  "description": "Learn data analysis, visualization, and machine learning techniques",
+  "quizzes": [
+    {
+      "id": 7,
+      "title": "SQL & Databases",
+      "description": "Test your database skills with SQL queries, joins, normalization, and transactions.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-database",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What does SQL stand for?",
+          "options": [
+            "Structured Query Language",
+            "Simple Query Language",
+            "Standard Query Language",
+            "System Query Language"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which SQL command is used to retrieve data from a database?",
+          "options": [
+            "SELECT",
+            "GET",
+            "RETRIEVE",
+            "FIND"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What type of join returns all records from both tables?",
+          "options": [
+            "INNER JOIN",
+            "LEFT JOIN",
+            "FULL OUTER JOIN",
+            "CROSS JOIN"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "Which normal form eliminates transitive dependencies?",
+          "options": [
+            "1NF",
+            "2NF",
+            "3NF",
+            "BCNF"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 5,
+          "question": "What is the purpose of the GROUP BY clause?",
+          "options": [
+            "Group rows with same values",
+            "Filter groups",
+            "Sort results",
+            "Join tables"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which constraint ensures all values in a column are unique?",
+          "options": [
+            "PRIMARY KEY",
+            "UNIQUE",
+            "NOT NULL",
+            "CHECK"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 7,
+          "question": "What does ACID stand for in database transactions?",
+          "options": [
+            "Atomicity, Consistency, Isolation, Durability",
+            "Accuracy, Consistency, Integrity, Durability",
+            "Atomicity, Correctness, Isolation, Durability",
+            "All, Consistent, Isolated, Durable"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "Which SQL command is used to add new rows to a table?",
+          "options": [
+            "INSERT",
+            "ADD",
+            "CREATE",
+            "UPDATE"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "What is a primary key?",
+          "options": [
+            "Unique identifier for a table record",
+            "Foreign key in another table",
+            "Index for faster search",
+            "Constraint for null values"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which join returns only matching records from both tables?",
+          "options": [
+            "INNER JOIN",
+            "LEFT JOIN",
+            "RIGHT JOIN",
+            "FULL JOIN"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What does the HAVING clause do?",
+          "options": [
+            "Filters groups after GROUP BY",
+            "Filters rows before grouping",
+            "Sorts results",
+            "Joins tables"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "Which SQL command modifies existing data in a table?",
+          "options": [
+            "UPDATE",
+            "MODIFY",
+            "CHANGE",
+            "ALTER"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 13,
+          "question": "What is a foreign key?",
+          "options": [
+            "References primary key in another table",
+            "Unique key in same table",
+            "Index for performance",
+            "Constraint for data type"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 14,
+          "question": "Which normal form deals with multi-valued dependencies?",
+          "options": [
+            "3NF",
+            "BCNF",
+            "4NF",
+            "5NF"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 15,
+          "question": "What is the purpose of an index?",
+          "options": [
+            "Improve query performance",
+            "Enforce constraints",
+            "Store data",
+            "Backup data"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which SQL command removes a table from the database?",
+          "options": [
+            "DROP TABLE",
+            "DELETE TABLE",
+            "REMOVE TABLE",
+            "ERASE TABLE"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is a view in SQL?",
+          "options": [
+            "Virtual table based on result set",
+            "Physical table copy",
+            "Temporary table",
+            "Backup table"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 18,
+          "question": "Which operator is used for pattern matching?",
+          "options": [
+            "LIKE",
+            "MATCH",
+            "SIMILAR",
+            "CONTAINS"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 19,
+          "question": "What is database normalization?",
+          "options": [
+            "Process of organizing data to reduce redundancy",
+            "Making database faster",
+            "Backing up database",
+            "Encrypting database"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which SQL function returns the number of rows?",
+          "options": [
+            "COUNT()",
+            "SUM()",
+            "AVG()",
+            "MAX()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What is a transaction in databases?",
+          "options": [
+            "Sequence of operations performed as single unit",
+            "Single query",
+            "Database backup",
+            "Table creation"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 22,
+          "question": "Which SQL clause sorts the result set?",
+          "options": [
+            "ORDER BY",
+            "SORT BY",
+            "GROUP BY",
+            "ARRANGE BY"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 23,
+          "question": "What is denormalization?",
+          "options": [
+            "Intentionally adding redundancy for performance",
+            "Removing all redundancy",
+            "Normalizing further",
+            "Backing up data"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which SQL command creates a new database?",
+          "options": [
+            "CREATE DATABASE",
+            "NEW DATABASE",
+            "MAKE DATABASE",
+            "BUILD DATABASE"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "What is a stored procedure?",
+          "options": [
+            "Prepared SQL code that can be reused",
+            "Temporary table",
+            "View definition",
+            "Index type"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which join returns all records from left table and matching from right?",
+          "options": [
+            "LEFT JOIN",
+            "RIGHT JOIN",
+            "INNER JOIN",
+            "FULL JOIN"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What does the COMMIT command do?",
+          "options": [
+            "Saves all transactions to database",
+            "Rolls back transactions",
+            "Starts transaction",
+            "Ends connection"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 28,
+          "question": "Which constraint prevents NULL values in a column?",
+          "options": [
+            "NOT NULL",
+            "UNIQUE",
+            "PRIMARY KEY",
+            "CHECK"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 29,
+          "question": "What is a subquery?",
+          "options": [
+            "Query within another query",
+            "Simple query",
+            "Join query",
+            "Update query"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 30,
+          "question": "Which SQL function returns the current date and time?",
+          "options": [
+            "NOW()",
+            "CURRENT_DATE()",
+            "TODAY()",
+            "GETDATE()"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Machine Learning Basics",
+      "description": "Evaluate your understanding of ML concepts, algorithms, and model evaluation.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-brain",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is supervised learning?",
+          "options": [
+            "Learning with labeled data",
+            "Learning without labels",
+            "Learning from rewards",
+            "Learning from clusters"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which algorithm is used for classification?",
+          "options": [
+            "Logistic Regression",
+            "Linear Regression",
+            "K-Means",
+            "Principal Component Analysis"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 3,
+          "question": "What does overfitting mean?",
+          "options": [
+            "Model performs well on training but poorly on test data",
+            "Model performs poorly on both",
+            "Model is too simple",
+            "Model doesn't train"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "What is the purpose of cross-validation?",
+          "options": [
+            "Evaluate model performance",
+            "Train faster",
+            "Reduce features",
+            "Increase accuracy"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which is an ensemble method?",
+          "options": [
+            "Random Forest",
+            "Linear Regression",
+            "K-Nearest Neighbors",
+            "Support Vector Machine"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 6,
+          "question": "What is gradient descent?",
+          "options": [
+            "Optimization algorithm",
+            "Classification algorithm",
+            "Clustering algorithm",
+            "Feature selection method"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "Which metric is used for regression?",
+          "options": [
+            "Mean Squared Error",
+            "Accuracy",
+            "F1-Score",
+            "Precision"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 8,
+          "question": "What is regularization used for?",
+          "options": [
+            "Prevent overfitting",
+            "Increase model complexity",
+            "Speed up training",
+            "Add more features"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "Which is an unsupervised learning algorithm?",
+          "options": [
+            "K-Means Clustering",
+            "Logistic Regression",
+            "Random Forest",
+            "Gradient Boosting"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 10,
+          "question": "What is a neural network?",
+          "options": [
+            "Model inspired by human brain",
+            "Statistical model",
+            "Rule-based system",
+            "Decision tree variant"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What does PCA stand for?",
+          "options": [
+            "Principal Component Analysis",
+            "Primary Component Analysis",
+            "Principal Classification Algorithm",
+            "Pattern Component Analysis"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "Which is a hyperparameter?",
+          "options": [
+            "Learning rate",
+            "Model weights",
+            "Training data",
+            "Test labels"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 13,
+          "question": "What is the bias-variance tradeoff?",
+          "options": [
+            "Balance between underfitting and overfitting",
+            "Speed vs accuracy",
+            "Training vs testing",
+            "Features vs samples"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 14,
+          "question": "Which algorithm uses decision boundaries?",
+          "options": [
+            "Support Vector Machine",
+            "Linear Regression",
+            "K-Means",
+            "DBSCAN"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "What is backpropagation?",
+          "options": [
+            "Training neural networks",
+            "Feature selection",
+            "Data preprocessing",
+            "Model evaluation"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which is a loss function for classification?",
+          "options": [
+            "Cross-Entropy Loss",
+            "Mean Absolute Error",
+            "R-squared",
+            "Variance"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is feature engineering?",
+          "options": [
+            "Creating new features from data",
+            "Removing features",
+            "Selecting algorithms",
+            "Training models"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which is a dimensionality reduction technique?",
+          "options": [
+            "t-SNE",
+            "Random Forest",
+            "Logistic Regression",
+            "Gradient Descent"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 19,
+          "question": "What is the purpose of activation functions?",
+          "options": [
+            "Introduce non-linearity",
+            "Speed up computation",
+            "Reduce memory",
+            "Normalize data"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which is a clustering algorithm?",
+          "options": [
+            "DBSCAN",
+            "Linear Regression",
+            "Decision Tree",
+            "Naive Bayes"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 21,
+          "question": "What is transfer learning?",
+          "options": [
+            "Using pre-trained models",
+            "Transferring data",
+            "Moving algorithms",
+            "Learning transfers"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which evaluation metric is for imbalanced datasets?",
+          "options": [
+            "F1-Score",
+            "Accuracy",
+            "Mean Squared Error",
+            "R-squared"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "What is early stopping?",
+          "options": [
+            "Stop training before overfitting",
+            "Stop after fixed epochs",
+            "Stop when accuracy is 100%",
+            "Stop at random"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which is a reinforcement learning concept?",
+          "options": [
+            "Q-Learning",
+            "K-Means",
+            "PCA",
+            "Linear Regression"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "What is a confusion matrix?",
+          "options": [
+            "Performance measurement for classification",
+            "Data structure",
+            "Algorithm flowchart",
+            "Feature matrix"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which algorithm is based on Bayes' theorem?",
+          "options": [
+            "Naive Bayes",
+            "Random Forest",
+            "SVM",
+            "KNN"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 27,
+          "question": "What is the purpose of dropout?",
+          "options": [
+            "Prevent overfitting in neural networks",
+            "Increase training speed",
+            "Reduce model size",
+            "Improve accuracy"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which is a gradient boosting algorithm?",
+          "options": [
+            "XGBoost",
+            "K-Means",
+            "Logistic Regression",
+            "Perceptron"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 29,
+          "question": "What is feature scaling?",
+          "options": [
+            "Normalizing feature values",
+            "Removing features",
+            "Adding features",
+            "Selecting features"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which is a deep learning framework?",
+          "options": [
+            "TensorFlow",
+            "Scikit-learn",
+            "Pandas",
+            "NumPy"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "title": "Pandas & Data Analysis",
+      "description": "Master Pandas library for data manipulation, cleaning, and exploratory analysis.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-chart-bar",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the primary data structure in Pandas for 1-dimensional data?",
+          "options": [
+            "Series",
+            "DataFrame",
+            "Array",
+            "List"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which method is used to read a CSV file in Pandas?",
+          "options": [
+            "read_csv()",
+            "load_csv()",
+            "open_csv()",
+            "import_csv()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "How do you select a single column from a DataFrame?",
+          "options": [
+            "df['column_name']",
+            "df.column_name",
+            "Both A and B",
+            "df.select('column_name')"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 4,
+          "question": "What does df.head() do?",
+          "options": [
+            "Returns first 5 rows",
+            "Returns last 5 rows",
+            "Returns column headers",
+            "Returns data types"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which method is used to check for missing values?",
+          "options": [
+            "isnull()",
+            "checkna()",
+            "missing()",
+            "findna()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 6,
+          "question": "How do you drop rows with missing values?",
+          "options": [
+            "dropna()",
+            "removena()",
+            "deletna()",
+            "cleanna()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What does df.describe() return?",
+          "options": [
+            "Statistical summary",
+            "Column names",
+            "Data types",
+            "Missing values count"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "Which method is used for grouping data?",
+          "options": [
+            "groupby()",
+            "aggregate()",
+            "cluster()",
+            "categorize()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "How do you merge two DataFrames?",
+          "options": [
+            "merge()",
+            "join()",
+            "concat()",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 10,
+          "question": "What does df.iloc[] use for selection?",
+          "options": [
+            "Integer position",
+            "Label/index name",
+            "Boolean condition",
+            "Column name"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "Which method is used for pivoting tables?",
+          "options": [
+            "pivot_table()",
+            "reshape()",
+            "transpose()",
+            "rotate()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 12,
+          "question": "How do you rename columns in a DataFrame?",
+          "options": [
+            "rename()",
+            "change_columns()",
+            "modify_columns()",
+            "update_columns()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What does df.sort_values() do?",
+          "options": [
+            "Sort DataFrame by values",
+            "Sort columns alphabetically",
+            "Sort index",
+            "Sort by data type"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 14,
+          "question": "Which method is used to apply a function to each element?",
+          "options": [
+            "apply()",
+            "map()",
+            "transform()",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 15,
+          "question": "What does df.info() display?",
+          "options": [
+            "DataFrame information including dtypes",
+            "Statistical summary",
+            "First few rows",
+            "Last few rows"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "How do you filter rows based on condition?",
+          "options": [
+            "df[condition]",
+            "df.filter()",
+            "df.select()",
+            "df.where()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What does df.reset_index() do?",
+          "options": [
+            "Resets index to default integer index",
+            "Deletes index",
+            "Creates new index column",
+            "Sorts by index"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which method is used to change data types?",
+          "options": [
+            "astype()",
+            "convert_type()",
+            "change_dtype()",
+            "modify_type()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 19,
+          "question": "What does df.duplicated() return?",
+          "options": [
+            "Boolean series for duplicate rows",
+            "List of duplicate values",
+            "Count of duplicates",
+            "Removed duplicates"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "How do you calculate correlation matrix?",
+          "options": [
+            "df.corr()",
+            "df.correlation()",
+            "df.relationship()",
+            "df.cov()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What does df.melt() do?",
+          "options": [
+            "Unpivots DataFrame from wide to long format",
+            "Melts numeric columns",
+            "Combines columns",
+            "Deletes columns"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which method is used for time series resampling?",
+          "options": [
+            "resample()",
+            "groupby_time()",
+            "aggregate_time()",
+            "time_group()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 23,
+          "question": "How do you create dummy variables?",
+          "options": [
+            "get_dummies()",
+            "create_dummies()",
+            "dummy_variables()",
+            "encode_categorical()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "What does df.cut() do?",
+          "options": [
+            "Bin values into discrete intervals",
+            "Cut DataFrame in half",
+            "Remove columns",
+            "Split DataFrame"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which method is used for rolling window calculations?",
+          "options": [
+            "rolling()",
+            "window()",
+            "slide()",
+            "move()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "How do you handle categorical data encoding?",
+          "options": [
+            "LabelEncoder",
+            "OneHotEncoder",
+            "Both A and B",
+            "CategoryEncoder"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 27,
+          "question": "What does df.query() allow?",
+          "options": [
+            "Query using string expression",
+            "SQL-like querying",
+            "Both A and B",
+            "Only numeric queries"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "Which method is used for cumulative operations?",
+          "options": [
+            "cumsum()",
+            "cumulative()",
+            "accumulate()",
+            "running_total()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 29,
+          "question": "How do you export DataFrame to CSV?",
+          "options": [
+            "to_csv()",
+            "export_csv()",
+            "save_csv()",
+            "write_csv()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "What is the difference between loc[] and iloc[]?",
+          "options": [
+            "loc uses labels, iloc uses integer positions",
+            "loc is faster",
+            "iloc uses labels",
+            "No difference"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "title": "Data Visualization",
+      "description": "Learn Matplotlib, Seaborn, Plotly for creating effective data visualizations.",
+      "difficulty": "Beginner",
+      "icon": "fas fa-chart-line",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Which library is used for basic plotting in Python?",
+          "options": [
+            "Matplotlib",
+            "Seaborn",
+            "Plotly",
+            "Pandas"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 2,
+          "question": "What type of chart shows changes over time?",
+          "options": [
+            "Line Chart",
+            "Bar Chart",
+            "Pie Chart",
+            "Scatter Plot"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "Which function creates a line plot in Matplotlib?",
+          "options": [
+            "plt.plot()",
+            "plt.bar()",
+            "plt.scatter()",
+            "plt.pie()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "What is Seaborn built on top of?",
+          "options": [
+            "Matplotlib",
+            "Plotly",
+            "Pandas",
+            "NumPy"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "Which chart is best for comparing categories?",
+          "options": [
+            "Bar Chart",
+            "Line Chart",
+            "Scatter Plot",
+            "Histogram"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 6,
+          "question": "How do you show a plot in Matplotlib?",
+          "options": [
+            "plt.show()",
+            "plot.display()",
+            "show.plot()",
+            "display()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What does a histogram show?",
+          "options": [
+            "Distribution of data",
+            "Relationship between variables",
+            "Changes over time",
+            "Part-to-whole relationships"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 8,
+          "question": "Which library creates interactive plots?",
+          "options": [
+            "Plotly",
+            "Matplotlib",
+            "Seaborn",
+            "ggplot"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "What is the purpose of a scatter plot?",
+          "options": [
+            "Show relationship between two variables",
+            "Compare categories",
+            "Show trends over time",
+            "Show distributions"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "How do you add a title to a Matplotlib plot?",
+          "options": [
+            "plt.title()",
+            "plot.title()",
+            "title.plot()",
+            "add_title()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "Which chart shows part-to-whole relationships?",
+          "options": [
+            "Pie Chart",
+            "Bar Chart",
+            "Line Chart",
+            "Histogram"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "What does 'sns' stand for in Seaborn?",
+          "options": [
+            "Seaborn",
+            "Statistical",
+            "Scientific",
+            "Style"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 13,
+          "question": "Which function creates a bar plot?",
+          "options": [
+            "plt.bar()",
+            "plt.plot()",
+            "plt.scatter()",
+            "plt.hist()"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 14,
+          "question": "What is the purpose of color mapping?",
+          "options": [
+            "Represent data values with colors",
+            "Make plots colorful",
+            "Hide data",
+            "Reduce plot size"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "Which plot shows correlations?",
+          "options": [
+            "Heatmap",
+            "Line Chart",
+            "Bar Chart",
+            "Pie Chart"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 16,
+          "question": "How do you save a plot to a file?",
+          "options": [
+            "plt.savefig()",
+            "plot.save()",
+            "save.plot()",
+            "export_plot()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What is a box plot used for?",
+          "options": [
+            "Show distribution and outliers",
+            "Show trends",
+            "Compare categories",
+            "Show relationships"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 18,
+          "question": "Which Seaborn function creates statistical plots?",
+          "options": [
+            "sns.relplot()",
+            "sns.catplot()",
+            "sns.displot()",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 19,
+          "question": "What does subplot allow you to do?",
+          "options": [
+            "Create multiple plots in one figure",
+            "Create 3D plots",
+            "Animate plots",
+            "Save plots"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which chart is for categorical data?",
+          "options": [
+            "Count Plot",
+            "Line Plot",
+            "Scatter Plot",
+            "Area Plot"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 21,
+          "question": "How do you add axis labels?",
+          "options": [
+            "plt.xlabel() and plt.ylabel()",
+            "axis.label()",
+            "label.axis()",
+            "add_labels()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "What is a violin plot?",
+          "options": [
+            "Combination of box plot and kernel density",
+            "Musical instrument plot",
+            "3D plot",
+            "Animated plot"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "Which Plotly feature is unique?",
+          "options": [
+            "Interactivity",
+            "Basic plotting",
+            "Static plots",
+            "2D only"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "What is the purpose of a legend?",
+          "options": [
+            "Identify different data series",
+            "Decorate the plot",
+            "Add title",
+            "Save space"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which function creates a histogram?",
+          "options": [
+            "plt.hist()",
+            "plt.bar()",
+            "plt.plot()",
+            "plt.scatter()"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "What is data visualization?",
+          "options": [
+            "Graphical representation of data",
+            "Data storage",
+            "Data cleaning",
+            "Data analysis"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which plot shows frequency distribution?",
+          "options": [
+            "Histogram",
+            "Scatter Plot",
+            "Line Chart",
+            "Pie Chart"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "How do you change plot size in Matplotlib?",
+          "options": [
+            "plt.figure(figsize=(w,h))",
+            "plot.size()",
+            "size.plot()",
+            "resize_plot()"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is a pair plot?",
+          "options": [
+            "Multiple scatter plots in grid",
+            "Single plot",
+            "3D plot",
+            "Animated plot"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which is a best practice in data visualization?",
+          "options": [
+            "Choose appropriate chart type",
+            "Use many colors",
+            "Make complex plots",
+            "Hide data"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "title": "Statistics & Probability",
+      "description": "Understand statistical concepts, probability distributions, hypothesis testing.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-dice",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the mean of the data: 2, 4, 6, 8, 10?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 2,
+          "question": "Which measure of central tendency is affected most by outliers?",
+          "options": [
+            "Mean",
+            "Median",
+            "Mode",
+            "Range"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "What is the probability of getting heads when flipping a fair coin?",
+          "options": [
+            "0.25",
+            "0.5",
+            "0.75",
+            "1"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which distribution describes the number of successes in fixed trials?",
+          "options": [
+            "Binomial",
+            "Normal",
+            "Poisson",
+            "Exponential"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 5,
+          "question": "What does a p-value less than 0.05 typically indicate?",
+          "options": [
+            "Statistically significant result",
+            "No effect",
+            "Large effect size",
+            "Small sample size"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "What is the standard deviation of a dataset?",
+          "options": [
+            "Measure of spread",
+            "Measure of center",
+            "Measure of shape",
+            "Measure of correlation"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "Which correlation coefficient indicates perfect positive correlation?",
+          "options": [
+            "+1",
+            "0",
+            "-1",
+            "0.5"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "What is the probability of rolling a 6 on a fair die?",
+          "options": [
+            "1/6",
+            "1/3",
+            "1/2",
+            "5/6"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "What does the Central Limit Theorem state?",
+          "options": [
+            "Sample means approach normal distribution",
+            "Population is always normal",
+            "Large samples are unbiased",
+            "Small samples are inaccurate"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which test compares means of two groups?",
+          "options": [
+            "t-test",
+            "Chi-square",
+            "ANOVA",
+            "Regression"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What is the range of probability values?",
+          "options": [
+            "0 to 1",
+            "-1 to 1",
+            "0 to 100",
+            "-∞ to ∞"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "What is the median of: 3, 5, 7, 9, 11?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 13,
+          "question": "Which distribution is symmetric and bell-shaped?",
+          "options": [
+            "Normal",
+            "Exponential",
+            "Binomial",
+            "Poisson"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What is Type I error?",
+          "options": [
+            "Rejecting true null hypothesis",
+            "Accepting false null hypothesis",
+            "Sample error",
+            "Measurement error"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "What does variance measure?",
+          "options": [
+            "Spread of data",
+            "Center of data",
+            "Shape of distribution",
+            "Correlation between variables"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 16,
+          "question": "Which probability rule states P(A and B) = P(A) × P(B|A)?",
+          "options": [
+            "Multiplication rule",
+            "Addition rule",
+            "Bayes' theorem",
+            "Complement rule"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "What is the mode of: 2, 3, 3, 4, 5, 3, 6?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which test compares observed vs expected frequencies?",
+          "options": [
+            "Chi-square",
+            "t-test",
+            "z-test",
+            "F-test"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 19,
+          "question": "What is the complement of probability 0.3?",
+          "options": [
+            "0.7",
+            "0.3",
+            "0.5",
+            "0.1"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "What does a confidence interval of 95% mean?",
+          "options": [
+            "95% chance interval contains true parameter",
+            "Parameter is definitely in interval",
+            "5% error rate",
+            "Both A and C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 21,
+          "question": "What is conditional probability?",
+          "options": [
+            "Probability given some condition",
+            "Joint probability",
+            "Marginal probability",
+            "Independent probability"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which measure describes the middle 50% of data?",
+          "options": [
+            "Interquartile Range",
+            "Range",
+            "Variance",
+            "Standard Deviation"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What is the probability of an impossible event?",
+          "options": [
+            "0",
+            "0.5",
+            "1",
+            "0.25"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which distribution models time between events?",
+          "options": [
+            "Exponential",
+            "Normal",
+            "Binomial",
+            "Uniform"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "What is statistical power?",
+          "options": [
+            "Probability of rejecting false null",
+            "Probability of Type I error",
+            "Effect size",
+            "Sample size"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "What is Bayes' theorem used for?",
+          "options": [
+            "Updating probability with new evidence",
+            "Calculating mean",
+            "Testing hypotheses",
+            "Finding correlation"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which correlation indicates no linear relationship?",
+          "options": [
+            "0",
+            "1",
+            "-1",
+            "0.5"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 28,
+          "question": "What is the probability of a certain event?",
+          "options": [
+            "1",
+            "0",
+            "0.5",
+            "0.75"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "Which test compares means of three or more groups?",
+          "options": [
+            "ANOVA",
+            "t-test",
+            "Chi-square",
+            "z-test"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "What is the law of large numbers?",
+          "options": [
+            "Sample mean approaches population mean",
+            "Small samples are better",
+            "Probability decreases with trials",
+            "Variance increases with size"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "title": "Deep Learning & Neural Networks",
+      "description": "Explore deep learning with TensorFlow, Keras, and neural network architectures.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-network-wired",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the purpose of an activation function?",
+          "options": [
+            "Introduce non-linearity",
+            "Normalize inputs",
+            "Reduce parameters",
+            "Speed up training"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 2,
+          "question": "Which activation function is used for binary classification output?",
+          "options": [
+            "Sigmoid",
+            "ReLU",
+            "Tanh",
+            "Softmax"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "What does backpropagation do?",
+          "options": [
+            "Update weights using gradient descent",
+            "Forward pass data",
+            "Initialize weights",
+            "Regularize model"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 4,
+          "question": "Which neural network is used for image recognition?",
+          "options": [
+            "CNN",
+            "RNN",
+            "LSTM",
+            "GAN"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 5,
+          "question": "What is the purpose of dropout?",
+          "options": [
+            "Prevent overfitting",
+            "Speed up convergence",
+            "Increase accuracy",
+            "Reduce memory usage"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which optimizer is commonly used in deep learning?",
+          "options": [
+            "Adam",
+            "SGD",
+            "RMSprop",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 7,
+          "question": "What is a convolutional layer used for?",
+          "options": [
+            "Feature extraction from images",
+            "Sequence processing",
+            "Generating data",
+            "Classification"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "Which network processes sequential data?",
+          "options": [
+            "RNN",
+            "CNN",
+            "MLP",
+            "Autoencoder"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "What is transfer learning?",
+          "options": [
+            "Using pre-trained models",
+            "Transferring weights",
+            "Moving data",
+            "Changing architectures"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which loss function is for multi-class classification?",
+          "options": [
+            "Categorical Crossentropy",
+            "Binary Crossentropy",
+            "MSE",
+            "MAE"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 11,
+          "question": "What is batch normalization?",
+          "options": [
+            "Normalize layer inputs",
+            "Reduce batch size",
+            "Increase batch size",
+            "Normalize outputs"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "Which architecture is used for generative models?",
+          "options": [
+            "GAN",
+            "CNN",
+            "RNN",
+            "Transformer"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 13,
+          "question": "What is the vanishing gradient problem?",
+          "options": [
+            "Gradients become too small",
+            "Gradients explode",
+            "No gradients",
+            "Wrong gradients"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which layer reduces spatial dimensions?",
+          "options": [
+            "Pooling layer",
+            "Convolutional layer",
+            "Dense layer",
+            "Dropout layer"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 15,
+          "question": "What is an autoencoder?",
+          "options": [
+            "Neural network for dimensionality reduction",
+            "Classification network",
+            "Sequence model",
+            "Generative model"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which is a recurrent neural network variant?",
+          "options": [
+            "LSTM",
+            "GRU",
+            "Both A and B",
+            "CNN"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is the purpose of padding in CNNs?",
+          "options": [
+            "Preserve spatial dimensions",
+            "Reduce dimensions",
+            "Add noise",
+            "Remove features"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which TensorFlow method builds models?",
+          "options": [
+            "tf.keras.Sequential()",
+            "tf.model()",
+            "tf.build()",
+            "tf.create()"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 19,
+          "question": "What is attention mechanism?",
+          "options": [
+            "Focus on relevant parts of input",
+            "Ignore inputs",
+            "Random selection",
+            "Memory allocation"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which is a deep learning framework?",
+          "options": [
+            "PyTorch",
+            "TensorFlow",
+            "Keras",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 21,
+          "question": "What is weight initialization?",
+          "options": [
+            "Setting initial values for weights",
+            "Removing weights",
+            "Updating weights",
+            "Normalizing weights"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which activation prevents vanishing gradients?",
+          "options": [
+            "ReLU",
+            "Sigmoid",
+            "Tanh",
+            "Softmax"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 23,
+          "question": "What is a transformer architecture?",
+          "options": [
+            "Uses attention mechanisms",
+            "CNN variant",
+            "RNN variant",
+            "Simple MLP"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which regularization technique adds penalty to loss?",
+          "options": [
+            "L1/L2 regularization",
+            "Dropout",
+            "Batch normalization",
+            "Early stopping"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 25,
+          "question": "What is model checkpointing?",
+          "options": [
+            "Save best model during training",
+            "Check model accuracy",
+            "Validate model",
+            "Test model"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which is used for natural language processing?",
+          "options": [
+            "Transformer",
+            "CNN",
+            "Autoencoder",
+            "GAN"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 27,
+          "question": "What is gradient clipping?",
+          "options": [
+            "Prevent exploding gradients",
+            "Increase gradients",
+            "Remove gradients",
+            "Normalize gradients"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which Keras layer is fully connected?",
+          "options": [
+            "Dense",
+            "Conv2D",
+            "LSTM",
+            "Dropout"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 29,
+          "question": "What is data augmentation?",
+          "options": [
+            "Create more training data",
+            "Reduce data",
+            "Clean data",
+            "Normalize data"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which evaluates model performance during training?",
+          "options": [
+            "Validation set",
+            "Training set",
+            "Test set",
+            "All data"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "title": "Natural Language Processing",
+      "description": "Master NLP techniques, text processing, sentiment analysis, and language models.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-language",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is tokenization in NLP?",
+          "options": [
+            "Splitting text into words/tokens",
+            "Removing stop words",
+            "Stemming words",
+            "Vectorizing text"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 2,
+          "question": "Which technique reduces words to root form?",
+          "options": [
+            "Stemming",
+            "Lemmatization",
+            "Both A and B",
+            "Tokenization"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What are stop words?",
+          "options": [
+            "Common words often removed",
+            "Important keywords",
+            "Rare words",
+            "Named entities"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which vectorization method creates word embeddings?",
+          "options": [
+            "Word2Vec",
+            "TF-IDF",
+            "Bag of Words",
+            "Count Vectorizer"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 5,
+          "question": "What does TF-IDF stand for?",
+          "options": [
+            "Term Frequency-Inverse Document Frequency",
+            "Text Feature-Information Document Frequency",
+            "Term Feature-Inverse Data Frequency",
+            "Text Frequency-Information Document Feature"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which model revolutionized NLP with attention?",
+          "options": [
+            "Transformer",
+            "CNN",
+            "RNN",
+            "LSTM"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 7,
+          "question": "What is Named Entity Recognition (NER)?",
+          "options": [
+            "Identify names, dates, locations",
+            "Classify sentiment",
+            "Summarize text",
+            "Translate languages"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "Which algorithm is for sentiment analysis?",
+          "options": [
+            "VADER",
+            "BERT",
+            "Both A and B",
+            "Word2Vec"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 9,
+          "question": "What is part-of-speech tagging?",
+          "options": [
+            "Label words as nouns, verbs, etc.",
+            "Group similar words",
+            "Find word roots",
+            "Create word vectors"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which is a pre-trained language model?",
+          "options": [
+            "BERT",
+            "GPT",
+            "ELMo",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 11,
+          "question": "What does BERT stand for?",
+          "options": [
+            "Bidirectional Encoder Representations from Transformers",
+            "Basic Encoder Representation Transformer",
+            "Bidirectional Encoding for Representation Transfer",
+            "Basic Encoding Representation Technique"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "What is word sense disambiguation?",
+          "options": [
+            "Determine correct meaning of word",
+            "Remove ambiguous words",
+            "Find synonyms",
+            "Group similar words"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 13,
+          "question": "Which technique handles out-of-vocabulary words?",
+          "options": [
+            "Subword tokenization",
+            "Word removal",
+            "Ignoring them",
+            "Using synonyms"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "What is a word embedding?",
+          "options": [
+            "Dense vector representation of word",
+            "Sparse vector",
+            "Text file",
+            "Dictionary"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "Which library is popular for NLP in Python?",
+          "options": [
+            "NLTK",
+            "spaCy",
+            "Transformers",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 16,
+          "question": "What is text summarization?",
+          "options": [
+            "Create shorter version preserving meaning",
+            "Translate text",
+            "Classify text",
+            "Generate text"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 17,
+          "question": "Which metric evaluates language models?",
+          "options": [
+            "Perplexity",
+            "BLEU",
+            "ROUGE",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 18,
+          "question": "What is topic modeling?",
+          "options": [
+            "Discover hidden topics in documents",
+            "Classify documents",
+            "Summarize documents",
+            "Translate documents"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 19,
+          "question": "Which algorithm is for topic modeling?",
+          "options": [
+            "LDA",
+            "LSA",
+            "Both A and B",
+            "Word2Vec"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 20,
+          "question": "What is dependency parsing?",
+          "options": [
+            "Analyze grammatical structure",
+            "Remove dependencies",
+            "Find word roots",
+            "Create word vectors"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "Which is a text classification task?",
+          "options": [
+            "Spam detection",
+            "Sentiment analysis",
+            "Topic categorization",
+            "All of the above"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 22,
+          "question": "What is coreference resolution?",
+          "options": [
+            "Link pronouns to nouns",
+            "Resolve word meanings",
+            "Find synonyms",
+            "Group entities"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "Which technique creates word contexts?",
+          "options": [
+            "n-grams",
+            "skip-grams",
+            "Both A and B",
+            "TF-IDF"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 24,
+          "question": "What is machine translation?",
+          "options": [
+            "Automatically translate between languages",
+            "Convert speech to text",
+            "Summarize text",
+            "Classify text"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "Which model uses encoder-decoder architecture?",
+          "options": [
+            "Seq2Seq",
+            "Transformer",
+            "Both A and B",
+            "CNN"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "What is text normalization?",
+          "options": [
+            "Convert text to standard form",
+            "Remove all text",
+            "Translate text",
+            "Summarize text"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "Which is a word embedding method?",
+          "options": [
+            "GloVe",
+            "FastText",
+            "Both A and B",
+            "TF-IDF"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 28,
+          "question": "What is sequence labeling?",
+          "options": [
+            "Assign labels to each word in sequence",
+            "Label entire document",
+            "Group sequences",
+            "Remove sequences"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "Which handles variable-length sequences?",
+          "options": [
+            "Padding",
+            "Truncation",
+            "Both A and B",
+            "None of the above"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "What is zero-shot learning in NLP?",
+          "options": [
+            "Perform task without training examples",
+            "Learn from zero data",
+            "Ignore tasks",
+            "Random guessing"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    }
+  ]
+}

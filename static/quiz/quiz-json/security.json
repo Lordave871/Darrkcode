@@ -1,0 +1,1702 @@
+{
+  "category": "security",
+  "categoryName": "Cybersecurity",
+  "description": "Learn network security, encryption, and ethical hacking",
+  "quizzes": [
+    {
+      "id": 23,
+      "title": "Network Security Basics",
+      "description": "Learn fundamentals of network security, firewalls, VPN, and threat prevention.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-shield-alt",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the primary purpose of a firewall?",
+          "options": [
+            "To block unauthorized access while allowing authorized communications",
+            "To increase internet speed",
+            "To store backup data",
+            "To manage user passwords"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which protocol provides secure communication over a network?",
+          "options": [
+            "FTP",
+            "HTTP",
+            "SSL/TLS",
+            "SMTP"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What does VPN stand for?",
+          "options": [
+            "Virtual Private Network",
+            "Virtual Public Network",
+            "Verified Private Node",
+            "Virtual Port Number"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 4,
+          "question": "Which of these is a common network attack?",
+          "options": [
+            "Phishing",
+            "Data compression",
+            "Packet forwarding",
+            "Bandwidth throttling"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 5,
+          "question": "What is the main function of an Intrusion Detection System (IDS)?",
+          "options": [
+            "Prevent all attacks automatically",
+            "Monitor and alert on suspicious activity",
+            "Replace firewalls",
+            "Encrypt all network traffic"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 6,
+          "question": "Which port is commonly used for SSH?",
+          "options": [
+            "Port 80",
+            "Port 22",
+            "Port 443",
+            "Port 21"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What does IPSec provide?",
+          "options": [
+            "Email encryption",
+            "Secure IP communications",
+            "Web page caching",
+            "Domain name resolution"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "Which device operates at Layer 2 of the OSI model?",
+          "options": [
+            "Router",
+            "Switch",
+            "Hub",
+            "Firewall"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 9,
+          "question": "What is a DMZ in network security?",
+          "options": [
+            "Demilitarized Zone - a subnetwork exposed to untrusted networks",
+            "A type of malware",
+            "A secure internal database",
+            "A type of encryption"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 10,
+          "question": "Which of these is a symmetric encryption algorithm?",
+          "options": [
+            "RSA",
+            "AES",
+            "ECDSA",
+            "DSA"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What is the purpose of NAC (Network Access Control)?",
+          "options": [
+            "To control which devices can access the network",
+            "To increase Wi-Fi range",
+            "To assign IP addresses automatically",
+            "To block spam emails"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 12,
+          "question": "Which attack floods a network with traffic to disrupt service?",
+          "options": [
+            "Phishing",
+            "DDoS",
+            "Man-in-the-middle",
+            "SQL injection"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 13,
+          "question": "What is two-factor authentication?",
+          "options": [
+            "Using two passwords",
+            "Verifying identity using two different methods",
+            "Having two user accounts",
+            "Using two different networks"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which protocol is used for secure web browsing?",
+          "options": [
+            "HTTP",
+            "HTTPS",
+            "FTP",
+            "Telnet"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 15,
+          "question": "What is a honeypot?",
+          "options": [
+            "A sweet treat for hackers",
+            "A security mechanism to detect and study attacks",
+            "A type of firewall",
+            "A backup server"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 16,
+          "question": "Which wireless security protocol is considered strongest?",
+          "options": [
+            "WEP",
+            "WPA",
+            "WPA2",
+            "No security"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What does SIEM stand for?",
+          "options": [
+            "Security Information and Event Management",
+            "Secure Internet Email Management",
+            "Systematic Incident and Error Monitoring",
+            "Server Integrity and Encryption Module"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which of these is a private IP address range?",
+          "options": [
+            "192.168.1.1",
+            "8.8.8.8",
+            "200.100.50.25",
+            "172.32.1.1"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 19,
+          "question": "What is packet filtering?",
+          "options": [
+            "A method to inspect and allow/block packets based on rules",
+            "A way to compress data",
+            "A type of VPN",
+            "A technique for speeding up DNS"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 20,
+          "question": "Which tool is used for network scanning?",
+          "options": [
+            "Nmap",
+            "Word",
+            "Excel",
+            "Photoshop"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 21,
+          "question": "What is social engineering?",
+          "options": [
+            "Engineering for social media",
+            "Manipulating people to gain confidential information",
+            "A type of software bug",
+            "A network protocol"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 22,
+          "question": "Which is a layer 7 protocol?",
+          "options": [
+            "IP",
+            "TCP",
+            "HTTP",
+            "Ethernet"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 23,
+          "question": "What is the main risk of using default passwords?",
+          "options": [
+            "Slower performance",
+            "Easy unauthorized access",
+            "Higher cost",
+            "Better compatibility"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 24,
+          "question": "Which encryption method uses a public and private key?",
+          "options": [
+            "Symmetric encryption",
+            "Asymmetric encryption",
+            "Hashing",
+            "Encoding"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 25,
+          "question": "What does CIA stand for in cybersecurity?",
+          "options": [
+            "Central Intelligence Agency",
+            "Confidentiality, Integrity, Availability",
+            "Cyber Investigation Authority",
+            "Computer Internet Access"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which protocol is used for email security?",
+          "options": [
+            "SMTP",
+            "POP3",
+            "PGP",
+            "FTP"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What is a zero-day vulnerability?",
+          "options": [
+            "A bug known for zero days",
+            "A vulnerability unknown to the vendor with no patch available",
+            "A type of firewall rule",
+            "An attack that happens at midnight"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 28,
+          "question": "Which of these is NOT a firewall type?",
+          "options": [
+            "Packet-filtering",
+            "Proxy",
+            "Stateful",
+            "Compiler"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 29,
+          "question": "What is the role of a bastion host?",
+          "options": [
+            "To host websites",
+            "To act as a strongly secured gateway",
+            "To act as a DHCP server",
+            "To store logs"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which technology hides internal IP addresses?",
+          "options": [
+            "DNS",
+            "NAT",
+            "ARP",
+            "SSL"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Web Application Security",
+      "description": "Understand OWASP top 10 vulnerabilities, SQL injection, XSS, and secure coding.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-lock",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is SQL Injection?",
+          "options": [
+            "A way to optimize SQL queries",
+            "An attack that inserts malicious SQL code",
+            "A method to backup databases",
+            "A type of SQL join"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 2,
+          "question": "Which OWASP Top 10 vulnerability involves executing scripts in a victim's browser?",
+          "options": [
+            "Broken Authentication",
+            "Cross-Site Scripting (XSS)",
+            "Insecure Direct Object References",
+            "Security Misconfiguration"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What is the main purpose of CSRF tokens?",
+          "options": [
+            "To encrypt data",
+            "To prevent Cross-Site Request Forgery attacks",
+            "To speed up page loading",
+            "To store user preferences"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "Which HTTP header helps prevent XSS attacks?",
+          "options": [
+            "Content-Type",
+            "Content-Security-Policy",
+            "Cache-Control",
+            "Accept-Encoding"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 5,
+          "question": "What does Same-Origin Policy (SOP) protect?",
+          "options": [
+            "Prevent scripts from one origin interacting with resources from another origin",
+            "Ensure same password policy",
+            "Keep server time synchronized",
+            "Block spam emails"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 6,
+          "question": "Which attack exploits trust a user has for a particular site?",
+          "options": [
+            "Clickjacking",
+            "CSRF",
+            "Directory traversal",
+            "Buffer overflow"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "What is a secure way to store passwords?",
+          "options": [
+            "Plain text",
+            "Encrypted with reversible encryption",
+            "Hashed with salt",
+            "In a CSV file"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 8,
+          "question": "Which vulnerability allows file uploads to execute code?",
+          "options": [
+            "Insecure File Upload",
+            "XML External Entity (XXE)",
+            "Broken Access Control",
+            "Using Components with Known Vulnerabilities"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 9,
+          "question": "What does CORS stand for?",
+          "options": [
+            "Cross-Origin Resource Sharing",
+            "Centralized Origin Request System",
+            "Common Origin Resolution Service",
+            "Cross-Origin Reference Standard"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 10,
+          "question": "Which tool is commonly used for web vulnerability scanning?",
+          "options": [
+            "Nessus",
+            "Burp Suite",
+            "Wireshark",
+            "Metasploit"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "What is Clickjacking?",
+          "options": [
+            "A UI redress attack tricking users to click hidden elements",
+            "Hijacking mouse movements",
+            "Stealing click analytics",
+            "A type of DDoS"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 12,
+          "question": "Which method is safest for authentication?",
+          "options": [
+            "Session tokens with HTTPS",
+            "HTTP Basic Auth without SSL",
+            "Storing passwords in cookies",
+            "Using GET requests for login"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 13,
+          "question": "What is the purpose of input validation?",
+          "options": [
+            "Improve website design",
+            "Prevent malicious data from being processed",
+            "Increase server speed",
+            "Reduce database size"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "Which attack manipulates database queries via input fields?",
+          "options": [
+            "XSS",
+            "LDAP Injection",
+            "SQL Injection",
+            "CSRF"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 15,
+          "question": "What does XXE stand for?",
+          "options": [
+            "XML External Entity",
+            "Extended XSS Exploit",
+            "Cross-Site Execution",
+            "Extra XML Encoding"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 16,
+          "question": "Which OWASP item refers to insecure deserialization?",
+          "options": [
+            "A8",
+            "A5",
+            "A1",
+            "A3"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is a security misconfiguration example?",
+          "options": [
+            "Using default admin credentials",
+            "Encrypting all data",
+            "Having a firewall",
+            "Using latest software"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 18,
+          "question": "Which header prevents MIME-sniffing attacks?",
+          "options": [
+            "X-Content-Type-Options: nosniff",
+            "Strict-Transport-Security",
+            "X-Frame-Options",
+            "Referrer-Policy"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 19,
+          "question": "What is Broken Access Control?",
+          "options": [
+            "Users can perform actions outside their intended permissions",
+            "Broken network cables",
+            "Access logs are missing",
+            "Slow server response"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 20,
+          "question": "Which practice reduces XSS risk?",
+          "options": [
+            "Output encoding",
+            "Using longer passwords",
+            "Disabling JavaScript",
+            "Using HTTP instead of HTTPS"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What is Insecure Direct Object Reference (IDOR)?",
+          "options": [
+            "Accessing objects directly without authorization checks",
+            "A secure API design pattern",
+            "A type of encryption",
+            "A method for logging errors"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 22,
+          "question": "Which attack targets session management?",
+          "options": [
+            "Session Fixation",
+            "Phishing",
+            "DNS Spoofing",
+            "ARP Poisoning"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "What is the main risk of verbose error messages?",
+          "options": [
+            "They expose internal system details to attackers",
+            "They slow down the application",
+            "They confuse users",
+            "They increase log size"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 24,
+          "question": "Which OWASP Top 10 item includes using outdated libraries?",
+          "options": [
+            "A9: Using Components with Known Vulnerabilities",
+            "A6: Security Misconfiguration",
+            "A2: Broken Authentication",
+            "A4: XML External Entities"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 25,
+          "question": "What is the purpose of a WAF?",
+          "options": [
+            "To block malicious web traffic",
+            "To host websites",
+            "To improve SEO",
+            "To manage databases"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 26,
+          "question": "Which type of XSS stores malicious script on the server?",
+          "options": [
+            "Reflected XSS",
+            "DOM-based XSS",
+            "Stored XSS",
+            "Blind XSS"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 27,
+          "question": "What does HTTPS protect against?",
+          "options": [
+            "Eavesdropping and tampering",
+            "DDoS attacks",
+            "Malware installation",
+            "Phishing emails"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 28,
+          "question": "Which practice helps prevent CSRF?",
+          "options": [
+            "Using anti-CSRF tokens",
+            "Disabling cookies",
+            "Using HTTP GET for state changes",
+            "Storing tokens in URLs"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 29,
+          "question": "What is a JWT?",
+          "options": [
+            "JSON Web Token - used for authentication",
+            "Java Web Toolkit",
+            "JavaScript Widget Technology",
+            "Joint Web Testing"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 30,
+          "question": "Which vulnerability involves manipulating file paths?",
+          "options": [
+            "Directory Traversal",
+            "Buffer Overflow",
+            "Integer Overflow",
+            "Race Condition"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Cryptography & Encryption",
+      "description": "Master encryption algorithms, hashing, digital signatures, and SSL/TLS.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-key",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the main goal of cryptography?",
+          "options": [
+            "To hide information from unauthorized access",
+            "To compress data",
+            "To improve network speed",
+            "To manage user accounts"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which algorithm is asymmetric encryption?",
+          "options": [
+            "AES",
+            "DES",
+            "RSA",
+            "Blowfish"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What does a digital signature provide?",
+          "options": [
+            "Encryption",
+            "Authentication and integrity",
+            "Compression",
+            "Key generation"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 4,
+          "question": "Which hash function produces a 256-bit output?",
+          "options": [
+            "MD5",
+            "SHA-1",
+            "SHA-256",
+            "SHA-512"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 5,
+          "question": "What is a salt in password hashing?",
+          "options": [
+            "Random data added to passwords before hashing",
+            "A type of encryption",
+            "A decryption key",
+            "A form of checksum"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which protocol secures HTTP traffic?",
+          "options": [
+            "SSL/TLS",
+            "FTP",
+            "SNMP",
+            "ICMP"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "What is the difference between symmetric and asymmetric encryption?",
+          "options": [
+            "Symmetric uses one key, asymmetric uses two keys",
+            "Symmetric is faster but asymmetric is more secure",
+            "Both use same keys",
+            "Asymmetric is for hashing only"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 8,
+          "question": "Which encryption mode is vulnerable to padding oracle attacks?",
+          "options": [
+            "ECB",
+            "CBC",
+            "GCM",
+            "CTR"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 9,
+          "question": "What does PKI stand for?",
+          "options": [
+            "Public Key Infrastructure",
+            "Private Key Identifier",
+            "Public Key Interchange",
+            "Password Key Integration"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which algorithm is used for digital signatures in Bitcoin?",
+          "options": [
+            "ECDSA",
+            "RSA",
+            "DSA",
+            "AES"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What is a man-in-the-middle attack against encryption?",
+          "options": [
+            "Intercepting and altering communications",
+            "Brute forcing passwords",
+            "Stealing encrypted data at rest",
+            "Social engineering"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "Which cipher is a stream cipher?",
+          "options": [
+            "AES",
+            "RC4",
+            "DES",
+            "3DES"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What is the purpose of a nonce?",
+          "options": [
+            "To ensure a number is used only once",
+            "To encrypt data",
+            "To hash passwords",
+            "To generate keys"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 14,
+          "question": "Which algorithm is considered broken for encryption?",
+          "options": [
+            "DES",
+            "AES-256",
+            "RSA-2048",
+            "SHA-256"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 15,
+          "question": "What does HMAC provide?",
+          "options": [
+            "Encryption",
+            "Hashing with a secret key for authentication",
+            "Key exchange",
+            "Digital certificates"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which TLS version is currently recommended?",
+          "options": [
+            "TLS 1.0",
+            "TLS 1.1",
+            "TLS 1.2",
+            "TLS 1.3"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is steganography?",
+          "options": [
+            "Hiding messages within other files",
+            "Encrypting data",
+            "Hashing passwords",
+            "Digital signatures"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 18,
+          "question": "Which key is used to decrypt in public key cryptography?",
+          "options": [
+            "Public key",
+            "Private key",
+            "Symmetric key",
+            "Session key"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 19,
+          "question": "What is a rainbow table attack?",
+          "options": [
+            "Precomputed tables for reversing hashes",
+            "Breaking asymmetric encryption",
+            "Intercepting network traffic",
+            "Social engineering"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which algorithm provides forward secrecy?",
+          "options": [
+            "Diffie-Hellman",
+            "RSA",
+            "AES",
+            "MD5"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What is the main weakness of ECB mode?",
+          "options": [
+            "It reveals patterns in plaintext",
+            "It is too slow",
+            "It uses too much memory",
+            "It requires two keys"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 22,
+          "question": "Which organization publishes cryptographic standards?",
+          "options": [
+            "NIST",
+            "ISO",
+            "IEEE",
+            "W3C"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "What is a certificate authority (CA)?",
+          "options": [
+            "Entity that issues digital certificates",
+            "A type of encryption algorithm",
+            "A hash function",
+            "A symmetric key"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which encryption is used in WPA2?",
+          "options": [
+            "TKIP",
+            "AES-CCMP",
+            "DES",
+            "RC4"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "What is the purpose of a key exchange protocol?",
+          "options": [
+            "To securely share symmetric keys",
+            "To encrypt data at rest",
+            "To hash passwords",
+            "To sign documents"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 26,
+          "question": "Which hash is considered cryptographically broken?",
+          "options": [
+            "MD5",
+            "SHA-256",
+            "SHA-3",
+            "Bcrypt"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What does 'salt' prevent?",
+          "options": [
+            "Rainbow table attacks",
+            "Man-in-the-middle",
+            "Brute force on encryption",
+            "DDoS attacks"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "Which algorithm is used in SSL/TLS certificates?",
+          "options": [
+            "RSA",
+            "AES",
+            "Blowfish",
+            "Twofish"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 29,
+          "question": "What is hybrid encryption?",
+          "options": [
+            "Combining symmetric and asymmetric encryption",
+            "Using two symmetric algorithms",
+            "Encrypting twice with same key",
+            "Hashing before encryption"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 30,
+          "question": "Which attack exploits repeated use of the same nonce?",
+          "options": [
+            "Nonce reuse attack",
+            "Birthday attack",
+            "Padding oracle",
+            "Timing attack"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Penetration Testing",
+      "description": "Learn ethical hacking techniques, vulnerability assessment, and penetration testing.",
+      "difficulty": "Advanced",
+      "icon": "fas fa-user-secret",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the first phase of penetration testing?",
+          "options": [
+            "Reconnaissance",
+            "Exploitation",
+            "Reporting",
+            "Post-exploitation"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which tool is used for port scanning?",
+          "options": [
+            "Nmap",
+            "Burp Suite",
+            "John the Ripper",
+            "Wireshark"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What is a vulnerability assessment?",
+          "options": [
+            "Identifying and classifying security weaknesses",
+            "Exploiting systems",
+            "Social engineering",
+            "Writing malware"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 4,
+          "question": "Which phase involves gaining access to systems?",
+          "options": [
+            "Exploitation",
+            "Scanning",
+            "Reporting",
+            "Reconnaissance"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 5,
+          "question": "What is the purpose of a penetration testing report?",
+          "options": [
+            "Document findings and recommend fixes",
+            "Hide vulnerabilities",
+            "Share exploits publicly",
+            "Delete logs"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which type of test has no prior knowledge of the system?",
+          "options": [
+            "Black box",
+            "White box",
+            "Gray box",
+            "Blue box"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "What is social engineering in pen testing?",
+          "options": [
+            "Manipulating people to gain access",
+            "Scanning networks",
+            "Cracking passwords",
+            "Analyzing malware"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 8,
+          "question": "Which tool is used for password cracking?",
+          "options": [
+            "Hydra",
+            "Metasploit",
+            "Sqlmap",
+            "Nessus"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 9,
+          "question": "What is the difference between vulnerability scanning and pen testing?",
+          "options": [
+            "Scanning identifies, testing exploits vulnerabilities",
+            "Both are same",
+            "Testing is automated, scanning is manual",
+            "Scanning is more thorough"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which phase includes maintaining access?",
+          "options": [
+            "Post-exploitation",
+            "Reconnaissance",
+            "Scanning",
+            "Reporting"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What is a false positive in vulnerability scanning?",
+          "options": [
+            "A vulnerability that doesn't actually exist",
+            "A real vulnerability",
+            "A critical flaw",
+            "A type of exploit"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "Which technique avoids detection by security systems?",
+          "options": [
+            "Evasion",
+            "Brute force",
+            "Phishing",
+            "Sniffing"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What is the Metasploit framework used for?",
+          "options": [
+            "Developing and executing exploits",
+            "Network mapping",
+            "Packet analysis",
+            "Log management"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 14,
+          "question": "Which law must pen testers comply with?",
+          "options": [
+            "Legal authorization and scope agreement",
+            "No laws apply",
+            "Only international laws",
+            "Privacy laws ignored"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 15,
+          "question": "What is OSINT?",
+          "options": [
+            "Open Source Intelligence gathering",
+            "Operating System Integration",
+            "Offline Security Testing",
+            "Overt Surveillance"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which tool analyzes network traffic?",
+          "options": [
+            "Wireshark",
+            "John the Ripper",
+            "Aircrack-ng",
+            "Sqlmap"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is a phishing simulation?",
+          "options": [
+            "Testing employee awareness",
+            "Exploiting software bugs",
+            "Scanning for vulnerabilities",
+            "Cracking passwords"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 18,
+          "question": "Which phase involves cleaning up traces?",
+          "options": [
+            "Covering tracks",
+            "Reconnaissance",
+            "Scanning",
+            "Exploitation"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 19,
+          "question": "What is the purpose of a reverse shell?",
+          "options": [
+            "Gaining remote command execution",
+            "Encrypting files",
+            "Hiding malware",
+            "Sniffing traffic"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which type of pen test examines internal networks?",
+          "options": [
+            "Internal testing",
+            "External testing",
+            "Web app testing",
+            "Wireless testing"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What is a payload in exploitation?",
+          "options": [
+            "Code executed after exploitation",
+            "A scanning tool",
+            "A report template",
+            "A type of vulnerability"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 22,
+          "question": "Which tool specializes in SQL injection?",
+          "options": [
+            "Sqlmap",
+            "Nmap",
+            "Burp Suite",
+            "Metasploit"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 23,
+          "question": "What is privilege escalation?",
+          "options": [
+            "Gaining higher-level permissions",
+            "Scanning ports",
+            "Cracking hashes",
+            "Sniffing packets"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 24,
+          "question": "Which wireless attack cracks WEP?",
+          "options": [
+            "Aircrack-ng",
+            "Nessus",
+            "Hydra",
+            "John"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 25,
+          "question": "What is the final deliverable in pen testing?",
+          "options": [
+            "Report with findings and recommendations",
+            "Exploit code",
+            "Stolen data",
+            "Malware samples"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 26,
+          "question": "Which method tests for XSS vulnerabilities?",
+          "options": [
+            "Injecting script tags",
+            "Buffer overflow",
+            "Port scanning",
+            "Password spraying"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 27,
+          "question": "What is a red team exercise?",
+          "options": [
+            "Simulating adversarial attacks",
+            "Defensive security only",
+            "Compliance checking",
+            "Network monitoring"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 28,
+          "question": "Which tool is used for fuzzing?",
+          "options": [
+            "Burp Suite Intruder",
+            "Nmap",
+            "Wireshark",
+            "Hydra"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 29,
+          "question": "What is lateral movement?",
+          "options": [
+            "Moving between systems in a network",
+            "Initial access",
+            "Reconnaissance",
+            "Reporting"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 30,
+          "question": "Which certification is popular for pen testers?",
+          "options": [
+            "CEH",
+            "CISSP",
+            "CompTIA Security+",
+            "CISM"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Identity & Access Management",
+      "description": "Understand authentication, authorization, OAuth, LDAP, and IAM best practices.",
+      "difficulty": "Intermediate",
+      "icon": "fas fa-user-check",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What does IAM stand for?",
+          "options": [
+            "Identity and Access Management",
+            "Internet Access Module",
+            "Integrated Authentication Method",
+            "Identity Authorization Model"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "Which protocol is used for directory services?",
+          "options": [
+            "LDAP",
+            "OAuth",
+            "SAML",
+            "OpenID"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 3,
+          "question": "What is multi-factor authentication?",
+          "options": [
+            "Using multiple pieces of evidence to authenticate",
+            "Having multiple user accounts",
+            "Using multiple passwords",
+            "Logging in from multiple devices"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 4,
+          "question": "Which standard is used for single sign-on (SSO)?",
+          "options": [
+            "SAML",
+            "FTP",
+            "HTTP",
+            "SMTP"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 5,
+          "question": "What is the principle of least privilege?",
+          "options": [
+            "Users get minimum access needed",
+            "Users get admin rights",
+            "Everyone has full access",
+            "Access based on seniority"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "Which protocol allows delegated access to resources?",
+          "options": [
+            "OAuth",
+            "LDAP",
+            "Kerberos",
+            "RADIUS"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 7,
+          "question": "What is RBAC?",
+          "options": [
+            "Role-Based Access Control",
+            "Rule-Based Authentication Check",
+            "Random Binary Access Code",
+            "Remote Backup and Control"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 8,
+          "question": "Which service provides time-based one-time passwords?",
+          "options": [
+            "Google Authenticator",
+            "LDAP",
+            "SAML",
+            "OAuth"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 9,
+          "question": "What is a identity provider (IdP)?",
+          "options": [
+            "Entity that authenticates users",
+            "A type of firewall",
+            "A database server",
+            "A network router"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "Which protocol is used for network access authentication?",
+          "options": [
+            "RADIUS",
+            "OAuth",
+            "SAML",
+            "OpenID"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 11,
+          "question": "What is JWT used for?",
+          "options": [
+            "Securely transmitting information as JSON",
+            "Encrypting databases",
+            "Hashing passwords",
+            "Managing firewalls"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 12,
+          "question": "Which IAM feature ensures users cannot deny actions?",
+          "options": [
+            "Non-repudiation",
+            "Authentication",
+            "Authorization",
+            "Accounting"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "What is SCIM?",
+          "options": [
+            "System for Cross-domain Identity Management",
+            "Secure Cloud Identity Module",
+            "Simple Certificate Issuance Mechanism",
+            "Standard Cryptographic Identity Method"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 14,
+          "question": "Which attack targets authentication mechanisms?",
+          "options": [
+            "Credential stuffing",
+            "DDoS",
+            "Man-in-the-browser",
+            "DNS spoofing"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 15,
+          "question": "What is the difference between authentication and authorization?",
+          "options": [
+            "Authentication verifies identity, authorization grants access",
+            "Both are same",
+            "Authorization verifies, authentication grants",
+            "Neither involves access"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "Which protocol uses tickets for authentication?",
+          "options": [
+            "Kerberos",
+            "OAuth",
+            "SAML",
+            "OpenID Connect"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 17,
+          "question": "What is a federated identity?",
+          "options": [
+            "Identity shared across multiple systems",
+            "A local user account",
+            "A type of password",
+            "An encryption key"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 18,
+          "question": "Which IAM process tracks user activities?",
+          "options": [
+            "Auditing",
+            "Authentication",
+            "Authorization",
+            "Provisioning"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 19,
+          "question": "What is privilege creep?",
+          "options": [
+            "Users accumulate excessive permissions over time",
+            "Reducing privileges",
+            "A type of malware",
+            "Authentication failure"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 20,
+          "question": "Which standard is for authorization delegation?",
+          "options": [
+            "OAuth",
+            "LDAP",
+            "Kerberos",
+            "RADIUS"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 21,
+          "question": "What is the purpose of MFA?",
+          "options": [
+            "Increase security by requiring multiple proofs",
+            "Simplify login process",
+            "Reduce password length",
+            "Eliminate passwords"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 22,
+          "question": "Which tool manages IAM in AWS?",
+          "options": [
+            "AWS IAM",
+            "Azure AD",
+            "Google Cloud IAM",
+            "Okta"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 23,
+          "question": "What is just-in-time access?",
+          "options": [
+            "Temporary privileges granted when needed",
+            "Permanent admin access",
+            "No access control",
+            "Access based on location"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 24,
+          "question": "Which protocol is commonly used for SSO in enterprises?",
+          "options": [
+            "SAML",
+            "FTP",
+            "HTTP",
+            "Telnet"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 25,
+          "question": "What is a password vault?",
+          "options": [
+            "Securely stores passwords",
+            "A type of encryption",
+            "A network device",
+            "A backup server"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 26,
+          "question": "Which attack uses stolen cookies?",
+          "options": [
+            "Session hijacking",
+            "Phishing",
+            "DDoS",
+            "SQL injection"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "id": 27,
+          "question": "What is biometric authentication?",
+          "options": [
+            "Using physical traits like fingerprints",
+            "Using passwords",
+            "Using tokens",
+            "Using security questions"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "id": 28,
+          "question": "Which IAM practice reviews user permissions?",
+          "options": [
+            "Access recertification",
+            "Password rotation",
+            "Log analysis",
+            "Encryption"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 29,
+          "question": "What is OpenID Connect?",
+          "options": [
+            "Authentication layer on top of OAuth",
+            "A directory protocol",
+            "A hashing algorithm",
+            "A firewall rule"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "id": 30,
+          "question": "Which risk occurs with shared accounts?",
+          "options": [
+            "Lack of accountability",
+            "Improved security",
+            "Easier auditing",
+            "Better performance"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    }
+  ]
+}

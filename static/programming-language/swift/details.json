@@ -1,0 +1,532 @@
+{
+  "interview_index": [
+    { "key": "swift_intro", "title": "Swift Overview" },
+    { "key": "swift_syntax", "title": "Syntax & Types" },
+    { "key": "swift_tooling", "title": "SPM & Tooling" },
+    { "key": "swift_concurrency", "title": "Concurrency (async/await & actors)" },
+    { "key": "swift_protocols_generics", "title": "Protocols & Generics" },
+    { "key": "swift_error_handling", "title": "Error Handling" },
+    { "key": "swift_optionals_collections", "title": "Optionals & Collections" },
+    { "key": "swift_memory_arc", "title": "Memory Management & ARC" },
+    { "key": "swift_server", "title": "Swift on Server (Vapor, Kitura)" },
+    { "key": "swift_ui", "title": "SwiftUI & UI Patterns" },
+    { "key": "swift_testing", "title": "Testing & Tooling" },
+    { "key": "swift_debug", "title": "Debugging & Profiling" },
+    { "key": "swift_performance", "title": "Performance & Optimization" },
+    { "key": "swift_interop_objc", "title": "Interop with Objective-C" },
+    { "key": "swift_deployment", "title": "Build & Deployment" },
+    { "key": "swift_best_practices", "title": "Best Practices & Patterns" }
+  ],
+
+  "swift_intro": {
+    "title": "Swift Overview",
+    "summary": "A modern, type-safe language by Apple for iOS, macOS, server and more.",
+    "details": "Swift is a modern, safe, high-performance language designed for Apple platforms and server-side use. Practical checklist and deep-dive topics:\n\n- Toolchains & environments: Xcode for Apple targets, Swift toolchain for Linux and CI. Manage multiple toolchains via xcode-select or swiftenv.\n- Language core: value semantics (structs/enums), optionals, protocols, generics, protocol extensions and strong type system. Favor clear API boundaries and prefer immutability.\n- Concurrency & safety: async/await, Task, TaskGroup and actors for structured concurrency and data race protection.\n- Interop & migration: bridging with Objective-C, using @objc, dealing with Foundation types and memory semantics across language boundaries.\n- Ecosystem & packaging: Swift Package Manager (SPM) for libraries/executables, SwiftLint/format for style, DocC for docs, and common CI patterns.\n\nStudy path: basics (syntax/types) → Optionals/Collections → Protocols & Generics → Concurrency → Tooling/Deployment. Keep a small sample app and iterate with tests and CI.",
+    "cheat": "// Quick commands\nswift --version\nswift build -c debug\nswift build -c release\nswift test\nswift run <executable>\n\n// Local dev tips\n- Use `swift package generate-xcodeproj` only if older tooling; prefer Xcode's native SPM support.\n- Use `swift build -c release -Xswiftc -Osize` for size-optimized builds.\n- Keep Package.swift platforms minimal (e.g., iOS 14+) to reduce compatibility issues.",
+    "examples": [
+      { "code": "func greet(_ name: String) -> String { \"Hello, \\(name)\" }" }
+    ],
+    "interview": [
+      { "q": "What is Swift?", "a": "A compiled, modern language by Apple for apps and server-side code." },
+      { "q": "Why prefer Swift over Objective-C for new projects?", "a": "Safer types, optionals, modern syntax and better ergonomics." },
+      { "q": "What are value types?", "a": "Structs/enums copied on assignment; they promote immutability." },
+      { "q": "What is SPM?", "a": "Swift Package Manager for building and managing packages." },
+      { "q": "What does ABI stability mean?", "a": "Binary compatibility across Swift versions on supported platforms." },
+      { "q": "What are optionals?", "a": "Types that explicitly model possible absence of a value (T?)." },
+      { "q": "What is protocol-oriented programming?", "a": "Design approach using protocols and extensions to share behavior." },
+      { "q": "What is a closure?", "a": "An inline, first-class function capturing its environment." },
+      { "q": "How to run tests?", "a": "Use `swift test` or Xcode's test runner." },
+      { "q": "What is Codable?", "a": "Protocol for easy encoding/decoding between types and formats like JSON." },
+      { "q": "What platforms support Swift?", "a": "iOS, macOS, tvOS, watchOS, and Linux for server-side Swift." },
+      { "q": "What is optional chaining?", "a": "Safe access of properties/methods on optionals using `?.`." },
+      { "q": "What is the REPL for Swift?", "a": "An interactive prompt via `swift` for quick experiments." },
+      { "q": "What are enums with associated values?", "a": "Enums that can carry data per case, like ADTs." },
+      { "q": "When to use classes vs structs?", "a": "Use classes for identity/inheritance, structs for value semantics and immutability." },
+      { "q": "What is type inference?", "a": "Compiler deduces types so many annotations are optional." },
+      { "q": "What are access control levels?", "a": "open, public, internal, fileprivate, private control visibility." },
+      { "q": "What is the Swift evolution process?", "a": "Community-driven proposal system for language changes." },
+      { "q": "How are generics helpful?", "a": "They allow reusable, type-safe code for many types." },
+      { "q": "What is the best way to learn Swift concurrency?", "a": "Start with async/await, Tasks, TaskGroup and actors patterns." }
+    ]
+  },
+
+  "swift_syntax": {
+    "title": "Syntax & Types",
+    "summary": "Basic syntax, optionals, pattern matching and control flow.",
+    "details": "Essential syntax & typing patterns with pragmatic recommendations:\n\n- Bindings: use `let` by default; use `var` only when mutation is necessary. Prefer small scopes for mutability.\n- Optionals: prefer `guard let` for early exits, `if let` for local unwraps, `??` for defaults, and optional chaining `?.` for safe accesses. Avoid force-unwraps except in tests or when invariant is guaranteed.\n- Control flow: use `switch` exhaustively with enums; prefer pattern matching and `where` clauses for clarity.\n- Functions: annotate return types for public APIs; use default arguments, variadics and `inout` sparingly.\n- Closures: annotate capture lists (`[weak self]`) explicitly when closures can outlive scope to avoid retain cycles.\n- Small idioms: computed properties, property observers (willSet/didSet), tuples for small grouped returns and typealiases to improve readability.\n\nStyle tips: prefer clear names, keep functions < 30 lines, extract complex logic into small helpers, add unit tests for edge cases.",
+    "cheat": "// Common snippets\nlet name: String = \"Alice\"\nvar count = 0\n\n// Optional unwrap\nguard let url = URL(string: s) else { return }\n\n// Switch with enum\nenum Result { case success(Int), failure(Error) }\nswitch result { case .success(let v): ... case .failure(let e): ... }\n\n// Closure capture\nsomeAsyncCall { [weak self] in self?.doWork() }\n\n// Quick mapping\nlet doubled = [1,2,3].map { $0 * 2 }",
+    "examples": [
+      { "code": "let a = 5 \nvar b = 10\nlet sum = a + b" }
+    ],
+    "interview": [
+      { "q": "What are let and var?", "a": "let declares a constant; var declares a mutable variable." },
+      { "q": "How to safely unwrap an Optional?", "a": "Use if let or guard let, optional chaining, or nil-coalescing." },
+      { "q": "What is pattern matching in Swift?", "a": "switch supports matching values, cases, ranges and where clauses." },
+      { "q": "How to write a closure?", "a": " { (params) -> Return in body } or shorthand $0, $1." },
+      { "q": "What is a tuple?", "a": "A lightweight grouping of values, e.g., (Int, String)." },
+      { "q": "How to declare a function with default params?", "a": "func f(x: Int = 0) { }" },
+      { "q": "What is the nil-coalescing operator?", "a": "a ?? b returns a if not nil, otherwise b." },
+      { "q": "How to create a computed property?", "a": "var area: Double { width * height }" },
+      { "q": "What is a throwing function?", "a": "A function marked throws that can throw errors." },
+      { "q": "How to mark a method mutating?", "a": "Use mutating on struct methods that change self." },
+      { "q": "What is a typealias?", "a": "Alias a complex type for clarity." },
+      { "q": "What does fileprivate do?", "a": "Restricts visibility to the same file." },
+      { "q": "How to use where in switch?", "a": "case let x where x > 0: ..." },
+      { "q": "What is a protocol?", "a": "A blueprint of methods/properties a type can conform to." },
+      { "q": "How to create an enum with raw values?", "a": "enum E: Int { case a = 1 }" },
+      { "q": "What is lazy var?", "a": "A property initialized on first access." },
+      { "q": "When to use generics?", "a": "When a function/type must work across multiple types safely." },
+      { "q": "What are property observers?", "a": "willSet/didSet for reacting to property changes." },
+      { "q": "What is a protocol extension?", "a": "Provide default implementations for protocol methods." },
+      { "q": "How to pattern-bind in for loops?", "a": "for case let .some(x) in array { ... }" }
+    ]
+  },
+
+  "swift_tooling": {
+    "title": "SPM & Tooling",
+    "summary": "Swift Package Manager, Xcode, linters and formatters.",
+    "details": "Tooling deep-dive and CI-ready practices:\n\n- SPM: Package.swift defines products, targets and dependencies. Prefer semantic versioning for dependencies.\n- Xcode: integrate SPM packages via File > Swift Packages for app projects; use Xcode Previews for UI iteration.\n- Linters/Formatters: swiftlint for enforceable rules, swift-format for formatting. Add pre-commit hooks and CI steps to enforce.\n- Editors: use sourcekit-lsp for code completion and diagnostics in editors like VSCode.\n- CI: cache SPM artifacts (.build and .build/checkouts), run swift test and lint in separate stages, publish artifacts (binaries/archives) to package registries.\n\nPackaging: provide clear README, license and example usage in packages. Use binary targets (XCFramework) for prebuilt libs when needed.",
+    "cheat": "// SPM commands\nswift package init --type library\nswift build\nswift test\nswift run <target>\n\n// CI tips\n- Cache ~/.swiftpm and .build\n- Use `swift test --parallel` for faster test runs\n- Upload artifacts (dSYMs) for releases and crash symbolication",
+    "examples": [
+      { "code": "swift package init --type library" }
+    ],
+    "interview": [
+      { "q": "What is Package.swift?", "a": "The manifest file that defines package metadata, targets and dependencies." },
+      { "q": "How to add a dependency with SPM?", "a": "Add its Git URL and version to dependencies in Package.swift." },
+      { "q": "How to run tests with SPM?", "a": "swift test" },
+      { "q": "What is swiftlint?", "a": "A linter enforcing style and best practices." },
+      { "q": "How to format code automatically?", "a": "Use swift-format or Xcode’s built-in formatter." },
+      { "q": "How to run an executable target?", "a": "swift run <target-name>" },
+      { "q": "What is a target in SPM?", "a": "A build unit: library, executable or test target." },
+      { "q": "How to generate Xcode project from SPM?", "a": "Xcode integrates SPM directly; `swift package generate-xcodeproj` is legacy." },
+      { "q": "How to pin versions in SPM?", "a": "Specify exact version or range in Package.swift dependencies." },
+      { "q": "What is a binary target?", "a": "Prebuilt artifacts (XCFramework) referenced in a manifest." },
+      { "q": "How to run tests in parallel?", "a": "Use `swift test --parallel`." },
+      { "q": "How to add resources to SPM target?", "a": "Use `.process` resources in the target definition." },
+      { "q": "How to inspect dependency graph?", "a": "swift package show-dependencies" },
+      { "q": "How to integrate SPM in CI?", "a": "Run swift build/test and cache .build and SPM caches." },
+      { "q": "What is sourcekit-lsp?", "a": "Language server for Swift used by editors for code intelligence." },
+      { "q": "How to debug SPM packages in Xcode?", "a": "Add package to an Xcode project and set breakpoints in package source." },
+      { "q": "What platforms can Package.swift declare?", "a": "Platforms like iOS, macOS, tvOS with minimum versions." },
+      { "q": "How to create an executable package?", "a": "Define an executable target and run swift run." },
+      { "q": "How to publish a Swift package?", "a": "Tag a repository release and make sure Package.swift is correct." },
+      { "q": "How to manage credentials in CI?", "a": "Store tokens as secure environment variables or secrets." }
+    ]
+  },
+
+  "swift_concurrency": {
+    "title": "Concurrency (async/await & actors)",
+    "summary": "Structured concurrency, async/await, tasks, actors and MainActor.",
+    "details": "Concurrency best practices and anti-patterns:\n\n- Structured concurrency: prefer Task and TaskGroup for scoping concurrent work; they provide automatic cancellation propagation.\n- Actors: use actors to protect shared mutable state; avoid leaking actor-isolated data to non-isolated contexts.\n- MainActor: annotate UI-touching code with `@MainActor` or use `MainActor.run` to schedule work on main thread.\n- Continuations: wrap callback-based APIs with `withCheckedContinuation` or `withCheckedThrowingContinuation` for safe bridging to async/await.\n- Cancellation: make long-running work cooperative—check `Task.isCancelled` regularly and release resources.\n- Performance: avoid heavy CPU work on the actor; offload to detached tasks or worker pools.\n\nTesting: write async XCTest cases and simulate cancellations/timeouts to ensure robustness.",
+    "cheat": "// Async examples\nfunc fetchData() async throws -> Data { ... }\nTask { do { let d = try await fetchData(); print(d) } catch { } }\n\n// TaskGroup\nawait withTaskGroup(of: Int.self) { group in for i in 0..<4 { group.addTask { doWork(i) } } for await r in group { print(r) } }\n\n// Actor\nactor Counter { private var value = 0; func inc() { value += 1 } func get() -> Int { value } }",
+    "examples": [
+      { "code": "await withTaskGroup(of: Int.self) { group in ... }" }
+    ],
+    "interview": [
+      { "q": "What is async/await in Swift?", "a": "Language syntax to write asynchronous code that looks sequential." },
+      { "q": "What is an actor?", "a": "A reference type that serializes access to its mutable state." },
+      { "q": "What is a Task?", "a": "A unit of asynchronous work that can be awaited or cancelled." },
+      { "q": "What is TaskGroup?", "a": "Structured concurrency primitive to run multiple child tasks and collect results." },
+      { "q": "What is MainActor?", "a": "A global actor ensuring code runs on the main thread." },
+      { "q": "How to cancel a task?", "a": "Call cancel() on the Task and check Task.isCancelled in the body." },
+      { "q": "What are continuations?", "a": "Bridges to convert callback APIs into async/await using withCheckedContinuation." },
+      { "q": "What is structured concurrency?", "a": "Parent-child task hierarchy managing lifetimes and cancellations." },
+      { "q": "When to use actor vs lock?", "a": "Prefer actors for safety in Swift concurrency; locks are lower-level." },
+      { "q": "What is Task.detached?", "a": "Creates a task not inheriting the current actor/priority context." },
+      { "q": "How to handle timeouts?", "a": "Use Task.sleep or implement timeout logic with TaskGroups and cancellation." },
+      { "q": "What is actor reentrancy?", "a": "Actor code can be reentered across awaits; be mindful of invariants." },
+      { "q": "How to share state safely?", "a": "Use immutable values or actors for mutable shared state." },
+      { "q": "How to test async code?", "a": "Use XCTest async tests and `await` the operations under test." },
+      { "q": "What is cooperative cancellation?", "a": "Tasks must check isCancelled and stop work cooperatively." },
+      { "q": "How to use TaskGroup with error handling?", "a": "Propagate errors and cancel remaining tasks if needed." },
+      { "q": "How to bridge old APIs to async?", "a": "Wrap callback-based APIs using continuations." },
+      { "q": "What is global actor?", "a": "An actor whose instance is globally available to serialize access." },
+      { "q": "How to avoid priority inversion?", "a": "Avoid blocking high-priority tasks on low-priority work; use priorities carefully." },
+      { "q": "Should heavy CPU work run in Tasks?", "a": "CPU-bound work should run off the main actor, possibly in detached tasks or worker pools." }
+    ]
+  },
+
+  "swift_protocols_generics": {
+    "title": "Protocols & Generics",
+    "summary": "Protocol-oriented design, associated types and generic constraints.",
+    "details": "Protocol & generic design patterns:\n\n- Protocols: define minimal interfaces; prefer small, focused protocols over large ones (Interface Segregation).\n- Protocol extensions: provide shared default implementations but avoid hiding behavior that callers might expect to override.\n- Associated types vs generics: use associatedtype in protocols where the conforming type decides the concrete type; use generics for functions and types that should be parameterized by callers.\n- Opaque types: use `some Protocol` to hide concrete return types while preserving performance and type safety.\n- Type erasure: implement type-erasure wrappers when different concrete generic types must be stored homogeneously (e.g., AnySequence, AnyPublisher).\n\nPerformance/compatibility: prefer concrete types on hot paths to allow specialization; measure impact before refactoring.",
+    "cheat": "// Protocol example\nprotocol Repository { associatedtype Model; func get(id: Int) -> Model? }\n\n// Generic function\nfunc find<T: Equatable>(_ arr: [T], _ value: T) -> Int? { arr.firstIndex(of: value) }\n\n// Opaque return\nfunc makeSequence() -> some Sequence { return [1,2,3] }",
+    "examples": [
+      { "code": "protocol Repository { associatedtype Model; func get(id: Int) -> Model? }" }
+    ],
+    "interview": [
+      { "q": "What is a protocol?", "a": "A blueprint of methods and properties a type can implement." },
+      { "q": "What is associatedtype?", "a": "A placeholder type in a protocol that conforming types specify." },
+      { "q": "What is opaque return type (some)?", "a": "Hides the concrete return type while preserving performance." },
+      { "q": "What is type erasure?", "a": "Technique to hide concrete generic types behind a protocol box." },
+      { "q": "When to use generics?", "a": "When you need type-safe reuse across different types." },
+      { "q": "How to constrain generics?", "a": "Use T: Protocol or where clauses for complex constraints." },
+      { "q": "What is protocol composition?", "a": "Combine multiple protocols with & in type annotations." },
+      { "q": "How to avoid code duplication with generics?", "a": "Extract generic helper functions or constrained protocol extensions." },
+      { "q": "What is conditional conformance?", "a": "Generic types conform only when their parameters meet constraints." },
+      { "q": "How to implement Sequence?", "a": "Provide makeIterator and implement IteratorProtocol with next()." },
+      { "q": "What is Self in protocols?", "a": "Refers to the conforming type itself; affects type requirements." },
+      { "q": "Why use protocol extensions?", "a": "Provide default implementations and shared behavior." },
+      { "q": "What is a generic typealias?", "a": "Alias for complex generic types to improve readability." },
+      { "q": "How to debug complex generic errors?", "a": "Simplify with typealias and add constraints incrementally." },
+      { "q": "When to use class-bound protocols?", "a": "When protocol requires reference semantics (use AnyObject)." },
+      { "q": "How to expose generic APIs in frameworks?", "a": "Use protocols or opaque return types for stable ABI." },
+      { "q": "What is covariance concern?", "a": "Swift generics are invariant; be careful with collections of supertypes/subtypes." },
+      { "q": "How to store heterogeneous values conforming to protocol?", "a": "Use type erasure wrappers." },
+      { "q": "How to test generic code?", "a": "Write tests with concrete types exercising generic paths." },
+      { "q": "What are associatedtype requirements vs generics?", "a": "associatedtype makes protocol require a type per-conformer; generics parameterize functions/types." }
+    ]
+  },
+
+  "swift_error_handling": {
+    "title": "Error Handling",
+    "summary": "Throwing functions, try/await, Result and recoverable errors.",
+    "details": "Errors & recoverability patterns:\n\n- Use `throws` for recoverable problems; map low-level errors to domain-specific error enums.\n- Distinguish between recoverable errors (use throws) and programmer errors (assert/fatalError in dev only).\n- Use `try?` when failing silently is acceptable and `try!` only in tests or guarded contexts.\n- Use Result<T,Error> for callback-based APIs, making success/failure explicit and composable.\n- Logging & telemetry: record errors with context and user-safe messages; avoid leaking sensitive details.\n\nTesting: assert thrown errors with `XCTAssertThrowsError` and assert error cases and messages.",
+    "cheat": "// Throwing example\nenum NetworkError: Error { case unreachable, timeout, unexpected(code: Int) }\nfunc fetch() throws -> Data { throw NetworkError.unreachable }\n\n// Calling\ndo { let data = try fetch() } catch { print(\"error: \\(error)\") }\n\n// Continuation wrap\nfunc fetchOld(_ completion:@escaping (Data?,Error?)->Void) { ... }\nfunc fetchAsync() async throws -> Data { try await withCheckedThrowingContinuation { cont in fetchOld { d,e in if let e=e { cont.resume(throwing:e) } else { cont.resume(returning:d!) } } } }",
+    "examples": [
+      { "code": "enum MyError: Error { case notFound }\nfunc load() throws -> String { throw MyError.notFound }" }
+    ],
+    "interview": [
+      { "q": "How to declare a throwing function?", "a": "Add `throws` to the function signature." },
+      { "q": "What does try? do?", "a": "Converts thrown errors to an optional result (nil on error)." },
+      { "q": "What is Result<T,Error> used for?", "a": "Represent success/failure in return values for callbacks." },
+      { "q": "How to rethrow errors?", "a": "Use `rethrows` for functions calling throwing closures." },
+      { "q": "Why avoid try! in production?", "a": "It will crash on error; unsafe for recoverable conditions." },
+      { "q": "How to provide user messages for errors?", "a": "Map errors to localized user-facing strings, not raw error descriptions." },
+      { "q": "How to add context to errors?", "a": "Wrap lower-level errors into domain-specific errors with context." },
+      { "q": "How to test error paths?", "a": "Use XCTAssertThrowsError and verify error cases." },
+      { "q": "How to handle errors in async functions?", "a": "Use try await and catch in calling code." },
+      { "q": "What is try! used for?", "a": "Force-unwrap a throwing call; use only when certain no error will occur." },
+      { "q": "How to normalize errors?", "a": "Map multiple underlying errors to a unified domain Error type." },
+      { "q": "How to convert NSError to Swift Error?", "a": "Bridge via NSError and wrap into Swift enums if needed." },
+      { "q": "When to use fatalError?", "a": "For unrecoverable programmer errors during development." },
+      { "q": "How to propagate errors upward?", "a": "Declare throws on functions and let callers handle or propagate." },
+      { "q": "What are best practices for API error contracts?", "a": "Define structured errors with codes and consistent payloads." },
+      { "q": "How to debug thrown errors?", "a": "Inspect the thrown Error in catch and log stack/context." },
+      { "q": "What is the cause of hidden errors?", "a": "Using try? silently converts errors to nil; prefer explicit handling." },
+      { "q": "How to recover from errors gracefully?", "a": "Provide fallback values or retry strategies where appropriate." },
+      { "q": "How to represent non-recoverable errors?", "a": "Use assertions or fatalError during development to signal bugs." },
+      { "q": "How to design error enums?", "a": "Include cases, associated data and conformance to LocalizedError for messages." }
+    ]
+  },
+
+  "swift_optionals_collections": {
+    "title": "Optionals & Collections",
+    "summary": "Optionals, arrays, dictionaries, sets and sequence operations.",
+    "details": "Collections & optional handling — pragmatic patterns:\n\n- Prefer strongly-typed collections ([T], [K:V], Set<T]); choose structures to match access patterns (ordered vs keyed vs unique).\n- Use `compactMap` to transform while dropping nils; use `flatMap` for flattening nested arrays.\n- Use `lazy` when chaining heavy transforms on big collections to avoid intermediate allocations.\n- For streaming or very large datasets, use sequence generators or custom IteratorProtocol to process in chunks.\n- Use `ArraySlice` to avoid copying when working with subranges; convert to Array when needing independent storage.\n\nPerformance: prefer in-place mutation (sort, removeAll(keepingCapacity:)) in hot loops and avoid frequent bridging to Objective-C collections.",
+    "cheat": "// Common patterns\nlet numbers = [1,2,3]\nlet doubled = numbers.map { $0 * 2 }\nlet maybe: [Int?] = [1, nil, 3]\nlet compact = maybe.compactMap { $0 }\n\n// Lazy chain\nlet seq = (0..<1_000_000).lazy.map { $0 * 2 }.filter { $0 % 3 == 0 }.prefix(100)\n",
+    "examples": [
+      { "code": "let nums = [1,2,3]\nlet doubled = nums.map { $0 * 2 }" }
+    ],
+    "interview": [
+      { "q": "What does compactMap do?", "a": "Transforms and removes nils from a sequence, returning non-optional results." },
+      { "q": "When to use Set vs Array?", "a": "Use Set for fast membership and uniqueness; Array for ordered elements." },
+      { "q": "What is lazy evaluation for collections?", "a": "Defers computation and avoids intermediate allocations when chaining operations." },
+      { "q": "How to combine two arrays element-wise?", "a": "Use zip(a,b).map { ... }" },
+      { "q": "How to get index and value while iterating?", "a": "Use enumerated() to get (index, value) pairs." },
+      { "q": "What is ArraySlice?", "a": "A view into part of an array that shares storage with the original." },
+      { "q": "How to group elements by key?", "a": "Use Dictionary(grouping:by:) initializer." },
+      { "q": "When to use Dictionary vs Map of arrays?", "a": "Use Dictionary for direct keyed lookup; choose structure to match access patterns." },
+      { "q": "How to remove duplicates but keep order?", "a": "Track seen elements via Set while filtering the array." },
+      { "q": "What is reduce used for?", "a": "Combine elements of a sequence into a single result." },
+      { "q": "What is flatMap behaviour change to compactMap?", "a": "flatMap used to flatten sequences; compactMap removes nils—API evolved." },
+      { "q": "How to check membership quickly?", "a": "Use a Set for O(1) membership checks." },
+      { "q": "When to use lazy.map then first(where:)?", "a": "To avoid creating full transformed arrays and stop early." },
+      { "q": "How to sort an array in place?", "a": "Use sort() for in-place, sorted() to return new array." },
+      { "q": "Why prefer typed collections?", "a": "Stronger compile-time checks and clearer intent." },
+      { "q": "How to convert Dictionary keys to array?", "a": "Array(dict.keys) or dict.keys.map { $0 }" },
+      { "q": "How to remove elements while iterating?", "a": "Use filter to create a new collection or iterate backward when mutating." },
+      { "q": "What is sequence vs collection?", "a": "Collection supports multi-pass traversal and count; Sequence may be single-pass." },
+      { "q": "How to map dictionary values?", "a": "Use mapValues to transform values keeping keys." },
+      { "q": "How to handle large datasets efficiently?", "a": "Use lazy sequences, streaming and chunked processing to limit memory use." }
+    ]
+  },
+
+  "swift_memory_arc": {
+    "title": "Memory Management & ARC",
+    "summary": "Reference counting, retain cycles, weak/unowned references and memory profiling.",
+    "details": "Memory, ARC and leak avoidance:\n\n- ARC applies to class instances. Use `weak`/`unowned` captures to avoid retain cycles in closures and delegate patterns.\n- Prefer value types (structs/enums) to minimize ARC overhead and increase thread-safety.\n- Use Instruments (Allocations, Leaks, Zombies) to detect leaks and unexpected retention.\n- Use `@autoreleasepool` when bridging heavy Obj-C allocations inside loops to free memory earlier.\n- For high-frequency allocations, reuse buffers (Data) or use `UnsafeMutableRawPointer` carefully in performance-critical sections.\n\nDebugging: test deinit behavior with weak references and ensure resources are released in integration scenarios.",
+    "cheat": "// Break cycles\nclass A { var b: B? }\nclass B { weak var a: A? }\n\n// Closure capture\nfetch { [weak self] result in self?.handle(result) }\n\n// Instruments quickstart\n- Run Allocations to see top allocators, use Leaks to detect leaked objects.",
+    "examples": [
+      { "code": "class A { var b: B? }\nclass B { weak var a: A? }" }
+    ],
+    "interview": [
+      { "q": "What is ARC?", "a": "Automatic Reference Counting manages object lifetimes by counting strong references." },
+      { "q": "What causes retain cycles?", "a": "Mutual strong references between objects or closures capturing self strongly." },
+      { "q": "When to use weak?", "a": "Use weak when the referenced object can become nil and you want to avoid retaining it." },
+      { "q": "When to use unowned?", "a": "Use unowned when you are sure the reference will never be nil during use." },
+      { "q": "How to break closure retain cycles?", "a": "Capture self as [weak self] or [unowned self] in the closure." },
+      { "q": "How to detect leaks?", "a": "Use Instruments Allocations and Leaks tools." },
+      { "q": "What is an autoreleasepool?", "a": "Mechanism to release autoreleased Objective-C objects earlier in loops." },
+      { "q": "Why prefer structs to reduce ARC overhead?", "a": "Structs are value types and avoid heap allocations for many cases." },
+      { "q": "What is copy-on-write (COW)?", "a": "Optimization where copies share storage until mutation occurs." },
+      { "q": "How to profile allocations?", "a": "Use Allocations instrument and filter by responsible callers." },
+      { "q": "Can ARC cause performance issues?", "a": "Excessive allocations and deallocations can cost CPU and memory churn." },
+      { "q": "How to handle large buffers?", "a": "Use Data with contiguous storage, reuse buffers and avoid frequent allocations." },
+      { "q": "What is object resurrection?", "a": "Reattaching references during deinit; generally avoid and treat as bug." },
+      { "q": "How to test for deinit in unit tests?", "a": "Use weak references and assert they become nil after scope exit." },
+      { "q": "Why avoid global singletons for large objects?", "a": "They prolong lifetime and increase memory usage across app lifecycle." },
+      { "q": "What is bridging overhead?", "a": "Conversions between Swift and Foundation types can allocate; minimize in hot paths." },
+      { "q": "How to use Instruments to find retain cycles?", "a": "Use the Leaks and Cycles tools and check reference graph." },
+      { "q": "When to use unowned optional pattern?", "a": "Rare; prefer weak optionals to avoid crashes if lifecycle assumptions break." },
+      { "q": "How to reduce memory footprint?", "a": "Release caches on memory warnings and use lazy initializations." },
+      { "q": "What is memory pressure handling?", "a": "Respond to system notifications by freeing caches and reducing allocations." }
+    ]
+  },
+
+  "swift_server": {
+    "title": "Swift on Server (Vapor, Kitura)",
+    "summary": "Server-side Swift frameworks, routing, and deployment patterns.",
+    "details": "Server-side Swift practical cheat-sheet:\n\n- Frameworks: Vapor, Kitura and Perfect provide routing, middleware and ORM layers; pick one and standardize across services.\n- Concurrency: use async handlers and non-blocking drivers for DB and HTTP clients; use connection pooling for database access.\n- Configuration: store secrets in env variables or secret managers; avoid embedding secrets in images.\n- Observability: expose /health and /metrics endpoints, emit structured logs and traces (OpenTelemetry) and integrate with APM.\n- Deployment: build release binaries, containerize with multi-stage Dockerfiles and orchestrate with Kubernetes or systemd.\n\nSecurity/ops: enable TLS, rotate keys, run security scans and enforce run-as-non-root policies in containers.",
+    "cheat": "// Vapor quick commands\nvapor new MyApp\nswift build -c release\nvapor run serve\n\n// Health example\napp.get(\"/health\") { req in return \"ok\" }",
+    "examples": [
+      { "code": "app.get(\"hello\") { req in \"Hello\" }" }
+    ],
+    "interview": [
+      { "q": "What is Vapor?", "a": "A popular server-side Swift framework for web apps and APIs." },
+      { "q": "How to structure Vapor routes?", "a": "Define routes in configure or routes files and group middleware." },
+      { "q": "How to handle DB migrations?", "a": "Use Fluent migrations to version schema changes." },
+      { "q": "How to manage secrets?", "a": "Store secrets in env vars or a secret manager, not in source." },
+      { "q": "How to scale server apps?", "a": "Run multiple stateless instances behind a load balancer and use external caches." },
+      { "q": "How to implement health checks?", "a": "Expose /health and readiness endpoints for orchestration." },
+      { "q": "Why use connection pooling?", "a": "To reuse DB connections and reduce connection overhead." },
+      { "q": "How to serve static files?", "a": "Serve via a dedicated static server or CDN for performance." },
+      { "q": "How to handle long-running tasks?", "a": "Offload to background workers or job queues." },
+      { "q": "How to secure endpoints?", "a": "Use TLS, auth middleware and input validation." },
+      { "q": "How to monitor server metrics?", "a": "Emit metrics and logs to monitoring systems (Prometheus, APM)." },
+      { "q": "How to test routes?", "a": "Use framework test helpers or integration tests with a test client." },
+      { "q": "How to deploy server Swift apps?", "a": "Build a release binary, containerize and deploy via orchestrator." },
+      { "q": "How to handle file uploads?", "a": "Stream uploads and store in object storage to avoid memory pressure." },
+      { "q": "What is content negotiation?", "a": "Serve formats based on Accept header and requested content types." },
+      { "q": "How to handle CORS?", "a": "Configure CORS middleware with allowed origins and methods." },
+      { "q": "How to rollback migrations?", "a": "Provide down migrations or migration rollback scripts with backups." },
+      { "q": "How to secure admin routes?", "a": "Restrict by network, auth and use strong credentials." },
+      { "q": "What are best practices for logging?", "a": "Structured logs, correlation IDs and avoid logging secrets." },
+      { "q": "How to achieve zero-downtime deploys?", "a": "Use rolling updates, draining connections and health checks." }
+    ]
+  },
+
+  "swift_ui": {
+    "title": "SwiftUI & UI Patterns",
+    "summary": "Declarative UI, state management, bindings and Combine integration.",
+    "details": "SwiftUI cheat and practical patterns:\n\n- State management: use `@State` for view-local state, `@StateObject` for view-owned ObservableObjects, `@ObservedObject` for view observers and `@EnvironmentObject` for shared app state.\n- Data flow: prefer unidirectional data flow; move business logic to view models and test them independently.\n- Performance: avoid heavy computation in body; use `EquatableView`, `@ViewBuilder` and `@StateObject` to avoid frequent re-inits.\n- Lifecycle: use `.task`, `.onAppear`, `.onDisappear` for async/side-effectful actions; keep UI code declarative.\n- Interop: embed SwiftUI in UIKit with UIHostingController and integrate incrementally.\n\nTesting: test view models and use Snapshot/UI tests for visual regressions.",
+    "cheat": "// Basic view\nstruct ContentView: View { @State private var count = 0; var body: some View { Button(\"Tap \\(count)\") { count += 1 } } }\n\n// ViewModel\nclass VM: ObservableObject { @Published var items: [String] = [] }\n\n// Use previews\nstruct ContentView_Previews: PreviewProvider { static var previews: some View { ContentView() } }",
+    "examples": [
+      { "code": "struct ContentView: View { @State var count = 0; var body: some View { Button(\"Tap \\(count)\") { count += 1 } } }" }
+    ],
+    "interview": [
+      { "q": "What is SwiftUI?", "a": "Declarative UI framework for building interfaces across Apple platforms." },
+      { "q": "When to use @State vs @Binding?", "a": "@State owns value in view; @Binding passes a reference to child views." },
+      { "q": "What is @StateObject?", "a": "Creates and owns an ObservableObject for the view lifecycle." },
+      { "q": "What is @ObservedObject?", "a": "Observes changes from an external ObservableObject but doesn't own it." },
+      { "q": "How to perform side effects in SwiftUI?", "a": "Use .task, .onAppear or call into view model async methods." },
+      { "q": "How to manage navigation?", "a": "Use NavigationView and NavigationLink or the new navigationDestination APIs." },
+      { "q": "How to test SwiftUI views?", "a": "Test view models and use snapshot/UI tests for views." },
+      { "q": "How to optimize view performance?", "a": "Minimize work in body, use @ViewBuilder and EquatableView when appropriate." },
+      { "q": "How to handle complex state?", "a": "Lift to view models and use enums to represent UI states." },
+      { "q": "How to integrate Combine?", "a": "Use publishers to feed view models and @Published to update views." },
+      { "q": "How to handle forms?", "a": "Use Bindings to connect UI controls to model state." },
+      { "q": "How to preview UI quickly?", "a": "Use PreviewProvider to create various preview configurations." },
+      { "q": "How to support accessibility?", "a": "Add accessibility modifiers and labels for UI elements." },
+      { "q": "How to localize SwiftUI text?", "a": "Use LocalizedStringKey or Localizable.strings for translations." },
+      { "q": "How to animate changes?", "a": "Use withAnimation, .animation modifiers and transitions." },
+      { "q": "How to embed SwiftUI in UIKit?", "a": "Use UIHostingController to host SwiftUI views inside UIKit." },
+      { "q": "When to fallback to UIKit?", "a": "When platform APIs are missing or for complex legacy integrations." },
+      { "q": "How to maintain state across app launches?", "a": "Persist in storage and restore in scene lifecycle events." },
+      { "q": "How to avoid view recreation costs?", "a": "Use @StateObject and avoid recomputing heavy data in body." },
+      { "q": "How to handle long lists efficiently?", "a": "Use List with identifiable data and pagination or on-demand loading." }
+    ]
+  },
+
+  "swift_testing": {
+    "title": "Testing & Tooling",
+    "summary": "XCTest, mocking, testable architecture and CI integration.",
+    "details": "Testing & CI practical guide:\n\n- Unit tests: isolate logic and use dependency injection to provide fakes/mocks for external dependencies.\n- Async tests: leverage XCTest's async support and `await` calls directly inside test methods.\n- Integration tests: run against ephemeral environments (Docker) for DB and external services; tear down reliably.\n- CI: run lint, static analysis, unit tests and limited integration tests on PRs; full integration and performance tests on schedule.\n- Flakiness: track flaky tests and quarantine until fixed; keep tests deterministic and small.\n\nCoverage: measure but focus on meaningful, critical paths; code coverage alone is not a quality metric.",
+    "cheat": "// Test commands\nswift test\n// Example\nfinal class AppTests: XCTestCase { func testExample() async throws { XCTAssertEqual(1+1, 2) } }",
+    "examples": [
+      { "code": "final class MathTests: XCTestCase { func testAdd() { XCTAssertEqual(2+3,5) } }" }
+    ],
+    "interview": [
+      { "q": "How to write unit tests in Swift?", "a": "Create XCTestCase subclasses and add test methods starting with `test`." },
+      { "q": "How to test async functions?", "a": "Use async tests in XCTest and await async calls directly." },
+      { "q": "Why inject dependencies for tests?", "a": "To replace real services with mocks/fakes and isolate units under test." },
+      { "q": "How to mock network calls?", "a": "Abstract URLSession behind a protocol and provide a mock implementation." },
+      { "q": "What is snapshot testing?", "a": "Comparing UI output to a stored snapshot image or text." },
+      { "q": "How to run tests in CI?", "a": "Run `swift test` or xcodebuild test and collect results." },
+      { "q": "How to avoid flaky tests?", "a": "Remove timing dependencies and use deterministic fixtures." },
+      { "q": "How to parallelize tests?", "a": "Enable XCTest parallelization and distribute tests across CI agents." },
+      { "q": "How to test view models?", "a": "Test logic in view models separately from views using injected dependencies." },
+      { "q": "How to test database interactions?", "a": "Use ephemeral test DBs or transactions rolled back per test." },
+      { "q": "How to measure coverage?", "a": "Enable code coverage flags and use coverage tools in CI." },
+      { "q": "How to test concurrency issues?", "a": "Use deterministic schedules, stress tests and concurrency sanitizers." },
+      { "q": "What is TDD?", "a": "Test-Driven Development: write tests before implementation to guide design." },
+      { "q": "How to test command-line tools?", "a": "Invoke executables and assert output and exit status." },
+      { "q": "How to mock time in tests?", "a": "Inject a clock abstraction and provide controllable test clocks." },
+      { "q": "How to run a subset of tests locally?", "a": "Use XCTest filters or run specific test targets." },
+      { "q": "How to handle external service flakiness?", "a": "Use mocks or local test doubles; run full integration tests in CI." },
+      { "q": "What is mutation testing?", "a": "Altering code to ensure tests detect changes, measuring test quality." },
+      { "q": "How to maintain test speed?", "a": "Keep unit tests fast, move heavy integrations to separate suites." },
+      { "q": "How to track flaky tests over time?", "a": "Use CI analytics and quarantine flaky tests until fixed." }
+    ]
+  },
+
+  "swift_debug": {
+    "title": "Debugging & Profiling",
+    "summary": "LLDB, Instruments, logs and crash reporting.",
+    "details": "Debugging & profiling practices:\n\n- LLDB: set breakpoints, use `po` to inspect objects and `bt` for backtraces. Use conditional breakpoints to reduce noise.\n- Instruments: Time Profiler for CPU hotspots, Allocations for memory, Leaks for leaks, Network for traffic analysis and Energy for battery impact.\n- Crash reporting: upload dSYMs to Sentry/Crashlytics for symbolication and actionable crash stacks.\n- Sanitizers: enable Thread Sanitizer and Address Sanitizer in debug builds to find races and memory corruption.\n- Logging: use os_log for structured logs and correlate traces using request IDs.\n\nOperational: collect metrics and logs in central systems and retain for incident analysis.",
+    "cheat": "// LLDB basics\n(lldb) breakpoint set --name viewDidLoad\n(lldb) run\n(lldb) po someVar\n\n// Instruments: open Product > Profile in Xcode and choose Time Profiler or Allocations",
+    "examples": [
+      { "code": "lldb> breakpoint set --name viewDidLoad\nlldb> run\nlldb> po variable" }
+    ],
+    "interview": [
+      { "q": "How to set breakpoints in LLDB?", "a": "Use `breakpoint set --name <symbol>` or set via Xcode UI." },
+      { "q": "What is Instruments Time Profiler?", "a": "Tool to sample CPU usage and find hotspots." },
+      { "q": "How to find memory leaks?", "a": "Use Allocations and Leaks instruments." },
+      { "q": "What is symbolication?", "a": "Mapping addresses in crash reports to symbols using dSYMs." },
+      { "q": "How to inspect variables in LLDB?", "a": "Use `p` or `po` to print values and expressions." },
+      { "q": "What is Address Sanitizer used for?", "a": "Detect memory corruption and out-of-bounds accesses." },
+      { "q": "How to debug async/await?", "a": "Use task-aware breakpoints and inspect task frames in the debugger." },
+      { "q": "How to capture production crashes?", "a": "Use crash reporters (Sentry, Crashlytics) and upload dSYMs." },
+      { "q": "How to profile network calls?", "a": "Use Instruments Network instrument or proxies like Charles." },
+      { "q": "How to reduce log overhead in production?", "a": "Sample logs, use appropriate levels and redact sensitive data." },
+      { "q": "What is thread sanitizer?", "a": "Tool to detect data races in concurrent code." },
+      { "q": "How to debug SwiftUI rendering issues?", "a": "Inspect view models and use Previews to replicate UI states." },
+      { "q": "How to analyze allocation spikes?", "a": "Record allocation timeline and correlate to code paths." },
+      { "q": "How to attach debugger to a process?", "a": "Use lldb to attach to PID or run via Xcode." },
+      { "q": "How to capture deterministic repro steps?", "a": "Record inputs, environment and use logging to recreate bugs." },
+      { "q": "How to debug memory leaks in mixed Obj-C/Swift code?", "a": "Check bridging allocations and use Instruments to trace retain cycles." },
+      { "q": "How to handle large trace data?", "a": "Filter by symbol or timeframe and focus on relevant threads." },
+      { "q": "How to test crash handling logic?", "a": "Simulate errors and verify cleanup and recovery paths." },
+      { "q": "How to inspect closures in LLDB?", "a": "Print capture lists and closure context with `po`." },
+      { "q": "How to debug UI freezes?", "a": "Profile the main thread in Instruments to find blocking work." }
+    ]
+  },
+
+  "swift_performance": {
+    "title": "Performance & Optimization",
+    "summary": "Profiling, algorithmic choices, inlining and value semantics.",
+    "details": "Performance & optimization checklist:\n\n- Profile first: use Instruments and microbenchmarks on release builds before optimizing.\n- Algorithmic focus: pick the right data structures and algorithms; often the biggest wins are algorithmic.\n- Reduce allocations: prefer value types, reuse buffers and avoid bridging to Foundation in hot loops.\n- Lazy sequences: use lazy chaining to avoid intermediate arrays when transforming large collections.\n- Concurrency: parallelize CPU-bound tasks carefully using Tasks or Dispatch and avoid main thread blocking.\n- Compiler flags: use -O / -Osize and enable Link Time Optimization (LTO) for release builds to improve performance.\n\nBenchmarking: run stable benchmarks in CI and compare changes; keep measurement harness isolated from test noise.",
+    "cheat": "// Build for perf\nswift build -c release\n// Use Instruments Time Profiler to find hotspots\n// Use lazy sequences: (0..<1_000_000).lazy.map { ... }",
+    "examples": [
+      { "code": "let res = (0..<1_000_000).lazy.map { $0 * 2 }.filter { $0 % 3 == 0 }.prefix(10)" }
+    ],
+    "interview": [
+      { "q": "What is the first step before optimizing?", "a": "Profile to identify real bottlenecks." },
+      { "q": "Why prefer value types for performance?", "a": "They can avoid heap allocations and be more cache-friendly." },
+      { "q": "What is copy-on-write?", "a": "Sharing storage until mutation triggers a copy for efficiency." },
+      { "q": "How to avoid bridging overhead?", "a": "Use native Swift types and minimize conversions to Foundation types." },
+      { "q": "When to use unsafe pointers?", "a": "Only in critical hot paths or for interop where safe options are too costly." },
+      { "q": "What is inlining?", "a": "Compiler optimization that can eliminate call overhead for small functions." },
+      { "q": "How to reduce allocations in loops?", "a": "Preallocate buffers and reuse objects where feasible." },
+      { "q": "How to avoid UI jank?", "a": "Move heavy work off the main thread and precompute layouts." },
+      { "q": "How to optimize Codable performance?", "a": "Use keyed containers carefully and avoid unnecessary conversions." },
+      { "q": "How to benchmark code?", "a": "Use release builds and Instruments or measurement frameworks." },
+      { "q": "What is Link Time Optimization (LTO)?", "a": "A build optimization that performs cross-module inlining." },
+      { "q": "How to use lazy to improve perf?", "a": "Avoid intermediate arrays by deferring operations until needed." },
+      { "q": "When to parallelize work?", "a": "For CPU-bound tasks with independent work using Tasks or Dispatch." },
+      { "q": "How to measure cold vs warm performance?", "a": "Test startup costs separately from steady-state performance." },
+      { "q": "What is the cost of generic abstraction?", "a": "Sometimes additional indirection; measure and specialize hot paths if needed." },
+      { "q": "How to profile memory usage?", "a": "Use Allocations instrument and track peaks and churn." },
+      { "q": "How to minimize context switches?", "a": "Avoid excessive thread creation and use task pools." },
+      { "q": "How to optimize network usage?", "a": "Batch requests, compress payloads and cache responses." },
+      { "q": "How to validate optimizations?", "a": "Benchmark before and after and run regression tests." },
+      { "q": "When to accept trade-offs for readability?", "a": "When the performance gain is marginal and clarity is more valuable." }
+    ]
+  },
+
+  "swift_interop_objc": {
+    "title": "Interop with Objective-C",
+    "summary": "Bridging between Swift and Objective-C, annotations and memory semantics.",
+    "details": "Objective-C interoperability cheats:\n\n- Bridging: common Foundation types bridge automatically (String/NSString, Array/NSArray, Dictionary/NSDictionary, Date/NSDate, Data/NSData).\n- Exposing Swift to Obj-C: inherit from NSObject and annotate methods/properties with @objc; keep API surface Obj-C friendly (no generics or Swift-only constructs directly).\n- Selectors and KVO: use @objc and @objcMembers for selector-based callbacks and KVO-compatible properties; prefer Combine or Swift alternatives when possible.\n- Memory: ARC is shared across Swift and Obj-C; watch closures and block capturing semantics.\n- Wrappers: provide thin Obj-C-friendly wrappers for complex Swift APIs when necessary for older codebases.\n\nTesting: exercise cross-boundary calls during integration tests to ensure correct bridging and memory behavior.",
+    "cheat": "// Expose class\n@objcMembers class LegacyAdapter: NSObject { func doWork() {} }\n// Bridging types\nlet ns = NSString(string: \"hi\") as String",
+    "examples": [
+      { "code": "@objcMembers class MyClass: NSObject { func doThing() {} }" }
+    ],
+    "interview": [
+      { "q": "How to expose Swift code to Objective-C?", "a": "Inherit from NSObject and mark methods/properties with @objc." },
+      { "q": "What types bridge automatically?", "a": "String<->NSString, Array<->NSArray, Dictionary<->NSDictionary, Date<->NSDate, Data<->NSData." },
+      { "q": "How to handle selectors in Swift?", "a": "Use #selector(methodName) and annotate the method with @objc." },
+      { "q": "How to convert NSError to Swift Error?", "a": "Objective-C APIs with NSError** can be imported as throwing Swift functions." },
+      { "q": "Can Swift generics be exposed to Obj-C?", "a": "No; wrap generics in Obj-C-compatible classes or use type-erasure." },
+      { "q": "What is @objcMembers?", "a": "Annotates all members in a class to be exposed to Obj-C automatically." },
+      { "q": "How to pass Swift closures to Obj-C blocks?", "a": "Use @convention(block) when necessary and be mindful of memory semantics." },
+      { "q": "What about memory across the boundary?", "a": "ARC works across Swift and Obj-C; be mindful of retain cycles." },
+      { "q": "How to import Obj-C frameworks into SPM?", "a": "Use module maps or binary targets for C/Obj-C libraries." },
+      { "q": "What is NS_SWIFT_NAME used for?", "a": "Rename Obj-C APIs to more Swifty names when imported." },
+      { "q": "How to expose constants from Obj-C?", "a": "Declare extern constants in headers and they become available in Swift." },
+      { "q": "How to bridge NSError domains to enums?", "a": "Wrap NSError codes in Swift enums for typed error handling." },
+      { "q": "What is @objc dynamic used for?", "a": "Enables Objective-C runtime dynamic dispatch and KVO compatibility." },
+      { "q": "How to avoid fragile APIs when bridging?", "a": "Keep Obj-C-facing APIs simple, typed and stable." },
+      { "q": "How to test mixed-language projects?", "a": "Add integration tests and ensure bridging headers are available to test targets." },
+      { "q": "How to handle Objective-C selectors with Swift names?", "a": "Use @objc(name) to set the selector explicitly." },
+      { "q": "How to handle KVO in Swift?", "a": "Use @objc dynamic and observe via key paths or use Combine where possible." },
+      { "q": "How to wrap Swift-only constructs for Obj-C?", "a": "Provide Objective-C-friendly wrapper classes or APIs." },
+      { "q": "How to manage API evolution across boundaries?", "a": "Keep Obj-C-visible APIs minimal and stable; deprecate carefully." },
+      { "q": "Why avoid exposing too much to Obj-C?", "a": "It makes APIs less Swifty and can limit modern language features." }
+    ]
+  },
+
+  "swift_deployment": {
+    "title": "Build & Deployment",
+    "summary": "Release builds, code signing, App Store and server deployment patterns.",
+    "details": "Build & deployment operations checklist:\n\n- Apps: use Xcode Archives, manage provisioning profiles and ensure build signing is reproducible. Automate uploads to TestFlight and App Store Connect.\n- Servers: build release binaries, create minimal container images (multi-stage Docker), and orchestrate with Kubernetes or systemd.\n- CI/CD: run tests, lint, build artifacts, upload dSYMs, and publish signed artifacts. Use feature flag rollout and canary deployments for safety.\n- Security: rotate keys, use secret stores and scan images for vulnerabilities; ensure runtime runs with least privileges.\n- Observability: deploy health/readiness endpoints and integrate with monitoring/alerting prior to prod traffic shifts.\n\nRollback: have a tested rollback plan and automated steps to revert to previous stable artifacts if needed.",
+    "cheat": "// Release build\nswift build -c release\n// Example Dockerfile (multi-stage)\nFROM swift:5 as builder\nWORKDIR /src\nCOPY . .\nRUN swift build -c release\nFROM debian:buster-slim\nCOPY --from=builder /src/.build/release/MyServer /usr/local/bin/\nENTRYPOINT [\"/usr/local/bin/MyServer\"]",
+    "examples": [
+      { "code": "swift build -c release ; docker build -t myserver ." }
+    ],
+    "interview": [
+      { "q": "How to create a release build for SPM?", "a": "swift build -c release" },
+      { "q": "How to archive an iOS app?", "a": "Use Xcode Archives and upload via App Store Connect." },
+      { "q": "Why upload dSYMs?", "a": "To symbolicate crash reports for readable stack traces." },
+      { "q": "How to notarize macOS apps?", "a": "Sign and submit to Apple notarization service, then staple if needed." },
+      { "q": "How to containerize a Swift server app?", "a": "Build the release binary and copy it into a minimal runtime image." },
+      { "q": "What is code signing?", "a": "Ensures authenticity and integrity of distributed apps on Apple platforms." },
+      { "q": "How to automate releases in CI?", "a": "Use CI pipelines to build, test, sign and publish artifacts." },
+      { "q": "How to manage secrets in CI?", "a": "Use secret stores or encrypted CI variables, never commit secrets." },
+      { "q": "How to run DB migrations on deploy?", "a": "Run migrations as a separate step with backups and health checks." },
+      { "q": "What is zero-downtime deploy?", "a": "Rolling updates or blue/green deploys ensuring continuous service availability." },
+      { "q": "How to rollback a bad release?", "a": "Use orchestrator rollbacks or redeploy the previous stable artifact." },
+      { "q": "How to shrink binary size?", "a": "Strip symbols, enable LTO and remove unused resources." },
+      { "q": "How to sign CLI tools on macOS?", "a": "Use codesign and notarization for distribution outside App Store." },
+      { "q": "How to build reproducible artifacts?", "a": "Pin dependency versions and use deterministic build steps." },
+      { "q": "How to deploy multi-arch images?", "a": "Build for each arch and push a manifest for multi-arch support." },
+      { "q": "How to handle feature flags during rollout?", "a": "Use remote config or flagging systems to toggle features per user." },
+      { "q": "How to test signed builds?", "a": "Install on devices or use TestFlight for beta distribution." },
+      { "q": "How to ensure security of build machines?", "a": "Limit access, rotate keys and use ephemeral build agents when possible." },
+      { "q": "How to monitor post-deploy?", "a": "Use health checks, metrics, logs and alerting to detect regressions." },
+      { "q": "How to handle database versioning?", "a": "Use migrations with backward-compatible schema changes and phased deploys." }
+    ]
+  },
+
+  "swift_best_practices": {
+    "title": "Best Practices & Patterns",
+    "summary": "Idiomatic Swift, maintainable APIs, testing, and safety patterns.",
+    "details": "Best practices summary — keep this checklist in your repo:\n\n- API design: be explicit with public types and annotate public APIs with clear documentation. Prefer stable interfaces and semantic versioning for libraries.\n- Testing: keep unit tests fast and deterministic; use integration tests for external systems in CI.\n- CI: enforce linting, formatting and static checks in CI; require green tests before merges.\n- Security & privacy: validate input, handle secrets securely, and avoid logging sensitive data.\n- Team practices: code reviews, architecture docs, and a lightweight onboarding guide for new contributors.\n\nMaintainability: allocate time for refactors, track technical debt and keep examples and docs up-to-date.",
+    "cheat": "// Enforce style\nswiftlint\nswift-format format .\n// CI baseline\n- lint\n- unit tests\n- static analysis\n- integration smoke tests",
+    "examples": [
+      { "code": "protocol UserService { func get(id: Int) async throws -> User }" }
+    ],
+    "interview": [
+      { "q": "Why prefer immutability?", "a": "Reduces bugs, simplifies reasoning and improves concurrency safety." },
+      { "q": "What is protocol-oriented design benefit?", "a": "Composability and testing without deep inheritance." },
+      { "q": "How to design public APIs?", "a": "Be explicit in types, document behavior, and minimize surface area." },
+      { "q": "Why keep functions small?", "a": "Easier to test, reason about and reuse." },
+      { "q": "How to manage technical debt?", "a": "Track, prioritize and allocate time for refactors." },
+      { "q": "How to enforce code style?", "a": "Use swiftlint and formatting steps in CI." },
+      { "q": "What is semantic versioning?", "a": "MAJOR.MINOR.PATCH—increment MAJOR for breaking changes." },
+      { "q": "How to document code?", "a": "Use doc comments and publish docs using DocC or jazzy." },
+      { "q": "How to design for testability?", "a": "Inject dependencies and avoid global mutable state." },
+      { "q": "When to refactor?", "a": "Refactor when adding features, fixing bugs, or when readability suffers." },
+      { "q": "How to handle third-party libraries?", "a": "Audit, pin versions and sandbox usage in CI." },
+      { "q": "What is defensive programming?", "a": "Validate inputs, avoid force-unwraps, and fail early with clear errors." },
+      { "q": "How to onboard new team members?", "a": "Provide docs, sample apps and consistent patterns." },
+      { "q": "How to keep APIs stable?", "a": "Deprecate gradually and follow semver for breaking changes." },
+      { "q": "How to cultivate secure defaults?", "a": "Set least-privilege defaults and require explicit opt-in to relax security." },
+      { "q": "What is contract-driven development?", "a": "Design interfaces first then implement to match contracts." },
+      { "q": "How to handle concurrency safely?", "a": "Isolate mutable state, prefer actors and test concurrent scenarios." },
+      { "q": "How to use code reviews effectively?", "a": "Focus on correctness, readability, test coverage and architecture." },
+      { "q": "How to measure success of practices?", "a": "Track quality metrics, build times, test flakiness and incident counts." },
+      { "q": "What is a good CI baseline?", "a": "Run lint, static analysis, unit tests and basic integration checks on every PR." }
+    ]
+  }
+}
