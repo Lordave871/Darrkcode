@@ -1,0 +1,22 @@
+# Web Framework
+Flask==3.0.2
+
+# Production Server (Required for Render)
+gunicorn==21.2.0
+
+# Database & ORM
+Flask-SQLAlchemy==3.1.1
+psycopg2-binary==2.9.9  # Required if using a PostgreSQL database on Render
+
+# User Authentication & Security
+Flask-Login==0.6.3
+Werkzeug==3.0.1
+Flask-Bcrypt==1.0.1     # For password hashing
+
+# Forms & Validation
+Flask-WTF==1.2.1
+email-validator==2.1.0.post1
+
+# Environment Variables
+python-dotenv==1.0.1
+pymysql
