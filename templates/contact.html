@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Dark Code</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../static/images/logo.png" type="image/png">
+    <link rel="shortcut icon" href="../static/images/logo.png" type="image/png">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent1: #4ECDC4;
+            --accent2: #FFD166;
+            --accent3: #6A0572;
+            --accent4: #118AB2;
+            --light: #FFFFFF;
+            --gray: #A0A0B0;
+            --dark: #0F0F1A;
+            --darker: #0A0A12;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient2: linear-gradient(135deg, var(--accent1) 0%, var(--accent4) 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+
+        /* Contact Hero Section */
+        .contact-hero {
+            padding: 60px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 10;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(108, 99, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 101, 132, 0.1) 0%, transparent 50%);
+            animation: backgroundShift 10s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Back to Home Button */
+        .back-home-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-home-btn:hover {
+            background: var(--gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.3);
+            gap: 12px;
+        }
+
+        .back-home-btn:hover .btn-glow {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+
+        .back-home-btn .btn-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            border-radius: 50px;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+            filter: blur(15px);
+        }
+
+        .back-home-btn i {
+            transition: var(--transition);
+        }
+
+        .back-home-btn:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* Contact Content */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 40px 0 80px;
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+        }
+
+        .form-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: var(--gray);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(108, 99, 255, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn .btn-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            border-radius: 12px;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+            filter: blur(20px);
+        }
+
+        .submit-btn:hover .btn-glow {
+            opacity: 1;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(108, 99, 255, 0.3);
+            box-shadow: var(--shadow);
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.1), transparent);
+            transition: var(--transition);
+        }
+
+        .info-card:hover::before {
+            left: 100%;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .info-content p {
+            color: var(--gray);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .info-content strong {
+            color: var(--light);
+        }
+
+        .faq-section {
+            padding: 80px 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 30px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item.active {
+            border-color: rgba(108, 99, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .faq-icon {
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 20px;
+            max-height: 200px;
+        }
+
+        /* Quick Stats */
+        .stats-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, #4ECDC4 0%, #06D6A0 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .contact-form-container {
+                padding: 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-form-container {
+                padding: 20px;
+            }
+
+            .info-card {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar container">
+            <a href="../" class="logo">
+                <div class="logo-icon">
+                    <img src="../static/images/logo.png" alt="Logo">
+                </div>
+                <div class="logo-text">Dark Code</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../" class="nav-link">Home</a></li>
+                <li><a href="/about" class="nav-link">About</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Learn <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="../programming_language"><i class="fas fa-laptop-code"></i>
+                                Programming</a></li>
+                        <li><a href="../skill"><i class="fas fa-cogs"></i> Skills</a></li>
+                        <li><a href="../game"><i class="fas fa-gamepad"></i> Games</a></li>
+                        <li><a href="../quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+                <li><a href="../login_register" class="nav-link register-btn">
+                    <span class="btn-text">Register</span>
+                    <span class="btn-glow"></span>
+                </a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+
+
+        <!-- Contact Hero Section -->
+        <section class="contact-hero">
+            <h1 class="hero-title fade-in">Get In Touch</h1>
+            <p class="hero-subtitle fade-in">Have questions about our coding courses? We're here to help you start your
+                programming journey. Our team responds within 24 hours.</p>
+
+            <!-- Back to Home Button -->
+            <div class="back-home-container fade-in">
+                <a href="../l" class="back-home-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                    <div class="btn-glow"></div>
+                </a>
+            </div>
+        </section>
+        <!-- Contact Content -->
+        <div class="contact-content">
+            <!-- Contact Form -->
+            <div class="contact-form-container fade-in">
+                <h2 class="form-title">Send us a Message</h2>
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-input" required>
+                            <option value="">Select Subject</option>
+                            <option value="course">Course Information</option>
+                            <option value="technical">Technical Support</option>
+                            <option value="billing">Billing Issue</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input form-textarea" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Send Message
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <div class="info-card fade-in">
+                    <div class="info-header">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="info-title">Our Location</h3>
+                    </div>
+                    <div class="info-content">
+                        <p><strong>Dark Code Office</strong></p>
+                        <p>Dhaka-1230<br>Dhaka, Bangladesh<br></p>
+                    </div>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="info-header">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3 class="info-title">Phone & Email</h3>
+                    </div>
+                    <div class="info-content">
+                        <p><strong>Phone:</strong> +8801780-366380</p>
+                        <p><strong>Email:</strong> darkcode276@gamil.com</p>
+                        <p><strong>Support:</strong> darkcode276@gamil.com</p>
+                    </div>
+                </div>
+
+
+
+                <div class="info-card fade-in">
+                    <div class="info-header">
+                        <div class="info-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="info-title">Live Support</h3>
+                    </div>
+                    <div class="info-content">
+                        <p>Our technical support team is available 24/7 to help you with any coding challenges or
+                            platform issues.</p>
+                        <p><strong>Live Chat:</strong> Available 24/7</p>
+                        <p><strong>Response Time:</strong> Under 5 minutes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <section class="stats-section fade-in">
+            <h2 class="section-title">Why Choose Dark Code?</h2>
+            <p class="section-subtitle">Join thousands of developers who have transformed their careers with our
+                platform</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Active Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Courses Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section fade-in">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Find quick answers to common questions about our courses and platform</p>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I get started with Dark Code?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Getting started is easy! Simply create an account, choose your learning path, and begin with our
+                        introductory courses. No prior coding experience is required.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are the courses suitable for beginners?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! We offer courses for all skill levels, from complete beginners to advanced
+                        programmers. Our beginner courses start with the fundamentals and build up gradually.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you offer certificates upon completion?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we provide certificates of completion for all our courses. These can be shared on LinkedIn
+                        and added to your resume to showcase your skills to employers.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What programming languages do you teach?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We cover a wide range of languages including Python, JavaScript, Java, C++, HTML/CSS, React,
+                        Node.js, and more. Check our course catalog for the complete list.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is there a mobile app available?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we have mobile apps for both iOS and Android devices, allowing you to learn on the go with
+                        full access to all course materials, coding exercises, and progress tracking.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <a href="../" class="logo">
+                            <div class="logo-icon">
+                                <img src="../images/logo.png" alt="Logo">
+                            </div>
+                            <div class="logo-text">Dark Code</div>
+                        </a>
+                    </div>
+                    <p class="footer-description">Master programming through interactive learning, games, and challenges.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/people/Dark-Code/100094718169707/"><i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="+8801780-366380"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/107173545"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Learning Paths</h3>
+                    <ul class="footer-links">
+                        <li><a href="../programming_language">Programming Languages</a></li>
+                        <li><a href="../skill/">Developer Skills</a></li>
+                        <li><a href="../game">Learning By Games</a></li>
+                        <li><a href="../quiz">Practice Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="/contact">Help Center</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+                        <li><i class="fas fa-phone"></i> +8801780-366380</li>
+                        <li><i class="fas fa-envelope"></i> darkcode276@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dark Code. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/script.js"></script>
+    <script>
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+
+            // Reset form
+            this.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Scroll Animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Add some interactive effects to info cards
+        const infoCards = document.querySelectorAll('.info-card');
+
+        infoCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-5px) scale(1)';
+            });
+        });
+
+        // Add loading animation to form submission
+        const submitBtn = document.querySelector('.submit-btn');
+
+        document.getElementById('contactForm').addEventListener('submit', function () {
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Add counter animation to stats
+        const statNumbers = document.querySelectorAll('.stat-number');
+
+        const observerStats = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const finalValue = target.textContent;
+                    const duration = 2000;
+                    const step = 20;
+                    const increment = parseInt(finalValue) / (duration / step);
+                    let current = 0;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= parseInt(finalValue)) {
+                            target.textContent = finalValue;
+                            clearInterval(timer);
+                        } else {
+                            target.textContent = Math.floor(current);
+                        }
+                    }, step);
+
+                    observerStats.unobserve(target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => {
+            observerStats.observe(stat);
+        });
+    </script>
+</body>
+
+</html>

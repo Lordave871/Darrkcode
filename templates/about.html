@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Dark Code</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../static/images/logo.png" type="image/png">
+    <link rel="shortcut icon" href="../static/images/logo.png" type="image/png">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent1: #4ECDC4;
+            --accent2: #FFD166;
+            --accent3: #6A0572;
+            --accent4: #118AB2;
+            --light: #FFFFFF;
+            --gray: #A0A0B0;
+            --dark: #0F0F1A;
+            --darker: #0A0A12;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient2: linear-gradient(135deg, var(--accent1) 0%, var(--accent4) 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* About Hero Section */
+        .about-hero {
+            padding: 60px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 10;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(108, 99, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 101, 132, 0.1) 0%, transparent 50%);
+            animation: backgroundShift 10s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Back to Home Button */
+        .back-home-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-home-btn:hover {
+            background: var(--gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.3);
+            gap: 12px;
+        }
+
+        .back-home-btn:hover .btn-glow {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+
+        .back-home-btn .btn-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            border-radius: 50px;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+            filter: blur(15px);
+        }
+
+        .back-home-btn i {
+            transition: var(--transition);
+        }
+
+        .back-home-btn:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* Mission Section */
+        .mission-section {
+            padding: 80px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .mission-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+
+        .mission-content p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .mission-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            min-height: 400px;
+        }
+
+        .mission-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .mission-image img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            display: block;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(108, 99, 255, 0.3));
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 30px;
+            margin: 40px 0;
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(108, 99, 255, 0.3);
+            box-shadow: var(--shadow);
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.1), transparent);
+            transition: var(--transition);
+        }
+
+        .value-card:hover::before {
+            left: 100%;
+        }
+
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin: 0 auto 20px;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .value-description {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(108, 99, 255, 0.3);
+            box-shadow: var(--shadow);
+        }
+
+        .team-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .team-bio {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .team-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            transition: var(--transition);
+        }
+
+        .team-social a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 60px 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 30px;
+            margin: 40px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-description {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-btn.primary {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.3);
+        }
+
+        .cta-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(108, 99, 255, 0.4);
+        }
+
+        .cta-btn .btn-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            border-radius: 12px;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+            filter: blur(20px);
+        }
+
+        .cta-btn:hover .btn-glow {
+            opacity: 1;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .mission-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .mission-content h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar container">
+            <a href="../" class="logo">
+                <div class="logo-icon">
+                    <img src="../static/images/logo.png" alt="Logo">
+                </div>
+                <div class="logo-text">Dark Code</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../" class="nav-link">Home</a></li>
+                <li><a href="/about class="nav-link">About</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Learn <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="../programming_language"><i class="fas fa-laptop-code"></i> Programming</a></li>
+                        <li><a href="../skill"><i class="fas fa-cogs"></i> Skills</a></li>
+                        <li><a href="../game"><i class="fas fa-gamepad"></i> Games</a></li>
+                        <li><a href="../quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+                <li><a href="../login_register" class="nav-link register-btn">
+                    <span class="btn-text">Register</span>
+                    <span class="btn-glow"></span>
+                </a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- About Hero Section -->
+        <section class="about-hero">
+            <h1 class="hero-title fade-in">About Dark Code</h1>
+            <p class="hero-subtitle fade-in">We're on a mission to make coding education accessible, engaging, and effective for everyone, everywhere.</p>
+
+            <!-- Back to Home Button -->
+            <div class="back-home-container fade-in">
+                <a href="../" class="back-home-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                    <div class="btn-glow"></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <div class="mission-content fade-in">
+                <h2>Our Mission</h2>
+                <p>At Dark Code, we believe that coding is the literacy of the 21st century. Our mission is to democratize coding education and empower individuals from all backgrounds to build the future with technology.</p>
+                <p>Founded in 2023 by a team of passionate developers and educators, we've grown from a small startup to a global platform serving over 50,000 students across 120 countries.</p>
+                <p>We combine cutting-edge curriculum with interactive learning tools to create an immersive educational experience that prepares our students for real-world challenges.</p>
+            </div>
+            <div class="mission-image fade-in">
+                <!-- Logo Image -->
+                <img src="../static/images/logo.png" alt="Dark Code Logo">
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <h2 class="section-title fade-in">Our Values</h2>
+            <p class="section-subtitle fade-in">These principles guide everything we do at Dark Code</p>
+            
+            <div class="values-grid">
+                <div class="value-card fade-in">
+                    <div class="value-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="value-title">Quality Education</h3>
+                    <p class="value-description">We're committed to providing the highest quality coding education with up-to-date curriculum and industry-relevant projects.</p>
+                </div>
+                
+                <div class="value-card fade-in">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="value-title">Community First</h3>
+                    <p class="value-description">We believe learning happens best in community. Our platform fosters collaboration, peer support, and mentorship.</p>
+                </div>
+                
+                <div class="value-card fade-in">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-description">We continuously innovate our teaching methods and platform features to provide the best learning experience possible.</p>
+                </div>
+                
+                <div class="value-card fade-in">
+                    <div class="value-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="value-title">Accessibility</h3>
+                    <p class="value-description">We're dedicated to making coding education accessible to everyone, regardless of background, location, or financial situation.</p>
+                </div>
+                
+                <div class="value-card fade-in">
+                    <div class="value-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="value-title">Practical Skills</h3>
+                    <p class="value-description">Our focus is on teaching practical, job-ready skills that students can immediately apply in real-world scenarios.</p>
+                </div>
+                
+                <div class="value-card fade-in">
+                    <div class="value-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3 class="value-title">Lifelong Learning</h3>
+                    <p class="value-description">We support our students throughout their coding journey, from beginner to advanced levels and beyond.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <h2 class="section-title fade-in">Meet Our Team</h2>
+            <p class="section-subtitle fade-in">The passionate educators and developers behind Dark Code</p>
+            
+            <div class="team-grid">
+                <div class="team-card fade-in">
+                    <div class="team-image">
+                        <!-- Placeholder for team member image -->
+                         <img src="../static/images/santo.JPG" alt="Dark Code Logo">
+                        <div style="width:100%; height:100%; background:linear-gradient(135deg, #4ECDC4 0%, #118AB2 100%);"></div>
+                    </div>
+                    <h3 class="team-name">Md Santo Sarkar</h3>
+                    <p class="team-role">Founder & CEO</p>
+                    <p class="team-bio">Software engineer at Dark Code with 4+ years of experience in web development and education.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-card fade-in">
+                    <div class="team-image">
+                        <!-- Placeholder for team member image -->
+                        <div style="width:100%; height:100%; background:linear-gradient(135deg, #FF6584 0%, #6A0572 100%);"></div>
+                    </div>
+                    <h3 class="team-name">Sarah Chen</h3>
+                    <p class="team-role">Head of Curriculum</p>
+                    <p class="team-bio">Computer Science PhD with a passion for creating engaging learning experiences and accessible education.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-card fade-in">
+                    <div class="team-image">
+                        <!-- Placeholder for team member image -->
+                        <div style="width:100%; height:100%; background:linear-gradient(135deg, #FFD166 0%, #118AB2 100%);"></div>
+                    </div>
+                    <h3 class="team-name">Marcus Johnson</h3>
+                    <p class="team-role">Lead Instructor</p>
+                    <p class="team-bio">Full-stack developer and educator with expertise in JavaScript frameworks and cloud technologies.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-card fade-in">
+                    <div class="team-image">
+                        <!-- Placeholder for team member image -->
+                        <div style="width:100%; height:100%; background:linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%);"></div>
+                    </div>
+                    <h3 class="team-name">Priya Patel</h3>
+                    <p class="team-role">Community Manager</p>
+                    <p class="team-bio">Dedicated to building inclusive communities and ensuring every student feels supported in their learning journey.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section fade-in">
+            <h2 class="section-title">Our Impact</h2>
+            <p class="section-subtitle">Numbers that tell our story of growth and success</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Active Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">120+</div>
+                    <div class="stat-label">Countries Reached</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Courses Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Student Satisfaction</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section fade-in">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Start Your Coding Journey?</h2>
+                <p class="cta-description">Join thousands of students who have transformed their careers with Dark Code. Whether you're a complete beginner or looking to advance your skills, we have the perfect learning path for you.</p>
+                <div class="cta-buttons">
+                    <a href="../" class="cta-btn primary">
+                        Explore Courses
+                        <div class="btn-glow"></div>
+                    </a>
+                    <a href="/contact" class="cta-btn secondary">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <a href="../" class="logo">
+                            <div class="logo-icon">
+                                <img src="../static/images/logo.png" alt="Logo">
+                            </div>
+                            <div class="logo-text">Dark Code</div>
+                        </a>
+                    </div>
+                    <p class="footer-description">Master programming through interactive learning, games, and challenges.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/people/Dark-Code/100094718169707/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="+8801780-366380"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/107173545"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Learning Paths</h3>
+                    <ul class="footer-links">
+                        <li><a href="../programming_language">Programming Languages</a></li>
+                        <li><a href="../skill">Developer Skills</a></li>
+                        <li><a href="../game">Learning By Games</a></li>
+                        <li><a href="../quiz">Practice Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="/contact">Help Center</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/privacy_policy">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+                        <li><i class="fas fa-phone"></i> +8801780-366380</li>
+                        <li><i class="fas fa-envelope"></i> darkcode276@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dark Code. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/script.js"></script>
+
+    <script>
+        // Scroll Animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Add interactive effects to cards
+        const valueCards = document.querySelectorAll('.value-card');
+        const teamCards = document.querySelectorAll('.team-card');
+
+        valueCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-10px) scale(1)';
+            });
+        });
+
+        teamCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-10px) scale(1)';
+            });
+        });
+
+        // Add counter animation to stats
+        const statNumbers = document.querySelectorAll('.stat-number');
+
+        const observerStats = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const finalValue = target.textContent;
+                    const duration = 2000;
+                    const step = 20;
+                    const increment = parseInt(finalValue) / (duration / step);
+                    let current = 0;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= parseInt(finalValue)) {
+                            target.textContent = finalValue;
+                            clearInterval(timer);
+                        } else {
+                            target.textContent = Math.floor(current);
+                        }
+                    }, step);
+
+                    observerStats.unobserve(target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => {
+            observerStats.observe(stat);
+        });
+    </script>
+</body>
+
+</html>

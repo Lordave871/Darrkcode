@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../google"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Gamex"
+	}
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darkcode | Learning Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #020617;
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .bg-blob {
+            position: fixed; width: 600px; height: 600px; filter: blur(120px);
+            border-radius: 50%; z-index: -1; opacity: 0.15; animation: float 20s infinite alternate;
+        }
+
+        @keyframes float { from { transform: translate(-10%, -10%); } to { transform: translate(20%, 20%); } }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .lang-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-fancy {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 1;
+        }
+
+        .btn-fancy::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-fancy:hover::before {
+            width: 300px; height: 300px;
+        }
+
+        .btn-fancy:hover {
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            border-radius: 10px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="bg-blob top-0 left-0" style="background: #3b82f6;"></div>
+    <div class="bg-blob bottom-0 right-0" style="background: #ec4899;"></div>
+
+    <div class="max-w-7xl mx-auto">
+        <header class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
+            <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-2xl font-bold shadow-lg shadow-indigo-500/20">
+                    JD
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold">Welcome back, {{name}}</h1>
+                    <p class="text-gray-400 text-sm">Level 12 Developer • 4,200 XP</p>
+                </div>
+            </div>
+            <nav class="flex gap-2">
+                <button class="px-6 py-2 rounded-xl glass-card text-sm font-medium hover:bg-white/10 transition-all">Settings</button>
+                <button class="px-6 py-2 rounded-xl bg-white text-black text-sm font-bold hover:bg-gray-200 transition-all">Log Out</button>
+            </nav>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="space-y-6">
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <h3 class="text-lg font-semibold mb-6">Learning Progress</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Overall Completion</span>
+                                <span class="text-white">68%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 68%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Daily Goal</span>
+                                <span class="text-white">4/5 Lessons</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 80%; background: #10b981;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-[2rem] bg-gradient-to-br from-indigo-500/10 to-transparent">
+                    <i class="fas fa-fire text-orange-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold">{{streak}} Day Streak!</h3>
+                    <p class="text-gray-400 text-sm mt-2">Keep it up! You're in the top 5% of learners this week.</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-3xl font-bold tracking-tight">Your Courses</h2>
+                    <div class="flex gap-4">
+                       <a href="/programmingl_language" class="text-indigo-400 text-sm font-semibold hover:text-indigo-300 transition-colors">
+                            View All
+                       </a> 
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="glass-card lang-card p-6 rounded-[2.5rem] flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center mb-6">
+                                <i class="fab fa-python text-yellow-500 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Python Mastery</h3>
+                            <p class="text-gray-400 text-sm mb-6 leading-relaxed">Master data structures, scripts, and automation with Python.</p>
+                        </div>
+                        <a href="/learn/python" class="btn-fancy w-full py-4 bg-white/5 border border-white/10 rounded-2xl text-center text-sm font-bold hover:bg-white hover:text-black">
+                            Resume Learning
+                        </a>
+                    </div>
+
+                    <div class="glass-card lang-card p-6 rounded-[2.5rem] flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-6">
+                                <i class="fab fa-js text-blue-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Modern JS (ES6+)</h3>
+                            <p class="text-gray-400 text-sm mb-6 leading-relaxed">Deep dive into async, closures, and the modern web ecosystem.</p>
+                        </div>
+                        <a href="/learn/javascript" class="btn-fancy w-full py-4 bg-white/5 border border-white/10 rounded-2xl text-center text-sm font-bold hover:bg-white hover:text-black">
+                            Start Course
+                        </a>
+                    </div>
+
+                    <div class="glass-card lang-card p-6 rounded-[2.5rem] flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center mb-6">
+                                <i class="fab fa-rust text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">System Programming</h3>
+                            <p class="text-gray-400 text-sm mb-6 leading-relaxed">Build high-performance, memory-safe apps with Rust.</p>
+                        </div>
+                        <a href="/learn/rust" class="btn-fancy w-full py-4 bg-white/5 border border-white/10 rounded-2xl text-center text-sm font-bold hover:bg-white hover:text-black">
+                            Browse Docs
+                        </a>
+                    </div>
+
+                    <div class="glass-card lang-card p-6 rounded-[2.5rem] flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center mb-6">
+                                <i class="fas fa-code text-indigo-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">C++ Foundations</h3>
+                            <p class="text-gray-400 text-sm mb-6 leading-relaxed">Understand memory management and low-level architecture.</p>
+                        </div>
+                        <a href="/learn/cpp" class="btn-fancy w-full py-4 bg-white/5 border border-white/10 rounded-2xl text-center text-sm font-bold hover:bg-white hover:text-black">
+                            Join Cohort
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#1b1538">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Typing & Coding Games - Master Both Skills</title>
+    <link rel="stylesheet" href="game.css" />
+    <link rel="icon" type="image/png" href="../static/images/logo.png">
+    <link rel="apple-touch-icon" href="../static/images/logo.png">
+</head>
+<body>
+    <!-- Educational Background Canvas -->
+    <canvas id="educational-bg" aria-hidden="true"></canvas>
+
+    <header class="banner" role="banner">
+        <div class="banner-content">
+            <!-- Main Hero Card -->
+            <div class="hero-card">
+                <div class="card-header">
+                    <a href=".." class="back-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Back to Home
+                    </a>
+                    <a class="explore-btn" href="#games">
+                        Start Playing
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="card-body">
+                    <div class="hero-icon">
+                        <img src="../static/images/logo.png" alt="Dark Code logo">
+                    </div>
+                    <h1 class="main-title">Typing & Coding Games</h1>
+                    <p class="subtitle">Combine typing speed with coding skills — 10 action-packed games designed to level up your keyboard mastery and programming prowess</p>
+                </div>
+                
+                <div class="card-stats">
+                    <div class="stat">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Games</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Practice</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Learning</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="games" class="games-section" role="main">
+        <div class="games-grid"></div>
+    </main>
+
+    <!-- Game Scripts -->
+    <script src="static/game/game-js/type-code-arena.js"></script>
+    <script src="static/game/game-js/keyboard-coder-quest.js"></script>
+    <script src="static/game/game-js/codetype-challenge.js"></script>
+    <script src="static/game/game-js/syntax-typing-master.js"></script>
+    <script src="static/game/game-js/typecraft-programmer.js"></script>
+    <script src="static/game/game-js/logic-typing-battle.js"></script>
+    <script src="static/game/game-js/type-to-code-adventure.js"></script>
+    <script src="static/game/game-js/bytespeed-coding-race.js"></script>
+    <script src="static/game/game-js/typeskill-hacker-mode.js"></script>
+    <script src="static/game/game-js/turbo-typing-coder.js"></script>
+
+    <!-- Main controller -->
+    <script src="static/game/game.js"></script>
+</body>
+</html>

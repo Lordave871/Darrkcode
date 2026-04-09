@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMaster Quiz Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/quiz.css">
+</head>
+<body>
+    <!-- Main Banner Section -->
+    <section class="main-banner">
+        <div class="container">
+            <div class="banner-card">
+                <div class="banner-content">
+                    <div class="banner-text">
+                        <h1 class="banner-title">Master Programming Through Quizzes</h1>
+                        <p class="banner-subtitle">Test your knowledge, track your progress, and become a better developer with our interactive programming quizzes.</p>
+                        
+                        <div class="banner-stats">
+                            <div class="banner-stat">
+                                <i class="fas fa-code"></i>
+                                <div>
+                                    <h3>500+</h3>
+                                    <p>Programming Quizzes</p>
+                                </div>
+                            </div>
+                            <div class="banner-stat">
+                                <i class="fas fa-users"></i>
+                                <div>
+                                    <h3>10K+</h3>
+                                    <p>Active Learners</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="banner-actions">
+                            <button class="btn btn-primary start-quiz-btn" onclick="window.history.back()">
+                                <span>Back To Home</span>
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="btn btn-secondary view-all-btn">
+                                <span>Browse All Quizzes</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="banner-visual">
+                        <div class="quiz-animation">
+                            <div class="quiz-bubble">
+                                <div class="question-mark">?</div>
+                                <div class="bubble-glow"></div>
+                                <div class="thinking-dots">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                            </div>
+
+                            <div class="quiz-options">
+                                <div class="quiz-option">
+                                    <span>JS</span>
+                                    <div class="option-glow"></div>
+                                </div>
+                                <div class="quiz-option">
+                                    <span>PY</span>
+                                    <div class="option-glow"></div>
+                                </div>
+                                <div class="quiz-option">
+                                    <span>CS</span>
+                                    <div class="option-glow"></div>
+                                </div>
+                                <div class="quiz-option">
+                                    <span>SQL</span>
+                                    <div class="option-glow"></div>
+                                </div>
+                            </div>
+
+                            <div class="quiz-particles">
+                                <div class="particle"></div>
+                                <div class="particle"></div>
+                                <div class="particle"></div>
+                                <div class="particle"></div>
+                                <div class="particle"></div>
+                            </div>
+
+                            <div class="quiz-connections">
+                                <div class="connection"></div>
+                                <div class="connection"></div>
+                                <div class="connection"></div>
+                                <div class="connection"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Explore Quiz Categories</h2>
+                <p class="section-subtitle">Select a category to test your knowledge in specific programming languages or computer science topics</p>
+            </div>
+            
+            <div class="categories-tabs">
+                <button class="tab-btn active" data-category="all">All Quizzes</button>
+                <button class="tab-btn" data-category="programming">Programming Languages</button>
+                <button class="tab-btn" data-category="cs">Computer Science</button>
+                <button class="tab-btn" data-category="web">Web Development</button>
+                <button class="tab-btn" data-category="data">Data Science</button>
+                <button class="tab-btn" data-category="mobile">Mobile Development</button>
+                <button class="tab-btn" data-category="devops">Cloud & DevOps</button>
+                <button class="tab-btn" data-category="security">Cybersecurity</button>
+                <button class="tab-btn" data-category="blockchain">Blockchain</button>
+            </div>
+            
+            <div class="quiz-cards" id="quizCards">
+                <!-- Quiz cards will be dynamically generated by JavaScript -->
+            </div>
+            
+            <div class="load-more-container">
+                <button class="btn btn-secondary load-more-btn">
+                    <span>Load More Quizzes</span>
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div id="quizResultsContainer">
+        <!-- Quiz results will be displayed here -->
+        <!-- Reset button will be dynamically added here -->
+    </div>
+
+    <script src="static/quiz.js"></script>
+</body>
+</html>

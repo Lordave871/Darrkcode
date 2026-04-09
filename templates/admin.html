@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darkcode | Admin Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #020617;
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .bg-blob {
+            position: fixed; width: 600px; height: 600px; filter: blur(120px);
+            border-radius: 50%; z-index: -1; opacity: 0.1; animation: float 20s infinite alternate;
+        }
+
+        @keyframes float { from { transform: translate(-10%, -10%); } to { transform: translate(20%, 20%); } }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .table-row {
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .table-row:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .status-pending { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+        .status-suspended { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        .admin-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .admin-btn:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        /* Modal styling */
+        #suspensionModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="bg-blob top-0 right-0" style="background: #8b5cf6;"></div>
+    <div class="bg-blob bottom-0 left-0" style="background: #3b82f6;"></div>
+
+    <div class="max-w-7xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight">Admin Console</h1>
+                <p class="text-gray-400 text-sm mt-1">Manage users, courses, and platform health.</p>
+            </div>
+            <div class="flex gap-3">
+                <button class="admin-btn px-5 py-2.5 rounded-xl glass-card text-sm font-semibold flex items-center gap-2">
+                    <i class="fas fa-plus text-[10px]"></i> New Course
+                </button>
+                <a href="{{ url_for('login') }}" class="admin-btn px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-500 shadow-lg shadow-indigo-500/20 inline-block text-center">
+                    Logout
+                </a>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Total Users</p>
+                <h2 class="text-2xl font-bold">12,842</h2>
+                <span class="text-emerald-400 text-xs font-medium">+14% this month</span>
+            </div>
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Active Subs</p>
+                <h2 class="text-2xl font-bold">8,210</h2>
+                <span class="text-emerald-400 text-xs font-medium">92% Retention</span>
+            </div>
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Revenue (ARR)</p>
+                <h2 class="text-2xl font-bold">$142.5k</h2>
+                <span class="text-indigo-400 text-xs font-medium">On track</span>
+            </div>
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Course Completes</p>
+                <h2 class="text-2xl font-bold">3,120</h2>
+                <span class="text-purple-400 text-xs font-medium">Avg. 4 courses/user</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2 glass-card rounded-[2.5rem] overflow-hidden">
+                <div class="p-8 flex justify-between items-center border-bottom border-white/5">
+                    <h3 class="text-xl font-bold">User Management</h3>
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                        <input type="text" placeholder="Search users..." class="bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 transition-all">
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="text-gray-500 text-[11px] uppercase tracking-widest border-b border-white/5">
+                                <th class="px-8 py-4 font-semibold">User</th>
+                                <th class="px-8 py-4 font-semibold">Subscription</th>
+                                <th class="px-8 py-4 font-semibold">Progress</th>
+                                <th class="px-8 py-4 font-semibold text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="px-8 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-400 to-indigo-600 flex items-center justify-center text-xs font-bold">DA</div>
+                                        <div>
+                                            <p class="text-sm font-bold">Domminion Afia</p>
+                                            <p class="text-xs text-gray-500">dom@example.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-5">
+                                    <span class="status-pill status-active">Pro Plus</span>
+                                </td>
+                                <td class="px-8 py-5">
+                                    <div class="w-32">
+                                        <div class="flex justify-between text-[10px] mb-1">
+                                            <span>Fullstack Track</span>
+                                            <span class="text-indigo-400">82%</span>
+                                        </div>
+                                        <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-indigo-500" style="width: 82%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-5 text-right">
+                                    <div class="flex justify-end gap-3">
+                                        <button onclick="openSuspendModal('Domminion Afia')" class="text-gray-500 hover:text-yellow-500 transition-colors" title="Suspend User">
+                                            <i class="fas fa-user-slash"></i>
+                                        </button>
+                                        <button onclick="removeUser(this, 'Domminion Afia')" class="text-gray-500 hover:text-red-500 transition-colors" title="Remove User">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="px-8 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-400 to-purple-600 flex items-center justify-center text-xs font-bold">JD</div>
+                                        <div>
+                                            <p class="text-sm font-bold">Jane Doe</p>
+                                            <p class="text-xs text-gray-500">jane@dev.io</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-5">
+                                    <span class="status-pill status-pending">Basic</span>
+                                </td>
+                                <td class="px-8 py-5">
+                                    <div class="w-32">
+                                        <div class="flex justify-between text-[10px] mb-1">
+                                            <span>Python Intro</span>
+                                            <span class="text-indigo-400">45%</span>
+                                        </div>
+                                        <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-indigo-500" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-5 text-right">
+                                    <div class="flex justify-end gap-3">
+                                        <button onclick="openSuspendModal('Jane Doe')" class="text-gray-500 hover:text-yellow-500 transition-colors" title="Suspend User">
+                                            <i class="fas fa-user-slash"></i>
+                                        </button>
+                                        <button onclick="removeUser(this, 'Jane Doe')" class="text-gray-500 hover:text-red-500 transition-colors" title="Remove User">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-6 text-center">
+                    <button class="text-xs font-bold text-gray-500 hover:text-indigo-400 transition-colors uppercase tracking-widest">View all users</button>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-[2.5rem] p-8">
+                <h3 class="text-xl font-bold mb-6">Course Health</h3>
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+                                <i class="fab fa-python text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold">Python Mastery</p>
+                                <p class="text-[10px] text-gray-500">2.4k Active Students</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chart-line text-emerald-500"></i>
+                    </div>
+                    </div>
+
+                <div class="mt-10 p-6 rounded-2xl bg-indigo-600/10 border border-indigo-500/20 text-center">
+                    <p class="text-xs text-indigo-300 font-medium mb-3">Server Load: 42%</p>
+                    <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-500" style="width: 42%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="suspensionModal">
+        <div class="glass-card p-10 rounded-[2.5rem] max-w-md w-full mx-4 text-center">
+            <h3 class="text-2xl font-bold mb-2">Suspend User</h3>
+            <p id="modalUserName" class="text-indigo-400 font-medium mb-6"></p>
+            
+            <div class="text-left mb-6">
+                <label class="text-xs text-gray-400 uppercase font-bold tracking-widest block mb-2">Select Unsuspend Date</label>
+                <input type="date" id="suspendUntil" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500 transition-all text-white">
+            </div>
+
+            <div class="flex gap-4">
+                <button onclick="closeSuspendModal()" class="flex-1 py-3 rounded-xl glass-card text-sm font-bold hover:bg-white/5">Cancel</button>
+                <button onclick="confirmSuspension()" class="flex-1 py-3 rounded-xl bg-red-600 text-white text-sm font-bold hover:bg-red-500 shadow-lg shadow-red-500/20">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = '';
+
+        function openSuspendModal(userName) {
+            currentUser = userName;
+            document.getElementById('modalUserName').innerText = userName;
+            document.getElementById('suspensionModal').style.display = 'flex';
+        }
+
+        function closeSuspendModal() {
+            document.getElementById('suspensionModal').style.display = 'none';
+        }
+
+        function confirmSuspension() {
+            const date = document.getElementById('suspendUntil').value;
+            if(!date) {
+                alert("Please select a date.");
+                return;
+            }
+            alert(`User ${currentUser} has been suspended until ${date}`);
+            closeSuspendModal();
+            // Here you would typically send an AJAX request to your Flask backend
+        }
+
+        function removeUser(btn, userName) {
+            if(confirm(`Are you sure you want to permanently remove ${userName}? This cannot be undone.`)) {
+                btn.closest('.table-row').remove();
+                alert(`${userName} has been removed.`);
+                // Here you would typically send an AJAX request to your Flask backend
+            }
+        }
+    </script>
+</body>
+</html>

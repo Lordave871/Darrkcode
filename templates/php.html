@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/png" href="../static/images/logo.png">
+<link rel="apple-touch-icon" href="../static/programming-language/images/logo.png">
+<title>Learn PHP — Dark Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;500;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Minimal scoped styles consistent with other language pages */
+  :root{--bg:#041022;--muted:#9fb4af;--accent:#7f3fbf;--glass:rgba(255,255,255,0.03);--text:#eafaf6}
+  html,body{height:100%;margin:0;font-family:"Exo 2",sans-serif;background:linear-gradient(135deg,#031026,#06132a);color:var(--text)}
+  .page{max-width:1100px;margin:28px auto;padding:18px;display:grid;grid-template-columns:1fr 360px;gap:18px}
+  .hero{grid-column:1/-1;display:flex;justify-content:space-between;padding:16px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--glass)}
+  .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#7f3fbf,#b26bff);display:grid;place-items:center;color:#fff;font-weight:900}
+  .search{padding:10px;border-radius:10px;border:1px solid var(--glass);background:transparent;color:var(--muted);min-width:240px}
+  .topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+  .option-card{padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.008),transparent);border:1px solid var(--glass);display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center}
+  .card-icon{width:64px;height:64px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#7f3fbf,#b26bff);color:#fff;font-weight:900;font-size:24px}
+  .btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;cursor:pointer;font-weight:800}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),#b26bff);color:#041018;border:none}
+  .notes-panel{background:linear-gradient(180deg,#021028,#021018);padding:12px;border-radius:10px;border:1px solid var(--glass);position:sticky;top:18px;height:calc(100vh - 60px);overflow:auto;display:flex;flex-direction:column;gap:8px}
+  .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1200;padding:16px}
+  .modal{width:100%;max-width:880px;background:linear-gradient(180deg,#031426,#021018);padding:14px;border-radius:12px;border:1px solid var(--glass);color:inherit}
+  @media (max-width:1000px){.page{grid-template-columns:1fr} .notes-panel{display:none} body.show-notes .notes-panel{display:flex}}
+  .option-card p { font-size:12px; line-height:1.15; margin:0; max-width:28ch; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--muted); }
+  .option-card h3 { font-size:15px; margin:0 0 .35rem; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero" role="banner" aria-label="PHP header">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="logo" aria-hidden="true">PHP</div>
+        <div>
+          <div style="font-weight:900;font-size:18px">PHP — Practical Roadmap</div>
+          <div style="color:var(--muted);font-size:13px">Server-side fundamentals, ecosystem & practical patterns</div>
+          <div style="margin-top:8px">
+            <input id="topic-search" class="search" placeholder="Search topics, keywords..." />
+            <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+              <button id="php-back" class="btn outline" aria-label="Go back" title="Go back">← Back</button>
+              <button id="php-start" class="btn primary" aria-label="Start now" title="Start now">Start now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+        <div style="display:flex;gap:8px">
+          <button id="cheat-btn" class="btn primary">Cheat Sheet</button>
+          <button id="interview-btn" class="btn">Interview Qs</button>
+        </div>
+
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="progress-wrap" title="Course progress" style="width:52px;height:52px;position:relative">
+            <svg viewBox="0 0 52 52" width="52" height="52" style="transform:rotate(-90deg)"><circle cx="26" cy="26" r="20" stroke="rgba(255,255,255,0.06)" stroke-width="6" fill="none"></circle><circle id="progress-ring-circle" cx="26" cy="26" r="20" stroke="url(#grad-php)" stroke-width="6" fill="none"></circle></svg>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--muted);font-size:12px" id="progress-text">0%</div>
+          </div>
+          <div style="font-size:13px;color:var(--muted)">Progress</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2 style="margin:0">Learning Path</h2>
+          <div style="color:var(--muted);font-size:13px">Syntax • frameworks • security • deployment</div>
+        </div>
+
+        <div id="topics-grid" class="topics-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <aside class="notes-panel" id="notes-panel" aria-hidden="false">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h4 style="margin:0">Notes</h4>
+        <button id="toggle-notes" class="btn">Toggle</button>
+      </div>
+
+      <textarea id="notes-text" style="min-height:120px;padding:10px;border-radius:8px;background:transparent;border:1px solid var(--glass);color:inherit" placeholder="Notes for selected topic..."></textarea>
+
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button id="save-note" class="btn primary">Save Note</button>
+        <button id="clear-note" class="btn">Clear</button>
+        <button id="clear-all-notes" class="btn">Clear all</button>
+      </div>
+
+      <div style="margin-top:12px">
+        <div style="font-weight:800;margin-bottom:8px">Topics</div>
+        <div id="topic-list" style="display:flex;flex-direction:column;gap:6px;max-height:260px;overflow:auto;padding-right:6px;color:var(--muted);font-size:13px"></div>
+      </div>
+
+      <div style="margin-top:12px">
+        <div style="font-weight:800;margin-bottom:8px">Saved notes</div>
+        <div id="saved-notes-list" style="display:flex;flex-direction:column;gap:8px;color:var(--muted);font-size:13px"></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- cheat & interview modals + topic modal -->
+  <div id="cheat-modal" class="modal-backdrop" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">PHP Cheat Sheet</h3><div style="display:flex;gap:8px"><button id="cheat-copy" class="btn">Copy</button><button id="cheat-close" class="btn">Close</button></div></div><div style="margin-top:12px;display:flex;gap:12px"><div id="cheat-topic-list" style="width:34%;max-height:60vh;overflow:auto;border-right:1px solid rgba(255,255,255,0.03);padding-right:8px"></div><div style="flex:1"><div id="cheat-title" style="font-weight:800;margin-bottom:8px">Select a topic</div><pre id="cheat-pre" style="background:rgba(0,0,0,0.6);padding:12px;border-radius:8px;color:var(--muted);white-space:pre-wrap;max-height:44vh;overflow:auto">// Select a topic to see cheat notes</pre><div id="cheat-examples" style="margin-top:10px;color:var(--muted);font-size:13px"></div></div></div></div></div>
+
+  <div id="interview-modal" class="modal-backdrop" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Interview Questions</h3><div style="display:flex;gap:8px"><button id="interview-close" class="btn">Close</button></div></div><div style="margin-top:12px;display:flex;gap:12px"><div id="interview-topic-list" style="width:34%;max-height:60vh;overflow:auto;padding-right:8px;border-right:1px solid rgba(255,255,255,0.03)"></div><div style="flex:1"><div id="interview-title" style="font-weight:800;margin-bottom:8px">Select a topic</div><div id="interview-list" style="max-height:56vh;overflow:auto;color:var(--muted)"></div></div></div></div></div>
+
+  <div id="topic-modal" class="modal-backdrop" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true"><div style="display:flex;justify-content:space-between;align-items:center"><h3 id="modal-title" style="margin:0">Topic</h3><button id="modal-close" class="btn">Close</button></div><pre id="modal-body" style="margin-top:12px;background:rgba(0,0,0,0.6);padding:12px;border-radius:8px;color:var(--muted);white-space:pre-wrap;max-height:52vh;overflow:auto"></pre></div></div>
+
+<script src="static/programming-language/php/main.js"></script>
+<script>
+(function(){
+  // local toggles + search -> php-search event
+  document.getElementById('cheat-btn')?.addEventListener('click', ()=> { const m = document.getElementById('cheat-modal'); if(m){ m.style.display='flex'; m.setAttribute('aria-hidden','false'); }} );
+  document.getElementById('cheat-close')?.addEventListener('click', ()=> { const m = document.getElementById('cheat-modal'); if(m){ m.style.display='none'; m.setAttribute('aria-hidden','true'); }} );
+  document.getElementById('interview-btn')?.addEventListener('click', ()=> { const m = document.getElementById('interview-modal'); if(m){ m.style.display='flex'; m.setAttribute('aria-hidden','false'); }} );
+  document.getElementById('interview_close')?.addEventListener('click', ()=> { const m = document.getElementById('interview-modal'); if(m){ m.style.display='none'; m.setAttribute('aria-hidden','true'); }} );
+  document.getElementById('modal-close')?.addEventListener('click', ()=> { const m = document.getElementById('topic-modal'); if(m){ m.style.display='none'; m.setAttribute('aria-hidden','true'); }} );
+  document.getElementById('topic-search')?.addEventListener('input', (e)=> { window.dispatchEvent(new CustomEvent('php-search', { detail: e.target.value.trim().toLowerCase() })); });
+
+  // Back button: always navigate to the programming-language overview page
+  document.getElementById('php-back')?.addEventListener('click', function(e){
+    e.preventDefault();
+    try { window.location.href = '../programmingl_language.html'; } catch(_) {}
+  });
+
+  // Start: open first topic if present
+  document.getElementById('php-start')?.addEventListener('click', (e)=>{ e.preventDefault(); const first = document.querySelector('.option-card'); if(first){ first.scrollIntoView({behavior:'smooth', block:'center'}); first.click(); } });
+})();
+</script>
+</body>
+</html>
