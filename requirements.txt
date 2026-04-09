@@ -1,24 +1,24 @@
 # Web Framework & Server
-Flask==3.0.2
-gunicorn==21.2.0
+Flask
+gunicorn
 
 # Database (MySQL & General)
-pymysql==1.1.0
-flask-mysqldb==1.2.0
-Flask-SQLAlchemy==3.1.1
+pymysql
+flask-mysqldb
+Flask-SQLAlchemy
 
 # Firebase Integration
-firebase-admin==6.5.0
+firebase-admin
 
 # API & Utilities
-flask-cors==4.0.0
-requests==2.31.0
+flask-cors
+requests
 
 # Security
-Werkzeug==3.0.1
-Flask-Bcrypt==1.0.1
+Werkzeug
+Flask-Bcrypt
 
 # Environment & Forms
-python-dotenv==1.0.1
-Flask-WTF==1.2.1
-email-validator==2.1.0.post1
+python-dotenv
+Flask-WTF
+email-validator
