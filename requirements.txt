@@ -1,23 +1,24 @@
-# Web Framework
+# Web Framework & Server
 Flask==3.0.2
-flask-cors==4.0.0
-
-# Production Server (Required for Render)
 gunicorn==21.2.0
 
-# Database & ORM
+# Database (MySQL & General)
+pymysql==1.1.0
+flask-mysqldb==1.2.0
 Flask-SQLAlchemy==3.1.1
-psycopg2-binary==2.9.9  # Required if using a PostgreSQL database on Render
 
-# User Authentication & Security
-Flask-Login==0.6.3
+# Firebase Integration
+firebase-admin==6.5.0
+
+# API & Utilities
+flask-cors==4.0.0
+requests==2.31.0
+
+# Security
 Werkzeug==3.0.1
-Flask-Bcrypt==1.0.1     # For password hashing
+Flask-Bcrypt==1.0.1
 
-# Forms & Validation
+# Environment & Forms
+python-dotenv==1.0.1
 Flask-WTF==1.2.1
 email-validator==2.1.0.post1
-
-# Environment Variables
-python-dotenv==1.0.1
-pymysql
