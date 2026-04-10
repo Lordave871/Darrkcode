@@ -94,7 +94,7 @@ def admin_authenticate():
             cur.execute("SELECT * FROM user WHERE email = %s", (email,))
             user = cur.fetchone()
 
-            if user and email == admin_email and check_password_hash(user['password'], password):
+            if email == admin_email and check_password_hash(user['password'], password):
                 session["user"] = email
                 session["user_id"] = user["id"]
                 return redirect(url_for('admin'))
