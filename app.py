@@ -205,6 +205,8 @@ def profile():
 
 # --- Admin API ---
 
+# --- Admin API ---
+
 @app.route('/admin')
 def admin_page():
     return render_template('admin.html')
@@ -214,9 +216,38 @@ def get_all_users():
     connection = get_db_connection()
     try:
         with connection.cursor() as cur:
+            # Added 'active' to ensure the frontend knows current status
             cur.execute("SELECT id, name, email, streak, course, active FROM user")
             users = cur.fetchall()
             return jsonify(users)
+    finally:
+        connection.close()
+
+@app.route('/admin/toggle-user/<int:user_id>', methods=['POST'])
+def toggle_user(user_id):
+    """Toggles user status between 1 (Active) and 0 (Suspended)"""
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cur:
+            # Get current status
+            cur.execute("SELECT active FROM user WHERE id = %s", (user_id,))
+            user = cur.fetchone()
+            
+            if not user:
+                return jsonify({"status": "error", "message": "User not found"}), 404
+
+            # Flip status: If 1 set to 0, else set to 1
+            new_status = 0 if user['active'] == 1 else 1
+            
+            cur.execute("UPDATE user SET active = %s WHERE id = %s", (new_status, user_id))
+            connection.commit()
+            
+            return jsonify({
+                "status": "success", 
+                "message": f"User {'activated' if new_status == 1 else 'suspended'}"
+            })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
     finally:
         connection.close()
 
@@ -232,7 +263,6 @@ def delete_user(user_id):
         return jsonify({"status": "error", "message": str(e)}), 500
     finally:
         connection.close()
-
 # --- Learning Content Routes ---
 
 @app.route('/learn/python')
