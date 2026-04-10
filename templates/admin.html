@@ -48,7 +48,6 @@
 
         .status-active { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
         .status-pending { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
-        .status-suspended { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
 
         .admin-btn {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -58,18 +57,6 @@
             background: white;
             color: black;
             transform: translateY(-2px);
-        }
-
-        /* Modal styling */
-        #suspensionModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
         }
     </style>
 </head>
@@ -82,13 +69,10 @@
         <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight">Admin Console</h1>
-                <p class="text-gray-400 text-sm mt-1">Manage users, courses, and platform health.</p>
+                <p class="text-gray-400 text-sm mt-1">Manage users and platform health.</p>
             </div>
             <div class="flex gap-3">
-                <button class="admin-btn px-5 py-2.5 rounded-xl glass-card text-sm font-semibold flex items-center gap-2">
-                    <i class="fas fa-plus text-[10px]"></i> New Course
-                </button>
-                <a href="{{ url_for('login') }}" class="admin-btn px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-500 shadow-lg shadow-indigo-500/20 inline-block text-center">
+                <a href="{{ url_for('logout') }}" class="admin-btn px-5 py-2.5 rounded-xl bg-red-600/20 text-red-500 border border-red-500/20 text-sm font-semibold hover:bg-red-600 hover:text-white inline-block text-center">
                     Logout
                 </a>
             </div>
@@ -96,202 +80,125 @@
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
             <div class="glass-card p-6 rounded-3xl">
-                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Total Users</p>
-                <h2 class="text-2xl font-bold">12,842</h2>
-                <span class="text-emerald-400 text-xs font-medium">+14% this month</span>
-            </div>
-            <div class="glass-card p-6 rounded-3xl">
-                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Active Subs</p>
-                <h2 class="text-2xl font-bold">8,210</h2>
-                <span class="text-emerald-400 text-xs font-medium">92% Retention</span>
-            </div>
-            <div class="glass-card p-6 rounded-3xl">
-                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Revenue (ARR)</p>
-                <h2 class="text-2xl font-bold">$142.5k</h2>
-                <span class="text-indigo-400 text-xs font-medium">On track</span>
-            </div>
-            <div class="glass-card p-6 rounded-3xl">
-                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Course Completes</p>
-                <h2 class="text-2xl font-bold">3,120</h2>
-                <span class="text-purple-400 text-xs font-medium">Avg. 4 courses/user</span>
+                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Database Status</p>
+                <h2 class="text-2xl font-bold text-emerald-400">Connected</h2>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <div class="lg:col-span-2 glass-card rounded-[2.5rem] overflow-hidden">
-                <div class="p-8 flex justify-between items-center border-bottom border-white/5">
-                    <h3 class="text-xl font-bold">User Management</h3>
-                    <div class="relative">
-                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-                        <input type="text" placeholder="Search users..." class="bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 transition-all">
-                    </div>
+        <div class="grid grid-cols-1 gap-8">
+            <div class="glass-card rounded-[2.5rem] overflow-hidden">
+                <div class="p-8 flex justify-between items-center border-b border-white/5">
+                    <h3 class="text-xl font-bold">Live User Directory</h3>
+                    <button onclick="loadUsers()" class="text-indigo-400 hover:text-indigo-300 text-sm font-semibold">
+                        <i class="fas fa-sync-alt mr-2"></i>Refresh Data
+                    </button>
                 </div>
                 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="text-gray-500 text-[11px] uppercase tracking-widest border-b border-white/5">
-                                <th class="px-8 py-4 font-semibold">User</th>
-                                <th class="px-8 py-4 font-semibold">Subscription</th>
-                                <th class="px-8 py-4 font-semibold">Progress</th>
+                                <th class="px-8 py-4 font-semibold">User Details</th>
+                                <th class="px-8 py-4 font-semibold">Account Status</th>
+                                <th class="px-8 py-4 font-semibold">Active Course</th>
                                 <th class="px-8 py-4 font-semibold text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="table-row">
-                                <td class="px-8 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-400 to-indigo-600 flex items-center justify-center text-xs font-bold">DA</div>
-                                        <div>
-                                            <p class="text-sm font-bold">Domminion Afia</p>
-                                            <p class="text-xs text-gray-500">dom@example.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5">
-                                    <span class="status-pill status-active">Pro Plus</span>
-                                </td>
-                                <td class="px-8 py-5">
-                                    <div class="w-32">
-                                        <div class="flex justify-between text-[10px] mb-1">
-                                            <span>Fullstack Track</span>
-                                            <span class="text-indigo-400">82%</span>
-                                        </div>
-                                        <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                            <div class="h-full bg-indigo-500" style="width: 82%"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5 text-right">
-                                    <div class="flex justify-end gap-3">
-                                        <button onclick="openSuspendModal('Domminion Afia')" class="text-gray-500 hover:text-yellow-500 transition-colors" title="Suspend User">
-                                            <i class="fas fa-user-slash"></i>
-                                        </button>
-                                        <button onclick="removeUser(this, 'Domminion Afia')" class="text-gray-500 hover:text-red-500 transition-colors" title="Remove User">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="px-8 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-400 to-purple-600 flex items-center justify-center text-xs font-bold">JD</div>
-                                        <div>
-                                            <p class="text-sm font-bold">Jane Doe</p>
-                                            <p class="text-xs text-gray-500">jane@dev.io</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5">
-                                    <span class="status-pill status-pending">Basic</span>
-                                </td>
-                                <td class="px-8 py-5">
-                                    <div class="w-32">
-                                        <div class="flex justify-between text-[10px] mb-1">
-                                            <span>Python Intro</span>
-                                            <span class="text-indigo-400">45%</span>
-                                        </div>
-                                        <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                            <div class="h-full bg-indigo-500" style="width: 45%"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5 text-right">
-                                    <div class="flex justify-end gap-3">
-                                        <button onclick="openSuspendModal('Jane Doe')" class="text-gray-500 hover:text-yellow-500 transition-colors" title="Suspend User">
-                                            <i class="fas fa-user-slash"></i>
-                                        </button>
-                                        <button onclick="removeUser(this, 'Jane Doe')" class="text-gray-500 hover:text-red-500 transition-colors" title="Remove User">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </div>
+                        <tbody id="user-table-body">
+                            <tr>
+                                <td colspan="4" class="px-8 py-10 text-center text-gray-500">
+                                    <div class="animate-pulse">Loading user data...</div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="p-6 text-center">
-                    <button class="text-xs font-bold text-gray-500 hover:text-indigo-400 transition-colors uppercase tracking-widest">View all users</button>
-                </div>
-            </div>
-
-            <div class="glass-card rounded-[2.5rem] p-8">
-                <h3 class="text-xl font-bold mb-6">Course Health</h3>
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
-                                <i class="fab fa-python text-yellow-500"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold">Python Mastery</p>
-                                <p class="text-[10px] text-gray-500">2.4k Active Students</p>
-                            </div>
-                        </div>
-                        <i class="fas fa-chart-line text-emerald-500"></i>
-                    </div>
-                    </div>
-
-                <div class="mt-10 p-6 rounded-2xl bg-indigo-600/10 border border-indigo-500/20 text-center">
-                    <p class="text-xs text-indigo-300 font-medium mb-3">Server Load: 42%</p>
-                    <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                        <div class="h-full bg-indigo-500" style="width: 42%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="suspensionModal">
-        <div class="glass-card p-10 rounded-[2.5rem] max-w-md w-full mx-4 text-center">
-            <h3 class="text-2xl font-bold mb-2">Suspend User</h3>
-            <p id="modalUserName" class="text-indigo-400 font-medium mb-6"></p>
-            
-            <div class="text-left mb-6">
-                <label class="text-xs text-gray-400 uppercase font-bold tracking-widest block mb-2">Select Unsuspend Date</label>
-                <input type="date" id="suspendUntil" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500 transition-all text-white">
-            </div>
-
-            <div class="flex gap-4">
-                <button onclick="closeSuspendModal()" class="flex-1 py-3 rounded-xl glass-card text-sm font-bold hover:bg-white/5">Cancel</button>
-                <button onclick="confirmSuspension()" class="flex-1 py-3 rounded-xl bg-red-600 text-white text-sm font-bold hover:bg-red-500 shadow-lg shadow-red-500/20">Confirm</button>
             </div>
         </div>
     </div>
 
     <script>
-        let currentUser = '';
+        // 1. Load users from Flask API
+        async function loadUsers() {
+            const tableBody = document.getElementById('user-table-body');
+            
+            try {
+                const response = await fetch('/admin/users');
+                const users = await response.json();
+                
+                tableBody.innerHTML = ''; // Clear loading state
 
-        function openSuspendModal(userName) {
-            currentUser = userName;
-            document.getElementById('modalUserName').innerText = userName;
-            document.getElementById('suspensionModal').style.display = 'flex';
-        }
+                if (users.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="4" class="px-8 py-10 text-center text-gray-500">No users found in database.</td></tr>';
+                    return;
+                }
 
-        function closeSuspendModal() {
-            document.getElementById('suspensionModal').style.display = 'none';
-        }
+                users.forEach(user => {
+                    const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
+                    const activeClass = user.active ? 'status-active' : 'status-pending';
+                    const activeText = user.active ? 'Active' : 'Pending';
 
-        function confirmSuspension() {
-            const date = document.getElementById('suspendUntil').value;
-            if(!date) {
-                alert("Please select a date.");
-                return;
+                    const row = `
+                        <tr class="table-row" id="user-row-${user.id}">
+                            <td class="px-8 py-5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-xs font-bold">
+                                        ${initial}
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-white">${user.name || 'Anonymous'}</p>
+                                        <p class="text-xs text-gray-500">${user.email}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-8 py-5">
+                                <span class="status-pill ${activeClass}">${activeText}</span>
+                            </td>
+                            <td class="px-8 py-5">
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-semibold text-indigo-400">${user.course || 'None'}</span>
+                                    <span class="text-[10px] text-gray-500">Streak: ${user.streak || 0} 🔥</span>
+                                </div>
+                            </td>
+                            <td class="px-8 py-5 text-right">
+                                <button onclick="deleteUser(${user.id}, '${user.name}')" class="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all">
+                                    <i class="fas fa-trash-alt text-xs"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.insertAdjacentHTML('beforeend', row);
+                });
+            } catch (error) {
+                console.error("Error loading users:", error);
+                tableBody.innerHTML = '<tr><td colspan="4" class="px-8 py-10 text-center text-red-400">Error connecting to server.</td></tr>';
             }
-            alert(`User ${currentUser} has been suspended until ${date}`);
-            closeSuspendModal();
-            // Here you would typically send an AJAX request to your Flask backend
         }
 
-        function removeUser(btn, userName) {
-            if(confirm(`Are you sure you want to permanently remove ${userName}? This cannot be undone.`)) {
-                btn.closest('.table-row').remove();
-                alert(`${userName} has been removed.`);
-                // Here you would typically send an AJAX request to your Flask backend
+        // 2. Delete user via Flask API
+        async function deleteUser(userId, userName) {
+            if (!confirm(`Are you sure you want to permanently delete ${userName}?`)) return;
+
+            try {
+                const response = await fetch(`/admin/delete-user/${userId}`, {
+                    method: 'DELETE'
+                });
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    const row = document.getElementById(`user-row-${userId}`);
+                    row.style.opacity = '0';
+                    setTimeout(() => row.remove(), 300);
+                } else {
+                    alert("Error: " + result.message);
+                }
+            } catch (error) {
+                alert("Failed to connect to backend.");
             }
         }
+
+        // Initial Load
+        window.onload = loadUsers;
     </script>
 </body>
 </html>
