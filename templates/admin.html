@@ -33,7 +33,7 @@
         }
 
         .table-row {
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
@@ -82,8 +82,8 @@
             <div class="glass-card p-6 rounded-3xl">
                 <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Database Status</p>
                 <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <h2 class="text-2xl font-bold text-emerald-400">Connected</h2>
+                    <div id="db-indicator" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <h2 id="db-text" class="text-2xl font-bold text-emerald-400">Connected</h2>
                 </div>
             </div>
         </div>
@@ -124,9 +124,15 @@
         // 1. Load users from Flask API
         async function loadUsers() {
             const tableBody = document.getElementById('user-table-body');
+            const dbIndicator = document.getElementById('db-indicator');
+            const dbText = document.getElementById('db-text');
             
             try {
+                // Leading slash ensures path starts from root
                 const response = await fetch('/admin/users');
+                
+                if (!response.ok) throw new Error('Network response was not ok');
+                
                 const users = await response.json();
                 
                 tableBody.innerHTML = ''; 
@@ -138,7 +144,7 @@
 
                 users.forEach(user => {
                     const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
-                    const isActive = user.active === 1; // Backend returns 1 or 0
+                    const isActive = parseInt(user.active) === 1;
                     
                     const activeClass = isActive ? 'status-active' : 'status-suspended';
                     const activeText = isActive ? 'Active' : 'Suspended';
@@ -149,7 +155,6 @@
                         ? 'text-amber-500 bg-amber-500/10 hover:bg-amber-500' 
                         : 'text-emerald-500 bg-emerald-500/10 hover:bg-emerald-500';
 
-                    // Safety: Escape single quotes in names to prevent JS breaks
                     const safeName = (user.name || 'Anonymous').replace(/'/g, "\\'");
 
                     const row = `
@@ -193,9 +198,19 @@
                     `;
                     tableBody.insertAdjacentHTML('beforeend', row);
                 });
+
+                // Update Status UI
+                dbIndicator.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+                dbText.className = "text-2xl font-bold text-emerald-400";
+                dbText.innerText = "Connected";
+
             } catch (error) {
                 console.error("Error loading users:", error);
                 tableBody.innerHTML = '<tr><td colspan="4" class="px-8 py-10 text-center text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Error connecting to server. Check backend console.</td></tr>';
+                
+                dbIndicator.className = "w-2 h-2 rounded-full bg-red-500";
+                dbText.className = "text-2xl font-bold text-red-500";
+                dbText.innerText = "Offline";
             }
         }
 
@@ -209,15 +224,21 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
                 });
-                const result = await response.json();
+                
+                if (!response.ok) {
+                    const errorMsg = await response.json();
+                    throw new Error(errorMsg.message || "Failed to update");
+                }
 
+                const result = await response.json();
                 if (result.status === 'success') {
-                    loadUsers(); 
+                    loadUsers(); // Refresh whole table to sync status
                 } else {
                     alert("Error: " + result.message);
                 }
             } catch (error) {
-                alert("Failed to connect to backend. Is the server running?");
+                console.error("Toggle Error:", error);
+                alert("Failed to connect to backend: " + error.message);
             }
         }
 
@@ -229,13 +250,17 @@
                 const response = await fetch(`/admin/delete-user/${userId}`, {
                     method: 'DELETE'
                 });
-                const result = await response.json();
 
+                if (!response.ok) throw new Error("Delete failed");
+
+                const result = await response.json();
                 if (result.status === 'success') {
                     const row = document.getElementById(`user-row-${userId}`);
-                    row.style.transform = 'translateX(20px)';
-                    row.style.opacity = '0';
-                    setTimeout(() => row.remove(), 300);
+                    if (row) {
+                        row.style.transform = 'translateX(30px)';
+                        row.style.opacity = '0';
+                        setTimeout(() => row.remove(), 300);
+                    }
                 } else {
                     alert("Error: " + result.message);
                 }
