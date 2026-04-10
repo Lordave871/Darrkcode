@@ -17,179 +17,200 @@
             color: white;
             margin: 0;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
+        /* Responsive Background Blobs */
         .bg-blob {
-            position: fixed; width: 600px; height: 600px; filter: blur(120px);
-            border-radius: 50%; z-index: -1; opacity: 0.1; animation: float 20s infinite alternate;
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            min-width: 300px;
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.1;
+            animation: float 20s infinite alternate;
         }
 
-        @keyframes float { from { transform: translate(-10%, -10%); } to { transform: translate(20%, 20%); } }
+        @keyframes float { from { transform: translate(-10%, -10%); } to { transform: translate(10%, 10%); } }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        /* Table responsiveness improvements */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.1) transparent;
+        }
+
         .table-row {
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .table-row:hover {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .status-pill {
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
         }
 
         .status-active { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
         .status-suspended { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
 
+        /* Button interactions */
         .admin-btn {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .admin-btn:active { transform: scale(0.95); }
 
-        .admin-btn:hover {
-            transform: translateY(-2px);
+        @media (max-width: 640px) {
+            .p-responsive { padding: 1.5rem !important; }
+            .hide-mobile { display: none; }
         }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-4 md:p-8 lg:p-12">
 
     <div class="bg-blob top-0 right-0" style="background: #8b5cf6;"></div>
     <div class="bg-blob bottom-0 left-0" style="background: #3b82f6;"></div>
 
     <div class="max-w-7xl mx-auto">
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-6">
             <div>
-                <h1 class="text-3xl font-bold tracking-tight text-white">Admin Console</h1>
-                <p class="text-gray-400 text-sm mt-1">Manage users and platform health.</p>
+                <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Admin Console</h1>
+                <p class="text-gray-400 text-sm mt-1">Platform management & security overview.</p>
             </div>
-            <div class="flex gap-3">
-                <a href="{{ url_for('logout') }}" class="admin-btn px-5 py-2.5 rounded-xl bg-red-600/10 text-red-500 border border-red-500/20 text-sm font-semibold hover:bg-red-600 hover:text-white transition-all">
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <a href="{{ url_for('logout') }}" class="admin-btn flex-1 sm:flex-none text-center px-6 py-3 rounded-2xl bg-red-500/10 text-red-500 border border-red-500/20 text-sm font-bold hover:bg-red-500 hover:text-white transition-all">
                     <i class="fas fa-sign-out-alt mr-2"></i>Logout
                 </a>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-            <div class="glass-card p-6 rounded-3xl">
-                <p class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1">Database Status</p>
-                <div class="flex items-center gap-2">
-                    <div id="db-indicator" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <h2 id="db-text" class="text-2xl font-bold text-emerald-400">Connected</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
+            <div class="glass-card p-6 rounded-[2rem]">
+                <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest mb-2">System Status</p>
+                <div class="flex items-center gap-3">
+                    <div id="db-indicator" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <h2 id="db-text" class="text-xl font-bold text-emerald-400">Database Live</h2>
                 </div>
             </div>
-        </div>
+            </div>
 
-        <div class="grid grid-cols-1 gap-8">
-            <div class="glass-card rounded-[2.5rem] overflow-hidden">
-                <div class="p-8 flex justify-between items-center border-b border-white/5">
-                    <h3 class="text-xl font-bold">Live User Directory</h3>
-                    <button onclick="loadUsers()" class="text-indigo-400 hover:text-indigo-300 text-sm font-semibold transition-colors">
-                        <i class="fas fa-sync-alt mr-2"></i>Refresh Data
-                    </button>
+        <div class="glass-card rounded-[2rem] md:rounded-[3rem] overflow-hidden">
+            <div class="p-6 md:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/5 gap-4">
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold">Live User Directory</h3>
+                    <p class="text-gray-500 text-xs mt-1">Real-time database sync active.</p>
                 </div>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="text-gray-500 text-[11px] uppercase tracking-widest border-b border-white/5">
-                                <th class="px-8 py-4 font-semibold">User Details</th>
-                                <th class="px-8 py-4 font-semibold">Account Status</th>
-                                <th class="px-8 py-4 font-semibold">Active Course</th>
-                                <th class="px-8 py-4 font-semibold text-right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="user-table-body">
-                            <tr>
-                                <td colspan="4" class="px-8 py-10 text-center text-gray-500">
-                                    <div class="animate-pulse">Fetching encrypted user data...</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <button onclick="loadUsers()" class="admin-btn w-full sm:w-auto px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-xl text-indigo-400 text-sm font-bold transition-all border border-white/5">
+                    <i class="fas fa-sync-alt mr-2"></i>Refresh Data
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <table class="w-full text-left border-collapse min-w-[700px]">
+                    <thead>
+                        <tr class="text-gray-500 text-[10px] uppercase tracking-[0.15em] border-b border-white/5">
+                            <th class="px-6 md:px-8 py-5 font-bold">User Identity</th>
+                            <th class="px-6 md:px-8 py-5 font-bold">Status</th>
+                            <th class="px-6 md:px-8 py-5 font-bold">Course Data</th>
+                            <th class="px-6 md:px-8 py-5 font-bold text-right">Security Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <tr>
+                            <td colspan="4" class="px-8 py-20 text-center">
+                                <div class="flex flex-col items-center gap-3">
+                                    <i class="fas fa-circle-notch fa-spin text-2xl text-indigo-500"></i>
+                                    <p class="text-gray-500 text-sm font-medium tracking-wide">Fetching encrypted user data...</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="p-6 border-t border-white/5 sm:hidden">
+                <p class="text-[10px] text-gray-600 text-center uppercase tracking-widest">Scroll horizontally to view all data</p>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. Load users from Flask API
         async function loadUsers() {
             const tableBody = document.getElementById('user-table-body');
             const dbIndicator = document.getElementById('db-indicator');
             const dbText = document.getElementById('db-text');
             
             try {
-                // Leading slash ensures path starts from root
                 const response = await fetch('/admin/users');
-                
-                if (!response.ok) throw new Error('Network response was not ok');
+                if (!response.ok) throw new Error('API Error');
                 
                 const users = await response.json();
-                
                 tableBody.innerHTML = ''; 
 
                 if (users.length === 0) {
-                    tableBody.innerHTML = '<tr><td colspan="4" class="px-8 py-10 text-center text-gray-500">No users found in database.</td></tr>';
+                    tableBody.innerHTML = '<tr><td colspan="4" class="px-8 py-10 text-center text-gray-500 font-medium">No records found in database.</td></tr>';
                     return;
                 }
 
                 users.forEach(user => {
                     const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
                     const isActive = parseInt(user.active) === 1;
-                    
                     const activeClass = isActive ? 'status-active' : 'status-suspended';
                     const activeText = isActive ? 'Active' : 'Suspended';
-                    
                     const toggleIcon = isActive ? 'fa-user-slash' : 'fa-user-check';
-                    const toggleTitle = isActive ? 'Suspend User' : 'Activate User';
                     const toggleBtnClass = isActive 
-                        ? 'text-amber-500 bg-amber-500/10 hover:bg-amber-500' 
-                        : 'text-emerald-500 bg-emerald-500/10 hover:bg-emerald-500';
+                        ? 'text-amber-500 bg-amber-500/10 hover:bg-amber-500 hover:text-white border-amber-500/20' 
+                        : 'text-emerald-500 bg-emerald-500/10 hover:bg-emerald-500 hover:text-white border-emerald-500/20';
 
                     const safeName = (user.name || 'Anonymous').replace(/'/g, "\\'");
 
                     const row = `
                         <tr class="table-row" id="user-row-${user.id}">
-                            <td class="px-8 py-5">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-sm font-bold text-white">
+                            <td class="px-6 md:px-8 py-5">
+                                <div class="flex items-center gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-sm font-bold shadow-lg shadow-indigo-500/20">
                                         ${initial}
                                     </div>
-                                    <div>
-                                        <p class="text-sm font-bold text-white">${user.name || 'Anonymous'}</p>
-                                        <p class="text-xs text-gray-500">${user.email}</p>
+                                    <div class="min-w-0">
+                                        <p class="text-sm font-bold text-white truncate">${user.name || 'Anonymous'}</p>
+                                        <p class="text-[11px] text-gray-500 truncate">${user.email}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-8 py-5">
-                                <span class="status-pill ${activeClass}">${activeText}</span>
+                            <td class="px-6 md:px-8 py-5">
+                                <span class="${activeClass} status-pill">${activeText}</span>
                             </td>
-                            <td class="px-8 py-5">
+                            <td class="px-6 md:px-8 py-5">
                                 <div class="flex flex-col">
-                                    <span class="text-xs font-semibold text-indigo-400">${user.course || 'None'}</span>
-                                    <span class="text-[10px] text-gray-500">Streak: ${user.streak || 0} 🔥</span>
+                                    <span class="text-xs font-bold text-indigo-400">${user.course || 'Unenrolled'}</span>
+                                    <span class="text-[10px] text-gray-500 mt-0.5">🔥 Streak: ${user.streak || 0}</span>
                                 </div>
                             </td>
-                            <td class="px-8 py-5 text-right">
+                            <td class="px-6 md:px-8 py-5 text-right">
                                 <div class="flex justify-end gap-2">
                                     <button onclick="toggleSuspension(${user.id}, ${user.active})" 
-                                            title="${toggleTitle}" 
-                                            class="w-9 h-9 flex items-center justify-center rounded-xl ${toggleBtnClass} hover:text-white transition-all shadow-lg shadow-black/20">
+                                            class="w-9 h-9 flex items-center justify-center rounded-xl border ${toggleBtnClass} transition-all">
                                         <i class="fas ${toggleIcon} text-xs"></i>
                                     </button>
-                                    
                                     <button onclick="deleteUser(${user.id}, '${safeName}')" 
-                                            title="Delete User" 
-                                            class="w-9 h-9 flex items-center justify-center rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg shadow-black/20">
+                                            class="w-9 h-9 flex items-center justify-center rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all">
                                         <i class="fas fa-trash-alt text-xs"></i>
                                     </button>
                                 </div>
@@ -199,77 +220,49 @@
                     tableBody.insertAdjacentHTML('beforeend', row);
                 });
 
-                // Update Status UI
-                dbIndicator.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
-                dbText.className = "text-2xl font-bold text-emerald-400";
-                dbText.innerText = "Connected";
+                dbIndicator.className = "w-3 h-3 rounded-full bg-emerald-500 animate-pulse";
+                dbText.className = "text-xl font-bold text-emerald-400";
+                dbText.innerText = "Database Live";
 
             } catch (error) {
-                console.error("Error loading users:", error);
-                tableBody.innerHTML = '<tr><td colspan="4" class="px-8 py-10 text-center text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Error connecting to server. Check backend console.</td></tr>';
-                
-                dbIndicator.className = "w-2 h-2 rounded-full bg-red-500";
-                dbText.className = "text-2xl font-bold text-red-500";
+                tableBody.innerHTML = '<tr><td colspan="4" class="px-8 py-10 text-center text-red-400 font-bold"><i class="fas fa-wifi-slash mr-2"></i>Backend Sync Failed</td></tr>';
+                dbIndicator.className = "w-3 h-3 rounded-full bg-red-500";
+                dbText.className = "text-xl font-bold text-red-500";
                 dbText.innerText = "Offline";
             }
         }
 
-        // 2. Toggle Suspension via Flask API
         async function toggleSuspension(userId, currentStatus) {
-            const action = currentStatus === 1 ? "suspend" : "activate";
-            if (!confirm(`Are you sure you want to ${action} this user?`)) return;
+            const action = currentStatus === 1 ? "SUSPEND" : "ACTIVATE";
+            if (!confirm(`${action} this user?`)) return;
 
             try {
                 const response = await fetch(`/admin/toggle-user/${userId}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
                 });
-                
-                if (!response.ok) {
-                    const errorMsg = await response.json();
-                    throw new Error(errorMsg.message || "Failed to update");
-                }
-
-                const result = await response.json();
-                if (result.status === 'success') {
-                    loadUsers(); // Refresh whole table to sync status
-                } else {
-                    alert("Error: " + result.message);
-                }
+                if (response.ok) loadUsers();
             } catch (error) {
-                console.error("Toggle Error:", error);
-                alert("Failed to connect to backend: " + error.message);
+                alert("Communication error.");
             }
         }
 
-        // 3. Delete user via Flask API
         async function deleteUser(userId, userName) {
-            if (!confirm(`WARNING: Are you sure you want to permanently delete ${userName}? This cannot be undone.`)) return;
+            if (!confirm(`ERASE ${userName} from database?`)) return;
 
             try {
-                const response = await fetch(`/admin/delete-user/${userId}`, {
-                    method: 'DELETE'
-                });
-
-                if (!response.ok) throw new Error("Delete failed");
-
-                const result = await response.json();
-                if (result.status === 'success') {
+                const response = await fetch(`/admin/delete-user/${userId}`, { method: 'DELETE' });
+                if (response.ok) {
                     const row = document.getElementById(`user-row-${userId}`);
-                    if (row) {
-                        row.style.transform = 'translateX(30px)';
-                        row.style.opacity = '0';
-                        setTimeout(() => row.remove(), 300);
-                    }
-                } else {
-                    alert("Error: " + result.message);
+                    row.style.opacity = '0';
+                    row.style.transform = 'scale(0.95)';
+                    setTimeout(() => loadUsers(), 300);
                 }
             } catch (error) {
-                alert("Failed to connect to backend.");
+                alert("Delete failed.");
             }
         }
 
-        // Initial Load
         window.onload = loadUsers;
     </script>
 </body>
