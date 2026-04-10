@@ -81,7 +81,7 @@
     {
       "id": "python",
       "icon": "Py",
-      "logo": "./images/python.png",
+      "logo": "./static/programming-language/images/python.png",
       "title": "Python",
       "desc": "Beginner-friendly language perfect for web development, data science, AI, and automation. Clean syntax and vast ecosystem.",
       "action": "Start Python",
@@ -93,7 +93,7 @@
     {
       "id": "javascript",
       "icon": "JS",
-      "logo": "./images/javascript.png",
+      "logo": "./static/programming-language/images/javascript.png",
       "title": "JavaScript",
       "desc": "The essential web language for interactive front-end and powerful back-end with Node.js. Runs everywhere.",
       "action": "Learn JS",
@@ -105,7 +105,7 @@
     {
       "id": "java",
       "icon": "Jv",
-      "logo": "./images/java.png",
+      "logo": "./static/programming-language/images/java.png",
       "title": "Java",
       "desc": "Enterprise-grade language for large-scale applications, Android development, and cross-platform solutions.",
       "action": "Explore Java",
@@ -117,7 +117,7 @@
     {
       "id": "csharp",
       "icon": "C#",
-      "logo": "./images/csharp.png",
+      "logo": "./static/programming-language/images/csharp.png",
       "title": "C#",
       "desc": "Microsoft's versatile language for Windows apps, game development with Unity, and modern web applications.",
       "action": "Discover C#",
@@ -129,7 +129,7 @@
     {
       "id": "cpp",
       "icon": "C++",
-      "logo": "./images/cpp.png",
+      "logo": "./static/programming-language/images/cpp.png",
       "title": "C++",
       "desc": "High-performance language for game engines, operating systems, and performance-critical applications.",
       "action": "Master C++",
@@ -141,7 +141,7 @@
     {
       "id": "go",
       "icon": "Go",
-      "logo": "./images/go.svg",
+      "logo": "./static/programming-language/images/go.svg",
       "title": "Go",
       "desc": "Google's simple and efficient language for concurrent systems, cloud services, and high-performance backends.",
       "action": "Build with Go",
@@ -153,7 +153,7 @@
     {
       "id": "rust",
       "icon": "Rs",
-      "logo": "./images/rust.svg",
+      "logo": "./static/programming-language/images/rust.svg",
       "title": "Rust",
       "desc": "Memory-safe systems programming with zero-cost abstractions. Perfect for safety-critical applications.",
       "action": "Code Rust",
@@ -165,7 +165,7 @@
     {
       "id": "typescript",
       "icon": "TS",
-      "logo": "./images/typescript.png",
+      "logo": "./static/programming-language/images/typescript.png",
       "title": "TypeScript",
       "desc": "JavaScript with type safety for large-scale applications. Better tooling and fewer runtime errors.",
       "action": "Type Safe JS",
@@ -177,7 +177,7 @@
     {
       "id": "ruby",
       "icon": "Rb",
-      "logo": "./images/ruby.png",
+      "logo": "./static/programming-language/images/ruby.png",
       "title": "Ruby",
       "desc": "Elegant and expressive language known for Ruby on Rails - perfect for rapid web development.",
       "action": "Ruby Journey",
@@ -189,7 +189,7 @@
     {
       "id": "php",
       "icon": "PHP",
-      "logo": "./images/php.svg",
+      "logo": "./static/programming-language/images/php.svg",
       "title": "PHP",
       "desc": "Server-side scripting language powering 78% of the web. Great for WordPress and web applications.",
       "action": "PHP Power",
@@ -201,7 +201,7 @@
     {
       "id": "swift",
       "icon": "Sw",
-      "logo": "./images/swift.svg",
+      "logo": "./static/programming-language/images/swift.svg",
       "title": "Swift",
       "desc": "Apple's modern language for iOS, macOS, watchOS development. Fast, safe, and expressive.",
       "action": "Swift Apps",
@@ -213,7 +213,7 @@
     {
       "id": "kotlin",
       "icon": "Kt",
-      "logo": "./images/kotlin.svg",
+      "logo": "./static/programming-language/images/kotlin.svg",
       "title": "Kotlin",
       "desc": "Modern language for Android development, backend services, and multiplatform applications.",
       "action": "Kotlin Dev",
