@@ -260,30 +260,26 @@ def get_all_users():
 # Make sure there is NO trailing slash if the frontend doesn't use one
 @app.route('/admin/toggle-user/<int:user_id>', methods=['POST'])
 def toggle_user(user_id):
+    conn = None
     try:
-        # 1. Connect to DB
         conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
+        with conn.cursor() as cursor:
+            # FIX: Table name was 'users', changed to 'user'
+            cursor.execute("SELECT active FROM user WHERE id = %s", (user_id,))
+            user = cursor.fetchone()
 
-        # 2. Get current status (is it 1 or 0?)
-        cursor.execute("SELECT active FROM users WHERE id = %s", (user_id,))
-        user = cursor.fetchone()
+            if not user:
+                return jsonify({"status": "error", "message": "User not found"}), 404
 
-        if not user:
-            return jsonify({"status": "error", "message": "User not found"}), 404
-
-        # 3. Toggle it
-        new_status = 0 if user['active'] == 1 else 1
-        cursor.execute("UPDATE users SET active = %s WHERE id = %s", (new_status, user_id))
-        
-        conn.commit()
-        return jsonify({"status": "success", "new_active": new_status})
-
+            new_status = 0 if user['active'] == 1 else 1
+            cursor.execute("UPDATE user SET active = %s WHERE id = %s", (new_status, user_id))
+            conn.commit()
+            
+            return jsonify({"status": "success", "new_active": new_status})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
     finally:
-        cursor.close()
-        conn.close()
+        if conn: conn.close()
 @app.route('/admin/delete-user/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     connection = get_db_connection()
