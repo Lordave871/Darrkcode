@@ -78,7 +78,6 @@
             border-radius: 10px;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
@@ -94,16 +93,16 @@
         <header class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
             <div class="flex items-center gap-4">
                 <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-2xl font-bold shadow-lg shadow-indigo-500/20">
-                    JD
+                    {{ name[0]|upper if name else 'U' }}
                 </div>
                 <div>
-                    <h1 class="text-2xl font-bold">Welcome back, {{name}}</h1>
-                    <p class="text-gray-400 text-sm">Level 12 Developer • 4,200 XP</p>
+                    <h1 class="text-2xl font-bold">Welcome back, {{ name }}</h1>
+                    <p class="text-gray-400 text-sm">Level 10 Developer • 4,200 XP</p>
                 </div>
             </div>
             <nav class="flex gap-2">
                 <button class="px-6 py-2 rounded-xl glass-card text-sm font-medium hover:bg-white/10 transition-all">Settings</button>
-                <button class="px-6 py-2 rounded-xl bg-white text-black text-sm font-bold hover:bg-gray-200 transition-all">Log Out</button>
+                <a href="{{ url_for('logout') }}" class="px-6 py-2 rounded-xl bg-white text-black text-sm font-bold hover:bg-gray-200 transition-all inline-block text-center">Log Out</a>
             </nav>
         </header>
 
@@ -132,7 +131,7 @@
 
                 <div class="glass-card p-8 rounded-[2rem] bg-gradient-to-br from-indigo-500/10 to-transparent">
                     <i class="fas fa-fire text-orange-500 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold">{{streak}} Day Streak!</h3>
+                    <h3 class="text-xl font-bold">{{ streak if streak else 0 }} Day Streak!</h3>
                     <p class="text-gray-400 text-sm mt-2">Keep it up! You're in the top 5% of learners this week.</p>
                 </div>
             </div>
@@ -141,7 +140,7 @@
                 <div class="flex items-center justify-between mb-8">
                     <h2 class="text-3xl font-bold tracking-tight">Your Courses</h2>
                     <div class="flex gap-4">
-                       <a href="/programmingl_language" class="text-indigo-400 text-sm font-semibold hover:text-indigo-300 transition-colors">
+                       <a href="/programming_languages" class="text-indigo-400 text-sm font-semibold hover:text-indigo-300 transition-colors">
                             View All
                        </a> 
                     </div>
