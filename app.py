@@ -259,31 +259,28 @@ def get_all_users():
 
 @app.route('/admin/toggle-user/<int:user_id>', methods=['POST'])
 def toggle_user(user_id):
-    """Toggles user status between 1 (Active) and 0 (Suspended)"""
-    connection = get_db_connection()
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
     try:
-        with connection.cursor() as cur:
-            # Get current status
-            cur.execute("SELECT active FROM user WHERE id = %s", (user_id,))
-            user = cur.fetchone()
-            
-            if not user:
-                return jsonify({"status": "error", "message": "User not found"}), 404
+        # First, find current status
+        cursor.execute("SELECT active FROM users WHERE id = %s", (user_id,))
+        user = cursor.fetchone()
+        
+        if not user:
+            return jsonify({"status": "error", "message": "User not found"}), 404
 
-            # Flip status: If 1 set to 0, else set to 1
-            new_status = 0 if user['active'] == 1 else 1
-            
-            cur.execute("UPDATE user SET active = %s WHERE id = %s", (new_status, user_id))
-            connection.commit()
-            
-            return jsonify({
-                "status": "success", 
-                "message": f"User {'activated' if new_status == 1 else 'suspended'}"
-            })
+        # Flip the bit: if 1 set to 0, if 0 set to 1
+        new_status = 0 if user['active'] == 1 else 1
+        
+        cursor.execute("UPDATE users SET active = %s WHERE id = %s", (new_status, user_id))
+        conn.commit()
+        
+        return jsonify({"status": "success", "new_active": new_status})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
     finally:
-        connection.close()
+        cursor.close()
+        conn.close()
 
 @app.route('/admin/delete-user/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
