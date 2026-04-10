@@ -273,6 +273,15 @@ def profile():
 
 @app.route('/admin')
 def admin():
+    # 1. Define the admin email (should match the one in admin_authenticate)
+    admin_email = "admin@darkcode.com" 
+
+    # 2. Check if "user" is in session AND if it is the admin email
+    if "user" not in session or session.get("user") != admin_email:
+        flash("Please log in as an admin to access this page.")
+        return redirect(url_for('admin_login'))
+
+    # 3. If they are the admin, show the page
     return render_template('admin.html')
 
 @app.route('/admin/users')
