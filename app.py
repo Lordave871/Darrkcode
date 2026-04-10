@@ -90,6 +90,34 @@ def premium():
 def skill():
     return render_template('skill.html')
 
+@app.route('/admin/users')
+def get_all_users():
+    """Fetch all users to display in the admin table."""
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cur:
+            # We fetch user details and their current course
+            cur.execute("SELECT id, name, email, streak, course, active FROM users")
+            users = cur.fetchall()
+            return jsonify(users)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        connection.close()
+
+@app.route('/admin/delete-user/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    """Permanently remove a user from the database."""
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cur:
+            cur.execute("DELETE FROM users WHERE id = %s", (user_id,))
+            connection.commit()
+            return jsonify({"status": "success", "message": "User deleted"})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+    finally:
+        connection.close()
 @app.route('/programmingl_language')
 def language():
     return render_template('programmingl_language.html')
