@@ -6,7 +6,7 @@
     <title>Darkcode | Admin Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="icon"       href="static/images/logo.png" type="image/png">
+    <link rel="icon" href="static/images/logo.png" type="image/png">
     <link rel="shortcut icon" href="static/images/logo.png" type="image/png">
     <link rel="apple-touch-icon" href="static/images/logo.png">
     <style>
@@ -50,7 +50,7 @@
         }
 
         .status-active { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
-        .status-pending { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+        .status-suspended { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
 
         .admin-btn {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -138,8 +138,15 @@
 
                 users.forEach(user => {
                     const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
-                    const activeClass = user.active ? 'status-active' : 'status-pending';
-                    const activeText = user.active ? 'Active' : 'Pending';
+                    const activeClass = user.active ? 'status-active' : 'status-suspended';
+                    const activeText = user.active ? 'Active' : 'Suspended';
+                    
+                    // Logic for Toggle Button
+                    const toggleIcon = user.active ? 'fa-user-slash' : 'fa-user-check';
+                    const toggleTitle = user.active ? 'Suspend User' : 'Activate User';
+                    const toggleBtnClass = user.active 
+                        ? 'text-amber-500 bg-amber-500/10 hover:bg-amber-500' 
+                        : 'text-emerald-500 bg-emerald-500/10 hover:bg-emerald-500';
 
                     const row = `
                         <tr class="table-row" id="user-row-${user.id}">
@@ -164,9 +171,15 @@
                                 </div>
                             </td>
                             <td class="px-8 py-5 text-right">
-                                <button onclick="deleteUser(${user.id}, '${user.name}')" class="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all">
-                                    <i class="fas fa-trash-alt text-xs"></i>
-                                </button>
+                                <div class="flex justify-end gap-2">
+                                    <button onclick="toggleSuspension(${user.id}, ${user.active})" title="${toggleTitle}" class="w-8 h-8 rounded-lg ${toggleBtnClass} hover:text-white transition-all">
+                                        <i class="fas ${toggleIcon} text-xs"></i>
+                                    </button>
+                                    
+                                    <button onclick="deleteUser(${user.id}, '${user.name}')" title="Delete User" class="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all">
+                                        <i class="fas fa-trash-alt text-xs"></i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     `;
@@ -178,7 +191,29 @@
             }
         }
 
-        // 2. Delete user via Flask API
+        // 2. Toggle Suspension via Flask API
+        async function toggleSuspension(userId, currentStatus) {
+            const action = currentStatus ? "suspend" : "activate";
+            if (!confirm(`Are you sure you want to ${action} this user?`)) return;
+
+            try {
+                const response = await fetch(`/admin/toggle-user/${userId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    loadUsers(); // Refresh UI to show new state
+                } else {
+                    alert("Error: " + result.message);
+                }
+            } catch (error) {
+                alert("Failed to connect to backend.");
+            }
+        }
+
+        // 3. Delete user via Flask API
         async function deleteUser(userId, userName) {
             if (!confirm(`Are you sure you want to permanently delete ${userName}?`)) return;
 
