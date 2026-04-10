@@ -74,6 +74,36 @@ def about():
 def contact():
     return render_template('contact.html')
 
+from flask import flash
+
+@app.route('/admin-login')
+def admin_login():
+    return render_template('admin_login.html')
+
+@app.route('/admin-auth', methods=['POST'])
+def admin_authenticate():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    
+    # You can check against a specific hardcoded admin or a DB field
+    admin_email = "admin@darkcode.com" 
+    
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cur:
+            cur.execute("SELECT * FROM user WHERE email = %s", (email,))
+            user = cur.fetchone()
+
+            if user and email == admin_email and check_password_hash(user['password'], password):
+                session["user"] = email
+                session["user_id"] = user["id"]
+                return redirect(url_for('admin'))
+            else:
+                flash("Unauthorized access attempt. Identity mismatch.")
+                return redirect(url_for('admin_login'))
+    finally:
+        connection.close()
+
 @app.route('/privacy-policy')
 def policy():
     return render_template('privacy-policy.html')
