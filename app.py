@@ -43,7 +43,7 @@ def initialize_database():
         connection = get_db_connection()
         with connection.cursor() as cur:
             create_users_table = """
-            CREATE TABLE IF NOT EXISTS users (
+            CREATE TABLE IF NOT EXISTS user (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255),
                 email VARCHAR(255) UNIQUE,
@@ -55,7 +55,7 @@ def initialize_database():
             """
             cur.execute(create_users_table)
             connection.commit()
-        return jsonify({"status": "success", "message": "Database tables ready"})
+        return jsonify({"status": "success", "message": "Database ttables ready"})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
     finally:
@@ -119,16 +119,16 @@ def google_login():
 
         connection = get_db_connection()
         with connection.cursor() as cur:
-            cur.execute("SELECT id FROM users WHERE email = %s", (email,))
+            cur.execute("SELECT id FROM user WHERE email = %s", (email,))
             user = cur.fetchone()
 
             if not user:
                 cur.execute(
-                    "INSERT INTO users (name, email, password, active, streak) VALUES (%s, %s, %s, %s, %s)",
+                    "INSERT INTO user (name, email, password, active, streak) VALUES (%s, %s, %s, %s, %s)",
                     (name, email, None, 1, 1)
                 )
                 connection.commit()
-                cur.execute("SELECT id FROM users WHERE email = %s", (email,))
+                cur.execute("SELECT id FROM user WHERE email = %s", (email,))
                 user = cur.fetchone()
 
         session["user"] = email
@@ -151,20 +151,20 @@ def authenticate():
         with connection.cursor() as cur:
             if auth_type == 'signup':
                 full_name = data.get('fullName')
-                cur.execute("SELECT id FROM users WHERE email = %s", (email,))
+                cur.execute("SELECT id FROM user WHERE email = %s", (email,))
                 if cur.fetchone():
                     return jsonify({"message": "User already exists"}), 400
 
                 hashed_pw = generate_password_hash(password)
                 cur.execute(
-                    "INSERT INTO users (name, email, password, active, streak) VALUES (%s, %s, %s, %s, %s)",
+                    "INSERT INTO user (name, email, password, active, streak) VALUES (%s, %s, %s, %s, %s)",
                     (full_name, email, hashed_pw, 1, 1)
                 )
                 connection.commit()
                 return jsonify({"status": "success", "message": "Account created!"}), 201
 
             elif auth_type == 'login':
-                cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+                cur.execute("SELECT * FROM user WHERE email = %s", (email,))
                 user = cur.fetchone()
                 # Ensure user has a password (not a Google-only user)
                 if user and user["password"] and check_password_hash(user["password"], password):
@@ -192,7 +192,7 @@ def profile():
     connection = get_db_connection()
     try:
         with connection.cursor() as cur:
-            cur.execute("SELECT name, email, streak, course FROM users WHERE id = %s", (user_id,))
+            cur.execute("SELECT name, email, streak, course FROM user WHERE id = %s", (user_id,))
             user = cur.fetchone()
             if not user:
                 return redirect(url_for("logout"))
@@ -214,7 +214,7 @@ def get_all_users():
     connection = get_db_connection()
     try:
         with connection.cursor() as cur:
-            cur.execute("SELECT id, name, email, streak, course, active FROM users")
+            cur.execute("SELECT id, name, email, streak, course, active FROM user")
             users = cur.fetchall()
             return jsonify(users)
     finally:
@@ -225,7 +225,7 @@ def delete_user(user_id):
     connection = get_db_connection()
     try:
         with connection.cursor() as cur:
-            cur.execute("DELETE FROM users WHERE id = %s", (user_id,))
+            cur.execute("DELETE FROM user WHERE id = %s", (user_id,))
             connection.commit()
             return jsonify({"status": "success", "message": "User deleted"})
     except Exception as e:
