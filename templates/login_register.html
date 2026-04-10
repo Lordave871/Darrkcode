@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkcode Login</title>
+    <title>Darkcode | Access</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -118,14 +118,12 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     
     <script>
-        // REPLACE THESE with your actual Firebase project settings from your console
         const firebaseConfig = {
             apiKey: "AIzaSyDBlTNtJPVlTLPRUy3wPy6FZ5ssHTH6uGE",
             authDomain: "gamex-ac9b6.firebaseapp.com",
             projectId: "gamex-ac9b6"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -161,7 +159,7 @@
                 if (response.ok) {
                     window.location.href = data.redirect;
                 } else {
-                    alert("Backend Error: " + data.error);
+                    alert("Backend Error: " + (data.error || data.message));
                 }
             } catch (error) {
                 console.error("Google Auth Error:", error);
@@ -180,6 +178,7 @@
             btn.disabled = true;
 
             try {
+                // FIXED: Use relative path '/auth' to avoid CORS issues
                 const response = await fetch('/auth', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -202,7 +201,8 @@
                     alert("Error: " + result.message);
                 }
             } catch (err) {
-                alert("Server connection failed.");
+                console.error("Fetch Error:", err);
+                alert("Server connection failed. Make sure your Render service is awake.");
             } finally {
                 btn.classList.remove('loading');
                 btn.disabled = false;
