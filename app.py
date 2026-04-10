@@ -272,7 +272,7 @@ def profile():
 # --- Admin API ---
 
 @app.route('/admin')
-def admin_page():
+def admin():
     return render_template('admin.html')
 
 @app.route('/admin/users')
