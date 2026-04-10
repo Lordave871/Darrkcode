@@ -65,11 +65,7 @@ def initialize_database():
 @app.route('/')
 def index():
     return render_template('index.html')
-
-@app.route('/login_register')
-def login_page():
-    return render_template('login_register.html')
-
+    
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -103,6 +99,15 @@ def quiz():
     return render_template('quiz.html')
 
 # --- Authentication Logic ---
+# --- Updated Login Page Route ---
+@app.route('/login_register')
+def login_page():
+    # If user is already logged in, proceed to profile automatically
+    if "user_id" in session:
+        return redirect(url_for("profile"))
+    return render_template('login_register.html')
+
+# --- Updated Authentication Logic ---
 
 @app.route("/google-login", methods=["POST"])
 def google_login():
@@ -119,17 +124,22 @@ def google_login():
 
         connection = get_db_connection()
         with connection.cursor() as cur:
-            cur.execute("SELECT id FROM user WHERE email = %s", (email,))
+            cur.execute("SELECT id, active FROM user WHERE email = %s", (email,))
             user = cur.fetchone()
 
             if not user:
+                # New Google user: set active=1 by default
                 cur.execute(
                     "INSERT INTO user (name, email, password, active, streak) VALUES (%s, %s, %s, %s, %s)",
                     (name, email, None, 1, 1)
                 )
                 connection.commit()
-                cur.execute("SELECT id FROM user WHERE email = %s", (email,))
+                cur.execute("SELECT id, active FROM user WHERE email = %s", (email,))
                 user = cur.fetchone()
+            
+            # Check if account is suspended (active == 0)
+            if user["active"] == 0:
+                return jsonify({"error": "Your account has been suspended. Please contact support."}), 403
 
         session["user"] = email
         session["user_id"] = user["id"]
@@ -156,6 +166,7 @@ def authenticate():
                     return jsonify({"message": "User already exists"}), 400
 
                 hashed_pw = generate_password_hash(password)
+                # Setting active=1 for new signups
                 cur.execute(
                     "INSERT INTO user (name, email, password, active, streak) VALUES (%s, %s, %s, %s, %s)",
                     (full_name, email, hashed_pw, 1, 1)
@@ -166,15 +177,20 @@ def authenticate():
             elif auth_type == 'login':
                 cur.execute("SELECT * FROM user WHERE email = %s", (email,))
                 user = cur.fetchone()
-                # Ensure user has a password (not a Google-only user)
+                
                 if user and user["password"] and check_password_hash(user["password"], password):
+                    # Check if account is suspended
+                    if user["active"] == 0:
+                        return jsonify({"message": "Your account has been suspended. Please contact support."}), 403
+                    
                     session["user"] = email
                     session["user_id"] = user["id"]
-                    # Important: Frontend expects 'redirect' key
                     return jsonify({"redirect": url_for("profile")})
+                
                 return jsonify({"message": "Invalid email or password"}), 401
     finally:
         connection.close()
+
 
 @app.route("/logout")
 def logout():
@@ -188,6 +204,24 @@ def profile():
     user_id = session.get("user_id")
     if not user_id:
         return redirect(url_for("login_page"))
+
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cur:
+            # Added 'active' to the SELECT query
+            cur.execute("SELECT name, email, streak, course, active FROM user WHERE id = %s", (user_id,))
+            user = cur.fetchone()
+            
+            # Kick out if user doesn't exist OR if they were recently suspended
+            if not user or user.get('active') == 0:
+                session.clear() # Clear the "ghost" session
+                return redirect(url_for("login_page"))
+            
+            initial = user['name'][0].upper() if user['name'] else "U"
+            return render_template("profile.html", name=user['name'], email=user['email'], 
+                                   streak=user['streak'], course=user['course'], text=initial)
+    finally:
+        connection.close()
 
     connection = get_db_connection()
     try:
