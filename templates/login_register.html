@@ -47,7 +47,6 @@
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
-        /* Spinner for loading state */
         .spinner {
             display: none;
             width: 20px; height: 20px;
@@ -68,7 +67,7 @@
     <div class="bg-blob top-0 left-0" style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);"></div>
     <div class="bg-blob bottom-0 right-0" style="background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);"></div>
 
-    <div class="glass-card w-full max-w-md p-10 rounded-[2.5rem]">
+    <div class="glass-card w-full max-w-md p-10 rounded-[2.5rem] relative z-10">
         <div class="text-center mb-8">
             <h1 id="header-title" class="text-3xl font-bold text-white tracking-tight">Welcome</h1>
             <p class="text-gray-400 text-sm mt-2">Enter your details to continue</p>
@@ -107,89 +106,110 @@
                 <span class="px-4 text-[10px] text-gray-500 uppercase tracking-widest">or continue with</span>
                 <div class="flex-grow border-t border-white/5"></div>
             </div>
-            <div class="grid grid-cols-3 gap-4">
-                <button type="button" onclick="googleAuth()" class="flex items-center justify-center py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white/70">
-                    <i class="fab fa-google"></i>
-                </button>
-                <button class="flex items-center justify-center py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white/70"><i class="fab fa-apple"></i></button>
-                <button class="flex items-center justify-center py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white/70"><i class="fab fa-x-twitter"></i></button>
-            </div>
+            
+            <button type="button" onclick="googleAuth()" class="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" class="w-5 h-5" alt="Google">
+                <span class="font-semibold text-sm">Continue with Google</span>
+            </button>
         </div>
     </div>
+
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     
     <script>
+        // REPLACE THESE with your actual Firebase project settings from your console
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBlTNtJPVlTLPRUy3wPy6FZ5ssHTH6uGE",
+            authDomain: "gamex-ac9b6.firebaseapp.com",
+            projectId: "gamex-ac9b6"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+
         let currentMode = 'login';
 
-        // 1. Tab Switching Function
         function switchTab(mode) {
             currentMode = mode;
             const isLogin = mode === 'login';
             
-            // Update Buttons
             document.getElementById('tab-login').className = isLogin ? "flex-1 py-2.5 text-sm font-semibold rounded-xl bg-white text-black" : "flex-1 py-2.5 text-sm font-semibold rounded-xl text-gray-400";
             document.getElementById('tab-signup').className = !isLogin ? "flex-1 py-2.5 text-sm font-semibold rounded-xl bg-white text-black" : "flex-1 py-2.5 text-sm font-semibold rounded-xl text-gray-400";
             
-            // Update UI Elements
             document.getElementById('signup-fields').classList.toggle('hidden-form', isLogin);
             document.getElementById('meter-container').classList.toggle('hidden-form', isLogin);
             document.getElementById('btn-label').innerText = isLogin ? 'Sign In' : 'Create Account';
             document.getElementById('header-title').innerText = isLogin ? 'Welcome' : 'Join Us';
         }
 
-        // Initialize Google Provider
-const googleProvider = new firebase.auth.GoogleAuthProvider();
+        // --- Google Login ---
+        async function googleAuth() {
+            try {
+                const result = await auth.signInWithPopup(googleProvider);
+                const idToken = await result.user.getIdToken();
 
-async function googleAuth() {
-    const btn = document.getElementById('submit-btn'); // Optional: show loading state on main button
-    
-    try {
-        // 1. Trigger the Google Popup
-        const result = await auth.signInWithPopup(googleProvider);
-        const user = result.user;
-        const idToken = await user.getIdToken();
+                const response = await fetch('/google-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idToken: idToken })
+                });
 
-        // 2. Send the token to your Flask backend
-        const response = await fetch('http://127.0.0.1:5000/google-login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
-                idToken: idToken,
-                email: user.email,
-                name: user.displayName 
-            })
-        });
-
-        const backEndResult = await response.json();
-
-        if (response.ok) {
-            alert("Google Sign-In Successful!");
-            // Redirect to dashboard or home
-            window.location.href = backEndResult.redirect || '/dashboard';
-        } else {
-            alert("Backend Error: " + backEndResult.message);
+                const data = await response.json();
+                if (response.ok) {
+                    window.location.href = data.redirect;
+                } else {
+                    alert("Backend Error: " + data.error);
+                }
+            } catch (error) {
+                console.error("Google Auth Error:", error);
+                if(error.code !== 'auth/popup-closed-by-user') alert("Login failed.");
+            }
         }
 
-    } catch (error) {
-        console.error("Google Auth Error:", error);
-        if (error.code === 'auth/popup-closed-by-user') {
-            alert("Login cancelled: Popup closed.");
-        } else {
-            alert("Google Sign-In failed. Check console for details.");
+        // --- Email/Password Auth ---
+        async function handleAuth(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/auth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: currentMode,
+                        ...data
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    if (currentMode === 'login') {
+                        window.location.href = result.redirect;
+                    } else {
+                        alert("Account created! Please log in.");
+                        switchTab('login');
+                    }
+                } else {
+                    alert("Error: " + result.message);
+                }
+            } catch (err) {
+                alert("Server connection failed.");
+            } finally {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
         }
-    }
-}
-        // 2. Password Strength Logic
-        firebase.initializeApp({
-        apiKey: "{{ apiKey }}",
-        authDomain: "{{ authDomain }}",
-        projectId: "{{ projectId }}"
-        });
-        
-        const auth = firebase.auth();
+
+        // Password Strength Meter
         document.getElementById('pass-input').oninput = (e) => {
             if (currentMode === 'login') return;
             const val = e.target.value;
@@ -204,44 +224,6 @@ async function googleAuth() {
             meter.style.width = (score * 25) + '%';
             meter.style.backgroundColor = colors[score] || colors[0];
         };
-
-        // 3. Embedded Auth Function (Submit Logic)
-        async function handleAuth(event) {
-    event.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-
-    btn.classList.add('loading');
-    btn.disabled = true;
-
-    try {
-        // We send the data to the /auth endpoint
-        const response = await fetch('http://127.0.0.1:5000/auth', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                type: currentMode, // 'login' or 'signup'
-                ...data
-            })
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            alert(`${currentMode === 'login' ? 'Login' : 'Signup'} successful: ` + result.message);
-        } else {
-            alert("Error: " + result.message);
-        }
-    } catch (err) {
-        alert("Could not connect to server. Make sure Flask is running!");
-    } finally {
-        btn.classList.remove('loading');
-        btn.disabled = false;
-    }
-}
     </script>
 </body>
 </html>
